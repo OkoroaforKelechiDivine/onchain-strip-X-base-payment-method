@@ -147,7 +147,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushReplacementNamed('/home');
+                        },
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(350, 60),
                         ),
