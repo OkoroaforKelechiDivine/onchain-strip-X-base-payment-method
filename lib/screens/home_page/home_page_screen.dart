@@ -120,7 +120,7 @@ class HomePageScreen extends StatelessWidget {
                                 child: IconButton(
                                   icon: const Icon(Icons.send),
                                   onPressed: () {
-                                    Navigator.of(context).pushReplacementNamed('/login');
+                                    Navigator.of(context).pushReplacementNamed('/transfer');
                                   },
                                 ),
                               ),
