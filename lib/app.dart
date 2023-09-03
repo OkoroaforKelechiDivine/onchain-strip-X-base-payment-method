@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         "/home": (context) => const HomePageScreen(),
         "/login": (context) => LoginScreen(),
         "/splash": (context) => const SplashScreen(),
-        "transfer": (context) => const TransferToBankScreen(),
+        "/transfer": (context) => const TransferToBankScreen(),
       },
     );
   }
