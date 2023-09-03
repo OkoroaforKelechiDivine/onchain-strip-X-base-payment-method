@@ -8,7 +8,6 @@ class AppColors {
   static const Color deepWhite = Color(0xFFFFFCFC);
   static const Color lightGreen = Color(0xFF2B606E);
   static const Color lightGrey = Color.fromRGBO(0, 0, 0, 0.6);
-
 }
 
 ThemeData _appTheme = ThemeData(
@@ -34,7 +33,6 @@ ThemeData _appTheme = ThemeData(
       )),
   inputDecorationTheme: InputDecorationTheme(
       hintStyle: getBodySmallStyle(color: Colors.black, fontSize: 14),
-      // fillColor: AppColors.placeholderColor.withOpacity(0.3),
       filled: true,
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
   primarySwatch: Colors.grey,
