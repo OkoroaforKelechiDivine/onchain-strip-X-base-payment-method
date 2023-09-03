@@ -2,21 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'font_style_manager.dart';
 
-class AppColors {
-  static Color deepGreen = HexColor.fromHex('#02001F');
-  static Color lightBlack = HexColor.fromHex("#000000");
-  static Color deepWhite = HexColor.fromHex("#FFFCFC");
-  static Color lightGreen = HexColor.fromHex("#2B606E");
-}
 
-extension HexColor on Color {
-  static Color fromHex(String hexColorString) {
-    hexColorString = hexColorString.replaceAll('#', '');
-    if (hexColorString.length == 6) {
-      hexColorString = "FF$hexColorString";
-    }
-    return Color(int.parse(hexColorString, radix: 16));
-  }
+class AppColors {
+  static const Color lightBlack = Color(0xFF000000);
+  static const Color deepWhite = Color(0xFFFFFCFC);
+  static const Color lightGreen = Color(0xFF2B606E);
+  static const Color lightGrey = Color.fromRGBO(0, 0, 0, 0.6);
+
 }
 
 ThemeData _appTheme = ThemeData(
@@ -31,13 +23,12 @@ ThemeData _appTheme = ThemeData(
   const AppBarTheme(backgroundColor: Colors.transparent, elevation: 0),
   textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        // foregroundColor: AppColors.activeButton,
         textStyle: getBodySmallStyle(color: AppColors.lightGreen, fontSize: 14),
       )),
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        fixedSize: const Size(275, 40),
-        // backgroundColor: AppColors.activeButton,
+        fixedSize: const Size(500, 60),
+        backgroundColor: AppColors.lightGreen,
         foregroundColor: Colors.black,
         textStyle: getBodySmallStyle(color: Colors.black, fontSize: 14),
       )),
