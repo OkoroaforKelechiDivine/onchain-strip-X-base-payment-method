@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
       theme: getApplicationTheme(),
       home: const SplashScreen(),
 
-      initialRoute: "/splash",
       routes: {
         "/home": (context) => const HomePageScreen(),
         "/login": (context) => const LoginScreen(),
