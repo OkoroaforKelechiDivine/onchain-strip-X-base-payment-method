@@ -43,6 +43,7 @@ ThemeData _appTheme = ThemeData(
   ),
   primarySwatch: Colors.grey,
 );
+
 getApplicationTheme() {
   return _appTheme;
 }
