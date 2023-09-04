@@ -17,8 +17,7 @@ getBodyMediumBoldStyle(
   return _getAlegreyaSansTextStyle(fontSize, AppFontWeight.semiBold, color);
 }
 
-getBodyMediumRegularStyle(
-    {double fontSize = AppFontSize.size14, required Color color}) {
+getBodyMediumRegularStyle({double fontSize = AppFontSize.size14, required Color color}) {
   return _getAlegreyaSansTextStyle(fontSize, AppFontWeight.regular, color);
 }
 
