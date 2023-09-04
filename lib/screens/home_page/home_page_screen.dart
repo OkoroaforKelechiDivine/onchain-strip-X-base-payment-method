@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
+import '../../views/custom_button/custom_bottom_bar_navigation.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class HomePageScreen extends StatefulWidget {
 class _HomePageScreenState extends State<HomePageScreen> {
   bool isAmountVisible = false;
   int _currentIndex = 0;
+
   static const dynamicAmount = "₦ 24,607,034.02";
   static const addMoneyImage = 'assets/jpg/add_money.jpg';
   static const transferImage = 'assets/jpg/transfer.jpg';
@@ -26,6 +28,15 @@ class _HomePageScreenState extends State<HomePageScreen> {
   static const buyAirtimeImage = "assets/jpg/mobile.jpg";
   static const buyPowerImage = "assets/jpg/buy_power.jpg";
   static const moreImage = "assets/jpg/more.jpg";
+
+  List<String> outletNames = [
+    'Outlet',
+    'Transaction\n \t\t\t\tHistory',
+    'Buy Airtime',
+    'Buy Power',
+    'POS Device',
+    'More',
+  ];
 
   void toggleVisibility() {
     setState(() {
@@ -260,15 +271,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
       moreImage,
     ];
 
-    List<String> outletNames = [
-      'Outlet',
-      'Transaction\n \t\t\t\tHistory',
-      'Buy Airtime',
-      'Buy Power',
-      'POS Device',
-      'More',
-    ];
-
     return Scaffold(
       appBar: _buildHeader(),
       body: CustomScrollView(
@@ -295,50 +297,14 @@ class _HomePageScreenState extends State<HomePageScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (int index) {
           setState(() {
             _currentIndex = index;
           });
         },
-        items: [
-          BottomNavigationBarItem(
-            icon: SizedBox(
-              width: 28,
-              height: 28,
-              child: Image.asset('assets/jpg/home.jpg'),
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: SizedBox(
-              width: 28,
-              height: 28,
-              child: Image.asset('assets/jpg/history.jpg'),
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: SizedBox(
-              width: 28,
-              height: 28,
-              child: Image.asset('assets/jpg/mobile.jpg'),
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: SizedBox(
-              width: 28,
-              height: 28,
-              child: Image.asset('assets/jpg/buy_power.jpg'),
-            ),
-            label: '',
-
-          ),
-        ],
       ),
-
     );
   }
 }
