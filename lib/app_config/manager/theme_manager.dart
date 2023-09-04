@@ -9,6 +9,7 @@ class AppColors {
   static const Color lightGrey = Color.fromRGBO(0, 0, 0, 0.6);
   static const Color lightBlue = Color(0xFFF0FBFE);
   static const Color pureWhite = Color(0xFFFFFFFF);
+  static const Color darkWhite = Color.fromRGBO(139, 134, 134, 0.5);
 }
 
 ThemeData _appTheme = ThemeData(
@@ -31,7 +32,6 @@ ThemeData _appTheme = ThemeData(
       style: ElevatedButton.styleFrom(
         fixedSize: const Size(500, 60),
         backgroundColor: AppColors.lightGreen,
-        // foregroundColor: AppColors.pureWhite,
         textStyle: getBodySmallStyle(color: AppColors.pureWhite, fontSize: 14),
       )
   ),
