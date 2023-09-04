@@ -288,8 +288,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
             ),
-            delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
+            delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
                 return _buildServiceCard(outletImages[index], outletNames[index]);
               },
               childCount: 6,
