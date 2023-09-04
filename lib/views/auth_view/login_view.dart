@@ -7,7 +7,7 @@ import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import '../../controllers/auth/login_controller.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -63,10 +63,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintText: 'Enter username',
                         errorText: controller.userNameError.value.isEmpty ? null : controller.userNameError.value,
                         filled: true,
-                        fillColor: AppColors.deepWhite,
+                        fillColor: AppColors.pureWhite,
                         border: OutlineInputBorder(
                           borderSide: const BorderSide(
-                            color: AppColors.deepWhite,
+                            color: AppColors.pureWhite,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
@@ -89,10 +89,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintText: 'Enter password',
                         errorText: controller.passwordError.value.isEmpty ? null : controller.passwordError.value,
                         filled: true,
-                        fillColor: AppColors.deepWhite,
+                        fillColor: AppColors.pureWhite,
                         border: OutlineInputBorder(
                           borderSide: const BorderSide(
-                            color: AppColors.deepWhite,
+                            color: AppColors.pureWhite,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           child: Icon(
                             _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                            color: Colors.grey,
+                            color: Colors.black,
                           ),
                         ),
                       ),
