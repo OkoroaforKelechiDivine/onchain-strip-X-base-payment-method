@@ -33,7 +33,7 @@ List<DummyBank> dummyBanks = [
   DummyBank("Ecobank", "assets/jpg/ecobank_logo.jpg", "Okoroafor Nathaniel", "8901234567"),
   DummyBank("Wema Bank", "assets/jpg/wemabank_logo.jpg", "Rabiu Anu", "9012345678"),
   DummyBank("Stanbic Bank", "assets/jpg/stanbic_logo.jpg", "Rabiu Iyanu", "0123456789"),
-  DummyBank("Opay Bank", "assets/jpg/gtb_logo.jpg", "Rabiu Bayelsa", "0123456789"),
+  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Rabiu Bayelsa", "0123456789"),
   DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Rabiu Lagos", "0123456789"),
 ];
 
@@ -158,11 +158,11 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   Widget _buildRecipientCard(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0), // Add horizontal padding
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Card(
           color: AppColors.lightBlue,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(6.0),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -233,7 +233,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
 
   Widget _buildBankNetworkMonitorCard(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0), // Add horizontal padding
+      padding: const EdgeInsets.symmetric(horizontal: 6.0),
       child: Card(
         color: AppColors.lightBlue,
         shape: RoundedRectangleBorder(
@@ -258,7 +258,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   Widget _buildBeneficiariesCard(BuildContext context) {
     List<DummyBank> beneficiaries = dummyBanks.sublist(0, 4);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 6.0),
       child: Card(
         color: AppColors.lightBlue,
         shape: RoundedRectangleBorder(
@@ -293,7 +293,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                         Text(
                           'View All',
                           style: TextStyle(
-                            color: AppColors.darkWhite,
+                            color: AppColors.lightGrey,
                             fontWeight: AppFontWeight.bold,
                             fontSize: AppFontSize.size12,
                           ),
@@ -322,7 +322,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                     ),
                   );
                 } else {
-                  // Add ListTile for the bank item
                   final int beneficiaryIndex = index ~/ 2;
                   DummyBank beneficiary = beneficiaries[beneficiaryIndex];
                   return ListTile(
@@ -358,17 +357,15 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
     );
   }
 
-
   Widget _buildAccountNumberTextField() {
     bool isAccountNumberEmpty = _accountNumberController.text.isEmpty;
     bool isAccountNumberInvalid = _accountNumberController.text.length < 10;
 
-    String labelText = isAccountNumberEmpty ? 'Enter 10 digit Number' : '';
+    String labelText = isAccountNumberEmpty ? 'Enter Account Number' : '';
 
     UnderlineInputBorder customErrorBorder = UnderlineInputBorder(
       borderSide: BorderSide(
-        color: (isAccountNumberEmpty || isAccountNumberInvalid) ? AppColors
-            .errorRed : AppColors.darkWhite.withOpacity(0.5),
+        color: (isAccountNumberEmpty || isAccountNumberInvalid) ? AppColors.errorRed : AppColors.darkWhite.withOpacity(0.5),
       ),
     );
 
@@ -424,10 +421,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
             Future.delayed(const Duration(seconds: 3), () {
               DummyBank matchingBank;
               try {
-                matchingBank = dummyBanks.firstWhere(
-                        (bank) =>
-                    bank.accountNumber == value &&
-                        bank.name == _selectedBankController.text
+                matchingBank = dummyBanks.firstWhere((bank) => bank.accountNumber == value && bank.name == _selectedBankController.text
                 );
                 _userName = matchingBank.accountName;
               } catch (e) {
@@ -458,7 +452,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
       fontWeight: AppFontWeight.medium,
       fontSize: AppFontSize.size14,
     );
-
     return Column(
       children: [
         Visibility(
@@ -483,37 +476,42 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   Widget _buildProcessingCircle() {
     return Visibility(
       visible: _showProcessingCircle,
-      child: Column(
-        children: [
-          const Center(
-            child: SizedBox(
-              width: 20.0,
-              height: 20.0,
-              child: CircularProgressIndicator(),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 39.0, bottom: 0.12),
+        child: Column(
+          children: [
+            const Center(
+              child: SizedBox(
+                width: 20.0,
+                height: 20.0,
+                child: CircularProgressIndicator(),
+              ),
             ),
-          ),
-          const SizedBox(height: 8.0),
-          Text(
-            _userName,
-            style: const TextStyle(
-              color: AppColors.lightGreen,
-              fontWeight: AppFontWeight.bold,
-              fontSize: AppFontSize.size16,
+            Text(
+              _userName,
+              style: const TextStyle(
+                color: AppColors.lightGreen,
+                fontWeight: AppFontWeight.bold,
+                fontSize: AppFontSize.size16,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildUserNameText() {
     return Center(
-      child: Text(
-        _userName,
-        style: const TextStyle(
-          color: AppColors.lightGreen,
-          fontWeight: AppFontWeight.bold,
-          fontSize: AppFontSize.size16,
+      child: Transform.translate(
+        offset: const Offset(0, 9.0),
+        child: Text(
+          _userName,
+          style: const TextStyle(
+            color: AppColors.lightGreen,
+            fontWeight: AppFontWeight.bold,
+            fontSize: AppFontSize.size20,
+          ),
         ),
       ),
     );
@@ -523,12 +521,15 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
     return Center(
       child: TextButton(
         onPressed: () {},
-        child: const Text(
-          'Next',
-          style: TextStyle(
-            fontWeight: AppFontWeight.bold,
-            color: AppColors.lightBlack,
-            fontSize: AppFontSize.size16,
+        child: const Padding(
+          padding: EdgeInsets.only(top: 28.0),
+          child: Text(
+            'Next',
+            style: TextStyle(
+              fontWeight: AppFontWeight.bold,
+              color: AppColors.lightBlack,
+              fontSize: AppFontSize.size16,
+            ),
           ),
         ),
       ),
