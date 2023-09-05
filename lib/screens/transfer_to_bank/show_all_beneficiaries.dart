@@ -53,7 +53,11 @@ class ShowAllBeneficiariesScreen extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            Navigator.pushNamed(context, "/beneficiary_details");
+            Navigator.pushNamed(
+              context,
+              "/beneficiary_details",
+              arguments: bank,
+            );
           },
           child: ListTile(
             leading: Image.asset(

@@ -30,7 +30,10 @@ class MyApp extends StatelessWidget {
         "/splash": (context) => const SplashScreen(),
         "/transfer": (context) => const TransferToBankScreen(),
         "/show_all_beneficiaries": (context) => ShowAllBeneficiariesScreen(banks: dummyBanks),
-        "/beneficiary_details": (context) => const BeneficiaryDetailsScreen(),
+        "/beneficiary_details": (context) {
+          final bank = ModalRoute.of(context)!.settings.arguments as DummyBank;
+          return BeneficiaryDetailsScreen(bank: bank);
+        },
       },
     );
   }
