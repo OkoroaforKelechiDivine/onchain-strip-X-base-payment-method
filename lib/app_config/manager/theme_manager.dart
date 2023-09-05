@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 
 import 'font_style_manager.dart';
 
@@ -22,11 +23,10 @@ ThemeData _appTheme = ThemeData(
       labelSmall: getButtonLabelStyle(color: AppColors.deepWhite),
   ),
   scaffoldBackgroundColor: AppColors.deepWhite,
-  appBarTheme:
-  const AppBarTheme(backgroundColor: Colors.transparent, elevation: 0),
+  appBarTheme: const AppBarTheme(backgroundColor: AppColors.deepWhite, elevation: 0),
   textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        textStyle: getBodySmallStyle(color: AppColors.lightGreen, fontSize: 14),
+        textStyle: getBodySmallStyle(color: AppColors.lightGreen, fontSize: AppFontSize.size16),
       )
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
