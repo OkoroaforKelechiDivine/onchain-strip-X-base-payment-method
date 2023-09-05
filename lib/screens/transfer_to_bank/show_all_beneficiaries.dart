@@ -7,8 +7,7 @@ import '../../views/custom_button/custom_bottom_bar_navigation.dart';
 class ShowAllBeneficiariesScreen extends StatelessWidget {
   final List<DummyBank> banks;
 
-  const ShowAllBeneficiariesScreen({Key? key, required this.banks})
-      : super(key: key);
+  const ShowAllBeneficiariesScreen({Key? key, required this.banks}) : super(key: key);
 
   PreferredSizeWidget _buildAppBar() {
     return PreferredSize(
