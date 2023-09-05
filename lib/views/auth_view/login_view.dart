@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildLockImage() {
     return Image.asset(
       "assets/jpg/lock.jpg",
-      height: 100,
+      height: 70,
       width: 100,
     );
   }
@@ -117,9 +117,6 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           Navigator.of(context).pushReplacementNamed('/home');
         },
-        style: ElevatedButton.styleFrom(
-          fixedSize: const Size(350, 60),
-        ),
         child: const Text(
           'Sign in',
           style: TextStyle(
@@ -176,12 +173,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller.passwordController,
                       (value) {
                     if (value.isNotEmpty) {
-                      // User has started typing, switch to password visibility off
                       setState(() {
                         _obscurePassword = true;
                       });
                     } else {
-                      // User has not typed anything, switch to password visibility on
                       setState(() {
                         _obscurePassword = false;
                       });
