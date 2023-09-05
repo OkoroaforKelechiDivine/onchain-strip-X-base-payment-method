@@ -214,10 +214,8 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                   _buildAccountNumberErrorMessages(),
                   _buildProcessingCircle(),
                   _buildUserNameText(),
-                  const Text(
-                    '5: Text',
-                    style: TextStyle(color: AppColors.lightGreen),
-                  ),
+                  const SizedBox(height: 20),
+                  _buildNextTextButton()
                 ],
               ),
             ),
@@ -289,9 +287,9 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
             Future.delayed(const Duration(seconds: 3), () {
               DummyBank matchingBank;
               try {
-                matchingBank =
-                    dummyBanks.firstWhere((bank) => bank.accountNumber ==
-                        value && bank.name == _selectedBankController.text);
+                matchingBank = dummyBanks.firstWhere(
+                        (bank) => bank.accountNumber == value && bank.name == _selectedBankController.text
+                );
                 _userName = matchingBank.accountName;
               } catch (e) {
                 _isAccountNumberErrorVisible = true;
@@ -374,6 +372,19 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
       child: Text(
         _userName,
         style: const TextStyle(
+          color: AppColors.lightGreen,
+          fontWeight: AppFontWeight.bold,
+          fontSize: AppFontSize.size16,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNextTextButton() {
+    return const Center(
+      child: Text(
+        "Next",
+        style: TextStyle(
           color: AppColors.lightGreen,
           fontWeight: AppFontWeight.bold,
           fontSize: AppFontSize.size16,
