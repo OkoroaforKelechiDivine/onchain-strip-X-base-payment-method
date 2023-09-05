@@ -10,6 +10,7 @@ class AppColors {
   static const Color lightBlue = Color(0xFFF0FBFE);
   static const Color pureWhite = Color(0xFFFFFFFF);
   static const Color darkWhite = Color.fromRGBO(139, 134, 134, 0.5);
+  static const Color errorRed =  Color(0xFFDF1414);
 }
 
 ThemeData _appTheme = ThemeData(
@@ -18,7 +19,7 @@ ThemeData _appTheme = ThemeData(
       bodyLarge: getBodyMediumBoldStyle(color: AppColors.deepWhite),
       bodyMedium: getBodyMediumRegularStyle(color: AppColors.deepWhite),
       bodySmall: getBodySmallStyle(color: AppColors.deepWhite),
-      labelSmall: getButtonLabelStyle(color: AppColors.deepWhite)
+      labelSmall: getButtonLabelStyle(color: AppColors.deepWhite),
   ),
   scaffoldBackgroundColor: AppColors.deepWhite,
   appBarTheme:
