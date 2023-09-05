@@ -32,7 +32,9 @@ List<DummyBank> dummyBanks = [
   DummyBank("First Bank", "assets/jpg/firstbank_logo.jpg", "Okoroafor Victoria", "7890123456"),
   DummyBank("Ecobank", "assets/jpg/ecobank_logo.jpg", "Okoroafor Nathaniel", "8901234567"),
   DummyBank("Wema Bank", "assets/jpg/wemabank_logo.jpg", "Rabiu Anu", "9012345678"),
-  DummyBank("Stanbic Bank", "assets/jpg/stanbic_logo.jpg", "Rabiu Ire", "0123456789"),
+  DummyBank("Stanbic Bank", "assets/jpg/stanbic_logo.jpg", "Rabiu Iyanu", "0123456789"),
+  DummyBank("Opay Bank", "assets/jpg/gtb_logo.jpg", "Rabiu Bayelsa", "0123456789"),
+  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Rabiu Lagos", "0123456789"),
 ];
 
 class _TransferToBankScreenState extends State<TransferToBankScreen> {
