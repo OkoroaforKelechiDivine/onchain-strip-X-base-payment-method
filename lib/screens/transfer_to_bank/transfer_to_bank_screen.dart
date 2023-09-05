@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
-import 'package:pay_me_mobile/screens/transfer_to_bank/show_all_beneficiaries.dart';
 
-import '../../views/custom_button/custom_bottom_bar_navigation.dart';
+import '../../views/custom/custom_bottom_bar_navigation.dart';
 
 class TransferToBankScreen extends StatefulWidget {
   const TransferToBankScreen({Key? key}) : super(key: key);
