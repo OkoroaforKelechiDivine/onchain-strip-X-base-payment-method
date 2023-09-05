@@ -31,7 +31,7 @@ ThemeData _appTheme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        fixedSize: const Size(500, 60),
+        fixedSize: const Size(350, 60),
         backgroundColor: AppColors.lightGreen,
         textStyle: getBodySmallStyle(color: AppColors.pureWhite, fontSize: 14),
       )
