@@ -36,23 +36,25 @@ class ShowAllBeneficiariesScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     return Scrollbar(
       thumbVisibility: true,
       trackVisibility: true,
       child: SingleChildScrollView(
         child: Column(
-          children: banks.map((bank) => _buildBankItem(bank)).toList(),
+          children: banks.map((bank) => _buildBankItem(context, bank)).toList(),
         ),
       ),
     );
   }
 
-  Widget _buildBankItem(DummyBank bank) {
+  Widget _buildBankItem(BuildContext context, DummyBank bank) {
     return Column(
       children: [
-        GestureDetector(
-          onTap: () {},
+        InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, "/beneficiary_details");
+          },
           child: ListTile(
             leading: Image.asset(
               bank.logo,
@@ -118,7 +120,7 @@ class ShowAllBeneficiariesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: _buildBody(),
+      body: _buildBody(context),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
