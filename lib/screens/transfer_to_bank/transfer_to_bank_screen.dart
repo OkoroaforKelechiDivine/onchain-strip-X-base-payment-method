@@ -281,12 +281,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ShowAllBeneficiariesScreen(banks: dummyBanks),
-                        ),
-                      );
+                      Navigator.pushNamed(context, "/show_all_beneficiaries");
                     },
                     child: const Row(
                       children: [
@@ -386,9 +381,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
         ),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: (_isAccountNumberErrorVisible ||
-                _isAccountNumberLengthInvalid) ? AppColors.errorRed : AppColors
-                .darkWhite.withOpacity(0.5),
+            color: (_isAccountNumberErrorVisible || _isAccountNumberLengthInvalid) ? AppColors.errorRed : AppColors.darkWhite.withOpacity(0.5),
           ),
         ),
         focusedBorder: const UnderlineInputBorder(
@@ -421,8 +414,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
             Future.delayed(const Duration(seconds: 3), () {
               DummyBank matchingBank;
               try {
-                matchingBank = dummyBanks.firstWhere((bank) => bank.accountNumber == value && bank.name == _selectedBankController.text
-                );
+                matchingBank = dummyBanks.firstWhere((bank) => bank.accountNumber == value && bank.name == _selectedBankController.text);
                 _userName = matchingBank.accountName;
               } catch (e) {
                 _isAccountNumberErrorVisible = true;
@@ -455,8 +447,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
     return Column(
       children: [
         Visibility(
-          visible: _isAccountNumberErrorVisible &&
-              _accountNumberController.text.isEmpty,
+          visible: _isAccountNumberErrorVisible && _accountNumberController.text.isEmpty,
           child: const Text(
             'Account number is empty',
             style: errorTextStyle,
