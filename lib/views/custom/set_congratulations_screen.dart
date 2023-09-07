@@ -46,7 +46,7 @@ class CongratulationsDialog extends StatelessWidget {
                   const SizedBox(height: 70),
                   _buildSuccessMessage(),
                   const SizedBox(height: 70),
-                  _buildButtonRow(),
+                  _buildButtonRow(context),
                   const SizedBox(height: 200),
                 ],
               ),
@@ -97,17 +97,21 @@ class CongratulationsDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildButtonRow() {
+  Widget _buildButtonRow(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _buildCardButton('Home >', () {}),
-        _buildCardButton('Add Beneficiary >', () {}),
+        _buildCardButton('Home >', () {
+          Navigator.of(context).pushReplacementNamed("/home");
+        }, context),
+        _buildCardButton('Add Beneficiary >', () {}, context),
       ],
     );
   }
 
-  Widget _buildCardButton(String label, Function onPressed) {
+
+
+  Widget _buildCardButton(String label, Function onPressed, BuildContext context) {
     return Card(
       color: AppColors.lightBlue,
       elevation: 5,
@@ -129,4 +133,5 @@ class CongratulationsDialog extends StatelessWidget {
       ),
     );
   }
+
 }
