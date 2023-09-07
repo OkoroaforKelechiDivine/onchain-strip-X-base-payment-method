@@ -8,7 +8,7 @@ class AppColors {
   static const Color deepWhite = Color(0xFFFFFCFC);
   static const Color lightGreen = Color(0xFF2B606E);
   static const Color lightGrey = Color.fromRGBO(0, 0, 0, 0.6);
-  static const Color lightBlue = Color(0xFFF0FBFE);
+  static const Color lightBlue = Color.fromRGBO(240, 251, 254, 1);
   static const Color pureWhite = Color(0xFFFFFFFF);
   static const Color darkWhite = Color.fromRGBO(139, 134, 134, 0.5);
   static const Color errorRed =  Color(0xFFDF1414);
