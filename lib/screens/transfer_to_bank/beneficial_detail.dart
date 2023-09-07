@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.dart';
+import 'package:pay_me_mobile/views/custom/show_pin_dialog.dart';
 import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
 import '../../views/custom/custom_dynamic_label_textfield.dart';
@@ -22,6 +23,7 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
   String amountExceedBalanceErrorMessage = 'Amount exceeds the available balance';
   String emptyAmountErrorMessage = 'Amount is empty';
   String emptyNarrativeMessage = 'Narration field cannot be empty';
+
 
   double balance = 20000.00;
 
@@ -201,7 +203,7 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
           controller: narrationController,
           decoration: InputDecoration(
             labelText: 'Enter Narration',
-            labelStyle: const TextStyle(color: AppColors.lightBlack),
+            labelStyle: const TextStyle(color: AppColors.lightBlack, fontSize: AppFontSize.size7),
             filled: true,
             fillColor: AppColors.lightBlue,
             border: OutlineInputBorder(
@@ -239,11 +241,25 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
     return Padding(
       padding: const EdgeInsets.only(top: 50.0, right: 100.0, left: 100.0),
       child: ElevatedButton(
-        onPressed: () {},
-        child: const Text('Submit', style: TextStyle(color: AppColors.deepWhite)),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const PinDialog();
+            },
+          );
+        },
+        child: const Text(
+          'Submit',
+          style: TextStyle(
+            color: AppColors.deepWhite,
+            fontSize: AppFontSize.size20,
+          ),
+        ),
       ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
