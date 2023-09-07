@@ -245,11 +245,14 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
           showDialog(
             context: context,
             builder: (BuildContext context) {
-              return PinDialog(amount: double.parse(amountController.text));
+              return PinDialog(
+                amount: double.parse(amountController.text),
+                accountName: widget.bank.accountName,
+              );
             },
           );
         },
-        child: const Text(
+      child: const Text(
           'Submit',
           style: TextStyle(
             color: AppColors.deepWhite,
