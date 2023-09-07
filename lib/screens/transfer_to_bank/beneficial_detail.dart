@@ -245,7 +245,7 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
           showDialog(
             context: context,
             builder: (BuildContext context) {
-              return const PinDialog();
+              return PinDialog(amount: double.parse(amountController.text));
             },
           );
         },
