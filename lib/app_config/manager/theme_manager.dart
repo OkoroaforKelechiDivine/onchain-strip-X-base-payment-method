@@ -33,7 +33,6 @@ ThemeData _appTheme = ThemeData(
       style: ElevatedButton.styleFrom(
         fixedSize: const Size(350, 60),
         backgroundColor: AppColors.lightGreen,
-        textStyle: getBodySmallStyle(color: AppColors.pureWhite, fontSize: 14),
       )
   ),
   inputDecorationTheme: InputDecorationTheme(
