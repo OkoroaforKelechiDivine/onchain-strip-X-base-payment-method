@@ -13,7 +13,7 @@ class CustomUnderlinedText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 25,
+      height: 30,
       child: CustomPaint(
         painter: UnderlinePainter(textStyle.color ?? Colors.black),
         child: Text(
