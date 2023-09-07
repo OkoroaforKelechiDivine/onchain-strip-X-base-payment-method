@@ -9,7 +9,7 @@ class CongratulationsDialog extends StatelessWidget {
   final double amount;
   final String accountName;
 
-  CongratulationsDialog({Key? key, required this.amount, required this.accountName}) : super(key: key);
+  const CongratulationsDialog({Key? key, required this.amount, required this.accountName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
