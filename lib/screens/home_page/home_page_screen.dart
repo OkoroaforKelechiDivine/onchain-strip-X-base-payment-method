@@ -230,7 +230,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   Widget _buildServiceCard(String image, String imageLabel, String routeName) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 15.0),
+      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 30.0),
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(
@@ -240,22 +240,26 @@ class _HomePageScreenState extends State<HomePageScreen> {
           onTap: () {
             Navigator.of(context).pushNamed(routeName);
           },
-          child: Column(
-            children: [
-              SizedBox(
-                width: 55,
-                height: 55,
-                child: Image.asset(image),
-              ),
-              Text(
-                imageLabel,
-                style: const TextStyle(
-                  fontSize: AppFontSize.size12,
-                  fontWeight: AppFontWeight.semiBold,
-                  color: AppColors.lightGreen,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 18.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  width: 30,
+                  height: 30,
+                  child: Image.asset(image),
                 ),
-              ),
-            ],
+                const SizedBox(height: 10),
+                Text(
+                  imageLabel,
+                  style: const TextStyle(
+                    fontSize: AppFontSize.size12,
+                    fontWeight: AppFontWeight.semiBold,
+                    color: AppColors.lightGreen,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
