@@ -1,8 +1,7 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:pay_me_mobile/views/custom/set_congratulations_screen.dart';
 import 'package:pay_me_mobile/views/custom/show_processing_screen.dart';
-
 import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
 
@@ -64,17 +63,24 @@ class _PinDialogState extends State<PinDialog> {
   Widget build(BuildContext context) {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-      child: AlertDialog(
-        content: _buildContent(),
-        title: Align(
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              const Text('Input PIN to Pay', style: TextStyle(fontSize: AppFontSize.size20)),
-              Text("₦${widget.amount.toString()}0", style: CustomStyles.bankInfoTextStyle),
-            ],
+      child: Stack(
+        children: [
+          Container(
+            color: AppColors.pureWhite.withOpacity(0.5),
           ),
-        ),
+          AlertDialog(
+            content: _buildContent(),
+            title: Align(
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                  const Text('Input PIN to Pay', style: TextStyle(fontSize: AppFontSize.size20)),
+                  Text("₦${widget.amount.toString()}0", style: CustomStyles.bankInfoTextStyle),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
