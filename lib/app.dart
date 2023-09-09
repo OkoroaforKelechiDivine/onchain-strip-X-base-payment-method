@@ -37,10 +37,16 @@ class MyApp extends StatelessWidget {
           return BeneficiaryDetailsScreen(bank: bank);
         },
         "/transaction_history": (context) => const TransactionHistoryScreen(),
-        "/transaction_details": (context) => TransactionDetailsScreen(
-          amount: "₦ 20,000",
-          transactionTimestamp: DateTime.now(),
-        ),
+        "/transaction_details": (context) {
+          final transactionDetails = ModalRoute.of(context)!.settings.arguments as TransactionDetailsScreen;
+          return TransactionDetailsScreen(
+            amount: transactionDetails.amount,
+            transactionTimestamp: transactionDetails.transactionTimestamp,
+            accountName: transactionDetails.accountName,
+          );
+        },
+
+
       },
     );
   }
