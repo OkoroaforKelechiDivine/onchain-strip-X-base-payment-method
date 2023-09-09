@@ -17,23 +17,24 @@ class DummyBank {
   final String logo;
   final String accountName;
   final String accountNumber;
+  final DateTime timestamp;
 
-  DummyBank(this.name, this.logo, this.accountName, this.accountNumber);
+  DummyBank(this.name, this.logo, this.accountName, this.accountNumber, this.timestamp);
 }
 
 List<DummyBank> dummyBanks = [
-  DummyBank("Kuda Bank", "assets/jpg/kudabank_logo.jpg", "Ifeoluwa Rabiu", "1234567890"),
-  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Okoroafor Kelechi", "2345678901"),
-  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Okoroafor Nonso", "3456789012"),
-  DummyBank("Zenith Bank", "assets/jpg/zenith_logo.jpg", "Okoroafor Maryjane", "4567890123"),
-  DummyBank("UBA", "assets/jpg/uba_logo.jpg", "Okoroafor Ozioma", "5678901234"),
-  DummyBank("Palmpay", "assets/jpg/palmpay_logo.jpg", "Okoroafor Chinwendu", "6789012345"),
-  DummyBank("First Bank", "assets/jpg/firstbank_logo.jpg", "Okoroafor Victoria", "7890123456"),
-  DummyBank("Ecobank", "assets/jpg/ecobank_logo.jpg", "Okoroafor Nathaniel", "8901234567"),
-  DummyBank("Wema Bank", "assets/jpg/wemabank_logo.jpg", "Rabiu Anu", "9012345678"),
-  DummyBank("Stanbic Bank", "assets/jpg/stanbic_logo.jpg", "Rabiu Iyanu", "0123456789"),
-  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Rabiu Bayelsa", "0123456789"),
-  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Rabiu Lagos", "0123456789"),
+  DummyBank("Kuda Bank", "assets/jpg/kudabank_logo.jpg", "Ifeoluwa Rabiu", "1234567890", DateTime.now()),
+  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Okoroafor Kelechi", "2345678901", DateTime.now()),
+  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Okoroafor Nonso", "3456789012", DateTime.now()),
+  DummyBank("Zenith Bank", "assets/jpg/zenith_logo.jpg", "Okoroafor Maryjane", "4567890123", DateTime.now()),
+  DummyBank("UBA", "assets/jpg/uba_logo.jpg", "Okoroafor Ozioma", "5678901234", DateTime.now()),
+  DummyBank("Palmpay", "assets/jpg/palmpay_logo.jpg", "Okoroafor Chinwendu", "6789012345", DateTime.now()),
+  DummyBank("First Bank", "assets/jpg/firstbank_logo.jpg", "Okoroafor Victoria", "7890123456", DateTime.now()),
+  DummyBank("Ecobank", "assets/jpg/ecobank_logo.jpg", "Okoroafor Nathaniel", "8901234567", DateTime.now()),
+  DummyBank("Wema Bank", "assets/jpg/wemabank_logo.jpg", "Rabiu Anu", "9012345678", DateTime.now()),
+  DummyBank("Stanbic Bank", "assets/jpg/stanbic_logo.jpg", "Rabiu Iyanu", "0123456789", DateTime.now()),
+  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Rabiu Bayelsa", "0123456789", DateTime.now()),
+  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Rabiu Lagos", "0123456789", DateTime.now()),
 ];
 
 class _TransferToBankScreenState extends State<TransferToBankScreen> {
