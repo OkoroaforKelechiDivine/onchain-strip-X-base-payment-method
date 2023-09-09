@@ -11,6 +11,7 @@ import 'package:pay_me_mobile/screens/transfer_to_bank/beneficial_detail.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/show_all_beneficiaries.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.dart';
 import 'package:pay_me_mobile/views/auth_view/login_view.dart';
+import 'package:pay_me_mobile/views/custom/show_pin_dialog.dart';
 
 import 'app_config/manager/theme_manager.dart';
 
@@ -37,6 +38,15 @@ class MyApp extends StatelessWidget {
           final bank = ModalRoute.of(context)!.settings.arguments as DummyBank;
           return BeneficiaryDetailsScreen(bank: bank);
         },
+        "/pin_dialog": (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          final amount = double.tryParse(args['amount'].replaceAll('₦', '').replaceAll(',', '').trim()) ?? 0.0;
+          return PinDialog(
+            amount: amount,
+            accountName: args['accountName'],
+          );
+        },
+
         "/transaction_history": (context) => const TransactionHistoryScreen(),
         "/transaction_details": (context) {
           final transactionDetails = ModalRoute.of(context)!.settings.arguments as TransactionDetailsScreen;
