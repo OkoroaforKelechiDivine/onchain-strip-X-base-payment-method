@@ -4,6 +4,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:pay_me_mobile/screens/home_page/home_page_screen.dart';
 import 'package:pay_me_mobile/screens/splash/splash_screen.dart';
+import 'package:pay_me_mobile/screens/transaction_history/transaction_details.dart';
 import 'package:pay_me_mobile/screens/transaction_history/transaction_history.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/beneficial_detail.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/show_all_beneficiaries.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           return BeneficiaryDetailsScreen(bank: bank);
         },
         "/transaction_history": (context) => const TransactionHistoryScreen(),
+        "/transaction_details": (context) => const TransactionDetailsScreen()
       },
     );
   }
