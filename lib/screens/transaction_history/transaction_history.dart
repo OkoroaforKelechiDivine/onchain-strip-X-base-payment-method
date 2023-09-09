@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import 'package:pay_me_mobile/screens/transaction_history/transaction_details.dart';
 
 import '../../views/custom/custom_bottom_bar_navigation.dart';
 import '../transfer_to_bank/transfer_to_bank_screen.dart';
@@ -16,7 +17,7 @@ class TransactionHistoryScreen extends StatefulWidget {
 
 class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
   String formatTimestamp(DateTime timestamp) {
-    return DateFormat('HH:mm').format(timestamp);
+    return DateFormat('HH:mm a').format(timestamp);
   }
 
   int _currentIndex = 0;
@@ -86,8 +87,13 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
             DummyBank bank = dummyBanks[index];
             return GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/transaction_details");
+                final transactionDetails = TransactionDetailsScreen(
+                  amount: "₦ 20,000",
+                  transactionTimestamp: bank.timestamp,
+                );
+                Navigator.pushNamed(context, "/transaction_details", arguments: transactionDetails);
               },
+
               child: Card(
                 elevation: 5,
                 child: Padding(
