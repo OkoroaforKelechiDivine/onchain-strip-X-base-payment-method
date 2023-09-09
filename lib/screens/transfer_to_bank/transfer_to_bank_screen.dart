@@ -144,7 +144,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
-          Navigator.of(context).pop();
+          Navigator.pushNamed(context, "/home");
         },
       ),
       title: const Text(
@@ -183,11 +183,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    Image.asset(
-                      _selectedBankLogo,
-                      width: 30.0,
-                      height: 30.0,
-                    ),
+                    _selectedBankLogo.isEmpty ? Container() : Image.asset(_selectedBankLogo, width: 30.0, height: 30.0),
                     const SizedBox(width: 8.0),
                     Expanded(
                       child: GestureDetector(
