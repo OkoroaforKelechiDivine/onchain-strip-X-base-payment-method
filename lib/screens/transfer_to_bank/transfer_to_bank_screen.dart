@@ -89,6 +89,14 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
     );
   }
 
