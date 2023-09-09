@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import 'package:pay_me_mobile/screens/transaction_history/repeat_transaction.dart';
 
 import '../../app_config/manager/font_manager.dart';
 import '../../views/custom/custom_bottom_bar_navigation.dart';
@@ -93,7 +94,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
                   widget.amount,
                   style: const TextStyle(
                     fontSize: AppFontSize.size24,
-                    fontWeight: AppFontWeight.thickBold,
+                    fontWeight: AppFontWeight.bold,
                     color: AppColors.lightBlack,
                   ),
                 ),
@@ -198,10 +199,24 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
   Widget _buildMoreActions() {
     return Column(
       children: [
-        _buildActionRow(
-          'assets/jpg/reset.jpg',
-          'Repeat Transaction',
-          Icons.arrow_forward_ios,
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => RepeatTransactionScreen(
+                  amount: widget.amount,
+                  transactionTimestamp: widget.transactionTimestamp,
+                  accountName: widget.accountName,
+                  description: 'Garri', isSent: true,
+                ),
+              ),
+            );
+          },
+          child: _buildActionRow(
+            'assets/jpg/reset.jpg',
+            'Repeat Transaction',
+            Icons.arrow_forward_ios,
+          ),
         ),
         const SizedBox(height: 30),
         _buildActionRow(
@@ -212,6 +227,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
       ],
     );
   }
+
 
   Widget _buildActionRow(String imagePath, String label, IconData icon) {
     return Row(
