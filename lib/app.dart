@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
             amount: transactionDetails.amount,
             transactionTimestamp: transactionDetails.transactionTimestamp,
             accountName: transactionDetails.accountName,
+            bankName: transactionDetails.bankName,
           );
         },
 
