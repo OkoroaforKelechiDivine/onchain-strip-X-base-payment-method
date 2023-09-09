@@ -187,7 +187,7 @@ class _RepeatTransactionScreenState extends State<RepeatTransactionScreen> {
                                         color: AppColors.lightGreen,
                                         child: Center(
                                           child: Text(
-                                            "NGN Balance: ${widget.amount}",
+                                            "NGN Balance: ${double.tryParse(widget.amount.replaceAll('₦', '').replaceAll(',', '').trim())?.toStringAsFixed(2) ?? 'Invalid'}",
                                             style: TextStyle(
                                               fontSize: AppFontSize.size16,
                                               fontWeight: AppFontWeight.bold,
@@ -284,7 +284,12 @@ class _RepeatTransactionScreenState extends State<RepeatTransactionScreen> {
                                       ),
                                     ),
                                     GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.pushNamed(context, "/pin_dialog", arguments: {
+                                          'amount': widget.amount, // Pass the required arguments here
+                                          'accountName': widget.accountName,
+                                        });
+                                      },
                                       child: Padding(
                                         padding: const EdgeInsets.only(left: 50.0),
                                         child: Image.asset(
