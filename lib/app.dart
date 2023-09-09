@@ -37,7 +37,10 @@ class MyApp extends StatelessWidget {
           return BeneficiaryDetailsScreen(bank: bank);
         },
         "/transaction_history": (context) => const TransactionHistoryScreen(),
-        "/transaction_details": (context) => const TransactionDetailsScreen()
+        "/transaction_details": (context) => TransactionDetailsScreen(
+          amount: "₦ 20,000",
+          transactionTimestamp: DateTime.now(),
+        ),
       },
     );
   }
