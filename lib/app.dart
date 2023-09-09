@@ -4,6 +4,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:pay_me_mobile/screens/home_page/home_page_screen.dart';
 import 'package:pay_me_mobile/screens/splash/splash_screen.dart';
+import 'package:pay_me_mobile/screens/transaction_history/repeat_transaction.dart';
 import 'package:pay_me_mobile/screens/transaction_history/transaction_details.dart';
 import 'package:pay_me_mobile/screens/transaction_history/transaction_history.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/beneficial_detail.dart';
@@ -46,7 +47,15 @@ class MyApp extends StatelessWidget {
             bankName: transactionDetails.bankName,
           );
         },
-
+        "/repeat_transaction": (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as RepeatTransactionScreen;
+          return RepeatTransactionScreen(
+            amount: args.amount,
+            transactionTimestamp: args.transactionTimestamp,
+            accountName: args.accountName,
+            description: args.description, isSent: true,
+          );
+        }
 
       },
     );
