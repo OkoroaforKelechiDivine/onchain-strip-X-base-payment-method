@@ -230,7 +230,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   Widget _buildServiceCard(String image, String imageLabel, String routeName) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 30.0),
+      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 15.0),
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(
