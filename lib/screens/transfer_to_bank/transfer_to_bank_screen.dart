@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 
@@ -45,6 +46,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   String _userName = '';
   String _selectedBankLogo = '';
   bool _showProcessingCircle = false;
+  int _currentIndex = 0;
 
   final TextEditingController _selectedBankController = TextEditingController();
   final TextEditingController _accountNumberController = TextEditingController();
@@ -121,11 +123,14 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
           child: ListTile(
             leading: Image.asset(
               bank.logo,
+              width: 40,
             ),
             title: Text(
               bank.name,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: AppFontWeight.bold,
+                fontFamily: GoogleFonts.alegreyaSans().fontFamily
+
               ),
             ),
             onTap: () {
@@ -537,13 +542,11 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
         ),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: 0,
-        onTap: (index) {
-          if (index == 0) {
-          } else if (index == 1) {
-          } else if (index == 2) {
-          } else if (index == 3) {
-          }
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
         },
       ),
     );
