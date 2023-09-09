@@ -90,7 +90,8 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                 final transactionDetails = TransactionDetailsScreen(
                   amount: "₦ 20,000",
                   transactionTimestamp: bank.timestamp,
-                  accountName: bank.accountName
+                  accountName: bank.accountName,
+                  bankName: bank.name,
                 );
                 Navigator.pushNamed(context, "/transaction_details", arguments: transactionDetails);
               },
