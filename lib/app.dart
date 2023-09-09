@@ -66,7 +66,6 @@ class MyApp extends StatelessWidget {
             description: args.description, isSent: true,
           );
         }
-
       },
     );
   }
