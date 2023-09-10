@@ -177,7 +177,10 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
           controller: amountController,
           decoration: InputDecoration(
             hintText: "Enter amount here",
-            hintStyle: const TextStyle(color: AppColors.lightBlack, fontWeight: AppFontWeight.bold),
+            hintStyle: const TextStyle(
+                color: AppColors.lightBlack,
+                fontWeight: AppFontWeight.bold
+            ),
             filled: true,
             fillColor: AppColors.lightBlue,
             focusColor: AppColors.lightBlue,
@@ -250,7 +253,10 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
         child: TextField(
           decoration: InputDecoration(
             hintText: "Enter Phone number",
-            hintStyle: const TextStyle(color: AppColors.lightBlack, fontWeight: AppFontWeight.bold),
+            hintStyle: const TextStyle(
+                color: AppColors.lightBlack,
+                fontWeight: AppFontWeight.bold
+            ),
             filled: true,
             fillColor: AppColors.lightBlue,
             focusColor: AppColors.lightBlue,
