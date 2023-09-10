@@ -7,7 +7,7 @@ class SplashController extends GetxController {
   void onInit() {
     super.onInit();
     Timer(const Duration(milliseconds: 4000), (){
-      Get.off(() => LoginScreen());
+      Get.offAll(() => LoginScreen());
     });
   }
 }

@@ -16,7 +16,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   bool isAmountVisible = false;
   int _currentIndex = 0;
 
-  static const dynamicAmount = "₦ 24,607,034.02";
+  static const dynamicAmount = "24,607,034.02";
   static const addMoneyImage = 'assets/jpg/add_money.jpg';
   static const transferImage = 'assets/jpg/transfer.jpg';
   static const posDeviceImage = 'assets/jpg/pos_device.jpg';
@@ -91,13 +91,22 @@ class _HomePageScreenState extends State<HomePageScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  displayedAmount,
-                  style: GoogleFonts.philosopher(
-                    fontSize: AppFontSize.size30,
-                    color: AppColors.deepWhite,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  children: [
+                    const Text("₦ "
+                    ,style: TextStyle(
+                        fontSize: AppFontSize.size30,
+                        fontFamily: ""
+                      ),),
+                    Text(
+                      displayedAmount,
+                      style: GoogleFonts.philosopher(
+                        fontSize: AppFontSize.size30,
+                        color: AppColors.deepWhite,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
                 IconButton(
                   icon: Icon(
