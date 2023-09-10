@@ -29,7 +29,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   static const buyPowerImage = "assets/jpg/buy_power.jpg";
   static const moreImage = "assets/jpg/more.jpg";
 
-  List<String> outletNames = [
+  List<String> cardName = [
     'Outlet',
     'Transaction\n \t\t\t\tHistory',
     'Buy Airtime',
@@ -278,7 +278,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> outletImages = [
+    List<String> cardImage = [
       outletImage,
       transactionHistoryImage,
       buyAirtimeImage,
@@ -308,17 +308,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   (BuildContext context, int index) {
                 switch (index) {
                   case 0:
-                    return _buildServiceCard(outletImages[index], outletNames[index], '/outlet');
+                    return _buildServiceCard(cardImage[index], cardName[index], '/outlet');
                   case 1:
-                    return _buildServiceCard(outletImages[index], outletNames[index], '/transaction_history');
+                    return _buildServiceCard(cardImage[index], cardName[index], '/transaction_history');
                   case 2:
-                    return _buildServiceCard(outletImages[index], outletNames[index], '/buy_airtime');
+                    return _buildServiceCard(cardImage[index], cardName[index], '/buy_airtime');
                   case 3:
-                    return _buildServiceCard(outletImages[index], outletNames[index], '/buy_power');
+                    return _buildServiceCard(cardImage[index], cardName[index], '/buy_power');
                   case 4:
-                    return _buildServiceCard(outletImages[index], outletNames[index], '/pos_device');
+                    return _buildServiceCard(cardImage[index], cardName[index], '/pos_device');
                   case 5:
-                    return _buildServiceCard(outletImages[index], outletNames[index], '/more');
+                    return _buildServiceCard(cardImage[index], cardName[index], '/more');
                   default:
                     return const SizedBox();
                 }
