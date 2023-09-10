@@ -134,7 +134,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
 
   Widget _buildAmountInfo() {
     return const Padding(
-      padding: EdgeInsets.only(top:5.0, bottom: 10),
+      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0,),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -161,7 +161,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
 
   Widget _buildAmountTextField() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 5.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0,),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -194,7 +194,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
 
   Widget _buildNetworkDropdown() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 5.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0,),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -234,30 +234,33 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
   }
 
   Widget _buildPhoneNumberTextField() {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.lightGrey.withOpacity(0.1),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: "Enter Phone number",
-          hintStyle: const TextStyle(color: AppColors.lightBlack, fontWeight: AppFontWeight.bold),
-          filled: true,
-          fillColor: AppColors.lightBlue,
-          focusColor: AppColors.lightBlue,
-          border: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(8.0),
-          ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0,),
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.lightGrey.withOpacity(0.1),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3),
+            ),
+          ],
         ),
-        keyboardType: TextInputType.number,
+        child: TextField(
+          decoration: InputDecoration(
+            hintText: "Enter Phone number",
+            hintStyle: const TextStyle(color: AppColors.lightBlack, fontWeight: AppFontWeight.bold),
+            filled: true,
+            fillColor: AppColors.lightBlue,
+            focusColor: AppColors.lightBlue,
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+          keyboardType: TextInputType.number,
+        ),
       ),
     );
   }
