@@ -4,6 +4,8 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:pay_me_mobile/screens/home_page/home_page_screen.dart';
 import 'package:pay_me_mobile/screens/splash/splash_screen.dart';
+import 'package:pay_me_mobile/screens/transfer_to_bank/beneficial_detail.dart';
+import 'package:pay_me_mobile/screens/transfer_to_bank/show_all_beneficiaries.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.dart';
 import 'package:pay_me_mobile/views/auth_view/login_view.dart';
 
@@ -22,12 +24,16 @@ class MyApp extends StatelessWidget {
       theme: getApplicationTheme(),
       home: const SplashScreen(),
 
-      initialRoute: "/splash",
       routes: {
         "/home": (context) => const HomePageScreen(),
-        "/login": (context) => LoginScreen(),
+        "/login": (context) => const LoginScreen(),
         "/splash": (context) => const SplashScreen(),
         "/transfer": (context) => const TransferToBankScreen(),
+        "/show_all_beneficiaries": (context) => ShowAllBeneficiariesScreen(banks: dummyBanks),
+        "/beneficiary_details": (context) {
+          final bank = ModalRoute.of(context)!.settings.arguments as DummyBank;
+          return BeneficiaryDetailsScreen(bank: bank);
+        },
       },
     );
   }

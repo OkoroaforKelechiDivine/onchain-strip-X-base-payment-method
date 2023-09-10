@@ -5,11 +5,15 @@ import 'font_manager.dart';
 
 
 TextStyle _getAlegreyaSansTextStyle(double fontSize, FontWeight fontWeight, Color fontColor,){
-  return GoogleFonts.alegreyaSans(fontSize: fontSize, fontWeight: fontWeight, color: fontColor);
+  return GoogleFonts.alegreyaSans(
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: fontColor,
+      textStyle: const TextStyle(fontFamily: 'AlegreyaSans'));
 }
 
 getBodyLargeStyle({double fontSize = AppFontSize.size24, required Color color}) {
-  return _getAlegreyaSansTextStyle(fontSize, AppFontWeight.bold, color);
+  return _getAlegreyaSansTextStyle(fontSize, AppFontWeight.bold, color, );
 }
 
 getBodyMediumBoldStyle(
@@ -17,8 +21,7 @@ getBodyMediumBoldStyle(
   return _getAlegreyaSansTextStyle(fontSize, AppFontWeight.semiBold, color);
 }
 
-getBodyMediumRegularStyle(
-    {double fontSize = AppFontSize.size14, required Color color}) {
+getBodyMediumRegularStyle({double fontSize = AppFontSize.size14, required Color color}) {
   return _getAlegreyaSansTextStyle(fontSize, AppFontWeight.regular, color);
 }
 
