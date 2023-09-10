@@ -138,7 +138,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildActionColumn(addMoneyImage, 'Add Money', () {}, textColor: AppColors.pureWhite),
+                _buildActionColumn(addMoneyImage, 'Earnings', () {}, textColor: AppColors.pureWhite),
                 _buildActionColumn(transferImage, 'Transfer', () { Navigator.of(context).pushReplacementNamed('/transfer'); }, textColor: AppColors.pureWhite),
                 _buildActionColumn(posDeviceImage, 'POS Device', () {}, textColor: AppColors.pureWhite),
               ],
