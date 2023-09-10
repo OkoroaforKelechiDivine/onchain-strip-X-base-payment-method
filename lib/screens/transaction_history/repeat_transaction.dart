@@ -286,7 +286,7 @@ class _RepeatTransactionScreenState extends State<RepeatTransactionScreen> {
                                     GestureDetector(
                                       onTap: () {
                                         Navigator.pushNamed(context, "/pin_dialog", arguments: {
-                                          'amount': widget.amount, // Pass the required arguments here
+                                          'amount': widget.amount,
                                           'accountName': widget.accountName,
                                         });
                                       },
