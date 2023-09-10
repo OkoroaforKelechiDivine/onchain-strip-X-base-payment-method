@@ -195,36 +195,46 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Row(
-                  children: [
-                    _selectedBankLogo.isEmpty ? Container() : Image.asset(_selectedBankLogo, width: 30.0, height: 30.0),
-                    const SizedBox(width: 8.0),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          _showBankSelectionDialog(context);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              _selectedBankController.text,
-                              style: const TextStyle(
-                                color: AppColors.lightBlack,
-                                fontWeight: AppFontWeight.bold,
-                                fontSize: AppFontSize.size18,
-                              ),
-                            ),
-                            const Icon(
-                              Icons.keyboard_arrow_down_sharp,
-                              size: AppFontSize.size30,
-                              color: AppColors.darkWhite,
-                            ),
-                          ],
-                        ),
+                Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: AppColors.lightGrey,
+                        width: 1.0,
                       ),
                     ),
-                  ],
+                  ),
+                  child: Row(
+                    children: [
+                      _selectedBankLogo.isEmpty ? Container() : Image.asset(_selectedBankLogo, width: 30.0, height: 30.0),
+                      const SizedBox(width: 8.0),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            _showBankSelectionDialog(context);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                _selectedBankController.text,
+                                style: const TextStyle(
+                                  color: AppColors.lightBlack,
+                                  fontWeight: AppFontWeight.bold,
+                                  fontSize: AppFontSize.size18,
+                                ),
+                              ),
+                              const Icon(
+                                Icons.keyboard_arrow_down_sharp,
+                                size: AppFontSize.size30,
+                                color: AppColors.darkWhite,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 _buildAccountNumberTextField(),
                 _buildAccountNumberErrorMessages(),
