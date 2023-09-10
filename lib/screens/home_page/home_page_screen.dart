@@ -5,8 +5,6 @@ import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
 import '../../views/custom/custom_bottom_bar_navigation.dart';
 
-// Import your AppFontSize, AppColors, AppFontWeight, and other necessary dependencies here.
-
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
 
@@ -78,8 +76,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 
   Widget _buildBalanceCard() {
-    final displayedAmount = isAmountVisible ? dynamicAmount : hideDigits(
-        dynamicAmount);
+    final displayedAmount = isAmountVisible ? dynamicAmount : hideDigits(dynamicAmount);
     return Card(
       color: AppColors.lightGreen,
       elevation: 0,
@@ -141,13 +138,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildActionColumn(addMoneyImage, 'Add Money', () {},
-                    textColor: AppColors.pureWhite),
-                _buildActionColumn(transferImage, 'Transfer', () {
-                  Navigator.of(context).pushReplacementNamed('/transfer');
-                }, textColor: AppColors.pureWhite),
-                _buildActionColumn(posDeviceImage, 'POS Device', () {},
-                    textColor: AppColors.pureWhite),
+                _buildActionColumn(addMoneyImage, 'Add Money', () {}, textColor: AppColors.pureWhite),
+                _buildActionColumn(transferImage, 'Transfer', () { Navigator.of(context).pushReplacementNamed('/transfer'); }, textColor: AppColors.pureWhite),
+                _buildActionColumn(posDeviceImage, 'POS Device', () {}, textColor: AppColors.pureWhite),
               ],
             ),
             const SizedBox(height: 20),
@@ -157,8 +150,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     );
   }
 
-  Widget _buildActionColumn(String imageAsset, String label,
-      VoidCallback onPressed, { required Color textColor }) {
+  Widget _buildActionColumn(String imageAsset, String label, VoidCallback onPressed, { required Color textColor }) {
     return Column(
       children: [
         Container(
@@ -205,13 +197,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildActionColumn(bankImage, 'To Bank', () {},
-                      textColor: AppColors.lightGreen),
-                  _buildActionColumn(raisePaymentImage, 'Raise Payment', () {},
-                      textColor: AppColors.lightGreen),
-                  _buildActionColumn(
-                      approvedPaymentImage, 'Approve Payments', () {},
-                      textColor: AppColors.lightGreen),
+                  _buildActionColumn(bankImage, 'To Bank', () {}, textColor: AppColors.lightGreen),
+                  _buildActionColumn(raisePaymentImage, 'Raise Payment', () {}, textColor: AppColors.lightGreen),
+                  _buildActionColumn(approvedPaymentImage, 'Approve Payments', () {}, textColor: AppColors.lightGreen),
                 ],
               ),
             ],
@@ -251,7 +239,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   Widget _buildServiceCard(String image, String imageLabel, String routeName) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 26.0),
+      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 15.0),
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(
@@ -261,25 +249,26 @@ class _HomePageScreenState extends State<HomePageScreen> {
           onTap: () {
             Navigator.of(context).pushNamed(routeName);
           },
-          child: Column(
-            children: [
-              SizedBox(
-                width: 55,
-                height: 55,
-                child: IconButton(
-                  icon: Image.asset(image),
-                  onPressed: () {},
+          child: Padding(
+            padding: const EdgeInsets.only(top: 18.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  width: 30,
+                  height: 30,
+                  child: Image.asset(image),
                 ),
-              ),
-              Text(
-                imageLabel,
-                style: const TextStyle(
-                  fontSize: AppFontSize.size12,
-                  fontWeight: AppFontWeight.semiBold,
-                  color: AppColors.lightGreen,
+                const SizedBox(height: 10),
+                Text(
+                  imageLabel,
+                  style: const TextStyle(
+                    fontSize: AppFontSize.size12,
+                    fontWeight: AppFontWeight.semiBold,
+                    color: AppColors.lightGreen,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
