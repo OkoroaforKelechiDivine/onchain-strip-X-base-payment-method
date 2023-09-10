@@ -198,7 +198,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _buildActionColumn(bankImage, 'To Bank', () {}, textColor: AppColors.lightGreen),
-                  _buildActionColumn(raisePaymentImage, 'Raise Payment', () {}, textColor: AppColors.lightGreen),
+                  _buildActionColumn(raisePaymentImage, 'Raise Payment', () { Navigator.of(context).pushReplacementNamed('/raise_payment'); }, textColor: AppColors.lightGreen),
                   _buildActionColumn(approvedPaymentImage, 'Approve Payments', () {}, textColor: AppColors.lightGreen),
                 ],
               ),
