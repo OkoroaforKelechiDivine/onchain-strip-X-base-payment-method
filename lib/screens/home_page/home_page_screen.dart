@@ -158,6 +158,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     return Column(
       children: [
         Container(
+          height: 40,
           decoration: BoxDecoration(
             color: AppColors.deepWhite,
             borderRadius: BorderRadius.circular(8.0),
