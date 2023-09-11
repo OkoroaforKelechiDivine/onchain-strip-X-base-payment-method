@@ -528,17 +528,26 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   }
 
   Widget _buildNextTextButton() {
-    return Center(
-      child: TextButton(
-        onPressed: () {},
-        child: const Padding(
-          padding: EdgeInsets.only(top: 28.0),
-          child: Text(
-            'Next',
-            style: TextStyle(
-              fontWeight: AppFontWeight.bold,
-              color: AppColors.lightBlack,
-              fontSize: AppFontSize.size16,
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Center(
+        child: SizedBox(
+          height: 50,
+          width: 100.0,
+          child: ElevatedButton(
+            onPressed: () {
+            },
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 15.0),
+              backgroundColor: AppColors.lightGreen,
+            ),
+            child: const Text(
+              'Next',
+              style: TextStyle(
+                fontWeight: AppFontWeight.bold,
+                color: AppColors.lightBlack,
+                fontSize: AppFontSize.size16,
+              ),
             ),
           ),
         ),
