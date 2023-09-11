@@ -545,7 +545,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
               'Next',
               style: TextStyle(
                 fontWeight: AppFontWeight.bold,
-                color: AppColors.lightBlack,
+                color: AppColors.pureWhite,
                 fontSize: AppFontSize.size16,
               ),
             ),
