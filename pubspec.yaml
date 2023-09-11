@@ -12,10 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.1
-  get: ^4.6.5
   intl:
 
 
@@ -31,3 +29,4 @@ flutter:
 
   assets:
     - assets/jpg/
+    - assets/png/
