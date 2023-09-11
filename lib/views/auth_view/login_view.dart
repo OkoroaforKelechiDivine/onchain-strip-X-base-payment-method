@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
@@ -14,12 +13,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final controller = Get.put(LoginController());
+  final controller = LoginController();
   bool _obscurePassword = true;
 
   Widget _buildLogo() {
     return Image.asset(
-      "assets/jpg/payMeLogo.jpg",
+      "assets/png/payme.png",
       height: 80,
     );
   }
@@ -89,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     );
   }
+
 
   Widget _buildForgotPasswordButton() {
     return Align(
@@ -165,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller.userNameController,
                   controller.clearUserNameError,
                   false, false, () {},
-                  controller.userNameError.value.isEmpty ? null : controller.userNameError.value,
+                  controller.userNameError.isEmpty ? null : controller.userNameError,
                 ),
                 const SizedBox(height: 20),
                 _buildTextField(
@@ -187,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       _obscurePassword = !_obscurePassword;
                     });
                   },
-                  controller.passwordError.value.isEmpty ? null : controller.passwordError.value,
+                  controller.passwordError.isEmpty ? null : controller.passwordError,
                 ),
                 _buildForgotPasswordButton(),
                 const SizedBox(height: 20),
