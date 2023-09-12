@@ -230,7 +230,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   Widget _buildServiceCard(String image, String imageLabel, String routeName) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 20.0),
+      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 35.0),
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
@@ -241,7 +241,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
             Navigator.of(context).pushNamed(routeName);
           },
           child: Padding(
-            padding: const EdgeInsets.only(top: 18.0),
+            padding: const EdgeInsets.only(top: 5),
             child: Column(
               children: [
                 SizedBox(
