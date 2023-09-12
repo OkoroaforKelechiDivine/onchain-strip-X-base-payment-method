@@ -84,7 +84,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
         borderRadius: BorderRadius.circular(9.0),
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16.0, 20.0, 16.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(15, 15, 15.0, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -121,23 +121,23 @@ class _HomePageScreenState extends State<HomePageScreen> {
             const Text(
               'ACCOUNT NUMBER: 157766678939',
               style: TextStyle(
-                fontSize: AppFontSize.size12,
+                fontSize: AppFontSize.size14,
                 fontWeight: AppFontWeight.bold,
                 color: AppColors.deepWhite,
               ),
             ),
             const SizedBox(height: 5),
             const Text(
-              'Account Status: MERCHANT',
+              'Account Type: MERCHANT',
               style: TextStyle(
-                fontSize: AppFontSize.size12,
+                fontSize: AppFontSize.size14,
                 fontWeight: AppFontWeight.bold,
                 color: AppColors.deepWhite,
               ),
             ),
             const SizedBox(height: 35),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+              padding: const EdgeInsets.only(left: 16, right: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -147,7 +147,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 35),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -172,8 +172,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
         Text(
           label,
           style: TextStyle(
-            fontSize: AppFontSize.size12,
-            fontWeight: AppFontWeight.bold,
+            fontSize: AppFontSize.size14,
+            fontWeight: AppFontWeight.medium,
             color: textColor,
           ),
         ),
@@ -183,7 +183,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   Widget _buildMoneyTransferCard() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16.0, 5.0, 16.0, 10.0),
+      padding: const EdgeInsets.fromLTRB(16, 5.0, 16, 10.0),
       child: Card(
         elevation: 5,
         child: Padding(
@@ -195,7 +195,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 'Money Transfer',
                 style: TextStyle(
                   fontSize: AppFontSize.size14,
-                  fontWeight: AppFontWeight.bold,
+                  fontWeight: AppFontWeight.medium,
                   color: AppColors.lightBlack,
                 ),
               ),
@@ -216,7 +216,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   Widget _buildServiceHeader() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(25.0, 0.0, 30.0, 0.0),
+      padding: const EdgeInsets.only(left: 25.0),
       child: Text(
         'Service',
         style: GoogleFonts.inter(
@@ -230,7 +230,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   Widget _buildServiceCard(String image, String imageLabel, String routeName) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 35.0),
+      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 25.0),
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
@@ -249,12 +249,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   height: 25,
                   child: Image.asset(image),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 Text(
                   imageLabel,
                   style: const TextStyle(
-                    fontSize: AppFontSize.size12,
-                    fontWeight: AppFontWeight.semiBold,
+                    fontSize: AppFontSize.size14,
+                    fontWeight: AppFontWeight.light,
                     color: AppColors.lightGreen,
                   ),
                 ),
