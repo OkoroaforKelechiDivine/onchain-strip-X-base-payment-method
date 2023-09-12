@@ -202,7 +202,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildActionColumn(bankImage, 'To Bank', () {}, textColor: AppColors.lightGreen),
+                  _buildActionColumn(bankImage, 'To Bank', () {Navigator.of(context).pushReplacementNamed('/transfer'); }, textColor: AppColors.lightGreen),
                   _buildActionColumn(raisePaymentImage, 'Raise Payment', () { Navigator.of(context).pushReplacementNamed('/raise_payment'); }, textColor: AppColors.lightGreen),
                   _buildActionColumn(approvedPaymentImage, 'Approve Payments', () {}, textColor: AppColors.lightGreen),
                 ],
