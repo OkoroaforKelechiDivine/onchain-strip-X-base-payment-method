@@ -236,7 +236,6 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
     );
   }
 
-
   Widget _buildActionRow(String imagePath, String label, IconData icon) {
     return Row(
       children: [
