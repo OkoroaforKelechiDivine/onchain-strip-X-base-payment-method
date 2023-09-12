@@ -56,7 +56,6 @@ class _RepeatTransactionScreenState extends State<RepeatTransactionScreen> {
     );
   }
 
-
   Widget buildTodayText() {
     return const Padding(
       padding: EdgeInsets.only(top: 10, left: 30),
