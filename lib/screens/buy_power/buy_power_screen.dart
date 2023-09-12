@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
+import '../../views/custom/custom_amount_input_field.dart';
 import '../../views/custom/custom_bottom_bar_navigation.dart';
 import '../../views/custom/show_pin_dialog.dart';
 
@@ -63,7 +64,7 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
-          padding: EdgeInsets.only(left: 80.0),
+          padding: EdgeInsets.only(left: 60.0),
           child: Text(
             'Buy Power',
             style: TextStyle(
@@ -76,17 +77,7 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Center(
-              child: Text(
-                "Electricity",
-                style: TextStyle(
-                  color: AppColors.lightBlack,
-                  fontWeight: AppFontWeight.bold,
-                  fontSize: AppFontSize.size18,
-                ),
-              ),
-            ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 20),
             _buildServiceProviders(),
             const SizedBox(height: 10),
             _buildPackage(),
@@ -121,7 +112,7 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
                 style: TextStyle(
                   color: AppColors.lightBlack,
                   fontWeight: AppFontWeight.bold,
-                  fontSize: AppFontSize.size18,
+                  fontSize: AppFontSize.size16,
                 ),
               ),
             ),
@@ -146,7 +137,7 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
                 style: TextStyle(
                   color: AppColors.lightBlack,
                   fontWeight: AppFontWeight.bold,
-                  fontSize: AppFontSize.size18,
+                  fontSize: AppFontSize.size16,
                 ),
               ),
             ),
@@ -167,11 +158,11 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
             child: Padding(
               padding: EdgeInsets.only(left: 10.0),
               child: Text(
-                "Meter Name",
+                "Meter Number",
                 style: TextStyle(
                   color: AppColors.lightBlack,
                   fontWeight: AppFontWeight.bold,
-                  fontSize: AppFontSize.size18,
+                  fontSize: AppFontSize.size16,
                 ),
               ),
             ),
@@ -229,12 +220,13 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
           decoration: InputDecoration(
             hintText: "Choose Electricity Provider",
             hintStyle: const TextStyle(
-              color: AppColors.lightBlack,
+              color: AppColors.lightGrey,
+              fontSize: AppFontSize.size14,
               fontWeight: AppFontWeight.light,
             ),
             filled: true,
-            fillColor: AppColors.lightBlue,
-            focusColor: AppColors.lightBlue,
+            fillColor: AppColors.pureWhite,
+            focusColor: AppColors.pureWhite,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(8.0),
@@ -269,14 +261,15 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
         child: TextField(
           controller: electricityProviderController,
           decoration: InputDecoration(
-            hintText: "Enter Meter Name",
+            hintText: "Enter Meter Number",
             hintStyle: const TextStyle(
-              color: AppColors.lightBlack,
+              color: AppColors.lightGrey,
+              fontSize: AppFontSize.size14,
               fontWeight: AppFontWeight.light,
             ),
             filled: true,
-            fillColor: AppColors.lightBlue,
-            focusColor: AppColors.lightBlue,
+            fillColor: AppColors.pureWhite,
+            focusColor: AppColors.pureWhite,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(8.0),
@@ -305,12 +298,13 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
           decoration: InputDecoration(
             hintText: "Choose Package",
             hintStyle: const TextStyle(
-              color: AppColors.lightBlack,
+              color: AppColors.lightGrey,
+              fontSize: AppFontSize.size14,
               fontWeight: AppFontWeight.light,
             ),
             filled: true,
-            fillColor: AppColors.lightBlue,
-            focusColor: AppColors.lightBlue,
+            fillColor: AppColors.pureWhite,
+            focusColor: AppColors.pureWhite,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(8.0),
@@ -344,15 +338,24 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
         ),
         child: TextField(
           controller: amountController,
+          onChanged: (text) {
+            String formattedAmount = AmountFormatter.formatAmount(text);
+            if (amountController.text != formattedAmount) {
+              amountController.value = amountController.value.copyWith(
+                text: formattedAmount,
+                selection: TextSelection.collapsed(offset: formattedAmount.length),
+              );
+            }
+          },
           decoration: InputDecoration(
             hintText: "Enter amount here",
             hintStyle: const TextStyle(
-              color: AppColors.lightBlack,
+              color: AppColors.lightGrey,
               fontWeight: AppFontWeight.light,
             ),
             filled: true,
-            fillColor: AppColors.lightBlue,
-            focusColor: AppColors.lightBlue,
+            fillColor: AppColors.pureWhite,
+            focusColor: AppColors.pureWhite,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(8.0),
@@ -364,13 +367,14 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
     );
   }
 
+
   Padding _buildNextButton() {
     return Padding(
       padding: const EdgeInsets.only(left: 100.0, right: 100.0, top: 50),
       child: ElevatedButton(
         onPressed: () {
           String enteredAmount = amountController.text;
-          enteredAmount = enteredAmount.replaceAll("₦", "");
+          enteredAmount = enteredAmount.replaceAll("₦", "").replaceAll(",", "");
 
           Navigator.of(context).push(
             MaterialPageRoute(
