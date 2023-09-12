@@ -188,7 +188,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
           decoration: InputDecoration(
             hintText: "Enter amount here",
             hintStyle: const TextStyle(
-                color: AppColors.lightBlack,
+                color: AppColors.lightGrey,
                 fontSize: AppFontSize.size14,
                 fontWeight: AppFontWeight.light
             ),
@@ -225,7 +225,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
           decoration: InputDecoration(
             hintText: "Choose Network",
             hintStyle: const TextStyle(
-              color: AppColors.lightBlack,
+              color: AppColors.lightGrey,
                 fontSize: AppFontSize.size14,
                 fontWeight: AppFontWeight.light
             ),
@@ -267,7 +267,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
           decoration: InputDecoration(
             hintText: "Enter Phone number",
             hintStyle: const TextStyle(
-                color: AppColors.lightBlack,
+                color: AppColors.lightGrey,
                 fontSize: AppFontSize.size14,
                 fontWeight: AppFontWeight.light
             ),
