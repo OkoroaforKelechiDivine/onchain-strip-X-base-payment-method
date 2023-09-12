@@ -367,7 +367,6 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
     );
   }
 
-
   Padding _buildNextButton() {
     return Padding(
       padding: const EdgeInsets.only(left: 100.0, right: 100.0, top: 50),
