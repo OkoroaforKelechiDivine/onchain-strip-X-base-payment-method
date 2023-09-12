@@ -36,24 +36,24 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
         title: Row(
           children: [
             const Padding(
-              padding: EdgeInsets.only(left: 50.0),
+              padding: EdgeInsets.only(left: 60.0),
               child: Center(
                 child: Text(
                   'Transaction',
                   style: TextStyle(
                     color: AppColors.lightGreen,
-                    fontSize: AppFontSize.size22,
+                    fontSize: AppFontSize.size20,
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 50),
+              padding: const EdgeInsets.only(left: 40),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Container(
                   color: AppColors.lightGreen,
-                  constraints: const BoxConstraints(maxWidth: 100, maxHeight: 35),
+                  constraints: const BoxConstraints(maxWidth: 70, maxHeight: 25),
                   child: ElevatedButton(
                     onPressed: () {},
                     child: const Text(
@@ -76,7 +76,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
           children: [
             const Center(
               child: Padding(
-                padding: EdgeInsets.only(top: 8.0, right: 30),
+                padding: EdgeInsets.only(top: 20),
                 child: Text(
                   'Amount',
                   style: TextStyle(
@@ -89,11 +89,11 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
             ),
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 10, right: 30),
+                padding: const EdgeInsets.only(bottom: 5),
                 child: Text(
                   widget.amount,
                   style: const TextStyle(
-                    fontSize: AppFontSize.size24,
+                    fontSize: AppFontSize.size20,
                     fontWeight: AppFontWeight.bold,
                     color: AppColors.lightBlack,
                   ),
@@ -101,51 +101,48 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
               ),
             ),
             Center(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 10, right: 30),
-                child: Text(
-                  'On $formattedTimestamp',
-                  style: const TextStyle(
-                    fontSize: AppFontSize.size16,
-                    fontWeight: AppFontWeight.medium,
-                    color: AppColors.lightBlack,
-                  ),
+              child: Text(
+                'On $formattedTimestamp',
+                style: const TextStyle(
+                  fontSize: AppFontSize.size16,
+                  fontWeight: AppFontWeight.medium,
+                  color: AppColors.lightBlack,
                 ),
               ),
             ),
 
             Padding(
-              padding: const EdgeInsets.only(top: 30, right: 20, left: 20),
+              padding: const EdgeInsets.only(top: 30, right: 10, left: 10),
               child: Column(
                 children: [
                   _buildInfoRow('Account Name', widget.accountName),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   _buildDivider(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   _buildInfoRow('To', widget.bankName),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   _buildDivider(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   _buildInfoRow('Description', 'Garri'),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   _buildDivider(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   _buildInfoRow('Outward Transfer', '₦ 0.00'),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   _buildDivider(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   _buildInfoRow('Payment Method', 'Fees'),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   _buildDivider(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   _buildInfoRow('Status', 'Successful'),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   _buildDivider(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   _buildInfoRow('Transaction Reference', '090267230811083838'),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   _buildDivider(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   _buildMoreActions(),
                 ],
               ),
@@ -171,7 +168,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
         Text(
           '$label ',
           style: const TextStyle(
-            fontSize: AppFontSize.size20,
+            fontSize: AppFontSize.size16,
             fontWeight: AppFontWeight.bold,
             color: AppColors.lightBlack,
           ),
@@ -182,7 +179,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
           style: const TextStyle(
             color: AppColors.lightBlack,
             fontWeight: AppFontWeight.light,
-            fontSize: AppFontSize.size20,
+            fontSize: AppFontSize.size16,
           ),
         )
       ],
@@ -192,13 +189,23 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
   Widget _buildDivider() {
     return Container(
       color: AppColors.lightGreen,
-      height: 2,
+      height: 0.5,
     );
   }
 
   Widget _buildMoreActions() {
     return Column(
       children: [
+        const Padding(
+          padding: EdgeInsets.only(right: 240, bottom: 20),
+          child: Text("More Actions",
+            style: TextStyle(
+                color: AppColors.lightBlack,
+                fontWeight: AppFontWeight.bold,
+              fontSize: AppFontSize.size18
+            )
+          ),
+        ),
         GestureDetector(
           onTap: () {
             Navigator.of(context).push(
@@ -218,7 +225,8 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
             Icons.arrow_forward_ios,
           ),
         ),
-        const SizedBox(height: 30),
+
+        const SizedBox(height: 20),
         _buildActionRow(
           'assets/jpg/report_card.jpg',
           'Report Transaction',
@@ -234,14 +242,14 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
       children: [
         Image.asset(
           imagePath,
-          width: 30,
-          height: 30,
+          width: 20,
+          height: 20,
         ),
         const SizedBox(width: 10),
         Text(
           label,
           style: const TextStyle(
-            fontSize: AppFontSize.size18,
+            fontSize: AppFontSize.size16,
             fontWeight: AppFontWeight.bold,
             color: AppColors.lightBlack,
           ),
