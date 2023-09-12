@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildLogo() {
     return Image.asset(
       "assets/png/payme.png",
-      height: 80,
+      height: 50,
     );
   }
 
@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       style: GoogleFonts.alegreyaSc(
         textStyle: const TextStyle(
           color: AppColors.lightGreen,
-          fontSize: AppFontSize.size20,
+          fontSize: AppFontSize.size18,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -40,8 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildLockImage() {
     return Image.asset(
       "assets/jpg/lock.jpg",
-      height: 70,
-      width: 100,
+      height: 50,
     );
   }
 
@@ -73,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onTap: toggleVisibility,
               child: Icon(
                 isVisible ? Icons.visibility_off : Icons.visibility,
-                color: Colors.black,
+                color: AppColors.lightBlack,
               ),
             )
                 : null,
@@ -149,11 +148,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          color: Colors.white,
+          color: AppColors.pureWhite,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             child: ListView(
               children: [
+                const SizedBox(height: 100,),
                 _buildLogo(),
                 const SizedBox(height: 30),
                 _buildWelcomeText(),
