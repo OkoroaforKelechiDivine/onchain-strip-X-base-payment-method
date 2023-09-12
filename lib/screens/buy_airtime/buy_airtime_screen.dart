@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import '../../views/custom/custom_amount_input_field.dart';
 import '../../views/custom/custom_bottom_bar_navigation.dart';
 import '../../views/custom/show_pin_dialog.dart';
 
@@ -66,7 +67,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
               child: Text(
                 'Choose an amount',
                 style: TextStyle(
-                  fontSize: AppFontSize.size20,
+                  fontSize: AppFontSize.size16,
                   color: AppColors.lightBlack,
                   fontWeight: AppFontWeight.bold,
                 ),
@@ -175,15 +176,25 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
         ),
         child: TextField(
           controller: amountController,
+          onChanged: (text) {
+            String formattedAmount = AmountFormatter.formatAmount(text);
+            if (amountController.text != formattedAmount) {
+              amountController.value = amountController.value.copyWith(
+                text: formattedAmount,
+                selection: TextSelection.collapsed(offset: formattedAmount.length),
+              );
+            }
+          },
           decoration: InputDecoration(
             hintText: "Enter amount here",
             hintStyle: const TextStyle(
                 color: AppColors.lightBlack,
-                fontWeight: AppFontWeight.bold
+                fontSize: AppFontSize.size14,
+                fontWeight: AppFontWeight.light
             ),
             filled: true,
-            fillColor: AppColors.lightBlue,
-            focusColor: AppColors.lightBlue,
+            fillColor: AppColors.pureWhite,
+            focusColor: AppColors.pureWhite,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(8.0),
@@ -194,6 +205,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
       ),
     );
   }
+
 
   Widget _buildNetworkDropdown() {
     return Padding(
@@ -214,11 +226,12 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
             hintText: "Choose Network",
             hintStyle: const TextStyle(
               color: AppColors.lightBlack,
-              fontWeight: AppFontWeight.bold,
+                fontSize: AppFontSize.size14,
+                fontWeight: AppFontWeight.light
             ),
             filled: true,
-            fillColor: AppColors.lightBlue,
-            focusColor: AppColors.lightBlue,
+            fillColor: AppColors.pureWhite,
+            focusColor: AppColors.pureWhite,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(8.0),
@@ -255,11 +268,12 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
             hintText: "Enter Phone number",
             hintStyle: const TextStyle(
                 color: AppColors.lightBlack,
-                fontWeight: AppFontWeight.bold
+                fontSize: AppFontSize.size14,
+                fontWeight: AppFontWeight.light
             ),
             filled: true,
-            fillColor: AppColors.lightBlue,
-            focusColor: AppColors.lightBlue,
+            fillColor: AppColors.pureWhite,
+            focusColor: AppColors.pureWhite,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(8.0),
@@ -273,11 +287,12 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
 
   Padding _buildNextButton() {
     return Padding(
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
       child: ElevatedButton(
         onPressed: () {
           String enteredAmount = amountController.text;
-          enteredAmount = enteredAmount.replaceAll("₦", "");
+
+          enteredAmount = enteredAmount.replaceAll("₦", "").replaceAll(",", "");
 
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -288,7 +303,12 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
             ),
           );
         },
-        child: const Text("Next", style: TextStyle(color: AppColors.pureWhite)),
+        child: const Text(
+            "Next",
+            style: TextStyle(
+                color: AppColors.pureWhite
+            )
+        ),
       ),
     );
   }
@@ -299,7 +319,8 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            amountController.text = title;
+            String formattedAmount = AmountFormatter.formatAmount(title);
+            amountController.text = formattedAmount;
           });
         },
         child: Card(
@@ -313,11 +334,11 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
-                width: 90,
-                height: 20,
+                width: 70,
+                height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
+                padding: const EdgeInsets.only(top: 5, bottom: 15.0),
                 child: Center(
                   child: Text(
                     title,
@@ -348,8 +369,8 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
 
 class CustomStyles {
   static const TextStyle buyAirtimeTextStyleInfo = TextStyle(
-    fontSize: AppFontSize.size24,
+    fontSize: AppFontSize.size16,
     color: AppColors.lightBlack,
-    fontWeight: AppFontWeight.bold,
+    fontWeight: AppFontWeight.regular,
   );
 }
