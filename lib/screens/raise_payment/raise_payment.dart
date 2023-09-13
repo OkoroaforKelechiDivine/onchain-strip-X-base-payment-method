@@ -152,7 +152,7 @@ class _RaisePaymentScreenState extends State<RaisePaymentScreen> {
                           Text(
                             bank.status,
                             style: TextStyle(
-                              color: bank.status == 'Approve' ? AppColors.brightGreen : bank.status == 'Decline' ? AppColors.errorRed : AppColors.dullOrange,
+                              color: bank.status == 'Approved' ? AppColors.brightGreen : bank.status == 'Declined' ? AppColors.errorRed : AppColors.dullOrange,
                               fontWeight: AppFontWeight.bold,
                               fontSize: AppFontSize.size14,
                             ),
@@ -165,7 +165,6 @@ class _RaisePaymentScreenState extends State<RaisePaymentScreen> {
               ),
             );
           },
-
         ),
       ),
     );
