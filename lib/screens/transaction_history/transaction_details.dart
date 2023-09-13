@@ -30,7 +30,6 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     String formattedTimestamp = DateFormat('MMMM dd, yyyy \'at\' hh:mm a').format(widget.transactionTimestamp);
-
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -225,7 +224,6 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
             Icons.arrow_forward_ios,
           ),
         ),
-
         const SizedBox(height: 20),
         _buildActionRow(
           'assets/jpg/report_card.jpg',
