@@ -1,289 +1,235 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.dart';
-import 'package:pay_me_mobile/views/custom/show_pin_dialog.dart';
+import 'package:intl/intl.dart';
+import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import 'package:pay_me_mobile/screens/transaction_history/repeat_transaction.dart';
+
 import '../../app_config/manager/font_manager.dart';
-import '../../app_config/manager/theme_manager.dart';
-import '../../views/custom/custom_dynamic_label_textfield.dart';
-import '../../views/custom/custom_underline.dart';
+import '../../views/custom/custom_bottom_bar_navigation.dart';
 
-class RaisePaymentDetailScreen extends StatefulWidget {
-  final DummyBank bank;
-  final String selectedBankLogo;
+class RaisePaymentDetailsScreen extends StatefulWidget {
+  final String amount;
+  final DateTime transactionTimestamp;
+  final String accountName;
+  final String bankName;
 
-  const RaisePaymentDetailScreen({Key? key, required this.bank, required this.selectedBankLogo}) : super(key: key);
+  const RaisePaymentDetailsScreen({
+    Key? key,
+    required this.amount,
+    required this.transactionTimestamp,
+    required this.accountName,
+    required this.bankName,
+  }) : super(key: key);
 
   @override
-  _RaisePaymentDetailScreenState createState() => _RaisePaymentDetailScreenState();
+  _RaisePaymentDetailsScreenState createState() => _RaisePaymentDetailsScreenState();
 }
 
-class _RaisePaymentDetailScreenState extends State<RaisePaymentDetailScreen> {
-  final TextEditingController amountController = TextEditingController();
-  final TextEditingController narrationController = TextEditingController();
-
-  String emptyAmountErrorMessage = 'Amount is empty';
-  String emptyNarrativeMessage = 'Narration field cannot be empty';
-
+class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
+  int _currentIndex = 0;
 
   @override
-  void initState() {
-    super.initState();
-    amountController.addListener(amountErrorHandling);
-    narrationController.addListener(narrationErrorHandling);
-  }
-
-  @override
-  void dispose() {
-    amountController.dispose();
-    narrationController.dispose();
-    super.dispose();
-  }
-
-  void narrationErrorHandling() {
-    if (narrationController.text.isEmpty) {
-      setState(() {
-        emptyNarrativeMessage = 'Narration field cannot be empty';
-      });
-    } else if (narrationController.text.length < 3) {
-      setState(() {
-        emptyNarrativeMessage = 'Narration must be at least 3 characters';
-      });
-    } else {
-      setState(() {
-        emptyNarrativeMessage = '';
-      });
-    }
-  }
-
-  void amountErrorHandling() {
-    double enteredAmount = double.tryParse(amountController.text) ?? 0.0;
-
-    if (amountController.text.isEmpty) {
-      setState(() {
-        emptyAmountErrorMessage = 'Amount is empty';
-      });
-    } else {
-      setState(() {
-        emptyAmountErrorMessage = '';
-      });
-    }
-  }
-
-  Widget buildBankCard() {
-    return Card(
-      color: AppColors.lightBlue,
-      elevation: 0.0,
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              color: AppColors.lightBlue,
-              child: Image.asset(
-                widget.bank.logo,
-                width: 40,
-                height: 60,
+  Widget build(BuildContext context) {
+    String formattedTimestamp = DateFormat('MMMM dd, yyyy \'at\' hh:mm a').format(widget.transactionTimestamp);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Padding(
+            padding: EdgeInsets.only(right: 50.0),
+            child: Text(
+              'Raise Payment',
+              style: TextStyle(
+                color: AppColors.lightGreen,
+                fontSize: AppFontSize.size20,
               ),
             ),
-            const SizedBox(width: 30),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.bank.accountName,
-                  style: CustomStyles.bankInfoTextStyle,
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: Text(
+                  'Amount',
+                  style: TextStyle(
+                    fontSize: AppFontSize.size20,
+                    color: AppColors.lightGreen,
+                    fontWeight: AppFontWeight.bold,
+                  ),
                 ),
-                Text(
-                  widget.bank.accountNumber,
-                  style: CustomStyles.bankInfoTextStyle,
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: Text(
+                  widget.amount,
+                  style: const TextStyle(
+                    fontSize: AppFontSize.size20,
+                    fontWeight: AppFontWeight.bold,
+                    color: AppColors.lightBlack,
+                  ),
                 ),
-              ],
+              ),
+            ),
+            Center(
+              child: Text(
+                'On $formattedTimestamp',
+                style: const TextStyle(
+                  fontSize: AppFontSize.size16,
+                  fontWeight: AppFontWeight.medium,
+                  color: AppColors.lightBlack,
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 30, right: 10, left: 10),
+              child: Column(
+                children: [
+                  _buildInfoRow('Account Name', widget.accountName),
+                  const SizedBox(height: 10),
+                  _buildDivider(),
+                  const SizedBox(height: 10),
+                  _buildInfoRow('To', widget.bankName),
+                  const SizedBox(height: 15),
+                  _buildDivider(),
+                  const SizedBox(height: 15),
+                  _buildInfoRow('Description', 'Garri'),
+                  const SizedBox(height: 15),
+                  _buildDivider(),
+                  const SizedBox(height: 15),
+                  _buildInfoRow('Outward Transfer', '₦ 0.00'),
+                  const SizedBox(height: 15),
+                  _buildDivider(),
+                  const SizedBox(height: 15),
+                  _buildInfoRow('Payment Method', 'Fees'),
+                  const SizedBox(height: 15),
+                  _buildDivider(),
+                  const SizedBox(height: 15),
+                  _buildInfoRow('Status', 'Successful'),
+                  const SizedBox(height: 15),
+                  _buildDivider(),
+                  const SizedBox(height: 15),
+                  _buildInfoRow('Transaction Reference', '090267230811083838'),
+                  const SizedBox(height: 15),
+                  _buildDivider(),
+                  const SizedBox(height: 15),
+                  _buildMoreActions(),
+                ],
+              ),
             ),
           ],
         ),
       ),
+
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
     );
   }
 
-  Widget buildSendMoneySection() {
-    return const Column(
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: CustomUnderlinedText(
-            text: "Send Money",
-            textStyle: TextStyle(
-              fontSize: AppFontSize.size24,
-              fontWeight: AppFontWeight.bold,
-              color: AppColors.lightGreen,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget buildAmountInput() {
+  Widget _buildInfoRow(String label, String value) {
     return Row(
       children: [
-        Expanded(
-          child: Container(
-            color: AppColors.deepWhite,
-            child: TextFieldWithDynamicLabel(
-              controller: amountController,
-              labelText: '₦ 0.00',
-              onChanged: (value) {
-                amountErrorHandling();
-              },
-              onValidation: (value) {},
-              hintText: '',
-              fillColor: AppColors.deepWhite,
-            ),
+        Text(
+          '$label ',
+          style: const TextStyle(
+            fontSize: AppFontSize.size16,
+            fontWeight: AppFontWeight.bold,
+            color: AppColors.lightBlack,
           ),
         ),
+        const Spacer(),
+        Text(
+          value,
+          style: const TextStyle(
+            color: AppColors.lightBlack,
+            fontWeight: AppFontWeight.light,
+            fontSize: AppFontSize.size16,
+          ),
+        )
       ],
     );
   }
 
-  Widget buildAmountErrorMessage() {
-    if (emptyAmountErrorMessage.isNotEmpty) {
-      return Padding(
-        padding: const EdgeInsets.only(top: 8.0),
-        child: Text(
-          emptyAmountErrorMessage,
-          style: const TextStyle(
-            color: AppColors.errorRed,
-          ),
-        ),
-      );
-    } else {
-      return const SizedBox.shrink();
-    }
+  Widget _buildDivider() {
+    return Container(
+      color: AppColors.lightGreen,
+      height: 0.5,
+    );
   }
 
-  Widget buildBalanceSection() {
+  Widget _buildMoreActions() {
     return Column(
       children: [
-        TextField(
-          controller: narrationController,
-          decoration: InputDecoration(
-            labelText: 'Enter Narration',
-            labelStyle: const TextStyle(color: AppColors.lightBlack, fontSize: AppFontSize.size7),
-            filled: true,
-            fillColor: AppColors.lightBlue,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: const BorderSide(
-                  color: AppColors.lightBlue, width: 2.0
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: const BorderSide(
-                  color: AppColors.lightBlue, width: 2.0
-              ),
-            ),
+        const Padding(
+          padding: EdgeInsets.only(right: 240, bottom: 20),
+          child: Text("More Actions",
+              style: TextStyle(
+                  color: AppColors.lightBlack,
+                  fontWeight: AppFontWeight.bold,
+                  fontSize: AppFontSize.size18
+              )
           ),
-          onChanged: (value) {
-            narrationErrorHandling();
-          },
         ),
-        if (emptyNarrativeMessage.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Text(
-              emptyNarrativeMessage,
-              style: const TextStyle(
-                color: AppColors.errorRed,
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => RepeatTransactionScreen(
+                  amount: widget.amount,
+                  transactionTimestamp: widget.transactionTimestamp,
+                  accountName: widget.accountName,
+                  description: 'Garri', isSent: true,
+                ),
               ),
-            ),
+            );
+          },
+          child: _buildActionRow(
+            'assets/jpg/reset.jpg',
+            'Terminate Transaction',
+            Icons.arrow_forward_ios,
           ),
+        ),
+
+        // const SizedBox(height: 20),
+        // _buildActionRow(
+        //   'assets/jpg/report_card.jpg',
+        //   'Report Transaction',
+        //   Icons.arrow_forward_ios,
+        // ),
       ],
     );
   }
 
-  Widget buildSubmitButton() {
+  Widget _buildActionRow(String imagePath, String label, IconData icon) {
     return Row(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 50.0, left: 5.0),
-          child: SizedBox(
-            width: 150,
-            child: ElevatedButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return PinDialog(
-                      amount: double.parse(amountController.text),
-                      accountName: widget.bank.accountName,
-                    );
-                  },
-                );
-              },
-              child: const Text(
-                'Submit',
-                style: TextStyle(
-                  color: AppColors.deepWhite,
-                  fontSize: AppFontSize.size20,
-                ),
-              ),
-            ),
+        Image.asset(
+          imagePath,
+          width: 20,
+          height: 20,
+        ),
+        const SizedBox(width: 10),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: AppFontSize.size16,
+            fontWeight: AppFontWeight.bold,
+            color: AppColors.lightBlack,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 50.0, left: 55),
-          child: SizedBox(
-            width: 150,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                'Cancel',
-                style: TextStyle(
-                  color: AppColors.deepWhite,
-                  fontSize: AppFontSize.size20,
-                ),
-              ),
-            ),
-          ),
-        ),
+        const Spacer(),
+        Icon(icon),
       ],
     );
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(''),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: [
-              buildBankCard(),
-              const SizedBox(height: 50),
-              buildSendMoneySection(),
-              const SizedBox(height: 50),
-              buildAmountInput(),
-              buildAmountErrorMessage(),
-              const SizedBox(height: 50),
-              buildBalanceSection(),
-              buildSubmitButton(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomStyles {
-  static const TextStyle bankInfoTextStyle = TextStyle(
-    fontSize: AppFontSize.size24,
-    color: AppColors.lightBlack,
-    fontWeight: AppFontWeight.bold,
-  );
 }
