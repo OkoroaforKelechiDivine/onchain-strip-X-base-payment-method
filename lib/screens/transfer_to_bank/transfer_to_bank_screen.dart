@@ -524,7 +524,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                     MaterialPageRoute(
                       builder: (context) => BeneficiaryDetailsScreen(
                         bank: selectedBank,
-                        selectedBankLogo: _selectedBankLogo,
+                        // selectedBankLogo: _selectedBankLogo,
                       ),
                     ),
                   );

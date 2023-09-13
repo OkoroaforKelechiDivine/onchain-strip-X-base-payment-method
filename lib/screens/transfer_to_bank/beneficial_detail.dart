@@ -10,8 +10,7 @@ import '../../views/custom/custom_underline.dart';
 class BeneficiaryDetailsScreen extends StatefulWidget {
   final DummyBank bank;
 
-  const BeneficiaryDetailsScreen({Key? key, required this.bank, required this.selectedBankLogo}) : super(key: key);
-  final String selectedBankLogo;
+  const BeneficiaryDetailsScreen({Key? key, required this.bank}) : super(key: key);
 
   @override
   _BeneficiaryDetailsScreenState createState() => _BeneficiaryDetailsScreenState();
