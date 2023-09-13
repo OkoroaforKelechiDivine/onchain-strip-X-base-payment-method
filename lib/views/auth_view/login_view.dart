@@ -88,7 +88,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-
   Widget _buildForgotPasswordButton() {
     return Align(
       alignment: Alignment.centerRight,
