@@ -41,7 +41,6 @@ List<DummyBank> dummyBanks = [
 
 class _TransferToBankScreenState extends State<TransferToBankScreen> {
   bool showBankList = false;
-  String searchText = '';
   bool _bankSelected = false;
   bool _isAccountNumberErrorVisible = true;
   bool _isAccountNumberLengthInvalid = false;
@@ -105,7 +104,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   Widget _buildBankSearchTextField() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child:TextField(
+      child: TextField(
         decoration: const InputDecoration(
           labelText: 'Search all banks',
           prefixIcon: Icon(Icons.search),
@@ -118,25 +117,17 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
           ),
           contentPadding: EdgeInsets.symmetric(horizontal: 14.0),
         ),
-        onChanged: (text) {
-          setState(() {
-            print("I got here ");
-            searchText = text;
-          });
-        },
+        onChanged: (text) {},
       ),
     );
   }
 
-  Widget _buildBankList() {
-    List<DummyBank> filteredBanks = dummyBanks.where((bank) {
-      return bank.name.toLowerCase().contains(searchText.toLowerCase());
-    }).toList();
 
+  Widget _buildBankList() {
     return ListView.builder(
-      itemCount: filteredBanks.length,
+      itemCount: dummyBanks.length,
       itemBuilder: (BuildContext context, int index) {
-        DummyBank bank = filteredBanks[index];
+        DummyBank bank = dummyBanks[index];
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 1.0),
           child: ListTile(
@@ -162,7 +153,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
       },
     );
   }
-
 
   PreferredSizeWidget? _buildAppBar(BuildContext context) {
     return AppBar(
@@ -526,22 +516,22 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
           width: 100.0,
           child: ElevatedButton(
             onPressed: () {
-                if (_bankSelected) {
-                  final selectedBank = dummyBanks.firstWhere((bank) => bank.name == _selectedBankController.text);
-                  if (selectedBank != null) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BeneficiaryDetailsScreen(
-                          bank: selectedBank,
-                          selectedBankLogo: _selectedBankLogo,
-                        ),
+              if (_bankSelected) {
+                final selectedBank = dummyBanks.firstWhere((bank) => bank.name == _selectedBankController.text);
+                if (selectedBank != null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BeneficiaryDetailsScreen(
+                        bank: selectedBank,
+                        selectedBankLogo: _selectedBankLogo,
                       ),
-                    );
-                  } else {
-                    print('Selected bank not found');
-                  }
+                    ),
+                  );
+                } else {
+                  print('Selected bank not found');
                 }
+              }
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
