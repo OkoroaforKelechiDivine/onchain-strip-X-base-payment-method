@@ -6,7 +6,6 @@ import 'dart:ui';
 import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
 
-// Import your custom widgets and styles here
 
 class PinDialog extends StatefulWidget {
   final double amount;
@@ -77,10 +76,7 @@ class _PinDialogState extends State<PinDialog> {
               scrollDirection: Axis.horizontal,
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxWidth: MediaQuery
-                      .of(context)
-                      .size
-                      .width * 0.8, // 50% of the screen width
+                  maxWidth: MediaQuery.of(context).size.width,
                 ),
                 child: _buildContent(),
               ),
@@ -90,7 +86,8 @@ class _PinDialogState extends State<PinDialog> {
               child: Column(
                 children: [
                   const Text('Input PIN to Pay',
-                      style: TextStyle(fontSize: AppFontSize.size20)),
+                      style: TextStyle(fontSize: AppFontSize.size20)
+                  ),
                   Text("₦${widget.amount.toString()}0",
                       style: CustomStyles.bankInfoTextStyle),
                 ],
@@ -118,7 +115,7 @@ class _PinDialogState extends State<PinDialog> {
                     children: [
                       for (int index = 0; index < 4; index++)
                         Container(
-                          width: 60, // Adjust the width as needed
+                          width: 55, // Adjust the width as needed
                           height: 70,
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -149,7 +146,7 @@ class _PinDialogState extends State<PinDialog> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 25),
                 TextButton(
                   onPressed: () {},
                   child: const Text("Forgot PIN?"),
@@ -162,7 +159,6 @@ class _PinDialogState extends State<PinDialog> {
     );
   }
 
-
   Future<void> show(BuildContext context) async {
     await showDialog<void>(
       context: context,
@@ -172,10 +168,7 @@ class _PinDialogState extends State<PinDialog> {
             scrollDirection: Axis.horizontal,
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                maxWidth: MediaQuery
-                    .of(context)
-                    .size
-                    .width * 0.8, // Adjust the percentage as needed
+                maxWidth: MediaQuery.of(context).size.width
               ),
               child: PinDialog(
                 amount: widget.amount,
@@ -191,7 +184,7 @@ class _PinDialogState extends State<PinDialog> {
 
 class CustomStyles {
   static const TextStyle bankInfoTextStyle = TextStyle(
-    fontSize: AppFontSize.size30,
+    fontSize: AppFontSize.size24,
     color: AppColors.lightBlack,
     fontWeight: AppFontWeight.bold,
   );
