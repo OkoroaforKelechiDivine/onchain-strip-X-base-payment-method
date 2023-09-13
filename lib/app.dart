@@ -45,11 +45,8 @@ class MyApp extends StatelessWidget {
           );
         },
         "/beneficiary_details": (context) {
-          final beneficiaryDetails = ModalRoute.of(context)!.settings.arguments as BeneficiaryDetailsScreen;
-          return BeneficiaryDetailsScreen(
-            bank: beneficiaryDetails.bank,
-            selectedBankLogo: beneficiaryDetails.selectedBankLogo,
-          );
+          final bank = ModalRoute.of(context)!.settings.arguments as DummyBank;
+          return BeneficiaryDetailsScreen(bank: bank);
         },
         "/buy_airtime": (context) => const BuyAirtimeScreen(),
         "/transaction_history": (context) => const TransactionHistoryScreen(),
