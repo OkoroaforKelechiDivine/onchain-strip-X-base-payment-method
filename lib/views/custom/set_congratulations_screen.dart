@@ -131,5 +131,4 @@ class CongratulationsDialog extends StatelessWidget {
       ),
     );
   }
-
 }
