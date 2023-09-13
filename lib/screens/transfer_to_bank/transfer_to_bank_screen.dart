@@ -53,15 +53,11 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   final TextEditingController _selectedBankController = TextEditingController();
   final TextEditingController _accountNumberController = TextEditingController();
 
-  List<DummyBank> filteredBanks = [];
-
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
       _showBankSelectionDialog(context);
-      filteredBanks = List.from(dummyBanks);
-
     });
   }
 
@@ -109,7 +105,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   Widget _buildBankSearchTextField() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: TextField(
+      child:TextField(
         decoration: const InputDecoration(
           labelText: 'Search all banks',
           prefixIcon: Icon(Icons.search),
@@ -122,17 +118,25 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
           ),
           contentPadding: EdgeInsets.symmetric(horizontal: 14.0),
         ),
-        onChanged: (text) {},
+        onChanged: (text) {
+          setState(() {
+            print("I got here ");
+            searchText = text;
+          });
+        },
       ),
     );
   }
 
-
   Widget _buildBankList() {
+    List<DummyBank> filteredBanks = dummyBanks.where((bank) {
+      return bank.name.toLowerCase().contains(searchText.toLowerCase());
+    }).toList();
+
     return ListView.builder(
-      itemCount: dummyBanks.length,
+      itemCount: filteredBanks.length,
       itemBuilder: (BuildContext context, int index) {
-        DummyBank bank = dummyBanks[index];
+        DummyBank bank = filteredBanks[index];
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 1.0),
           child: ListTile(
@@ -158,6 +162,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
       },
     );
   }
+
 
   PreferredSizeWidget? _buildAppBar(BuildContext context) {
     return AppBar(
