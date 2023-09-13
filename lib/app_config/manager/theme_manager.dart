@@ -12,6 +12,8 @@ class AppColors {
   static const Color pureWhite = Color(0xFFFFFFFF);
   static const Color darkWhite = Color.fromRGBO(139, 134, 134, 0.5);
   static const Color errorRed =  Color(0xFFDF1414);
+  static const Color brightGreen =  Color.fromRGBO(19, 232, 79, 1);
+  static const Color dullOrange =  Color.fromRGBO(232, 211, 19, 1);
 }
 
 ThemeData _appTheme = ThemeData(
