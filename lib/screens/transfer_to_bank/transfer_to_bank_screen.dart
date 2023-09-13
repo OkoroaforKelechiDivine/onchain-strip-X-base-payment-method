@@ -20,23 +20,24 @@ class DummyBank {
   final String accountName;
   final String accountNumber;
   final DateTime timestamp;
+  final String status;
 
-  DummyBank(this.name, this.logo, this.accountName, this.accountNumber, this.timestamp);
+  DummyBank(this.name, this.logo, this.accountName, this.accountNumber, this.timestamp, this.status);
 }
 
 List<DummyBank> dummyBanks = [
-  DummyBank("Kuda Bank", "assets/jpg/kudabank_logo.jpg", "Ifeoluwa Rabiu", "1234567890",DateTime(2023, 2, 12)),
-  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Okoroafor Kelechi", "2345678901", DateTime(2023, 2, 12,)),
-  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Okoroafor Nonso", "3456789012", DateTime.now()),
-  DummyBank("Zenith Bank", "assets/jpg/zenith_logo.jpg", "Okoroafor Maryjane", "4567890123", DateTime(2023, 1, 12)),
-  DummyBank("UBA", "assets/jpg/uba_logo.jpg", "Okoroafor Ozioma", "5678901234", DateTime(2023, 6, 12)),
-  DummyBank("Palmpay", "assets/jpg/palmpay_logo.jpg", "Okoroafor Chinwendu", "6789012345", DateTime(2023, 12, 16)),
-  DummyBank("First Bank", "assets/jpg/firstbank_logo.jpg", "Okoroafor Victoria", "7890123456",DateTime(2022, 2, 12)),
-  DummyBank("Ecobank", "assets/jpg/ecobank_logo.jpg", "Okoroafor Nathaniel", "8901234567", DateTime.now()),
-  DummyBank("Wema Bank", "assets/jpg/wemabank_logo.jpg", "Rabiu Anu", "9012345678",DateTime(2021, 2, 12)),
-  DummyBank("Stanbic Bank", "assets/jpg/stanbic_logo.jpg", "Rabiu Iyanu", "0123456789", DateTime.now()),
-  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Rabiu Bayelsa", "0123456789", DateTime.now()),
-  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Rabiu Lagos", "0123456789", DateTime.now()),
+  DummyBank("Kuda Bank", "assets/jpg/kudabank_logo.jpg", "Ifeoluwa Rabiu", "1234567890",DateTime(2023, 2, 12), "Approved"),
+  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Okoroafor Kelechi", "2345678901", DateTime(2023, 2, 12), "Approved"),
+  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Okoroafor Nonso", "3456789012", DateTime.now(),"Pending"),
+  DummyBank("Zenith Bank", "assets/jpg/zenith_logo.jpg", "Okoroafor Maryjane", "4567890123", DateTime(2023, 1, 12), "Approved"),
+  DummyBank("UBA", "assets/jpg/uba_logo.jpg", "Okoroafor Ozioma", "5678901234", DateTime(2023, 6, 12), "Declined"),
+  DummyBank("Palmpay", "assets/jpg/palmpay_logo.jpg", "Okoroafor Chinwendu", "6789012345", DateTime(2023, 12, 16), "Approved"),
+  DummyBank("First Bank", "assets/jpg/firstbank_logo.jpg", "Okoroafor Victoria", "7890123456",DateTime(2022, 2, 12), "Pending"),
+  DummyBank("Ecobank", "assets/jpg/ecobank_logo.jpg", "Okoroafor Nathaniel", "8901234567", DateTime.now(), "Declined"),
+  DummyBank("Wema Bank", "assets/jpg/wemabank_logo.jpg", "Rabiu Anu", "9012345678",DateTime(2021, 2, 12), "Approved"),
+  DummyBank("Stanbic Bank", "assets/jpg/stanbic_logo.jpg", "Rabiu Iyanu", "0123456789", DateTime.now(), "Pending"),
+  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Rabiu Bayelsa", "0123456789", DateTime.now(), "Approved"),
+  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Rabiu Lagos", "0123456789", DateTime.now(), "Declined"),
 ];
 
 class _TransferToBankScreenState extends State<TransferToBankScreen> {
@@ -121,7 +122,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
       ),
     );
   }
-
 
   Widget _buildBankList() {
     return ListView.builder(
@@ -528,9 +528,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                       ),
                     ),
                   );
-                } else {
-                  print('Selected bank not found');
-                }
+                } else {}
               }
             },
             style: ElevatedButton.styleFrom(
@@ -559,7 +557,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
         child: Column(
           children: [
             _buildRecipientCard(context),
-            // _buildBankNetworkMonitorCard(context),
             _buildBeneficiariesCard(context),
           ],
         ),
