@@ -39,7 +39,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
     );
   }
 
-  Widget buildTransactionCard(String text) {
+  Widget buildTransactionCard(String text, String routeName) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -50,10 +50,15 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
               color: AppColors.lightGreen,
             ),
           ),
-          child: Center(
-            child: Text(
-              text,
-              style: CustomStyles.transactionHistoryTextStyle,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, routeName);
+            },
+            child: Center(
+              child: Text(
+                text,
+                style: CustomStyles.transactionHistoryTextStyle,
+              ),
             ),
           ),
         ),
@@ -68,9 +73,9 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
         height: 80.0,
         child: Row(
           children: [
-            buildTransactionCard("Transfer"),
-            buildTransactionCard("Airtime"),
-            buildTransactionCard("Buy Power"),
+            buildTransactionCard("Transfer", "/transfer"),
+            buildTransactionCard("Airtime", "/buy_airtime"),
+            buildTransactionCard("Buy Power", "/buy_power"),
           ],
         ),
       ),
