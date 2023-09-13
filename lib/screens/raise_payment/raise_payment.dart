@@ -32,14 +32,49 @@ class _RaisePaymentScreenState extends State<RaisePaymentScreen> {
           Navigator.pushNamed(context, "/home");
         },
       ),
-      title: const Padding(
-        padding: EdgeInsets.only(left: 20),
-        child: Text(
-          'Raise Payment',
-          style: TextStyle(
-            color: AppColors.lightGreen,
-            fontSize: AppFontSize.size20,
-          ),
+      title: Padding(
+        padding: const EdgeInsets.only(left: 20),
+        child: Row(
+          children: [
+            const Text(
+              'Raise Payment',
+              style: TextStyle(
+                color: AppColors.lightGreen,
+                fontSize: AppFontSize.size20,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 45.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Container(
+                  color: AppColors.lightGreen,
+                  constraints: const BoxConstraints(maxWidth: 80, maxHeight: 25),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(0),
+                    ),
+                    child: const Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 15.0),
+                          child: Text(
+                            'Add New',
+                            style: TextStyle(
+                              fontSize: AppFontSize.size12,
+                              fontWeight: AppFontWeight.medium,
+                              color: AppColors.pureWhite,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -80,7 +115,7 @@ class _RaisePaymentScreenState extends State<RaisePaymentScreen> {
             return GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => RaisePaymentDetailScreen(bank: bank, selectedBankLogo: bank.logo),
+                  builder: (context) => RaisePaymentDetailsScreen(amount: "₦ 20,000", transactionTimestamp: bank.timestamp, accountName: bank.accountName, bankName: bank.name)
                 ));
               },
               child: Padding(
