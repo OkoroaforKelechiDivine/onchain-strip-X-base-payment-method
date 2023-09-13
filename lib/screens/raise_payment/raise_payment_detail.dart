@@ -6,13 +6,13 @@ import 'package:pay_me_mobile/screens/transaction_history/repeat_transaction.dar
 import '../../app_config/manager/font_manager.dart';
 import '../../views/custom/custom_bottom_bar_navigation.dart';
 
-class TransactionDetailsScreen extends StatefulWidget {
+class RaisePaymentDetailsScreen extends StatefulWidget {
   final String amount;
   final DateTime transactionTimestamp;
   final String accountName;
   final String bankName;
 
-  const TransactionDetailsScreen({
+  const RaisePaymentDetailsScreen({
     Key? key,
     required this.amount,
     required this.transactionTimestamp,
@@ -21,10 +21,10 @@ class TransactionDetailsScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TransactionDetailsScreenState createState() => _TransactionDetailsScreenState();
+  _RaisePaymentDetailsScreenState createState() => _RaisePaymentDetailsScreenState();
 }
 
-class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
+class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
   int _currentIndex = 0;
 
   @override
@@ -32,42 +32,17 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
     String formattedTimestamp = DateFormat('MMMM dd, yyyy \'at\' hh:mm a').format(widget.transactionTimestamp);
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 60.0),
-              child: Center(
-                child: Text(
-                  'Transaction',
-                  style: TextStyle(
-                    color: AppColors.lightGreen,
-                    fontSize: AppFontSize.size20,
-                  ),
-                ),
+        title: const Center(
+          child: Padding(
+            padding: EdgeInsets.only(right: 50.0),
+            child: Text(
+              'Raise Payment',
+              style: TextStyle(
+                color: AppColors.lightGreen,
+                fontSize: AppFontSize.size20,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 40),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Container(
-                  color: AppColors.lightGreen,
-                  constraints: const BoxConstraints(maxWidth: 70, maxHeight: 25),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Share',
-                      style: TextStyle(
-                        fontSize: AppFontSize.size12,
-                        fontWeight: AppFontWeight.medium,
-                        color: AppColors.pureWhite,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -198,11 +173,11 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
         const Padding(
           padding: EdgeInsets.only(right: 240, bottom: 20),
           child: Text("More Actions",
-            style: TextStyle(
-                color: AppColors.lightBlack,
-                fontWeight: AppFontWeight.bold,
-              fontSize: AppFontSize.size18
-            )
+              style: TextStyle(
+                  color: AppColors.lightBlack,
+                  fontWeight: AppFontWeight.bold,
+                  fontSize: AppFontSize.size18
+              )
           ),
         ),
         GestureDetector(
@@ -220,16 +195,17 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
           },
           child: _buildActionRow(
             'assets/jpg/reset.jpg',
-            'Repeat Transaction',
+            'Terminate Transaction',
             Icons.arrow_forward_ios,
           ),
         ),
-        const SizedBox(height: 20),
-        _buildActionRow(
-          'assets/jpg/report_card.jpg',
-          'Report Transaction',
-          Icons.arrow_forward_ios,
-        ),
+
+        // const SizedBox(height: 20),
+        // _buildActionRow(
+        //   'assets/jpg/report_card.jpg',
+        //   'Report Transaction',
+        //   Icons.arrow_forward_ios,
+        // ),
       ],
     );
   }

@@ -5,6 +5,7 @@ import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 
 import '../../views/custom/custom_bottom_bar_navigation.dart';
+import 'beneficial_detail.dart';
 
 class TransferToBankScreen extends StatefulWidget {
   const TransferToBankScreen({Key? key}) : super(key: key);
@@ -19,23 +20,24 @@ class DummyBank {
   final String accountName;
   final String accountNumber;
   final DateTime timestamp;
+  final String status;
 
-  DummyBank(this.name, this.logo, this.accountName, this.accountNumber, this.timestamp);
+  DummyBank(this.name, this.logo, this.accountName, this.accountNumber, this.timestamp, this.status);
 }
 
 List<DummyBank> dummyBanks = [
-  DummyBank("Kuda Bank", "assets/jpg/kudabank_logo.jpg", "Ifeoluwa Rabiu", "1234567890", DateTime.now()),
-  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Okoroafor Kelechi", "2345678901", DateTime.now()),
-  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Okoroafor Nonso", "3456789012", DateTime.now()),
-  DummyBank("Zenith Bank", "assets/jpg/zenith_logo.jpg", "Okoroafor Maryjane", "4567890123", DateTime.now()),
-  DummyBank("UBA", "assets/jpg/uba_logo.jpg", "Okoroafor Ozioma", "5678901234", DateTime.now()),
-  DummyBank("Palmpay", "assets/jpg/palmpay_logo.jpg", "Okoroafor Chinwendu", "6789012345", DateTime.now()),
-  DummyBank("First Bank", "assets/jpg/firstbank_logo.jpg", "Okoroafor Victoria", "7890123456", DateTime.now()),
-  DummyBank("Ecobank", "assets/jpg/ecobank_logo.jpg", "Okoroafor Nathaniel", "8901234567", DateTime.now()),
-  DummyBank("Wema Bank", "assets/jpg/wemabank_logo.jpg", "Rabiu Anu", "9012345678", DateTime.now()),
-  DummyBank("Stanbic Bank", "assets/jpg/stanbic_logo.jpg", "Rabiu Iyanu", "0123456789", DateTime.now()),
-  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Rabiu Bayelsa", "0123456789", DateTime.now()),
-  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Rabiu Lagos", "0123456789", DateTime.now()),
+  DummyBank("Kuda Bank", "assets/jpg/kudabank_logo.jpg", "Ifeoluwa Rabiu", "1234567890",DateTime(2023, 2, 12), "Approved"),
+  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Okoroafor Kelechi", "2345678901", DateTime(2023, 2, 12), "Approved"),
+  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Okoroafor Nonso", "3456789012", DateTime.now(),"Pending"),
+  DummyBank("Zenith Bank", "assets/jpg/zenith_logo.jpg", "Okoroafor Maryjane", "4567890123", DateTime(2023, 1, 12), "Approved"),
+  DummyBank("UBA", "assets/jpg/uba_logo.jpg", "Okoroafor Ozioma", "5678901234", DateTime(2023, 6, 12), "Declined"),
+  DummyBank("Palmpay", "assets/jpg/palmpay_logo.jpg", "Okoroafor Chinwendu", "6789012345", DateTime(2023, 12, 16), "Approved"),
+  DummyBank("First Bank", "assets/jpg/firstbank_logo.jpg", "Okoroafor Victoria", "7890123456",DateTime(2022, 2, 12), "Pending"),
+  DummyBank("Ecobank", "assets/jpg/ecobank_logo.jpg", "Okoroafor Nathaniel", "8901234567", DateTime.now(), "Declined"),
+  DummyBank("Wema Bank", "assets/jpg/wemabank_logo.jpg", "Rabiu Anu", "9012345678",DateTime(2021, 2, 12), "Approved"),
+  DummyBank("Stanbic Bank", "assets/jpg/stanbic_logo.jpg", "Rabiu Iyanu", "0123456789", DateTime.now(), "Pending"),
+  DummyBank("Opay Bank", "assets/jpg/opay_logo.jpg", "Rabiu Bayelsa", "0123456789", DateTime.now(), "Approved"),
+  DummyBank("GTBank", "assets/jpg/gtb_logo.jpg", "Rabiu Lagos", "0123456789", DateTime.now(), "Declined"),
 ];
 
 class _TransferToBankScreenState extends State<TransferToBankScreen> {
@@ -136,9 +138,8 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
             title: Text(
               bank.name,
               style: TextStyle(
-                fontWeight: AppFontWeight.bold,
-                fontFamily: GoogleFonts.alegreyaSans().fontFamily
-
+                  fontWeight: AppFontWeight.bold,
+                  fontFamily: GoogleFonts.alegreyaSans().fontFamily
               ),
             ),
             onTap: () {
@@ -195,36 +196,46 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Row(
-                  children: [
-                    _selectedBankLogo.isEmpty ? Container() : Image.asset(_selectedBankLogo, width: 30.0, height: 30.0),
-                    const SizedBox(width: 8.0),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          _showBankSelectionDialog(context);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              _selectedBankController.text,
-                              style: const TextStyle(
-                                color: AppColors.lightBlack,
-                                fontWeight: AppFontWeight.bold,
-                                fontSize: AppFontSize.size18,
-                              ),
-                            ),
-                            const Icon(
-                              Icons.keyboard_arrow_down_sharp,
-                              size: AppFontSize.size30,
-                              color: AppColors.darkWhite,
-                            ),
-                          ],
-                        ),
+                Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: AppColors.lightGrey,
+                        width: 1.0,
                       ),
                     ),
-                  ],
+                  ),
+                  child: Row(
+                    children: [
+                      _selectedBankLogo.isEmpty ? Container() : Image.asset(_selectedBankLogo, width: 30.0, height: 30.0),
+                      const SizedBox(width: 8.0),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            _showBankSelectionDialog(context);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                _selectedBankController.text,
+                                style: const TextStyle(
+                                  color: AppColors.lightBlack,
+                                  fontWeight: AppFontWeight.bold,
+                                  fontSize: AppFontSize.size18,
+                                ),
+                              ),
+                              const Icon(
+                                Icons.keyboard_arrow_down_sharp,
+                                size: AppFontSize.size30,
+                                color: AppColors.darkWhite,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 _buildAccountNumberTextField(),
                 _buildAccountNumberErrorMessages(),
@@ -235,30 +246,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBankNetworkMonitorCard(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6.0),
-      child: Card(
-        color: AppColors.lightBlue,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: ListTile(
-          onTap: () {},
-          title: const Text(
-            'Real-time Bank Network Monitor',
-            style: TextStyle(
-              color: AppColors.lightBlack,
-              fontWeight: AppFontWeight.bold,
-              fontSize: AppFontSize.size14,
-            ),
-          ),
-          trailing: const Icon(Icons.arrow_forward_ios, color: AppColors.darkWhite, size: AppFontSize.size20),
         ),
       ),
     );
@@ -477,7 +464,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
     return Visibility(
       visible: _showProcessingCircle,
       child: Padding(
-        padding: const EdgeInsets.only(top: 39.0, bottom: 0.12),
+        padding: const EdgeInsets.only(top: 50),
         child: Column(
           children: [
             const Center(
@@ -502,15 +489,18 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   }
 
   Widget _buildUserNameText() {
-    return Center(
-      child: Transform.translate(
-        offset: const Offset(0, 9.0),
-        child: Text(
-          _userName,
-          style: const TextStyle(
-            color: AppColors.lightGreen,
-            fontWeight: AppFontWeight.bold,
-            fontSize: AppFontSize.size20,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Center(
+        child: Transform.translate(
+          offset: const Offset(0, 9.0),
+          child: Text(
+            _userName,
+            style: const TextStyle(
+              color: AppColors.lightGreen,
+              fontWeight: AppFontWeight.bold,
+              fontSize: AppFontSize.size20,
+            ),
           ),
         ),
       ),
@@ -518,17 +508,40 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   }
 
   Widget _buildNextTextButton() {
-    return Center(
-      child: TextButton(
-        onPressed: () {},
-        child: const Padding(
-          padding: EdgeInsets.only(top: 28.0),
-          child: Text(
-            'Next',
-            style: TextStyle(
-              fontWeight: AppFontWeight.bold,
-              color: AppColors.lightBlack,
-              fontSize: AppFontSize.size16,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20.0),
+      child: Center(
+        child: SizedBox(
+          height: 50,
+          width: 100.0,
+          child: ElevatedButton(
+            onPressed: () {
+              if (_bankSelected) {
+                final selectedBank = dummyBanks.firstWhere((bank) => bank.name == _selectedBankController.text);
+                if (selectedBank != null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BeneficiaryDetailsScreen(
+                        bank: selectedBank,
+                        // selectedBankLogo: _selectedBankLogo,
+                      ),
+                    ),
+                  );
+                } else {}
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 15.0),
+              backgroundColor: AppColors.lightGreen,
+            ),
+            child: const Text(
+              'Next',
+              style: TextStyle(
+                fontWeight: AppFontWeight.bold,
+                color: AppColors.pureWhite,
+                fontSize: AppFontSize.size16,
+              ),
             ),
           ),
         ),
@@ -544,7 +557,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
         child: Column(
           children: [
             _buildRecipientCard(context),
-            _buildBankNetworkMonitorCard(context),
             _buildBeneficiariesCard(context),
           ],
         ),

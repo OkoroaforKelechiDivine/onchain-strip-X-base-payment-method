@@ -44,7 +44,7 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
   void narrationErrorHandling() {
     if (narrationController.text.isEmpty) {
       setState(() {
-        emptyNarrativeMessage = 'Narration field cannot be empty';
+        emptyNarrativeMessage = 'Narration field is empty';
       });
     } else if (narrationController.text.length < 3) {
       setState(() {
@@ -139,7 +139,7 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
           child: CustomUnderlinedText(
             text: "Send Money",
             textStyle: TextStyle(
-              fontSize: AppFontSize.size24,
+              fontSize: AppFontSize.size22,
               fontWeight: AppFontWeight.bold,
               color: AppColors.lightGreen,
             ),
@@ -202,8 +202,8 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
         TextField(
           controller: narrationController,
           decoration: InputDecoration(
-            labelText: 'Enter Narration',
-            labelStyle: const TextStyle(color: AppColors.lightBlack, fontSize: AppFontSize.size7),
+            hintText: 'Enter Narration',
+            labelStyle: const TextStyle(color: AppColors.lightGrey, fontSize: AppFontSize.size16),
             filled: true,
             fillColor: AppColors.lightBlue,
             border: OutlineInputBorder(
@@ -242,14 +242,17 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
       padding: const EdgeInsets.only(top: 50.0, right: 100.0, left: 100.0),
       child: ElevatedButton(
         onPressed: () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return PinDialog(
-                amount: double.parse(amountController.text),
-                accountName: widget.bank.accountName,
-              );
-            },
+          String enteredAmount = amountController.text;
+
+          enteredAmount = enteredAmount.replaceAll("₦", "").replaceAll(",", "");
+
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => PinDialog(
+                amount: double.parse(enteredAmount),
+                accountName: "",
+              ),
+            ),
           );
         },
       child: const Text(
@@ -276,12 +279,12 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
           child: Column(
             children: [
               buildBankCard(),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               buildSendMoneySection(),
               const SizedBox(height: 50),
               buildAmountInput(),
               buildAmountErrorMessage(),
-              const SizedBox(height: 50),
+              const SizedBox(height: 30),
               buildBalanceSection(),
               buildSubmitButton(),
             ],

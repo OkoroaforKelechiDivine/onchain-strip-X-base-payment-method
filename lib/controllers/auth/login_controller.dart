@@ -1,15 +1,17 @@
-
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 
-class LoginController extends GetxController{
-
+class LoginController {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
-  var userNameError = "".obs;
-  var passwordError = "".obs;
-  var isLoading = false.obs;
+  var userNameError = "";
+  var passwordError = "";
+  var isLoading = false;
 
-  clearUserNameError(val) => userNameError.value = "";
-  clearPasswordError(val) => passwordError.value = "";
+  void clearUserNameError(val) {
+    userNameError = "";
+  }
+
+  void clearPasswordError(val) {
+    passwordError = "";
+  }
 }

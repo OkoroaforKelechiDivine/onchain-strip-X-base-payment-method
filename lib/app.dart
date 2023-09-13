@@ -1,10 +1,10 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/screens/buy_airtime/buy_airtime_screen.dart';
 import 'package:pay_me_mobile/screens/buy_power/buy_power_screen.dart';
 import 'package:pay_me_mobile/screens/home_page/home_page_screen.dart';
+import 'package:pay_me_mobile/screens/raise_payment/raise_payment.dart';
 import 'package:pay_me_mobile/screens/splash/splash_screen.dart';
 import 'package:pay_me_mobile/screens/transaction_history/repeat_transaction.dart';
 import 'package:pay_me_mobile/screens/transaction_history/transaction_details.dart';
@@ -22,9 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      defaultTransition: Transition.fadeIn,
-      transitionDuration: const Duration(microseconds: 20),
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'PayMe',
       theme: getApplicationTheme(),
@@ -34,13 +32,10 @@ class MyApp extends StatelessWidget {
         "/home": (context) => const HomePageScreen(),
         "/login": (context) => const LoginScreen(),
         "/splash": (context) => const SplashScreen(),
+        "/raise_payment": (context) => const RaisePaymentScreen(),
         "/buy_power": (context) => const BuyPowerScreen(),
         "/transfer": (context) => const TransferToBankScreen(),
         "/show_all_beneficiaries": (context) => ShowAllBeneficiariesScreen(banks: dummyBanks),
-        "/beneficiary_details": (context) {
-          final bank = ModalRoute.of(context)!.settings.arguments as DummyBank;
-          return BeneficiaryDetailsScreen(bank: bank);
-        },
         "/pin_dialog": (context) {
           final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
           final amount = double.tryParse(args['amount'].replaceAll('₦', '').replaceAll(',', '').trim()) ?? 0.0;
@@ -48,6 +43,10 @@ class MyApp extends StatelessWidget {
             amount: amount,
             accountName: args['accountName'],
           );
+        },
+        "/beneficiary_details": (context) {
+          final bank = ModalRoute.of(context)!.settings.arguments as DummyBank;
+          return BeneficiaryDetailsScreen(bank: bank);
         },
         "/buy_airtime": (context) => const BuyAirtimeScreen(),
         "/transaction_history": (context) => const TransactionHistoryScreen(),

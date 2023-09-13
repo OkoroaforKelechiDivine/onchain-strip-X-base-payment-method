@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
@@ -14,13 +13,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final controller = Get.put(LoginController());
+  final controller = LoginController();
   bool _obscurePassword = true;
 
   Widget _buildLogo() {
     return Image.asset(
-      "assets/jpg/payMeLogo.jpg",
-      height: 80,
+      "assets/png/payme.png",
+      height: 50,
     );
   }
 
@@ -31,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       style: GoogleFonts.alegreyaSc(
         textStyle: const TextStyle(
           color: AppColors.lightGreen,
-          fontSize: AppFontSize.size20,
+          fontSize: AppFontSize.size18,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -41,8 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildLockImage() {
     return Image.asset(
       "assets/jpg/lock.jpg",
-      height: 70,
-      width: 100,
+      height: 50,
     );
   }
 
@@ -74,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onTap: toggleVisibility,
               child: Icon(
                 isVisible ? Icons.visibility_off : Icons.visibility,
-                color: Colors.black,
+                color: AppColors.lightBlack,
               ),
             )
                 : null,
@@ -149,11 +147,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          color: Colors.white,
+          color: AppColors.pureWhite,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             child: ListView(
               children: [
+                const SizedBox(height: 100,),
                 _buildLogo(),
                 const SizedBox(height: 30),
                 _buildWelcomeText(),
@@ -165,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller.userNameController,
                   controller.clearUserNameError,
                   false, false, () {},
-                  controller.userNameError.value.isEmpty ? null : controller.userNameError.value,
+                  controller.userNameError.isEmpty ? null : controller.userNameError,
                 ),
                 const SizedBox(height: 20),
                 _buildTextField(
@@ -187,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       _obscurePassword = !_obscurePassword;
                     });
                   },
-                  controller.passwordError.value.isEmpty ? null : controller.passwordError.value,
+                  controller.passwordError.isEmpty ? null : controller.passwordError,
                 ),
                 _buildForgotPasswordButton(),
                 const SizedBox(height: 20),

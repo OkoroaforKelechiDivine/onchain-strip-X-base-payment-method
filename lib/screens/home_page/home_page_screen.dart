@@ -60,7 +60,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
             const Text(
               'Hi, Adeola',
               style: TextStyle(
-                fontSize: AppFontSize.size30,
+                fontSize: AppFontSize.size24,
                 color: AppColors.lightBlack,
                 fontWeight: FontWeight.bold,
               ),
@@ -84,7 +84,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
         borderRadius: BorderRadius.circular(9.0),
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(15, 15, 15.0, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -100,10 +100,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       ),),
                     Text(
                       displayedAmount,
-                      style: GoogleFonts.philosopher(
+                      style: TextStyle(
                         fontSize: AppFontSize.size30,
                         color: AppColors.deepWhite,
                         fontWeight: FontWeight.bold,
+                        fontFamily: GoogleFonts.philosopher().fontFamily
                       ),
                     ),
                   ],
@@ -120,28 +121,31 @@ class _HomePageScreenState extends State<HomePageScreen> {
             const Text(
               'ACCOUNT NUMBER: 157766678939',
               style: TextStyle(
-                fontSize: AppFontSize.size12,
+                fontSize: AppFontSize.size14,
                 fontWeight: AppFontWeight.bold,
                 color: AppColors.deepWhite,
               ),
             ),
             const SizedBox(height: 5),
             const Text(
-              'Account Status: MERCHANT',
+              'Account Type: MERCHANT',
               style: TextStyle(
-                fontSize: AppFontSize.size12,
+                fontSize: AppFontSize.size14,
                 fontWeight: AppFontWeight.bold,
                 color: AppColors.deepWhite,
               ),
             ),
             const SizedBox(height: 35),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildActionColumn(addMoneyImage, 'Earnings', () {}, textColor: AppColors.pureWhite),
-                _buildActionColumn(transferImage, 'Transfer', () { Navigator.of(context).pushReplacementNamed('/transfer'); }, textColor: AppColors.pureWhite),
-                _buildActionColumn(posDeviceImage, 'POS Device', () {}, textColor: AppColors.pureWhite),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildActionColumn(addMoneyImage, 'Earnings', () {}, textColor: AppColors.pureWhite),
+                  _buildActionColumn(transferImage, 'Transfer', () { Navigator.of(context).pushReplacementNamed('/transfer'); }, textColor: AppColors.pureWhite),
+                  _buildActionColumn(posDeviceImage, 'POS Device', () {}, textColor: AppColors.pureWhite),
+                ],
+              ),
             ),
             const SizedBox(height: 20),
           ],
@@ -154,6 +158,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     return Column(
       children: [
         Container(
+          height: 40,
           decoration: BoxDecoration(
             color: AppColors.deepWhite,
             borderRadius: BorderRadius.circular(8.0),
@@ -167,8 +172,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
         Text(
           label,
           style: TextStyle(
-            fontSize: AppFontSize.size12,
-            fontWeight: AppFontWeight.bold,
+            fontSize: AppFontSize.size14,
+            fontWeight: AppFontWeight.medium,
             color: textColor,
           ),
         ),
@@ -178,9 +183,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   Widget _buildMoneyTransferCard() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 10.0),
+      padding: const EdgeInsets.fromLTRB(16, 5.0, 16, 10.0),
       child: Card(
-        elevation: 4,
+        elevation: 5,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -189,16 +194,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
               const Text(
                 'Money Transfer',
                 style: TextStyle(
-                  fontSize: AppFontSize.size16,
-                  fontWeight: AppFontWeight.light,
+                  fontSize: AppFontSize.size14,
+                  fontWeight: AppFontWeight.medium,
                   color: AppColors.lightBlack,
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildActionColumn(bankImage, 'To Bank', () {}, textColor: AppColors.lightGreen),
-                  _buildActionColumn(raisePaymentImage, 'Raise Payment', () {}, textColor: AppColors.lightGreen),
+                  _buildActionColumn(bankImage, 'To Bank', () {Navigator.of(context).pushReplacementNamed('/transfer'); }, textColor: AppColors.lightGreen),
+                  _buildActionColumn(raisePaymentImage, 'Raise Payment', () { Navigator.of(context).pushReplacementNamed('/raise_payment'); }, textColor: AppColors.lightGreen),
                   _buildActionColumn(approvedPaymentImage, 'Approve Payments', () {}, textColor: AppColors.lightGreen),
                 ],
               ),
@@ -211,37 +216,23 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   Widget _buildServiceHeader() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(25.0, 0.0, 30.0, 0.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Service',
-            style: GoogleFonts.inter(
-              fontSize: AppFontSize.size16,
-              fontWeight: FontWeight.w400,
-              color: AppColors.lightBlack,
-            ),
-          ),
-          const Spacer(),
-          const Text(
-            'More >',
-            style: TextStyle(
-              fontSize: AppFontSize.size12,
-              fontWeight: AppFontWeight.light,
-              color: AppColors.lightBlack,
-            ),
-          ),
-        ],
+      padding: const EdgeInsets.only(left: 25.0),
+      child: Text(
+        'Service',
+        style: GoogleFonts.inter(
+          fontSize: AppFontSize.size16,
+          fontWeight: AppFontWeight.regular,
+          color: AppColors.lightBlack,
+        ),
       ),
     );
   }
 
   Widget _buildServiceCard(String image, String imageLabel, String routeName) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 15.0),
+      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 25.0),
       child: Card(
-        elevation: 4,
+        elevation: 5,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6.0),
         ),
@@ -250,20 +241,20 @@ class _HomePageScreenState extends State<HomePageScreen> {
             Navigator.of(context).pushNamed(routeName);
           },
           child: Padding(
-            padding: const EdgeInsets.only(top: 18.0),
+            padding: const EdgeInsets.only(top: 5),
             child: Column(
               children: [
                 SizedBox(
                   width: 30,
-                  height: 30,
+                  height: 25,
                   child: Image.asset(image),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 Text(
                   imageLabel,
                   style: const TextStyle(
-                    fontSize: AppFontSize.size12,
-                    fontWeight: AppFontWeight.semiBold,
+                    fontSize: AppFontSize.size14,
+                    fontWeight: AppFontWeight.light,
                     color: AppColors.lightGreen,
                   ),
                 ),
@@ -274,7 +265,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

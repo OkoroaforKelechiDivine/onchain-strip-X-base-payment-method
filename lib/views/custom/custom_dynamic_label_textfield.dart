@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 
+import 'custom_amount_input_field.dart';
+
 class TextFieldWithDynamicLabel extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
@@ -40,8 +42,13 @@ class _TextFieldWithDynamicLabelState extends State<TextFieldWithDynamicLabel> {
         child: TextFormField(
           controller: widget.controller,
           keyboardType: TextInputType.number,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+          ],
           decoration: InputDecoration(
-            labelText: widget.controller.text.isNotEmpty ? null : '₦ 0.00',
+            labelText: widget.controller.text.isNotEmpty
+                ? null
+                : '₦ 0.00',
             hintText: widget.hintText,
             fillColor: widget.fillColor,
             focusedBorder: const UnderlineInputBorder(
@@ -54,12 +61,19 @@ class _TextFieldWithDynamicLabelState extends State<TextFieldWithDynamicLabel> {
             filled: true,
             counterText: '',
             labelStyle: const TextStyle(
-              fontSize: AppFontSize.size24,
+              fontSize: AppFontSize.size16,
             ),
             errorText: widget.errorText,
           ),
           textAlign: TextAlign.left,
           onChanged: (text) {
+            text = text.replaceAll(RegExp(r'[^\d]'), '');
+            String formattedAmount = AmountFormatter.formatAmount(text);
+            widget.controller.value = widget.controller.value.copyWith(
+              text: formattedAmount,
+              selection: TextSelection.collapsed(offset: formattedAmount.length),
+            );
+
             if (widget.onValidation != null) {
               widget.onValidation!(text);
             }

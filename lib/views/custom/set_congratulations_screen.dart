@@ -39,15 +39,15 @@ class CongratulationsDialog extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 30),
                   _buildSuccessImage(),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 30),
                   _buildSuccessTitle(),
-                  const SizedBox(height: 70),
+                  const SizedBox(height: 40),
                   _buildSuccessMessage(),
-                  const SizedBox(height: 70),
+                  const SizedBox(height: 40),
                   _buildButtonRow(context),
-                  const SizedBox(height: 200),
+                  const SizedBox(height: 90),
                 ],
               ),
             ),
@@ -109,8 +109,6 @@ class CongratulationsDialog extends StatelessWidget {
     );
   }
 
-
-
   Widget _buildCardButton(String label, Function onPressed, BuildContext context) {
     return Card(
       color: AppColors.lightBlue,
@@ -133,5 +131,4 @@ class CongratulationsDialog extends StatelessWidget {
       ),
     );
   }
-
 }
