@@ -9,6 +9,7 @@ import 'package:pay_me_mobile/screens/splash/splash_screen.dart';
 import 'package:pay_me_mobile/screens/transaction_history/repeat_transaction.dart';
 import 'package:pay_me_mobile/screens/transaction_history/transaction_details.dart';
 import 'package:pay_me_mobile/screens/transaction_history/transaction_history.dart';
+import 'package:pay_me_mobile/screens/transfer_to_bank/beneficial_detail.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/show_all_beneficiaries.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.dart';
 import 'package:pay_me_mobile/views/auth_view/login_view.dart';
@@ -41,6 +42,13 @@ class MyApp extends StatelessWidget {
           return PinDialog(
             amount: amount,
             accountName: args['accountName'],
+          );
+        },
+        "/beneficiary_details": (context) {
+          final beneficiaryDetails = ModalRoute.of(context)!.settings.arguments as BeneficiaryDetailsScreen;
+          return BeneficiaryDetailsScreen(
+            bank: beneficiaryDetails.bank,
+            selectedBankLogo: beneficiaryDetails.selectedBankLogo,
           );
         },
         "/buy_airtime": (context) => const BuyAirtimeScreen(),
