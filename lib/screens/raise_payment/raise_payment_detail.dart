@@ -176,7 +176,6 @@ class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
     );
   }
 
-
   Widget _buildInfoRow(String label, String value) {
     return Row(
       children: [
@@ -207,7 +206,6 @@ class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
       height: 0.5,
     );
   }
-
 
   Widget _buildMoreActions() {
     if (widget.status == 'Approved') {
@@ -278,8 +276,6 @@ class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
       );
     }
   }
-
-
 
   Widget _buildActionRow(String imagePath, String label, IconData icon) {
     return Row(
