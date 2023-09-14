@@ -18,16 +18,18 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            _buildLogo(),
-            _buildWelcomeText(),
-            Keypad(
-              enteredDigits: enteredDigits,
-              onButtonPressed: _onButtonPressed,
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              _buildLogo(),
+              _buildWelcomeText(),
+              Keypad(
+                enteredDigits: enteredDigits,
+                onButtonPressed: _onButtonPressed,
+              ),
+            ],
+          ),
         ),
       ),
     );
