@@ -11,6 +11,7 @@ class RaisePaymentDetailsScreen extends StatefulWidget {
   final DateTime transactionTimestamp;
   final String accountName;
   final String bankName;
+  final String status;
 
   const RaisePaymentDetailsScreen({
     Key? key,
@@ -18,6 +19,7 @@ class RaisePaymentDetailsScreen extends StatefulWidget {
     required this.transactionTimestamp,
     required this.accountName,
     required this.bankName,
+    required this.status,
   }) : super(key: key);
 
   @override
@@ -45,19 +47,29 @@ class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
           ),
         ),
       ),
+
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Center(
+            Center(
               child: Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: Text(
-                  'Amount',
-                  style: TextStyle(
-                    fontSize: AppFontSize.size20,
-                    color: AppColors.lightGreen,
-                    fontWeight: AppFontWeight.bold,
-                  ),
+                padding: const EdgeInsets.only(top: 20, left: 150),
+                child: Row(
+                  children: [
+                    const Text(
+                      'Amount',
+                      style: TextStyle(
+                        fontSize: AppFontSize.size20,
+                        color: AppColors.lightGreen,
+                        fontWeight: AppFontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 65),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: _buildStatusCircle(widget.status),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -132,6 +144,39 @@ class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
     );
   }
 
+  Widget _buildStatusCircle(String status) {
+    Color circleColor = AppColors.brightGreen;
+
+    if (status == 'Declined') {
+      circleColor = AppColors.errorRed;
+    } else if (status == 'Pending') {
+      circleColor = AppColors.dullOrange;
+    }
+
+    return Row(
+      children: [
+        Container(
+          width: 15,
+          height: 15,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: circleColor,
+          ),
+        ),
+        const SizedBox(width: 5),
+        Text(
+          status,
+          style: TextStyle(
+            fontSize: AppFontSize.size12,
+            color: circleColor,
+            fontWeight: AppFontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
+
   Widget _buildInfoRow(String label, String value) {
     return Row(
       children: [
@@ -163,48 +208,78 @@ class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
     );
   }
 
-  Widget _buildMoreActions() {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(right: 240, bottom: 20),
-          child: Text("More Actions",
-              style: TextStyle(
-                  color: AppColors.lightBlack,
-                  fontWeight: AppFontWeight.bold,
-                  fontSize: AppFontSize.size18
-              )
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => RepeatTransactionScreen(
-                  amount: widget.amount,
-                  transactionTimestamp: widget.transactionTimestamp,
-                  accountName: widget.accountName,
-                  description: 'Garri', isSent: true,
-                ),
-              ),
-            );
-          },
-          child: _buildActionRow(
-            'assets/jpg/reset.jpg',
-            'Terminate Transaction',
-            Icons.arrow_forward_ios,
-          ),
-        ),
 
-        // const SizedBox(height: 20),
-        // _buildActionRow(
-        //   'assets/jpg/report_card.jpg',
-        //   'Report Transaction',
-        //   Icons.arrow_forward_ios,
-        // ),
-      ],
-    );
+  Widget _buildMoreActions() {
+    if (widget.status == 'Approved') {
+      return Container();
+    } else if (widget.status == 'Declined') {
+      return const Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(right: 200, bottom: 20),
+            child: Text(
+              "Reason:",
+              style: TextStyle(
+                color: AppColors.lightBlack,
+                fontWeight: AppFontWeight.bold,
+                fontSize: AppFontSize.size18,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 20, bottom: 20),
+            child: Text(
+              "blah blah",
+              style: TextStyle(
+                color: AppColors.lightBlack,
+                fontWeight: AppFontWeight.light,
+                fontSize: AppFontSize.size16,
+              ),
+            ),
+          ),
+        ],
+      );
+
+    } else {
+      return Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(right: 240, bottom: 20),
+            child: Text(
+              "More Actions",
+              style: TextStyle(
+                color: AppColors.lightBlack,
+                fontWeight: AppFontWeight.bold,
+                fontSize: AppFontSize.size18,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => RepeatTransactionScreen(
+                    amount: widget.amount,
+                    transactionTimestamp: widget.transactionTimestamp,
+                    accountName: widget.accountName,
+                    description: 'Garri',
+                    isSent: true,
+                  ),
+                ),
+              );
+            },
+            child: _buildActionRow(
+              'assets/jpg/reset.jpg',
+              'Terminate Transaction',
+              Icons.arrow_forward_ios,
+            ),
+          ),
+        ],
+      );
+    }
   }
+
+
 
   Widget _buildActionRow(String imagePath, String label, IconData icon) {
     return Row(

@@ -51,7 +51,9 @@ class _RaisePaymentScreenState extends State<RaisePaymentScreen> {
                   color: AppColors.lightGreen,
                   constraints: const BoxConstraints(maxWidth: 80, maxHeight: 25),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/transfer");
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(0),
                     ),
@@ -115,7 +117,7 @@ class _RaisePaymentScreenState extends State<RaisePaymentScreen> {
             return GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => RaisePaymentDetailsScreen(amount: "₦ 20,000", transactionTimestamp: bank.timestamp, accountName: bank.accountName, bankName: bank.name)
+                  builder: (context) => RaisePaymentDetailsScreen(amount: "₦ 20,000", transactionTimestamp: bank.timestamp, accountName: bank.accountName, bankName: bank.name, status: bank.status,)
                 ));
               },
               child: Padding(
