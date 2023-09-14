@@ -79,7 +79,15 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   Widget _buildBankSelectionDialog(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select Bank'),
+        title: const Padding(
+          padding: EdgeInsets.only(left: 60.0),
+          child: Text('Select Bank',
+              style: TextStyle(
+                  fontSize: AppFontSize.size20,
+                color: AppColors.lightGreen
+              )
+          ),
+        ),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
@@ -164,7 +172,8 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
       ),
       title: const Text(
         "Transfer to Bank",
-        style: TextStyle(color: AppColors.lightGreen),
+        style: TextStyle(color: AppColors.lightGreen, fontSize: AppFontSize.size20,
+        ),
       ),
     );
   }
