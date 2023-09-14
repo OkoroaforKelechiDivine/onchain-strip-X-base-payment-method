@@ -117,7 +117,13 @@ class _RaisePaymentScreenState extends State<RaisePaymentScreen> {
             return GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => RaisePaymentDetailsScreen(amount: "₦ 20,000", transactionTimestamp: bank.timestamp, accountName: bank.accountName, bankName: bank.name, status: bank.status,)
+                  builder: (context) => RaisePaymentDetailsScreen(
+                    amount: "₦ 20,000",
+                    transactionTimestamp: bank.timestamp,
+                    accountName: bank.accountName,
+                    bankName: bank.name,
+                    status: bank.status
+                  )
                 ));
               },
               child: Padding(
