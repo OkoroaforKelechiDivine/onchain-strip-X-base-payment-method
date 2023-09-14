@@ -13,6 +13,36 @@ class PinCodeScreen extends StatefulWidget {
 
 class _PinCodeScreenState extends State<PinCodeScreen> {
   List<String> enteredDigits = [];
+  bool isProcessing = false;
+
+
+  void _onButtonPressed(String buttonText) {
+    if (buttonText == 'Delete') {
+      if (enteredDigits.isNotEmpty) {
+        setState(() {
+          enteredDigits.removeLast();
+        });
+      }
+    } else {
+      if (enteredDigits.length < 6) {
+        setState(() {
+          enteredDigits.add(buttonText);
+          if (enteredDigits.length == 6) {
+            setState(() {
+              isProcessing = true;
+            });
+            _startProcessingAndNavigate();
+          }
+        });
+      }
+    }
+  }
+
+  void _startProcessingAndNavigate() {
+    Future.delayed(const Duration(seconds: 5), () {
+      Navigator.of(context).pushReplacementNamed("/home");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +52,7 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              if (isProcessing) const LinearProgressIndicator(), // Show progress bar
               _buildLogo(),
               _buildWelcomeText(),
               Keypad(
@@ -51,31 +82,6 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
         ),
       ),
     );
-  }
-
-  void _onButtonPressed(String buttonText) {
-    if (buttonText == 'Delete') {
-      if (enteredDigits.isNotEmpty) {
-        setState(() {
-          enteredDigits.removeLast();
-        });
-      }
-    } else {
-      if (enteredDigits.length < 6) {
-        setState(() {
-          enteredDigits.add(buttonText);
-          if (enteredDigits.length == 6) {
-            _startProcessingAndNavigate();
-          }
-        });
-      }
-    }
-  }
-
-  void _startProcessingAndNavigate() {
-    Future.delayed(const Duration(seconds: 1), () {
-      Navigator.of(context).pushReplacementNamed("/home");
-    });
   }
 }
 
