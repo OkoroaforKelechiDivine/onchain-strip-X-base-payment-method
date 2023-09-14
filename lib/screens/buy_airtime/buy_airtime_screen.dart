@@ -16,7 +16,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
   String selectedAmount = "";
   TextEditingController amountController = TextEditingController();
   String? selectedNetwork;
-  int _currentIndex = 0;
+  int _currentIndex = 2;
   int? selectedAmountIndex;
 
   late List<DropdownMenuItem<String>> networkItems;
