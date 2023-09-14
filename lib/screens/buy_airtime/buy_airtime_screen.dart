@@ -16,7 +16,8 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
   String selectedAmount = "";
   TextEditingController amountController = TextEditingController();
   String? selectedNetwork;
-  int _currentIndex = 0;
+  int _currentIndex = 2;
+  int? selectedAmountIndex;
 
   late List<DropdownMenuItem<String>> networkItems;
 
@@ -116,17 +117,17 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildAmountCard("₦200", CustomStyles.buyAirtimeTextStyleInfo),
-            _buildAmountCard("₦500", CustomStyles.buyAirtimeTextStyleInfo),
-            _buildAmountCard("₦1000", CustomStyles.buyAirtimeTextStyleInfo),
+            _buildAmountCard("₦200", CustomStyles.buyAirtimeTextStyleInfo, 0),
+            _buildAmountCard("₦500", CustomStyles.buyAirtimeTextStyleInfo, 1),
+            _buildAmountCard("₦1000", CustomStyles.buyAirtimeTextStyleInfo, 2),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildAmountCard("₦2000", CustomStyles.buyAirtimeTextStyleInfo),
-            _buildAmountCard("₦3000", CustomStyles.buyAirtimeTextStyleInfo),
-            _buildAmountCard("₦5000", CustomStyles.buyAirtimeTextStyleInfo),
+            _buildAmountCard("₦2000", CustomStyles.buyAirtimeTextStyleInfo, 3),
+            _buildAmountCard("₦3000", CustomStyles.buyAirtimeTextStyleInfo, 4),
+            _buildAmountCard("₦5000", CustomStyles.buyAirtimeTextStyleInfo, 5),
           ],
         ),
       ],
@@ -225,7 +226,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
           decoration: InputDecoration(
             hintText: "Choose Network",
             hintStyle: const TextStyle(
-              color: AppColors.lightGrey,
+                color: AppColors.lightGrey,
                 fontSize: AppFontSize.size14,
                 fontWeight: AppFontWeight.light
             ),
@@ -313,7 +314,9 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
     );
   }
 
-  Widget _buildAmountCard(String title, TextStyle style) {
+  Widget _buildAmountCard(String title, TextStyle style, int cardIndex) {
+    bool isSelected = selectedAmountIndex == cardIndex;
+
     return Padding(
       padding: const EdgeInsets.all(9.0),
       child: GestureDetector(
@@ -321,6 +324,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
           setState(() {
             String formattedAmount = AmountFormatter.formatAmount(title);
             amountController.text = formattedAmount;
+            selectedAmountIndex = cardIndex;
           });
         },
         child: Card(
@@ -328,7 +332,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6.0),
           ),
-          color: AppColors.lightBlue,
+          color: isSelected ? AppColors.lightGreen : AppColors.lightBlue,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -342,7 +346,11 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
                 child: Center(
                   child: Text(
                     title,
-                    style: style,
+                    style: TextStyle(
+                      color: isSelected ? AppColors.pureWhite : style.color,
+                      fontSize: style.fontSize,
+                      fontWeight: style.fontWeight,
+                    ),
                   ),
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
@@ -19,7 +20,7 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
   String? selectedPackage;
   TextEditingController electricityProviderController = TextEditingController();
   TextEditingController amountController = TextEditingController();
-  int _currentIndex = 0;
+  int _currentIndex = 3;
 
   List<DropdownMenuItem<String>> electricityProviderItems = [
     const DropdownMenuItem<String>(
@@ -369,7 +370,7 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
 
   Padding _buildNextButton() {
     return Padding(
-      padding: const EdgeInsets.only(left: 100.0, right: 100.0, top: 50),
+      padding: const EdgeInsets.only(left: 120.0, right: 120.0, top: 50),
       child: ElevatedButton(
         onPressed: () {
           String enteredAmount = amountController.text;

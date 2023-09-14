@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pay_me_mobile/views/auth_view/processing_bar.dart';
 
 import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
@@ -13,43 +16,7 @@ class PinCodeScreen extends StatefulWidget {
 
 class _PinCodeScreenState extends State<PinCodeScreen> {
   List<String> enteredDigits = [];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            _buildLogo(),
-            _buildWelcomeText(),
-            Keypad(
-              enteredDigits: enteredDigits,
-              onButtonPressed: _onButtonPressed,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLogo() {
-    return Image.asset('assets/png/payme.png', width: 150.0, height: 100.0);
-  }
-
-  Widget _buildWelcomeText() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 50.0),
-      child: Text(
-        "Welcome Back",
-        style: TextStyle(
-          fontSize: AppFontSize.size22,
-          color: AppColors.lightBlack,
-          fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-        ),
-      ),
-    );
-  }
+  bool isProcessing = false;
 
   void _onButtonPressed(String buttonText) {
     if (buttonText == 'Delete') {
@@ -63,6 +30,9 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
         setState(() {
           enteredDigits.add(buttonText);
           if (enteredDigits.length == 6) {
+            setState(() {
+              isProcessing = true;
+            });
             _startProcessingAndNavigate();
           }
         });
@@ -71,9 +41,70 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
   }
 
   void _startProcessingAndNavigate() {
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 5), () {
       Navigator.of(context).pushReplacementNamed("/home");
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          BackdropFilter(
+            filter: isProcessing
+                ? ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0)
+                : ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
+            child: Container(
+              color: Colors.transparent,
+              width: double.infinity,
+              height: double.infinity,
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      if (isProcessing)
+                       const ProcessingBar(),
+                      _buildLogo(),
+                      _buildWelcomeText(),
+                      Keypad(
+                        enteredDigits: enteredDigits,
+                        onButtonPressed: _onButtonPressed,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLogo() {
+    return Image.asset('assets/png/payme.png', width: 150.0, height: 100.0);
+  }
+
+  Widget _buildWelcomeText() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 50.0),
+      child: Column(
+        children: [
+          Text(
+            "Welcome Back",
+            style: TextStyle(
+              fontSize: AppFontSize.size22,
+              color: AppColors.lightBlack,
+              fontFamily: GoogleFonts
+                  .alegreyaSans()
+                  .fontFamily,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

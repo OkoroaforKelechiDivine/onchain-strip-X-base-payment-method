@@ -22,7 +22,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
     return DateFormat('HH:mm a').format(timestamp);
   }
 
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
   PreferredSizeWidget buildAppBar() {
     return AppBar(

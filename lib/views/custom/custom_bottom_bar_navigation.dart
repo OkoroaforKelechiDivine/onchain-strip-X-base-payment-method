@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -5,7 +6,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
   final ValueChanged<int> onTap;
 
   static const double imageSize = 28.0;
-  static const double underlineHeight = 2.0; // Height of the underline
 
   static const homeImage = "assets/jpg/home.jpg";
   static const transactionHistoryImage = "assets/jpg/history.jpg";
@@ -23,17 +23,20 @@ class CustomBottomNavigationBar extends StatelessWidget {
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: onTap,
-      type: BottomNavigationBarType.shifting,
+      type: BottomNavigationBarType.fixed,
       items: [
         BottomNavigationBarItem(
           icon: GestureDetector(
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/home');
             },
-            child: SizedBox(
-              width: imageSize,
-              height: imageSize - 6.0,
-              child: Image.asset(homeImage),
+            child: Opacity(
+              opacity: currentIndex == 0 ? 1.0 : 0.5,
+              child: SizedBox(
+                width: imageSize,
+                height: imageSize - 6.0,
+                child: Image.asset(homeImage),
+              ),
             ),
           ),
           label: '',
@@ -42,11 +45,14 @@ class CustomBottomNavigationBar extends StatelessWidget {
           icon: GestureDetector(
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/transaction_history');
-              },
-            child: SizedBox(
-              width: imageSize,
-              height: imageSize - 6.0,
-              child: Image.asset(transactionHistoryImage),
+            },
+            child: Opacity(
+              opacity: currentIndex == 1 ? 1.0 : 0.5,
+              child: SizedBox(
+                width: imageSize,
+                height: imageSize - 6.0,
+                child: Image.asset(transactionHistoryImage),
+              ),
             ),
           ),
           label: '',
@@ -56,10 +62,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/buy_airtime');
             },
-            child: SizedBox(
-              width: imageSize,
-              height: imageSize - 6.0,
-              child: Image.asset(buyAirtimeImage),
+            child: Opacity(
+              opacity: currentIndex == 2 ? 1.0 : 0.5,
+              child: SizedBox(
+                width: imageSize,
+                height: imageSize - 6.0,
+                child: Image.asset(buyAirtimeImage),
+              ),
             ),
           ),
           label: '',
@@ -69,10 +78,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/buy_power');
             },
-            child: SizedBox(
-              width: imageSize,
-              height: imageSize - 6.0,
-              child: Image.asset(buyPowerImage),
+            child: Opacity(
+              opacity: currentIndex == 3 ? 1.0 : 0.5,
+              child: SizedBox(
+                width: imageSize,
+                height: imageSize - 6.0,
+                child: Image.asset(buyPowerImage),
+              ),
             ),
           ),
           label: '',

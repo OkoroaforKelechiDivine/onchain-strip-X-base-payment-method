@@ -5,8 +5,8 @@ import '../../views/auth_view/login_view.dart';
 
 class SplashController {
   void initialize(BuildContext context) {
-    Timer(const Duration(milliseconds: 4000), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => PinCodeScreen()));
+    Timer(const Duration(milliseconds: 900), () {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => const PinCodeScreen()));
     });
   }
 }
