@@ -347,7 +347,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
                   child: Text(
                     title,
                     style: TextStyle(
-                      color: isSelected ? AppColors.pureWhite : style.color, // Set text color to white when selected
+                      color: isSelected ? AppColors.pureWhite : style.color,
                       fontSize: style.fontSize,
                       fontWeight: style.fontWeight,
                     ),
