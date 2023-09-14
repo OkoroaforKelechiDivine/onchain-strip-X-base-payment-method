@@ -56,7 +56,8 @@ class _PinDialogState extends State<PinDialog> {
         context: context,
         builder: (BuildContext context) {
           return CongratulationsDialog(
-              amount: widget.amount, accountName: widget.accountName);
+              amount: widget.amount, accountName: widget.accountName
+          );
         },
       );
     });
@@ -89,7 +90,8 @@ class _PinDialogState extends State<PinDialog> {
                       style: TextStyle(fontSize: AppFontSize.size20)
                   ),
                   Text("₦${widget.amount.toString()}0",
-                      style: CustomStyles.bankInfoTextStyle),
+                      style: CustomStyles.bankInfoTextStyle
+                  ),
                 ],
               ),
             ),
