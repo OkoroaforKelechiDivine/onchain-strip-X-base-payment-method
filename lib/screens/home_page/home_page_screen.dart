@@ -31,10 +31,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   List<String> cardName = [
     'Outlet',
-    'Transaction\n \t\t\t\tHistory',
-    'Buy Airtime',
-    'Buy Power',
-    'POS Device',
+    'History',
+    'Airtime',
+    'Power',
+    'TV',
     'More',
   ];
 
@@ -230,7 +230,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   Widget _buildServiceCard(String image, String imageLabel, String routeName) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 16.0, 25.0),
+      padding: const EdgeInsets.fromLTRB(18.0, 15.0, 20.0, 30.0),
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
@@ -306,7 +306,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   case 3:
                     return _buildServiceCard(cardImage[index], cardName[index], '/buy_power');
                   case 4:
-                    return _buildServiceCard(cardImage[index], cardName[index], '/pos_device');
+                    return _buildServiceCard(cardImage[index], cardName[index], '');
                   case 5:
                     return _buildServiceCard(cardImage[index], cardName[index], '/more');
                   default:
