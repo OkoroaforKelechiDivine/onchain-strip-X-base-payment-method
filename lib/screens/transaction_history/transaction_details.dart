@@ -54,7 +54,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
                   color: AppColors.lightGreen,
                   constraints: const BoxConstraints(maxWidth: 70, maxHeight: 25),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {_showHelloDialog(context);},
                     child: const Text(
                       'Share',
                       style: TextStyle(
@@ -160,6 +160,51 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
       ),
     );
   }
+
+  void _showHelloDialog(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            color: AppColors.deepWhite,
+            padding: const EdgeInsets.all(16),
+            child: const Center(
+              child: Column(
+                children: [
+                  Text('Share Receipt',
+                      style: TextStyle(
+                          fontSize: AppFontSize.size20,
+                          fontWeight: AppFontWeight.bold,
+                          color: AppColors.lightBlack
+                      ),
+                  ),
+                  SizedBox(height: 40),
+                  Text("PDF",
+                      style: TextStyle(
+                          fontSize: AppFontSize.size16,
+                          fontWeight: AppFontWeight.bold,
+                          color: AppColors.lightBlack
+                      )
+                  ),
+                  SizedBox(height: 40),
+                  Text("Image",
+                      style: TextStyle(
+                          fontSize: AppFontSize.size16,
+                          fontWeight: AppFontWeight.bold,
+                          color: AppColors.lightBlack
+                      )
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
 
   Widget _buildInfoRow(String label, String value) {
     return Row(
