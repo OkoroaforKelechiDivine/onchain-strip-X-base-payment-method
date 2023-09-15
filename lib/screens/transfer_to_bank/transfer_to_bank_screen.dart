@@ -1,10 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 
+import '../../views/auth_view/processing_bar.dart';
 import '../../views/custom/custom_bottom_bar_navigation.dart';
+import '../transaction_history/transaction_details.dart';
 import 'beneficial_detail.dart';
 
 class TransferToBankScreen extends StatefulWidget {
@@ -56,6 +60,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
 
   List<DummyBank> filteredBanks = [];
 
+
   @override
   void initState() {
     super.initState();
@@ -100,7 +105,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
           child: Text('Select Bank',
               style: TextStyle(
                   fontSize: AppFontSize.size20,
-                color: AppColors.lightGreen
+                  color: AppColors.lightGreen
               )
           ),
         ),
@@ -144,7 +149,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
           contentPadding: EdgeInsets.symmetric(horizontal: 14.0),
         ),
         onChanged: (text) {
-          print("I got here");
           filterBanks(text);
         },
       ),
@@ -229,17 +233,17 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(top: 8.0),
+                  padding: EdgeInsets.only(top: 10),
                   child: Text(
                     'Recipient Account',
                     style: TextStyle(
                       color: AppColors.lightBlack,
                       fontWeight: AppFontWeight.bold,
-                      fontSize: AppFontSize.size18,
+                      fontSize: AppFontSize.size14,
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 Container(
                   decoration: const BoxDecoration(
                     border: Border(
@@ -266,13 +270,13 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                                 style: const TextStyle(
                                   color: AppColors.lightBlack,
                                   fontWeight: AppFontWeight.bold,
-                                  fontSize: AppFontSize.size18,
+                                  fontSize: AppFontSize.size14,
                                 ),
                               ),
                               const Icon(
                                 Icons.keyboard_arrow_down_sharp,
-                                size: AppFontSize.size30,
-                                color: AppColors.darkWhite,
+                                size: AppFontSize.size18,
+                                color: AppColors.lightBlack,
                               ),
                             ],
                           ),
@@ -283,7 +287,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                 ),
                 _buildAccountNumberTextField(),
                 _buildAccountNumberErrorMessages(),
-                _buildProcessingCircle(),
                 _buildUserNameText(),
                 const SizedBox(height: 2),
                 _buildNextTextButton()
@@ -295,9 +298,104 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
     );
   }
 
-  Widget _buildBeneficiariesCard(BuildContext context) {
-    List<DummyBank> beneficiaries = dummyBanks.sublist(0, 4);
+  Widget _buildBeneficiary(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 10),
+        const Padding(
+          padding: EdgeInsets.only(left: 15, right: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Beneficiaries",
+                style: TextStyle(
+                  color: AppColors.lightBlack,
+                  fontWeight: AppFontWeight.bold,
+                  fontSize: AppFontSize.size14,
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    'View All',
+                    style: TextStyle(
+                      color: AppColors.lightGrey,
+                      fontWeight: AppFontWeight.bold,
+                      fontSize: AppFontSize.size14,
+                    ),
+                  ),
+                  SizedBox(width: 5),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: AppColors.lightGrey,
+                    size: AppFontSize.size14,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: dummyBanks.map((transaction) {
+              final firstLetter = transaction.accountName.isNotEmpty ? transaction.accountName[0].toUpperCase() : '';
+              final randomColor = Color(0xFF000000 + Random().nextInt(0xFFFFFF));
+              final splitAccountNameIntoWords = transaction.accountName.split(' ');
 
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context,  "/show_all_beneficiaries");
+                },
+                child: Column(
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 50,
+                      margin: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: randomColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          firstLetter,
+                          style: TextStyle(
+                            fontWeight: AppFontWeight.bold,
+                            fontSize: AppFontSize.size18,
+                            fontFamily: GoogleFonts.alegreyaSans().fontFamily,
+                            color: AppColors.pureWhite,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Column(
+                      children: splitAccountNameIntoWords.map((word) => Text(
+                        word,
+                        style: TextStyle(
+                          fontWeight: AppFontWeight.bold,
+                          fontSize: AppFontSize.size14,
+                          fontFamily: GoogleFonts.alegreyaSans().fontFamily,
+                          color: AppColors.lightBlack,
+                        ),
+                      )).toList(),
+                    ),
+                    const SizedBox(height: 20,)
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+
+  Widget _buildRecentsCard(BuildContext context) {
+    List<DummyBank> firstFourBanks = dummyBanks.take(4).toList();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6.0),
       child: Card(
@@ -312,11 +410,11 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                 children: [
                   const Expanded(
                     child: Text(
-                      'Beneficiaries',
+                      'Recents',
                       style: TextStyle(
                         color: AppColors.lightGreen,
                         fontWeight: AppFontWeight.bold,
-                        fontSize: AppFontSize.size12,
+                        fontSize: AppFontSize.size14,
                       ),
                     ),
                   ),
@@ -331,7 +429,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                           style: TextStyle(
                             color: AppColors.lightGrey,
                             fontWeight: AppFontWeight.bold,
-                            fontSize: AppFontSize.size12,
+                            fontSize: AppFontSize.size14,
                           ),
                         ),
                         SizedBox(width: 10),
@@ -346,52 +444,63 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                 ],
               ),
             ),
-            Column(
-              children: List<Widget>.generate(
-                beneficiaries.length * 2 - 1,
-                    (index) {
-                  if (index.isOdd) {
-                    return const Padding(
-                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                      child: Divider(
-                        height: 0.5,
-                        color: AppColors.darkWhite,
-                        thickness: 2,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: firstFourBanks.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final transaction = entry.value;
+                  final bankLogo = transaction.logo;
+                  final accountName = transaction.accountName;
+                  return Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          final selectedBank = firstFourBanks[index];
+                          final beneficiaryDetails = BeneficiaryDetailsScreen(bank: selectedBank);
+                          Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => beneficiaryDetails),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              bankLogo,
+                              width: 40,
+                              height: 40,
+                              fit: BoxFit.cover,
+                            ),
+                            const SizedBox(width: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  accountName,
+                                  style: TextStyle(
+                                    fontWeight: AppFontWeight.bold,
+                                    fontSize: AppFontSize.size14,
+                                    fontFamily: GoogleFonts.alegreyaSans().fontFamily,
+                                    color: AppColors.lightBlack,
+                                  ),
+                                ),
+                                Text(
+                                  transaction.name,
+                                  style: TextStyle(
+                                    fontWeight: AppFontWeight.light,
+                                    fontSize: AppFontSize.size14,
+                                    fontFamily: GoogleFonts.alegreyaSans().fontFamily,
+                                    color: AppColors.lightBlack,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    );
-                  } else {
-                    final int beneficiaryIndex = index ~/ 2;
-                    if (beneficiaryIndex < beneficiaries.length) {
-                      DummyBank beneficiary = beneficiaries[beneficiaryIndex];
-                      return ListTile(
-                        leading: SizedBox(
-                          width: 30.0,
-                          height: 30.0,
-                          child: Image.asset(
-                            beneficiary.logo,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                        title: Text(
-                          beneficiary.accountName,
-                          style: const TextStyle(
-                            fontWeight: AppFontWeight.bold,
-                            fontSize: AppFontSize.size14,
-                          ),
-                        ),
-                        subtitle: Text(
-                          beneficiary.name,
-                          style: const TextStyle(
-                            color: AppColors.lightGreen,
-                            fontSize: AppFontSize.size12,
-                          ),
-                        ),
-                      );
-                    } else {
-                      return const SizedBox.shrink();
-                    }
-                  }
-                },
+                      const Divider(),
+                    ],
+                  );
+                }).toList(),
               ),
             ),
           ],
@@ -420,7 +529,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
         labelStyle: const TextStyle(
           color: AppColors.darkWhite,
           fontWeight: AppFontWeight.bold,
-          fontSize: AppFontSize.size16,
+          fontSize: AppFontSize.size14,
         ),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
@@ -472,7 +581,8 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
               setState(() {});
             });
           }
-        });
+        }
+        );
       },
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -514,27 +624,18 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   Widget _buildProcessingCircle() {
     return Visibility(
       visible: _showProcessingCircle,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 50),
-        child: Column(
-          children: [
-            const Center(
-              child: SizedBox(
-                width: 20.0,
-                height: 20.0,
-                child: CircularProgressIndicator(),
-              ),
+      child: Column(
+        children: [
+          const ProcessingBar(),
+          Text(
+            _userName,
+            style: const TextStyle(
+              color: AppColors.lightGreen,
+              fontWeight: AppFontWeight.bold,
+              fontSize: AppFontSize.size16,
             ),
-            Text(
-              _userName,
-              style: const TextStyle(
-                color: AppColors.lightGreen,
-                fontWeight: AppFontWeight.bold,
-                fontSize: AppFontSize.size16,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -560,7 +661,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
 
   Widget _buildNextTextButton() {
     bool isButtonDisabled = !_bankSelected || _isAccountNumberErrorVisible || _isAccountNumberLengthInvalid;
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Center(
@@ -570,14 +670,16 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
           child: ElevatedButton(
             onPressed: isButtonDisabled ? null : () {
               if (_bankSelected) {
-                final selectedBank = dummyBanks.firstWhere((bank) => bank.name == _selectedBankController.text);
+                final selectedBank = dummyBanks.firstWhere((bank) =>
+                bank.name == _selectedBankController.text);
                 if (selectedBank != null) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BeneficiaryDetailsScreen(
-                        bank: selectedBank,
-                      ),
+                      builder: (context) =>
+                          BeneficiaryDetailsScreen(
+                            bank: selectedBank,
+                          ),
                     ),
                   );
                 } else {}
@@ -605,13 +707,40 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildRecipientCard(context),
-            _buildBeneficiariesCard(context),
-          ],
-        ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                _buildProcessingCircle(),
+                _buildRecipientCard(context),
+                _buildBeneficiary(context),
+                _buildRecentsCard(context),
+              ],
+            ),
+          ),
+          if (_showProcessingCircle)
+            Container(
+              color: AppColors.pureWhite.withOpacity(0.5),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Center(
+                child: Column(
+                  children: [
+                    const ProcessingBar(),
+                    Text(
+                      _userName,
+                      style: const TextStyle(
+                        color: AppColors.lightGreen,
+                        fontWeight: AppFontWeight.bold,
+                        fontSize: AppFontSize.size16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: _currentIndex,
