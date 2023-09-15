@@ -353,6 +353,8 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                       builder: (context) => BeneficiaryDetailPage(
                         circleColor: randomColor,
                         accountName: transaction.accountName,
+                        logo: transaction.logo,
+                        accountNumber: transaction.accountNumber,
                       ),
                     ),
                   );
