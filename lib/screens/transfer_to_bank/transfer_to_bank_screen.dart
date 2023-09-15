@@ -8,7 +8,8 @@ import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 
 import '../../views/auth_view/processing_bar.dart';
 import '../../views/custom/custom_bottom_bar_navigation.dart';
-import 'beneficial_detail.dart';
+import 'BeneficiaryDetailPage.dart';
+import 'send_money.dart';
 
 class TransferToBankScreen extends StatefulWidget {
   const TransferToBankScreen({Key? key}) : super(key: key);
@@ -345,7 +346,15 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
               final splitAccountNameIntoWords = transaction.accountName.split(' ');
               return GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context,  "/show_all_beneficiaries");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BeneficiaryDetailPage(
+                        circleColor: randomColor,
+                        accountName: transaction.accountName,
+                      ),
+                    ),
+                  );
                 },
                 child: Column(
                   children: [
@@ -455,7 +464,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                       GestureDetector(
                         onTap: () {
                           final selectedBank = firstFourBanks[index];
-                          final beneficiaryDetails = BeneficiaryDetailsScreen(bank: selectedBank);
+                          final beneficiaryDetails = SendMoneyScreen(bank: selectedBank);
                           Navigator.push(
                             context, MaterialPageRoute(builder: (context) => beneficiaryDetails),
                           );
@@ -675,7 +684,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          BeneficiaryDetailsScreen(
+                          SendMoneyScreen(
                             bank: selectedBank,
                           ),
                     ),
