@@ -1,9 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
-
-import '../../controllers/auth/login_controller.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -13,8 +12,34 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final controller = LoginController();
   bool _obscurePassword = true;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  Dio dio = Dio();
+
+  // Add a variable to store the error message.
+  String errorMessage = "";
+
+  void login(String username, String password) async {
+    try {
+      Response response = await dio.post(
+        "https://dzbilqfc4qszv.cloudfront.net/auth/login",
+        data: {
+          "username": username,
+          "password": password,
+        },
+      );
+
+      if (response.statusCode == 200) {}
+    } catch (e) {
+      print(e.toString());
+      setState(() {
+        errorMessage = "Login Failed, please try again.";
+      });
+    }
+  }
 
   Widget _buildLogo() {
     return Image.asset(
@@ -44,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildTextField(String hintText, TextEditingController controller, ValueChanged<String>? onChanged, bool isPassword, bool isVisible, void Function() toggleVisibility, String? errorText) {
+  Widget _buildTextField(String hintText, TextEditingController controller, bool isPassword, bool isVisible, void Function() toggleVisibility) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -59,7 +84,6 @@ class _LoginScreenState extends State<LoginScreen> {
         TextFormField(
           decoration: InputDecoration(
             hintText: 'Enter $hintText',
-            errorText: errorText,
             filled: true,
             fillColor: AppColors.pureWhite,
             border: OutlineInputBorder(
@@ -79,7 +103,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           textCapitalization: TextCapitalization.none,
           textInputAction: TextInputAction.next,
-          onChanged: onChanged,
           keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.text,
           obscureText: isPassword && !_obscurePassword,
           controller: controller,
@@ -113,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
       alignment: Alignment.centerLeft,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.of(context).pushReplacementNamed('/home');
+          login(emailController.text.toString(), passwordController.text.toString());
         },
         child: const Text(
           'Sign in',
@@ -161,35 +184,31 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 10),
                 _buildTextField(
                   "Username",
-                  controller.userNameController,
-                  controller.clearUserNameError,
-                  false, false, () {},
-                  controller.userNameError.isEmpty ? null : controller.userNameError,
+                  emailController,
+                  false,
+                  false,
+                      (){},
                 ),
                 const SizedBox(height: 20),
                 _buildTextField(
                   "Password",
-                  controller.passwordController,
-                      (value) {
-                    if (value.isNotEmpty) {
-                      setState(() {
-                        _obscurePassword = true;
-                      });
-                    } else {
-                      setState(() {
-                        _obscurePassword = false;
-                      });
-                    }
-                  }, true,
-                  _obscurePassword, () {
-                    setState(() {
-                      _obscurePassword = !_obscurePassword;
-                    });
-                  },
-                  controller.passwordError.isEmpty ? null : controller.passwordError,
+                  passwordController,
+                  false,
+                  false,
+                      (){},
                 ),
                 _buildForgotPasswordButton(),
-                const SizedBox(height: 20),
+                // const SizedBox(height: 20),
+                Center(
+                  child: Text(
+                    errorMessage,
+                    style: const TextStyle(
+                      fontWeight: AppFontWeight.bold,
+                      color: AppColors.errorRed,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10,),
                 _buildSignInButton(context),
                 const SizedBox(height: 60),
                 _buildRequestForPOS(),
