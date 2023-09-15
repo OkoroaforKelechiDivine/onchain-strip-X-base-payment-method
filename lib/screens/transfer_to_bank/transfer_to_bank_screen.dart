@@ -8,6 +8,7 @@ import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 
 import '../../views/auth_view/processing_bar.dart';
 import '../../views/custom/custom_bottom_bar_navigation.dart';
+import '../transaction_history/repeat_transaction.dart';
 import 'BeneficiaryDetailPage.dart';
 import 'send_money.dart';
 
@@ -400,7 +401,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
     );
   }
 
-
   Widget _buildRecentsCard(BuildContext context) {
     List<DummyBank> firstFourBanks = dummyBanks.take(4).toList();
     return Padding(
@@ -455,57 +455,72 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: firstFourBanks.asMap().entries.map((entry) {
-                  final index = entry.key;
                   final transaction = entry.value;
                   final bankLogo = transaction.logo;
                   final accountName = transaction.accountName;
-                  return Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          final selectedBank = firstFourBanks[index];
-                          final beneficiaryDetails = SendMoneyScreen(bank: selectedBank);
-                          Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => beneficiaryDetails),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              bankLogo,
-                              width: 40,
-                              height: 40,
-                              fit: BoxFit.cover,
+                  return Card(
+                    elevation: 0,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RepeatTransactionScreen(
+                              amount: "",
+                              transactionTimestamp: DateTime.now(),
+                              accountName: "",
+                              description: "",
+                              isSent: false,
                             ),
-                            const SizedBox(width: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
+                        );
+                      },
+                      child: Container(
+                        color: AppColors.lightBlue,
+                        child: Column(
+                          children: [
+                            Row(
                               children: [
-                                Text(
-                                  accountName,
-                                  style: TextStyle(
-                                    fontWeight: AppFontWeight.bold,
-                                    fontSize: AppFontSize.size14,
-                                    fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-                                    color: AppColors.lightBlack,
-                                  ),
+                                Image.asset(
+                                  bankLogo,
+                                  width: 40,
+                                  height: 40,
+                                  fit: BoxFit.cover,
                                 ),
-                                Text(
-                                  transaction.name,
-                                  style: TextStyle(
-                                    fontWeight: AppFontWeight.light,
-                                    fontSize: AppFontSize.size14,
-                                    fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-                                    color: AppColors.lightBlack,
-                                  ),
+                                const SizedBox(width: 10),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      accountName,
+                                      style: TextStyle(
+                                        fontWeight: AppFontWeight.bold,
+                                        fontSize: AppFontSize.size14,
+                                        fontFamily: GoogleFonts.alegreyaSans().fontFamily,
+                                        color: AppColors.lightBlack,
+                                      ),
+                                    ),
+                                    Text(
+                                      transaction.name,
+                                      style: TextStyle(
+                                        fontWeight: AppFontWeight.light,
+                                        fontSize: AppFontSize.size14,
+                                        fontFamily: GoogleFonts.alegreyaSans().fontFamily,
+                                        color: AppColors.lightBlack,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
+                            ),
+                            const Divider(
+                              height: 30,
+                              thickness: 1,
                             ),
                           ],
                         ),
                       ),
-                      const Divider(),
-                    ],
+                    ),
                   );
                 }).toList(),
               ),
