@@ -7,14 +7,14 @@ import 'package:pay_me_mobile/views/auth_view/processing_bar.dart';
 import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
 
-class PinCodeScreen extends StatefulWidget {
-  const PinCodeScreen({Key? key}) : super(key: key);
+class PassCodeScreen extends StatefulWidget {
+  const PassCodeScreen({Key? key}) : super(key: key);
 
   @override
-  State<PinCodeScreen> createState() => _PinCodeScreenState();
+  State<PassCodeScreen> createState() => _PassCodeScreenState();
 }
 
-class _PinCodeScreenState extends State<PinCodeScreen> {
+class _PassCodeScreenState extends State<PassCodeScreen> {
   List<String> enteredDigits = [];
   bool isProcessing = false;
 
@@ -52,9 +52,7 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
       body: Stack(
         children: [
           BackdropFilter(
-            filter: isProcessing
-                ? ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0)
-                : ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
+            filter: isProcessing ? ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0) : ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
             child: Container(
               color: Colors.transparent,
               width: double.infinity,
@@ -65,7 +63,7 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       if (isProcessing)
-                       const ProcessingBar(),
+                        const ProcessingBar(),
                       _buildLogo(),
                       _buildWelcomeText(),
                       Keypad(
@@ -112,7 +110,7 @@ class Keypad extends StatelessWidget {
   final Function(String) onButtonPressed;
   final List<String> enteredDigits;
 
-  Keypad({required this.onButtonPressed, required this.enteredDigits});
+  const Keypad({super.key, required this.onButtonPressed, required this.enteredDigits});
 
   @override
   Widget build(BuildContext context) {
