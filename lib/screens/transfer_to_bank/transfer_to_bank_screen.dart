@@ -343,7 +343,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
               final firstLetter = transaction.accountName.isNotEmpty ? transaction.accountName[0].toUpperCase() : '';
               final randomColor = Color(0xFF000000 + Random().nextInt(0xFFFFFF));
               final splitAccountNameIntoWords = transaction.accountName.split(' ');
-
               return GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context,  "/show_all_beneficiaries");
