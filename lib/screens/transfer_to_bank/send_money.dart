@@ -7,16 +7,16 @@ import '../../app_config/manager/theme_manager.dart';
 import '../../views/custom/custom_dynamic_label_textfield.dart';
 import '../../views/custom/custom_underline.dart';
 
-class BeneficiaryDetailsScreen extends StatefulWidget {
+class SendMoneyScreen extends StatefulWidget {
   final DummyBank bank;
 
-  const BeneficiaryDetailsScreen({Key? key, required this.bank}) : super(key: key);
+  const SendMoneyScreen({Key? key, required this.bank}) : super(key: key);
 
   @override
-  _BeneficiaryDetailsScreenState createState() => _BeneficiaryDetailsScreenState();
+  _SendMoneyScreenState createState() => _SendMoneyScreenState();
 }
 
-class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
+class _SendMoneyScreenState extends State<SendMoneyScreen> {
   final TextEditingController amountController = TextEditingController();
   final TextEditingController narrationController = TextEditingController();
 
