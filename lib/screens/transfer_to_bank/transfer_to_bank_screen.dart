@@ -632,7 +632,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
             style: const TextStyle(
               color: AppColors.lightGreen,
               fontWeight: AppFontWeight.bold,
-              fontSize: AppFontSize.size16,
+              fontSize: AppFontSize.size14,
             ),
           ),
         ],
@@ -694,7 +694,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
               style: TextStyle(
                 fontWeight: AppFontWeight.bold,
                 color: AppColors.pureWhite,
-                fontSize: AppFontSize.size16,
+                fontSize: AppFontSize.size14,
               ),
             ),
           ),
@@ -733,7 +733,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                       style: const TextStyle(
                         color: AppColors.lightGreen,
                         fontWeight: AppFontWeight.bold,
-                        fontSize: AppFontSize.size16,
+                        fontSize: AppFontSize.size14,
                       ),
                     ),
                   ],
