@@ -10,7 +10,7 @@ import 'package:pay_me_mobile/screens/transaction_history/repeat_transaction.dar
 import 'package:pay_me_mobile/screens/transaction_history/transaction_details.dart';
 import 'package:pay_me_mobile/screens/transaction_history/transaction_history.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/send_money.dart';
-import 'package:pay_me_mobile/screens/transfer_to_bank/show_all_beneficiaries.dart';
+import 'package:pay_me_mobile/screens/transfer_to_bank/show_all_recent_transaction.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.dart';
 import 'package:pay_me_mobile/views/auth_view/login_view.dart';
 import 'package:pay_me_mobile/views/custom/show_pin_dialog.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         "/raise_payment": (context) => const RaisePaymentScreen(),
         "/buy_power": (context) => const BuyPowerScreen(),
         "/transfer": (context) => const TransferToBankScreen(),
-        "/show_all_beneficiaries": (context) => ShowAllBeneficiariesScreen(banks: dummyBanks),
+        "/show_all_beneficiaries": (context) => ShowAllRecentTransactionsScreen(banks: dummyBanks),
         "/pin_dialog": (context) {
           final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
           final amount = double.tryParse(args['amount'].replaceAll('₦', '').replaceAll(',', '').trim()) ?? 0.0;
