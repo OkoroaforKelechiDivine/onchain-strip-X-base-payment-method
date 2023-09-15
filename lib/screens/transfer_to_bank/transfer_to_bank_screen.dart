@@ -8,7 +8,6 @@ import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 
 import '../../views/auth_view/processing_bar.dart';
 import '../../views/custom/custom_bottom_bar_navigation.dart';
-import '../transaction_history/transaction_details.dart';
 import 'beneficial_detail.dart';
 
 class TransferToBankScreen extends StatefulWidget {
