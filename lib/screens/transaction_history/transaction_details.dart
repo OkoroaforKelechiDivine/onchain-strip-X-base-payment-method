@@ -170,9 +170,9 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
           child: Container(
             color: AppColors.deepWhite,
             padding: const EdgeInsets.all(16),
-            child: const Center(
+            child:  Center(
               child: Column(
-                children: [
+                children: const [
                   Text('Share Receipt',
                       style: TextStyle(
                           fontSize: AppFontSize.size20,

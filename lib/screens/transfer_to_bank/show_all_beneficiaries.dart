@@ -15,10 +15,10 @@ class ShowAllBeneficiariesScreen extends StatelessWidget {
       child: AppBar(
         title: null,
         leading: const BackButton(),
-        flexibleSpace: const Column(
+        flexibleSpace:  Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [
+          children: const [
             Padding(
               padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
               child: Text(

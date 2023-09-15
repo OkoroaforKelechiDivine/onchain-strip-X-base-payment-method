@@ -324,8 +324,8 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                     onTap: () {
                       Navigator.pushNamed(context, "/show_all_beneficiaries");
                     },
-                    child: const Row(
-                      children: [
+                    child: Row(
+                      children: const [
                         Text(
                           'View All',
                           style: TextStyle(

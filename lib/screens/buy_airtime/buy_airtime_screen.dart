@@ -135,11 +135,11 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
   }
 
   Widget _buildAmountInfo() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0,),
+    return  Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0,),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: const [
           Text(
             'Amount',
             style: TextStyle(

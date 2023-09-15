@@ -211,8 +211,8 @@ class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
     if (widget.status == 'Approved') {
       return Container();
     } else if (widget.status == 'Declined') {
-      return const Row(
-        children: [
+      return  Row(
+        children: const [
           Padding(
             padding: EdgeInsets.only(right: 200, bottom: 20),
             child: Text(

@@ -132,7 +132,7 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
   }
 
   Widget buildSendMoneySection() {
-    return const Column(
+    return Column(
       children: [
         Align(
           alignment: Alignment.centerLeft,

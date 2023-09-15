@@ -57,8 +57,8 @@ class _RaisePaymentScreenState extends State<RaisePaymentScreen> {
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(0),
                     ),
-                    child: const Row(
-                      children: [
+                    child: Row(
+                      children: const [
                         Padding(
                           padding: EdgeInsets.only(left: 15.0),
                           child: Text(
