@@ -16,6 +16,7 @@ dependencies:
   google_fonts: ^4.0.1
   intl:
   grouped_list:
+  http: ^1.1.0
 
 
 
