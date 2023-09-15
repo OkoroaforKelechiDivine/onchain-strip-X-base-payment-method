@@ -6,7 +6,7 @@ import '../../views/auth_view/login_view.dart';
 class SplashController {
   void initialize(BuildContext context) {
     Timer(const Duration(milliseconds: 900), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => const PassCodeScreen()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => const LoginScreen()));
     });
   }
 }
