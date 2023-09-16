@@ -19,7 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Dio dio = Dio();
 
-  // Add a variable to store the error message.
   String errorMessage = "";
 
   void login(String username, String password) async {
@@ -34,7 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (response.statusCode == 200) {}
     } catch (e) {
-      print(e.toString());
       setState(() {
         errorMessage = "Login Failed, please try again.";
       });
@@ -175,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             child: ListView(
               children: [
-                const SizedBox(height: 100,),
+                const SizedBox(height: 100),
                 _buildLogo(),
                 const SizedBox(height: 30),
                 _buildWelcomeText(),
