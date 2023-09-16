@@ -12,14 +12,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _obscurePassword = true;
+  final bool _obscurePassword = true;
+  Dio dio = Dio();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  Dio dio = Dio();
-
-  String errorMessage = "";
+  String message = "";
 
   void login(String username, String password) async {
     try {
@@ -34,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response.statusCode == 200) {}
     } catch (e) {
       setState(() {
-        errorMessage = "Login Failed, please try again.";
+        message = "Login Failed, please try again.";
       });
     }
   }
@@ -96,8 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 isVisible ? Icons.visibility_off : Icons.visibility,
                 color: AppColors.lightBlack,
               ),
-            )
-                : null,
+            ) : null,
           ),
           textCapitalization: TextCapitalization.none,
           textInputAction: TextInputAction.next,
@@ -185,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   emailController,
                   false,
                   false,
-                      (){},
+                      (){}
                 ),
                 const SizedBox(height: 20),
                 _buildTextField(
@@ -193,20 +190,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   passwordController,
                   false,
                   false,
-                      (){},
+                      (){}
                 ),
                 _buildForgotPasswordButton(),
-                // const SizedBox(height: 20),
                 Center(
                   child: Text(
-                    errorMessage,
+                    message,
                     style: const TextStyle(
                       fontWeight: AppFontWeight.bold,
                       color: AppColors.errorRed,
                     ),
                   ),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(height: 10),
                 _buildSignInButton(context),
                 const SizedBox(height: 60),
                 _buildRequestForPOS(),
