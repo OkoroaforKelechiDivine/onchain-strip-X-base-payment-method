@@ -1,8 +1,11 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+
+import 'connectivity.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -20,6 +23,14 @@ class _LoginScreenState extends State<LoginScreen> {
   String message = "";
 
   void login(String username, String password) async {
+    final connectivityResult = await ConnectivityUtil.checkConnectivity();
+
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        message = "Network problem. Please check your internet connection.";
+      });
+      return;
+    }
     try {
       Response response = await dio.post(
         "https://dzbilqfc4qszv.cloudfront.net/auth/login",

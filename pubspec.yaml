@@ -17,6 +17,8 @@ dependencies:
   intl:
   grouped_list:
   dio:
+  connectivity:
+
 
 
 
