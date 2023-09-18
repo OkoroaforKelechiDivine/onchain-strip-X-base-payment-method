@@ -34,7 +34,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     'History',
     'Airtime',
     'Power',
-    'TV',
+    'Cable TV',
     'More',
   ];
 
