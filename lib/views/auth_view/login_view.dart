@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final bool _obscurePassword = true;
   Dio dio = Dio();
 
-  TextEditingController emailController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String message = "";
 
@@ -29,7 +29,9 @@ class _LoginScreenState extends State<LoginScreen> {
         },
       );
 
-      if (response.statusCode == 200) {}
+      if (response.statusCode == 200) {
+        Navigator.pushNamed(context, "/pass_code");
+      }
     } catch (e) {
       setState(() {
         message = "Login Failed, please try again.";
@@ -73,7 +75,11 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.centerLeft,
           child: Text(
             hintText,
-            style: const TextStyle(color: AppColors.lightBlack, fontSize: AppFontSize.size16, fontWeight: AppFontWeight.light),
+            style: const TextStyle(
+                color: AppColors.lightBlack,
+                fontSize: AppFontSize.size16,
+                fontWeight: AppFontWeight.light
+            ),
           ),
         ),
         const SizedBox(height: 5),
@@ -131,7 +137,10 @@ class _LoginScreenState extends State<LoginScreen> {
       alignment: Alignment.centerLeft,
       child: ElevatedButton(
         onPressed: () {
-          login(emailController.text.toString(), passwordController.text.toString());
+          login(
+              userNameController.text.toString(),
+              passwordController.text.toString()
+          );
         },
         child: const Text(
           'Sign in',
@@ -164,50 +173,47 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          color: AppColors.pureWhite,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            child: ListView(
-              children: [
-                const SizedBox(height: 100),
-                _buildLogo(),
-                const SizedBox(height: 30),
-                _buildWelcomeText(),
-                const SizedBox(height: 25),
-                _buildLockImage(),
-                const SizedBox(height: 10),
-                _buildTextField(
-                  "Username",
-                  emailController,
-                  false,
-                  false,
-                      (){}
-                ),
-                const SizedBox(height: 20),
-                _buildTextField(
-                  "Password",
-                  passwordController,
-                  false,
-                  false,
-                      (){}
-                ),
-                _buildForgotPasswordButton(),
-                Center(
-                  child: Text(
-                    message,
-                    style: const TextStyle(
-                      fontWeight: AppFontWeight.bold,
-                      color: AppColors.errorRed,
-                    ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: ListView(
+            children: [
+              const SizedBox(height: 50),
+              _buildLogo(),
+              const SizedBox(height: 30),
+              _buildWelcomeText(),
+              const SizedBox(height: 25),
+              _buildLockImage(),
+              const SizedBox(height: 10),
+              _buildTextField(
+                "Username",
+                userNameController,
+                false,
+                false,
+                    (){}
+              ),
+              const SizedBox(height: 20),
+              _buildTextField(
+                "Password",
+                passwordController,
+                false,
+                false,
+                    (){}
+              ),
+              _buildForgotPasswordButton(),
+              Center(
+                child: Text(
+                  message,
+                  style: const TextStyle(
+                    fontWeight: AppFontWeight.light,
+                    color: AppColors.errorRed,
                   ),
                 ),
-                const SizedBox(height: 10),
-                _buildSignInButton(context),
-                const SizedBox(height: 60),
-                _buildRequestForPOS(),
-              ],
-            ),
+              ),
+              const SizedBox(height: 10),
+              _buildSignInButton(context),
+              const SizedBox(height: 60),
+              _buildRequestForPOS(),
+            ],
           ),
         ),
       ),
