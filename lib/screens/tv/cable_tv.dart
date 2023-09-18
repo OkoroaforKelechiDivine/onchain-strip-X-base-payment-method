@@ -4,7 +4,6 @@ import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
 import '../../views/custom/custom_amount_input_field.dart';
 import '../../views/custom/custom_bottom_bar_navigation.dart';
-import '../../views/custom/show_pin_dialog.dart';
 
 class CableTvScreen extends StatefulWidget {
   const CableTvScreen({super.key});
@@ -370,9 +369,12 @@ class _CableTvScreenState extends State<CableTvScreen> {
     return Padding(
       padding: const EdgeInsets.only(left: 120.0, right: 120.0, top: 50),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed('/confirm_page');
+        },
         child: const Text("Next", style: TextStyle(color: AppColors.pureWhite)),
       ),
     );
   }
+
 }
