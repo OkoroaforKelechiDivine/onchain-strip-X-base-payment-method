@@ -219,7 +219,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
         ),
         child: DropdownButtonFormField<String>(
           decoration: InputDecoration(
-            hintText: "Choose Electricity Provider",
+            hintText: "Choose TV Provider",
             hintStyle: const TextStyle(
               color: AppColors.lightGrey,
               fontSize: AppFontSize.size14,
