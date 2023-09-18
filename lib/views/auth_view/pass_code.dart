@@ -17,6 +17,7 @@ class PassCodeScreen extends StatefulWidget {
 class _PassCodeScreenState extends State<PassCodeScreen> {
   List<String> enteredDigits = [];
   bool isProcessing = false;
+  bool isError = false;
 
   void _onButtonPressed(String buttonText) {
     if (buttonText == 'Delete') {
@@ -41,10 +42,29 @@ class _PassCodeScreenState extends State<PassCodeScreen> {
   }
 
   void _startProcessingAndNavigate() {
-    Future.delayed(const Duration(seconds: 5), () {
-      Navigator.of(context).pushReplacementNamed("/home");
-    });
+    final enteredPasscode = enteredDigits.join();
+    if (enteredPasscode != '123456') {
+      setState(() {
+        isProcessing = true;
+      });
+
+      Future.delayed(const Duration(seconds: 2), () {
+        setState(() {
+          isProcessing = false;
+          isError = true;
+        });
+      });
+    } else {
+      setState(() {
+        isProcessing = true;
+      });
+
+      Future.delayed(const Duration(seconds: 5), () {
+        Navigator.of(context).pushReplacementNamed("/home");
+      });
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +86,14 @@ class _PassCodeScreenState extends State<PassCodeScreen> {
                         const ProcessingBar(),
                       _buildLogo(),
                       _buildWelcomeText(),
+                      if (isError)
+                        const Text(
+                          'Incorrect passcode. Please try again.',
+                          style: TextStyle(
+                            color: AppColors.errorRed,
+                            fontSize: 16.0,
+                          ),
+                        ),
                       Keypad(
                         enteredDigits: enteredDigits,
                         onButtonPressed: _onButtonPressed,
