@@ -20,7 +20,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
   TextEditingController amountController = TextEditingController();
   int _currentIndex = 3;
 
-  List<DropdownMenuItem<String>> cableTvProviderItems = [
+  List<DropdownMenuItem<String>> cableTvBiller = [
     const DropdownMenuItem<String>(
       value: "Provider 1",
       child: Text("Provider 1"),
@@ -237,7 +237,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
               selectedCableTvProvider = newValue;
             });
           },
-          items: cableTvProviderItems,
+          items: cableTvBiller,
         ),
       ),
     );
@@ -370,19 +370,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
     return Padding(
       padding: const EdgeInsets.only(left: 120.0, right: 120.0, top: 50),
       child: ElevatedButton(
-        onPressed: () {
-          String enteredAmount = amountController.text;
-          enteredAmount = enteredAmount.replaceAll("₦", "").replaceAll(",", "");
-
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => PinDialog(
-                amount: double.parse(enteredAmount),
-                accountName: "",
-              ),
-            ),
-          );
-        },
+        onPressed: () {},
         child: const Text("Next", style: TextStyle(color: AppColors.pureWhite)),
       ),
     );
