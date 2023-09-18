@@ -80,7 +80,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
             const SizedBox(height: 10),
             _buildPackage(),
             const SizedBox(height: 10),
-            _buildMeterName(),
+            _buildDecoderName(),
             _buildNextButton(),
           ],
         ),
@@ -115,7 +115,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
               ),
             ),
           ),
-          _buildElectricityProviderDropdown(),
+          _buildTVProviderDropdown(),
         ],
       ),
     );
@@ -146,7 +146,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
     );
   }
 
-  Widget _buildMeterName() {
+  Widget _buildDecoderName() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -165,7 +165,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
               ),
             ),
           ),
-          _buildElectricityProviderTextField(),
+          _buildTVProviderTextField(),
           const SizedBox(height: 10),
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -200,7 +200,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
     );
   }
 
-  Widget _buildElectricityProviderDropdown() {
+  Widget _buildTVProviderDropdown() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       child: Container(
@@ -242,7 +242,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
     );
   }
 
-  Widget _buildElectricityProviderTextField() {
+  Widget _buildTVProviderTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       child: Container(
@@ -367,14 +367,19 @@ class _CableTvScreenState extends State<CableTvScreen> {
 
   Padding _buildNextButton() {
     return Padding(
-      padding: const EdgeInsets.only(left: 120.0, right: 120.0, top: 50),
+      padding: const EdgeInsets.only(left: 120, right: 120, top: 50),
       child: ElevatedButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/confirm_page');
+          String enteredAmount = amountController.text;
+          Navigator.of(context).pushNamed('/confirm_page', arguments: enteredAmount);
         },
-        child: const Text("Next", style: TextStyle(color: AppColors.pureWhite)),
+        child: const Text(
+          "Next",
+          style: TextStyle(
+            color: AppColors.pureWhite,
+          ),
+        ),
       ),
     );
   }
-
 }
