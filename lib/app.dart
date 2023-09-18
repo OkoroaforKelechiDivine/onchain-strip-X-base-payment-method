@@ -15,6 +15,7 @@ import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.d
 import 'package:pay_me_mobile/screens/tv/cable_tv.dart';
 import 'package:pay_me_mobile/views/auth_view/login_view.dart';
 import 'package:pay_me_mobile/views/auth_view/pass_code.dart';
+import 'package:pay_me_mobile/views/custom/confirm_page.dart';
 import 'package:pay_me_mobile/views/custom/show_pin_dialog.dart';
 
 import 'app_config/manager/theme_manager.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
             accountName: args['accountName'],
           );
         },
+        "/confirm_page": (context) => const ConfirmPaymentScreen(),
         "/cable_tv": (context) => const CableTvScreen(),
         "/pass_code": (context) => const PassCodeScreen(),
         "/beneficiary_details": (context) {
