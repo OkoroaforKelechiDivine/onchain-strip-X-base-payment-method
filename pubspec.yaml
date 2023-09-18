@@ -19,6 +19,9 @@ dependencies:
   dio:
   connectivity:
   provider:
+  jwt_decoder:
+  shared_preferences:
+
 
 dev_dependencies:
   flutter_test:
