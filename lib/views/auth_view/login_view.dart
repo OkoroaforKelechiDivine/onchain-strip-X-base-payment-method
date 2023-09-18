@@ -2,9 +2,13 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../token/UserToken.dart';
 import 'connectivity.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,7 +21,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final bool _obscurePassword = true;
   Dio dio = Dio();
-
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String message = "";
@@ -41,7 +44,9 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       if (response.statusCode == 200) {
-        Navigator.pushNamed(context, "/pass_code");
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setBool('hasLoggedIn', true);
+        Navigator.pushReplacementNamed(context, "/pass_code");
       }
     } catch (e) {
       setState(() {
