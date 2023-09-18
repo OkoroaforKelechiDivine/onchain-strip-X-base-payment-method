@@ -16,13 +16,13 @@ class CableTvScreen extends StatefulWidget {
 }
 
 class _CableTvScreenState extends State<CableTvScreen> {
-  String? selectedElectricityProvider;
-  String? selectedPackage;
-  TextEditingController electricityProviderController = TextEditingController();
+  String? selectedCableTvProvider;
+  String? selectedCableTvPackage;
+  TextEditingController cableTvProviderController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   int _currentIndex = 3;
 
-  List<DropdownMenuItem<String>> electricityProviderItems = [
+  List<DropdownMenuItem<String>> cableTvProviderItems = [
     const DropdownMenuItem<String>(
       value: "Provider 1",
       child: Text("Provider 1"),
@@ -41,7 +41,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
     ),
   ];
 
-  List<DropdownMenuItem<String>> packageItems = [
+  List<DropdownMenuItem<String>> cableTvPackageItems = [
     const DropdownMenuItem<String>(
       value: "Package 1",
       child: Text("Package 1"),
@@ -233,13 +233,13 @@ class _CableTvScreenState extends State<CableTvScreen> {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          value: selectedElectricityProvider,
+          value: selectedCableTvProvider,
           onChanged: (newValue) {
             setState(() {
-              selectedElectricityProvider = newValue;
+              selectedCableTvProvider = newValue;
             });
           },
-          items: electricityProviderItems,
+          items: cableTvProviderItems,
         ),
       ),
     );
@@ -260,7 +260,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
           ],
         ),
         child: TextField(
-          controller: electricityProviderController,
+          controller: cableTvProviderController,
           decoration: InputDecoration(
             hintText: "Enter Decoder Number",
             hintStyle: const TextStyle(
@@ -311,13 +311,13 @@ class _CableTvScreenState extends State<CableTvScreen> {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          value: selectedPackage,
+          value: selectedCableTvPackage,
           onChanged: (newValue) {
             setState(() {
-              selectedPackage = newValue;
+              selectedCableTvPackage = newValue;
             });
           },
-          items: packageItems,
+          items: cableTvPackageItems,
         ),
       ),
     );
