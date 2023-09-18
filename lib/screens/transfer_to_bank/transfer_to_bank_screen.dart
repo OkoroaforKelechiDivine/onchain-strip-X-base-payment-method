@@ -52,7 +52,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   bool _isAccountNumberLengthInvalid = false;
   String _userName = '';
   String _selectedBankLogo = '';
-  bool _showProcessingCircle = false;
+  bool _showLinearProcessing = false;
   int _currentIndex = 0;
 
   final TextEditingController _selectedBankController = TextEditingController();
@@ -588,7 +588,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
             _isAccountNumberLengthInvalid = true;
             _userName = '';
           } else {
-            _showProcessingCircle = true;
+            _showLinearProcessing = true;
             _isAccountNumberErrorVisible = false;
             _isAccountNumberLengthInvalid = false;
             Future.delayed(const Duration(seconds: 3), () {
@@ -600,7 +600,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                 _isAccountNumberErrorVisible = true;
                 _userName = 'Account not found';
               } finally {
-                _showProcessingCircle = false;
+                _showLinearProcessing = false;
               }
               setState(() {});
             });
@@ -647,7 +647,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
 
   Widget _buildProcessingCircle() {
     return Visibility(
-      visible: _showProcessingCircle,
+      visible: _showLinearProcessing,
       child: Column(
         children: [
           const ProcessingBar(),
@@ -743,7 +743,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
               ],
             ),
           ),
-          if (_showProcessingCircle)
+          if (_showLinearProcessing)
             Container(
               color: AppColors.pureWhite.withOpacity(0.5),
               width: MediaQuery.of(context).size.width,
@@ -757,7 +757,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                       style: const TextStyle(
                         color: AppColors.lightGreen,
                         fontWeight: AppFontWeight.bold,
-                        fontSize: AppFontSize.size14,
+                        fontSize: AppFontSize.size12,
                       ),
                     ),
                   ],
