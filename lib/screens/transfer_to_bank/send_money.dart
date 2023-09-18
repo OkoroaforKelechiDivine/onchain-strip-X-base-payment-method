@@ -205,11 +205,12 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
             hintText: 'Enter Narration',
             labelStyle: const TextStyle(color: AppColors.lightGrey, fontSize: AppFontSize.size16),
             filled: true,
-            fillColor: AppColors.lightBlue,
+            fillColor: AppColors.pureWhite,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
               borderSide: const BorderSide(
-                  color: AppColors.lightBlue, width: 2.0
+                  color: AppColors.pureWhite,
+                  width: 2.0
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -259,7 +260,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
           'Submit',
           style: TextStyle(
             color: AppColors.deepWhite,
-            fontSize: AppFontSize.size20,
+            fontSize: AppFontSize.size14,
           ),
         ),
       ),
