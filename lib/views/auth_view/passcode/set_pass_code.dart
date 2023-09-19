@@ -6,7 +6,7 @@ import 'package:pay_me_mobile/views/auth_view/process/processing_bar.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../../app_config/manager/theme_manager.dart';
-import '../helper/auth_helper.dart';
+import '../helper/helper.dart';
 
 class SetPassCodeScreen extends StatefulWidget {
   const SetPassCodeScreen({Key? key}) : super(key: key);
@@ -57,7 +57,7 @@ class _SetPassCodeScreenState extends State<SetPassCodeScreen> {
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.of(context).pushReplacementNamed("/home");
     });
-    AuthHelper.savePasscodeToEndpoint(context, firstPassCode!);
+    EndpointHelper.savePasscodeToEndpoint(context, firstPassCode!);
   }
 
   @override

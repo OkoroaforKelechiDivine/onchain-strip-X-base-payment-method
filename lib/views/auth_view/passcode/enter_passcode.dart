@@ -6,7 +6,7 @@ import 'package:pay_me_mobile/views/auth_view/process/processing_bar.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../../app_config/manager/theme_manager.dart';
-import '../helper/auth_helper.dart';
+import '../helper/helper.dart';
 
 class EnterPassCodeScreen extends StatefulWidget {
   const EnterPassCodeScreen({Key? key}) : super(key: key);
@@ -40,7 +40,7 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
   }
 
   Future<void> _verifyPassCode(String passcode) async {
-    await AuthHelper.verifyPassCode(context, passcode);
+    await EndpointHelper.verifyPassCode(context, passcode);
   }
 
   @override

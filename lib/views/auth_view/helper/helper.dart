@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../../token/token_provider.dart';
 
-class AuthHelper {
+class EndpointHelper {
 
   static const String baseUrl = 'https://dzbilqfc4qszv.cloudfront.net/auth';
 
