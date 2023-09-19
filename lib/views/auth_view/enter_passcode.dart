@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
+import 'auth_helper.dart';
 
 class EnterPassCodeScreen extends StatefulWidget {
   const EnterPassCodeScreen({Key? key}) : super(key: key);
@@ -42,74 +43,7 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
   }
 
   Future<void> _verifyPassCode(String passcode) async {
-    final token = Provider.of<TokenProvider>(context, listen: false).token;
-    final options = BaseOptions(
-      headers: {
-        'Authorization': 'Bearer $token'
-      },
-    );
-    final dioWithToken = Dio(options);
-    const url = 'https://dzbilqfc4qszv.cloudfront.net/auth/validate_passcode';
-
-    try {
-      final response = await dioWithToken.post(
-        url,
-        data: {
-          'passcode': passcode
-        },
-      );
-      if (response.data['message'] == true) {
-        _startProcessingAndNavigate();
-      } else {
-        _showErrorDialog('Incorrect passcode. Please try again.');
-      }
-    } catch (e) {
-      _showErrorDialog('An error occurred while verifying the passcode. Please check your internet connection.');
-    }
-  }
-
-  void _showErrorDialog(String errorMessage) {
-    setState(() {
-      isError = true;
-    });
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Error"),
-          content: Text(errorMessage),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  isError = false;
-                });
-                Navigator.of(context).pop();
-              },
-              child: const Text("OK"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _startProcessingAndNavigate() {
-    setState(() {
-      isProcessing = true;
-    });
-
-    Future.delayed(const Duration(seconds: 5), () {
-      if (!isError) {
-        Navigator.of(context).pushReplacementNamed("/home");
-      } else {
-        Future.delayed(const Duration(seconds: 2), () {
-          setState(() {
-            isProcessing = false;
-          });
-        });
-      }
-    });
+    await AuthHelper.verifyPassCode(context, passcode);
   }
 
   @override
