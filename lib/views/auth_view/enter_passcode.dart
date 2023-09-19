@@ -103,9 +103,7 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
             style: TextStyle(
               fontSize: AppFontSize.size22,
               color: AppColors.lightBlack,
-              fontFamily: GoogleFonts
-                  .alegreyaSans()
-                  .fontFamily,
+              fontFamily: GoogleFonts.alegreyaSans().fontFamily,
             ),
           ),
         ],
