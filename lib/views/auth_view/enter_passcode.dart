@@ -1,20 +1,23 @@
 import 'dart:ui';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pay_me_mobile/token/token_provider.dart';
 import 'package:pay_me_mobile/views/auth_view/processing_bar.dart';
+import 'package:provider/provider.dart';
 
 import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
 
-class PassCodeScreen extends StatefulWidget {
-  const PassCodeScreen({Key? key}) : super(key: key);
+class EnterPassCodeScreen extends StatefulWidget {
+  const EnterPassCodeScreen({Key? key}) : super(key: key);
 
   @override
-  State<PassCodeScreen> createState() => _PassCodeScreenState();
+  State<EnterPassCodeScreen> createState() => _EnterPassCodeScreenState();
 }
 
-class _PassCodeScreenState extends State<PassCodeScreen> {
+class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
   List<String> enteredDigits = [];
   bool isProcessing = false;
   bool isError = false;
@@ -31,40 +34,83 @@ class _PassCodeScreenState extends State<PassCodeScreen> {
         setState(() {
           enteredDigits.add(buttonText);
           if (enteredDigits.length == 6) {
-            setState(() {
-              isProcessing = true;
-            });
-            _startProcessingAndNavigate();
+            _verifyPassCode(enteredDigits.join());
           }
         });
       }
     }
   }
 
-  void _startProcessingAndNavigate() {
-    final enteredPasscode = enteredDigits.join();
-    if (enteredPasscode != '123456') {
-      setState(() {
-        isProcessing = true;
-      });
+  Future<void> _verifyPassCode(String passcode) async {
+    final token = Provider.of<TokenProvider>(context, listen: false).token;
+    final options = BaseOptions(
+      headers: {
+        'Authorization': 'Bearer $token'
+      },
+    );
+    final dioWithToken = Dio(options);
+    const url = 'https://dzbilqfc4qszv.cloudfront.net/auth/validate_passcode';
 
-      Future.delayed(const Duration(seconds: 2), () {
-        setState(() {
-          isProcessing = false;
-          isError = true;
-        });
-      });
-    } else {
-      setState(() {
-        isProcessing = true;
-      });
-
-      Future.delayed(const Duration(seconds: 5), () {
-        Navigator.of(context).pushReplacementNamed("/home");
-      });
+    try {
+      final response = await dioWithToken.post(
+        url,
+        data: {
+          'passcode': passcode
+        },
+      );
+      if (response.data['message'] == true) {
+        _startProcessingAndNavigate();
+      } else {
+        _showErrorDialog('Incorrect passcode. Please try again.');
+      }
+    } catch (e) {
+      _showErrorDialog('An error occurred while verifying the passcode. Please check your internet connection.');
     }
   }
 
+  void _showErrorDialog(String errorMessage) {
+    setState(() {
+      isError = true;
+    });
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Error"),
+          content: Text(errorMessage),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  isError = false;
+                });
+                Navigator.of(context).pop();
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _startProcessingAndNavigate() {
+    setState(() {
+      isProcessing = true;
+    });
+
+    Future.delayed(const Duration(seconds: 5), () {
+      if (!isError) {
+        Navigator.of(context).pushReplacementNamed("/home");
+      } else {
+        Future.delayed(const Duration(seconds: 2), () {
+          setState(() {
+            isProcessing = false;
+          });
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
