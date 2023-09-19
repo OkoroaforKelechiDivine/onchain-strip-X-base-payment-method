@@ -8,7 +8,7 @@ import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:provider/provider.dart';
 
 import '../../token/token_provider.dart';
-import 'connectivity.dart';
+import 'connection/connectivity.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

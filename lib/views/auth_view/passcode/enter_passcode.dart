@@ -1,14 +1,12 @@
 import 'dart:ui';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pay_me_mobile/token/token_provider.dart';
-import 'package:pay_me_mobile/views/auth_view/processing_bar.dart';
-import 'package:provider/provider.dart';
+import 'package:pay_me_mobile/views/auth_view/process/processing_bar.dart';
 
-import '../../app_config/manager/font_manager.dart';
-import '../../app_config/manager/theme_manager.dart';
+import '../../../app_config/manager/font_manager.dart';
+import '../../../app_config/manager/theme_manager.dart';
+import '../helper/auth_helper.dart';
 
 class EnterPassCodeScreen extends StatefulWidget {
   const EnterPassCodeScreen({Key? key}) : super(key: key);
@@ -42,74 +40,7 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
   }
 
   Future<void> _verifyPassCode(String passcode) async {
-    final token = Provider.of<TokenProvider>(context, listen: false).token;
-    final options = BaseOptions(
-      headers: {
-        'Authorization': 'Bearer $token'
-      },
-    );
-    final dioWithToken = Dio(options);
-    const url = 'https://dzbilqfc4qszv.cloudfront.net/auth/validate_passcode';
-
-    try {
-      final response = await dioWithToken.post(
-        url,
-        data: {
-          'passcode': passcode
-        },
-      );
-      if (response.data['message'] == true) {
-        _startProcessingAndNavigate();
-      } else {
-        _showErrorDialog('Incorrect passcode. Please try again.');
-      }
-    } catch (e) {
-      _showErrorDialog('An error occurred while verifying the passcode. Please check your internet connection.');
-    }
-  }
-
-  void _showErrorDialog(String errorMessage) {
-    setState(() {
-      isError = true;
-    });
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Error"),
-          content: Text(errorMessage),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  isError = false;
-                });
-                Navigator.of(context).pop();
-              },
-              child: const Text("OK"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _startProcessingAndNavigate() {
-    setState(() {
-      isProcessing = true;
-    });
-
-    Future.delayed(const Duration(seconds: 5), () {
-      if (!isError) {
-        Navigator.of(context).pushReplacementNamed("/home");
-      } else {
-        Future.delayed(const Duration(seconds: 2), () {
-          setState(() {
-            isProcessing = false;
-          });
-        });
-      }
-    });
+    await AuthHelper.verifyPassCode(context, passcode);
   }
 
   @override
@@ -169,9 +100,7 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
             style: TextStyle(
               fontSize: AppFontSize.size22,
               color: AppColors.lightBlack,
-              fontFamily: GoogleFonts
-                  .alegreyaSans()
-                  .fontFamily,
+              fontFamily: GoogleFonts.alegreyaSans().fontFamily,
             ),
           ),
         ],
@@ -262,14 +191,14 @@ class Keypad extends StatelessWidget {
                 fontSize: AppFontSize.size20,
                 fontWeight: buttonText == 'Sign out' ? AppFontWeight.bold : AppFontWeight.bold,
                 fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-                color: buttonText == 'Sign out' ? Colors.green : AppColors.lightBlack,
+                color: buttonText == 'Sign out' ? AppColors.lightGreen : AppColors.lightBlack,
               ),
               textAlign: TextAlign.center,
             ),
           ) : Text(
             buttonText,
             style: TextStyle(
-              fontSize: 30.0,
+              fontSize: AppFontSize.size30,
               fontWeight: AppFontWeight.bold,
               fontFamily: GoogleFonts.alegreyaSans().fontFamily,
             ),

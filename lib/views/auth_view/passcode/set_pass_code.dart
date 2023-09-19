@@ -1,14 +1,12 @@
 import 'dart:ui';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pay_me_mobile/views/auth_view/processing_bar.dart';
-import 'package:provider/provider.dart';
+import 'package:pay_me_mobile/views/auth_view/process/processing_bar.dart';
 
-import '../../app_config/manager/font_manager.dart';
-import '../../app_config/manager/theme_manager.dart';
-import '../../token/token_provider.dart';
+import '../../../app_config/manager/font_manager.dart';
+import '../../../app_config/manager/theme_manager.dart';
+import '../helper/auth_helper.dart';
 
 class SetPassCodeScreen extends StatefulWidget {
   const SetPassCodeScreen({Key? key}) : super(key: key);
@@ -45,9 +43,7 @@ class _SetPassCodeScreenState extends State<SetPassCodeScreen> {
                 secondPassCode = enteredDigits.join();
                 if (firstPassCode == secondPassCode) {
                   isProcessing = true;
-                  _startProcessingAndNavigate();
-                } else{
-                  _showErrorDialog();
+                  _savePasscodeToEndpointAndNavigate();
                 }
               });
             }
@@ -57,61 +53,12 @@ class _SetPassCodeScreenState extends State<SetPassCodeScreen> {
     }
   }
 
-  void _showErrorDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Passcodes Do Not Match"),
-          content: const Text("The passcodes you entered do not match. Please try again."),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("OK"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _startProcessingAndNavigate() {
+  void _savePasscodeToEndpointAndNavigate() {
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.of(context).pushReplacementNamed("/home");
     });
-    _savePasscodeToEndpoint(firstPassCode!);
+    AuthHelper.savePasscodeToEndpoint(context, firstPassCode!);
   }
-
-  Future<void> _savePasscodeToEndpoint(String passcode) async {
-    final token = Provider.of<TokenProvider>(context, listen: false).token;
-    final options = BaseOptions(
-      headers: {
-        'Authorization': 'Bearer $token'
-      },
-    );
-    final dioWithToken = Dio(options);
-    const url = 'https://dzbilqfc4qszv.cloudfront.net/auth/set_passcode';
-
-    try {
-      final response = await dioWithToken.post(
-        url,
-        data: {
-          'passcode': passcode
-        },
-      );
-
-      if (response.statusCode == 200) {
-        print('Passcode saved on the server.');
-      } else {
-        print('Failed to save passcode on the server. Status code: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('An error occurred while sending the passcode: $e');
-    }
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -262,7 +209,7 @@ class Keypad extends StatelessWidget {
           ) : Text(
             buttonText,
             style: TextStyle(
-              fontSize: 30.0,
+              fontSize: AppFontSize.size30,
               fontWeight: AppFontWeight.bold,
               fontFamily: GoogleFonts.alegreyaSans().fontFamily,
             ),
