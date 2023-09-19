@@ -198,7 +198,7 @@ class Keypad extends StatelessWidget {
           ) : Text(
             buttonText,
             style: TextStyle(
-              fontSize: AppFontSize.size20,
+              fontSize: AppFontSize.size30,
               fontWeight: AppFontWeight.bold,
               fontFamily: GoogleFonts.alegreyaSans().fontFamily,
             ),
