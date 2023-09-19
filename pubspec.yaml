@@ -17,10 +17,9 @@ dependencies:
   intl:
   grouped_list:
   dio:
-  connectivity:
   provider:
-  jwt_decoder:
-  shared_preferences:
+  connectivity:
+  jwt_decode:
 
 
 dev_dependencies:
