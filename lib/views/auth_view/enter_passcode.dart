@@ -1,11 +1,8 @@
 import 'dart:ui';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pay_me_mobile/token/token_provider.dart';
 import 'package:pay_me_mobile/views/auth_view/processing_bar.dart';
-import 'package:provider/provider.dart';
 
 import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
