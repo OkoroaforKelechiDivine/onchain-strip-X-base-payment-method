@@ -2,13 +2,12 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../token/UserToken.dart';
+import '../../token/token_provider.dart';
 import 'connectivity.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -44,9 +43,18 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       if (response.statusCode == 200) {
-        final prefs = await SharedPreferences.getInstance();
-        prefs.setBool('hasLoggedIn', true);
-        Navigator.pushReplacementNamed(context, "/pass_code");
+        final Map<String, dynamic> responseData = response.data;
+        final String token = responseData['token'];
+        print("Token: $token");
+        context.read<TokenProvider>().setToken(token);
+
+        Map<String, dynamic> payload = Jwt.parseJwt(token);
+        if (payload['is_first_login']) {
+          Navigator.pushReplacementNamed(context, "/set_pass_code");
+        } else {
+          Navigator.pushReplacementNamed(context, "/enter_pass_code");
+        }
+        return;
       }
     } catch (e) {
       setState(() {
