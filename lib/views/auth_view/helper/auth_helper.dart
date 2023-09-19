@@ -4,7 +4,7 @@ import 'package:jwt_decode/jwt_decode.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
-import '../../token/token_provider.dart';
+import '../../../token/token_provider.dart';
 
 class AuthHelper {
 

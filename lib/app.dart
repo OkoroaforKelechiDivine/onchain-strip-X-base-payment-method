@@ -14,8 +14,8 @@ import 'package:pay_me_mobile/screens/transfer_to_bank/show_all_recent_transacti
 import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.dart';
 import 'package:pay_me_mobile/screens/tv/cable_tv.dart';
 import 'package:pay_me_mobile/views/auth_view/login_view.dart';
-import 'package:pay_me_mobile/views/auth_view/enter_passcode.dart';
-import 'package:pay_me_mobile/views/auth_view/set_pass_code.dart';
+import 'package:pay_me_mobile/views/auth_view/passcode/enter_passcode.dart';
+import 'package:pay_me_mobile/views/auth_view/passcode/set_pass_code.dart';
 import 'package:pay_me_mobile/views/custom/confirm_page.dart';
 import 'package:pay_me_mobile/views/custom/show_pin_dialog.dart';
 
