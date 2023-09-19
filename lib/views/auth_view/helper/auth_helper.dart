@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../../token/token_provider.dart';
 
-class EndpointHelper {
+class AuthHelper {
 
   static const String baseUrl = 'https://dzbilqfc4qszv.cloudfront.net/auth';
 
@@ -89,8 +89,7 @@ class EndpointHelper {
     }
   }
 
-  static Future<void> login(
-      BuildContext context, String username, String password) async {
+  static Future<void> login(BuildContext context, String username, String password) async {
     final dio = Dio();
     final connectivityResult = await Connectivity().checkConnectivity();
 
