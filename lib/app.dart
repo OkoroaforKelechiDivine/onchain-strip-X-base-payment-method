@@ -14,7 +14,8 @@ import 'package:pay_me_mobile/screens/transfer_to_bank/show_all_recent_transacti
 import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.dart';
 import 'package:pay_me_mobile/screens/tv/cable_tv.dart';
 import 'package:pay_me_mobile/views/auth_view/login_view.dart';
-import 'package:pay_me_mobile/views/auth_view/pass_code.dart';
+import 'package:pay_me_mobile/views/auth_view/enter_passcode.dart';
+import 'package:pay_me_mobile/views/auth_view/set_pass_code.dart';
 import 'package:pay_me_mobile/views/custom/confirm_page.dart';
 import 'package:pay_me_mobile/views/custom/show_pin_dialog.dart';
 
@@ -49,7 +50,8 @@ class MyApp extends StatelessWidget {
         },
         "/confirm_page": (context) => const ConfirmPaymentScreen(),
         "/cable_tv": (context) => const CableTvScreen(),
-        "/pass_code": (context) => const PassCodeScreen(),
+        "/enter_pass_code": (context) => const EnterPassCodeScreen(),
+        "/set_pass_code": (context) => const SetPassCodeScreen(),
         "/beneficiary_details": (context) {
           final bank = ModalRoute.of(context)!.settings.arguments as DummyBank;
           return SendMoneyScreen(bank: bank);
