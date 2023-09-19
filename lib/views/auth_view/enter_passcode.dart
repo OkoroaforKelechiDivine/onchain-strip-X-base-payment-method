@@ -196,14 +196,14 @@ class Keypad extends StatelessWidget {
                 fontSize: AppFontSize.size20,
                 fontWeight: buttonText == 'Sign out' ? AppFontWeight.bold : AppFontWeight.bold,
                 fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-                color: buttonText == 'Sign out' ? Colors.green : AppColors.lightBlack,
+                color: buttonText == 'Sign out' ? AppColors.lightGreen : AppColors.lightBlack,
               ),
               textAlign: TextAlign.center,
             ),
           ) : Text(
             buttonText,
             style: TextStyle(
-              fontSize: 30.0,
+              fontSize: AppFontSize.size20,
               fontWeight: AppFontWeight.bold,
               fontFamily: GoogleFonts.alegreyaSans().fontFamily,
             ),
