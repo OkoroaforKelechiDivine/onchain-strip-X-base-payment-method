@@ -4,10 +4,10 @@ import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.d
 
 import '../../views/custom/custom_bottom_bar_navigation.dart';
 
-class ShowAllBeneficiariesScreen extends StatelessWidget {
+class ShowAllRecentTransactionsScreen extends StatelessWidget {
   final List<DummyBank> banks;
 
-  const ShowAllBeneficiariesScreen({Key? key, required this.banks}) : super(key: key);
+  const ShowAllRecentTransactionsScreen({Key? key, required this.banks}) : super(key: key);
 
   PreferredSizeWidget _buildAppBar() {
     return PreferredSize(

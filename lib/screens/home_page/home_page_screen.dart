@@ -34,7 +34,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     'History',
     'Airtime',
     'Power',
-    'TV',
+    'Cable TV',
     'More',
   ];
 
@@ -306,7 +306,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   case 3:
                     return _buildServiceCard(cardImage[index], cardName[index], '/buy_power');
                   case 4:
-                    return _buildServiceCard(cardImage[index], cardName[index], '');
+                    return _buildServiceCard(cardImage[index], cardName[index], '/cable_tv');
                   case 5:
                     return _buildServiceCard(cardImage[index], cardName[index], '/more');
                   default:

@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: '>=3.0.5 <4.0.0'
 
 dependencies:
   flutter:
@@ -16,8 +16,10 @@ dependencies:
   google_fonts: ^4.0.1
   intl:
   grouped_list:
-  dio: ^4.0.6
-
+  dio:
+  provider:
+  connectivity:
+  jwt_decode:
 
 
 dev_dependencies:

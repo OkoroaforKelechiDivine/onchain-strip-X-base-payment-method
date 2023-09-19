@@ -1,9 +1,14 @@
+import 'package:connectivity/connectivity.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import 'package:provider/provider.dart';
 
-import '../../controllers/auth/login_controller.dart';
+import '../../token/token_provider.dart';
+import 'connectivity.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -13,8 +18,50 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final controller = LoginController();
-  bool _obscurePassword = true;
+  final bool _obscurePassword = true;
+  Dio dio = Dio();
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  String message = "";
+
+  void login(String username, String password) async {
+    final connectivityResult = await ConnectivityUtil.checkConnectivity();
+
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        message = "Network problem. Please check your internet connection.";
+      });
+      return;
+    }
+    try {
+      Response response = await dio.post(
+        "https://dzbilqfc4qszv.cloudfront.net/auth/login",
+        data: {
+          "username": username,
+          "password": password,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = response.data;
+        final String token = responseData['token'];
+        print("Token: $token");
+        context.read<TokenProvider>().setToken(token);
+
+        Map<String, dynamic> payload = Jwt.parseJwt(token);
+        if (payload['is_first_login']) {
+          Navigator.pushReplacementNamed(context, "/set_pass_code");
+        } else {
+          Navigator.pushReplacementNamed(context, "/enter_pass_code");
+        }
+        return;
+      }
+    } catch (e) {
+      setState(() {
+        message = "Login Failed, please try again.";
+      });
+    }
+  }
 
   Widget _buildLogo() {
     return Image.asset(
@@ -44,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildTextField(String hintText, TextEditingController controller, ValueChanged<String>? onChanged, bool isPassword, bool isVisible, void Function() toggleVisibility, String? errorText) {
+  Widget _buildTextField(String hintText, TextEditingController controller, bool isPassword, bool isVisible, void Function() toggleVisibility) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -52,14 +99,17 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.centerLeft,
           child: Text(
             hintText,
-            style: const TextStyle(color: AppColors.lightBlack, fontSize: AppFontSize.size16, fontWeight: AppFontWeight.light),
+            style: const TextStyle(
+                color: AppColors.lightBlack,
+                fontSize: AppFontSize.size16,
+                fontWeight: AppFontWeight.light
+            ),
           ),
         ),
         const SizedBox(height: 5),
         TextFormField(
           decoration: InputDecoration(
             hintText: 'Enter $hintText',
-            errorText: errorText,
             filled: true,
             fillColor: AppColors.pureWhite,
             border: OutlineInputBorder(
@@ -74,12 +124,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 isVisible ? Icons.visibility_off : Icons.visibility,
                 color: AppColors.lightBlack,
               ),
-            )
-                : null,
+            ) : null,
           ),
           textCapitalization: TextCapitalization.none,
           textInputAction: TextInputAction.next,
-          onChanged: onChanged,
           keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.text,
           obscureText: isPassword && !_obscurePassword,
           controller: controller,
@@ -113,7 +161,10 @@ class _LoginScreenState extends State<LoginScreen> {
       alignment: Alignment.centerLeft,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.of(context).pushReplacementNamed('/home');
+          login(
+              userNameController.text.toString(),
+              passwordController.text.toString()
+          );
         },
         child: const Text(
           'Sign in',
@@ -146,55 +197,47 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          color: AppColors.pureWhite,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            child: ListView(
-              children: [
-                const SizedBox(height: 100,),
-                _buildLogo(),
-                const SizedBox(height: 30),
-                _buildWelcomeText(),
-                const SizedBox(height: 25),
-                _buildLockImage(),
-                const SizedBox(height: 10),
-                _buildTextField(
-                  "Username",
-                  controller.userNameController,
-                  controller.clearUserNameError,
-                  false, false, () {},
-                  controller.userNameError.isEmpty ? null : controller.userNameError,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: ListView(
+            children: [
+              const SizedBox(height: 50),
+              _buildLogo(),
+              const SizedBox(height: 30),
+              _buildWelcomeText(),
+              const SizedBox(height: 25),
+              _buildLockImage(),
+              const SizedBox(height: 10),
+              _buildTextField(
+                "Username",
+                userNameController,
+                false,
+                false,
+                    (){}
+              ),
+              const SizedBox(height: 20),
+              _buildTextField(
+                "Password",
+                passwordController,
+                false,
+                false,
+                    (){}
+              ),
+              _buildForgotPasswordButton(),
+              Center(
+                child: Text(
+                  message,
+                  style: const TextStyle(
+                    fontWeight: AppFontWeight.light,
+                    color: AppColors.errorRed,
+                  ),
                 ),
-                const SizedBox(height: 20),
-                _buildTextField(
-                  "Password",
-                  controller.passwordController,
-                      (value) {
-                    if (value.isNotEmpty) {
-                      setState(() {
-                        _obscurePassword = true;
-                      });
-                    } else {
-                      setState(() {
-                        _obscurePassword = false;
-                      });
-                    }
-                  }, true,
-                  _obscurePassword, () {
-                    setState(() {
-                      _obscurePassword = !_obscurePassword;
-                    });
-                  },
-                  controller.passwordError.isEmpty ? null : controller.passwordError,
-                ),
-                _buildForgotPasswordButton(),
-                const SizedBox(height: 20),
-                _buildSignInButton(context),
-                const SizedBox(height: 60),
-                _buildRequestForPOS(),
-              ],
-            ),
+              ),
+              const SizedBox(height: 10),
+              _buildSignInButton(context),
+              const SizedBox(height: 60),
+              _buildRequestForPOS(),
+            ],
           ),
         ),
       ),

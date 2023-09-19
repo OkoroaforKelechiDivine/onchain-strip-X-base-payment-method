@@ -7,16 +7,16 @@ import '../../app_config/manager/theme_manager.dart';
 import '../../views/custom/custom_dynamic_label_textfield.dart';
 import '../../views/custom/custom_underline.dart';
 
-class BeneficiaryDetailsScreen extends StatefulWidget {
+class SendMoneyScreen extends StatefulWidget {
   final DummyBank bank;
 
-  const BeneficiaryDetailsScreen({Key? key, required this.bank}) : super(key: key);
+  const SendMoneyScreen({Key? key, required this.bank}) : super(key: key);
 
   @override
-  _BeneficiaryDetailsScreenState createState() => _BeneficiaryDetailsScreenState();
+  _SendMoneyScreenState createState() => _SendMoneyScreenState();
 }
 
-class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
+class _SendMoneyScreenState extends State<SendMoneyScreen> {
   final TextEditingController amountController = TextEditingController();
   final TextEditingController narrationController = TextEditingController();
 
@@ -205,11 +205,12 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
             hintText: 'Enter Narration',
             labelStyle: const TextStyle(color: AppColors.lightGrey, fontSize: AppFontSize.size16),
             filled: true,
-            fillColor: AppColors.lightBlue,
+            fillColor: AppColors.pureWhite,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
               borderSide: const BorderSide(
-                  color: AppColors.lightBlue, width: 2.0
+                  color: AppColors.pureWhite,
+                  width: 2.0
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -259,7 +260,7 @@ class _BeneficiaryDetailsScreenState extends State<BeneficiaryDetailsScreen> {
           'Submit',
           style: TextStyle(
             color: AppColors.deepWhite,
-            fontSize: AppFontSize.size20,
+            fontSize: AppFontSize.size14,
           ),
         ),
       ),

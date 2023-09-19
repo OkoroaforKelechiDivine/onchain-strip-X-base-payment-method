@@ -1,22 +1,27 @@
 import 'dart:ui';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/views/auth_view/processing_bar.dart';
+import 'package:provider/provider.dart';
 
 import '../../app_config/manager/font_manager.dart';
 import '../../app_config/manager/theme_manager.dart';
+import '../../token/token_provider.dart';
 
-class PinCodeScreen extends StatefulWidget {
-  const PinCodeScreen({Key? key}) : super(key: key);
+class SetPassCodeScreen extends StatefulWidget {
+  const SetPassCodeScreen({Key? key}) : super(key: key);
 
   @override
-  State<PinCodeScreen> createState() => _PinCodeScreenState();
+  State<SetPassCodeScreen> createState() => _SetPassCodeScreenState();
 }
 
-class _PinCodeScreenState extends State<PinCodeScreen> {
+class _SetPassCodeScreenState extends State<SetPassCodeScreen> {
   List<String> enteredDigits = [];
   bool isProcessing = false;
+  String? firstPassCode;
+  String? secondPassCode;
 
   void _onButtonPressed(String buttonText) {
     if (buttonText == 'Delete') {
@@ -30,21 +35,83 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
         setState(() {
           enteredDigits.add(buttonText);
           if (enteredDigits.length == 6) {
-            setState(() {
-              isProcessing = true;
-            });
-            _startProcessingAndNavigate();
+            if (firstPassCode == null) {
+              setState(() {
+                firstPassCode = enteredDigits.join();
+                enteredDigits.clear();
+              });
+            } else {
+              setState(() {
+                secondPassCode = enteredDigits.join();
+                if (firstPassCode == secondPassCode) {
+                  isProcessing = true;
+                  _startProcessingAndNavigate();
+                } else{
+                  _showErrorDialog();
+                }
+              });
+            }
           }
         });
       }
     }
   }
 
+  void _showErrorDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Passcodes Do Not Match"),
+          content: const Text("The passcodes you entered do not match. Please try again."),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _startProcessingAndNavigate() {
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.of(context).pushReplacementNamed("/home");
     });
+    _savePasscodeToEndpoint(firstPassCode!);
   }
+
+  Future<void> _savePasscodeToEndpoint(String passcode) async {
+    final token = Provider.of<TokenProvider>(context, listen: false).token;
+    final options = BaseOptions(
+      headers: {
+        'Authorization': 'Bearer $token'
+      },
+    );
+    final dioWithToken = Dio(options);
+    const url = 'https://dzbilqfc4qszv.cloudfront.net/auth/set_passcode';
+
+    try {
+      final response = await dioWithToken.post(
+        url,
+        data: {
+          'passcode': passcode
+        },
+      );
+
+      if (response.statusCode == 200) {
+        print('Passcode saved on the server.');
+      } else {
+        print('Failed to save passcode on the server. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('An error occurred while sending the passcode: $e');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +119,7 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
       body: Stack(
         children: [
           BackdropFilter(
-            filter: isProcessing
-                ? ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0)
-                : ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
+            filter: isProcessing ? ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0) : ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
             child: Container(
               color: Colors.transparent,
               width: double.infinity,
@@ -65,7 +130,7 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       if (isProcessing)
-                       const ProcessingBar(),
+                        const ProcessingBar(),
                       _buildLogo(),
                       _buildWelcomeText(),
                       Keypad(
@@ -112,7 +177,7 @@ class Keypad extends StatelessWidget {
   final Function(String) onButtonPressed;
   final List<String> enteredDigits;
 
-  Keypad({required this.onButtonPressed, required this.enteredDigits});
+  const Keypad({super.key, required this.onButtonPressed, required this.enteredDigits});
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +201,7 @@ class Keypad extends StatelessWidget {
 
   Widget _buildPasscodeText() {
     return const Text(
-      "Enter Passcode",
+      "Set Passcode",
       style: TextStyle(
         fontSize: AppFontSize.size18,
         color: AppColors.lightGrey,
@@ -190,7 +255,7 @@ class Keypad extends StatelessWidget {
                 fontSize: AppFontSize.size20,
                 fontWeight: buttonText == 'Sign out' ? AppFontWeight.bold : AppFontWeight.bold,
                 fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-                color: buttonText == 'Sign out' ? Colors.green : AppColors.lightBlack,
+                color: buttonText == 'Sign out' ? AppColors.lightGreen : AppColors.lightBlack,
               ),
               textAlign: TextAlign.center,
             ),
