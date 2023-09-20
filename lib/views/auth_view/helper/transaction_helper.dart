@@ -18,7 +18,6 @@ class TransactionHelper{
     );
     final dio = Dio(options);
     const url = '$baseUrl/get-all-banks';
-    print(url);
 
     try {
       final response = await dio.get(url);
@@ -33,6 +32,33 @@ class TransactionHelper{
       }
     } catch (exception) {
       throw Exception('Error fetching banks: $exception');
+    }
+  }
+
+  static Future<String> fetchBeneficiaryAccount(BuildContext context, String accountNo, String bankCode, String transferType) async {
+    final token = Provider.of<TokenProvider>(context, listen: false).token;
+
+    final options = BaseOptions(
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+    final dio = Dio(options);
+    final url = '$baseUrl/get-beneficiary-account?accountNo=$accountNo&bank=$bankCode&transfer_type=$transferType';
+    print(url);
+
+    try {
+      final response = await dio.get(url);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = response.data;
+        final String accountNumber = responseData['data']['account']['number'];
+        return accountNumber;
+      } else {
+        throw Exception('Failed to load beneficiary account');
+      }
+    } catch (exception) {
+      throw Exception('Error fetching beneficiary account: $exception');
     }
   }
 }
