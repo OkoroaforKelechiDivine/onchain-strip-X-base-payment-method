@@ -125,7 +125,9 @@ class _LoginScreenState extends State<LoginScreen> {
       alignment: Alignment.centerLeft,
       child: ElevatedButton(
         onPressed: onPressed,
-        child: loginState.state == ViewState.Idle || loginState.state == ViewState.Retrieved ?
+        child: loginState.state == ViewState.Busy ?
+        CircularProgressIndicator()
+            :
         const Text(
           'Sign in',
           style: TextStyle(
@@ -133,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
             color: AppColors.deepWhite,
             fontWeight: AppFontWeight.bold,
           ),
-        ) : CircularProgressIndicator(),
+        ),
       ),
     );
   }
@@ -198,7 +200,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 10),
                   _buildSignInButton(context, onPressed: ()async{
                     await model.login(username: userNameController.text,password: passwordController.text);
-
                     if(model.state == ViewState.Retrieved){
                     //   navigate to next screen
                       _gotoNextScreen();

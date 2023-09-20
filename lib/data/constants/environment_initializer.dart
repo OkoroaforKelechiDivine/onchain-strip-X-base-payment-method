@@ -11,9 +11,6 @@ class EnvironmentInitializer{
       case Environment.PROD:
         _config = _BaseUrlConfig.prodConstants;
         break;
-      case Environment.QA:
-        _config = _BaseUrlConfig.qaConstants;
-        break;
     }
   }
   static get BASE_URL {
@@ -30,9 +27,5 @@ class _BaseUrlConfig {
 
   static Map<String, dynamic> prodConstants = {
     BASE_URL: "Prod Base URL",
-  };
-
-  static Map<String, dynamic> qaConstants = {
-    BASE_URL: "QA Base URL",
   };
 }
