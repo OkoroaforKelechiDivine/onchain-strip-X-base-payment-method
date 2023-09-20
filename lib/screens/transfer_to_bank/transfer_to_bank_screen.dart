@@ -208,8 +208,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
     );
   }
 
-
-
   PreferredSizeWidget? _buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
@@ -232,6 +230,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   }
 
   Widget _buildRecipientCard(BuildContext context) {
+    final bankLogoAsset = _selectedBankLogo.isEmpty ? null : _selectedBankLogo.startsWith("data:image") ? _selectedBankLogo.split(',')[1] : _selectedBankLogo;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -269,7 +268,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                   ),
                   child: Row(
                     children: [
-                      _selectedBankLogo.isEmpty ? Container() : Image.asset(_selectedBankLogo, width: 30.0, height: 30.0),
+                      bankLogoAsset != null ? Image.memory(base64Decode(bankLogoAsset), width: 30.0, height: 30.0) : Container(),
                       const SizedBox(width: 8.0),
                       Expanded(
                         child: GestureDetector(
@@ -421,7 +420,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6.0),
       child: Card(
-        color: AppColors.lightBlue,
+        color: AppColors.pureWhite,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -491,7 +490,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                         );
                       },
                       child: Container(
-                        color: AppColors.lightBlue,
+                        color: AppColors.pureWhite,
                         child: Column(
                           children: [
                             Row(
@@ -557,7 +556,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
       ),
     );
     UnderlineInputBorder customFocusedErrorBorder = const UnderlineInputBorder(
-      borderSide: BorderSide(color: AppColors.errorRed),
+        borderSide: BorderSide(color: AppColors.errorRed)
     );
     return TextFormField(
       controller: _accountNumberController,
@@ -604,11 +603,11 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
             _showLinearProcessing = true;
             _isAccountNumberErrorVisible = false;
             _isAccountNumberLengthInvalid = false;
-            Future.delayed(const Duration(seconds: 3), () {
-              DummyBank matchingBank;
+            Future.delayed(const Duration(seconds: 3), () async {
               try {
-                matchingBank = dummyBanks.firstWhere((bank) => bank.accountNumber == value && bank.name == _selectedBankController.text);
-                _userName = matchingBank.accountName;
+                String accountType = "inter";
+                String beneficiaryAccount = await TransactionHelper.fetchBeneficiaryAccount(context, value, _selectedBankController.text, accountType);
+                _userName = beneficiaryAccount;
               } catch (e) {
                 _isAccountNumberErrorVisible = true;
                 _userName = 'Account not found';
@@ -618,8 +617,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
               setState(() {});
             });
           }
-        }
-        );
+        });
       },
       validator: (value) {
         if (value == null || value.isEmpty) {
