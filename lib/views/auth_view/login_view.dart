@@ -5,8 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import 'package:pay_me_mobile/data/constants/enum/view_state.dart';
+import 'package:pay_me_mobile/data/states/auth/login_state.dart';
 import 'package:provider/provider.dart';
 
+import '../../data/view_models/auth/login_view_model.dart';
 import '../../token/token_provider.dart';
 import 'connection/connectivity.dart';
 
@@ -19,49 +22,10 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final bool _obscurePassword = true;
-  Dio dio = Dio();
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String message = "";
 
-  void login(String username, String password) async {
-    final connectivityResult = await ConnectivityUtil.checkConnectivity();
-
-    if (connectivityResult == ConnectivityResult.none) {
-      setState(() {
-        message = "Network problem. Please check your internet connection.";
-      });
-      return;
-    }
-    try {
-      Response response = await dio.post(
-        "https://dzbilqfc4qszv.cloudfront.net/auth/login",
-        data: {
-          "username": username,
-          "password": password,
-        },
-      );
-
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> responseData = response.data;
-        final String token = responseData['token'];
-        print("Token: $token");
-        context.read<TokenProvider>().setToken(token);
-
-        Map<String, dynamic> payload = Jwt.parseJwt(token);
-        if (payload['is_first_login']) {
-          Navigator.pushReplacementNamed(context, "/set_pass_code");
-        } else {
-          Navigator.pushReplacementNamed(context, "/enter_pass_code");
-        }
-        return;
-      }
-    } catch (e) {
-      setState(() {
-        message = "Login Failed, please try again.";
-      });
-    }
-  }
 
   Widget _buildLogo() {
     return Image.asset(
@@ -156,24 +120,20 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildSignInButton(BuildContext context) {
+  Widget _buildSignInButton(BuildContext context,{required void Function()? onPressed,required LoginState loginState}) {
     return Align(
       alignment: Alignment.centerLeft,
       child: ElevatedButton(
-        onPressed: () {
-          login(
-              userNameController.text.toString(),
-              passwordController.text.toString()
-          );
-        },
-        child: const Text(
+        onPressed: onPressed,
+        child: loginState.state == ViewState.Idle || loginState.state == ViewState.Retrieved ?
+        const Text(
           'Sign in',
           style: TextStyle(
             fontSize: AppFontSize.size16,
             color: AppColors.deepWhite,
             fontWeight: AppFontWeight.bold,
           ),
-        ),
+        ) : CircularProgressIndicator(),
       ),
     );
   }
@@ -195,52 +155,67 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: ListView(
-            children: [
-              const SizedBox(height: 50),
-              _buildLogo(),
-              const SizedBox(height: 30),
-              _buildWelcomeText(),
-              const SizedBox(height: 25),
-              _buildLockImage(),
-              const SizedBox(height: 10),
-              _buildTextField(
-                "Username",
-                userNameController,
-                false,
-                false,
-                    (){}
-              ),
-              const SizedBox(height: 20),
-              _buildTextField(
-                "Password",
-                passwordController,
-                false,
-                false,
-                    (){}
-              ),
-              _buildForgotPasswordButton(),
-              Center(
-                child: Text(
-                  message,
-                  style: const TextStyle(
-                    fontWeight: AppFontWeight.light,
-                    color: AppColors.errorRed,
+    return Consumer<LoginViewModel>(
+      builder: (context, model, child)  {
+        return Scaffold(
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              child: ListView(
+                children: [
+                  const SizedBox(height: 50),
+                  _buildLogo(),
+                  const SizedBox(height: 30),
+                  _buildWelcomeText(),
+                  const SizedBox(height: 25),
+                  _buildLockImage(),
+                  const SizedBox(height: 10),
+                  _buildTextField(
+                    "Username",
+                    userNameController,
+                    false,
+                    false,
+                        (){}
                   ),
-                ),
+                  const SizedBox(height: 20),
+                  _buildTextField(
+                    "Password",
+                    passwordController,
+                    true,
+                    false,
+                        (){}
+                  ),
+                  _buildForgotPasswordButton(),
+                  Center(
+                    child: Text(
+                      message,
+                      style: const TextStyle(
+                        fontWeight: AppFontWeight.light,
+                        color: AppColors.errorRed,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  _buildSignInButton(context, onPressed: ()async{
+                    await model.login(username: userNameController.text,password: passwordController.text);
+
+                    if(model.state == ViewState.Retrieved){
+                    //   navigate to next screen
+                      _gotoNextScreen();
+                    }
+                    }, loginState: model),
+                  const SizedBox(height: 60),
+                  _buildRequestForPOS(),
+                ],
               ),
-              const SizedBox(height: 10),
-              _buildSignInButton(context),
-              const SizedBox(height: 60),
-              _buildRequestForPOS(),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      }
     );
+  }
+
+  _gotoNextScreen(){
+    Navigator.pushReplacementNamed(context, "/enter_pass_code");
   }
 }

@@ -18,65 +18,70 @@ import 'package:pay_me_mobile/views/auth_view/passcode/enter_passcode.dart';
 import 'package:pay_me_mobile/views/auth_view/passcode/set_pass_code.dart';
 import 'package:pay_me_mobile/views/custom/confirm_page.dart';
 import 'package:pay_me_mobile/views/custom/show_pin_dialog.dart';
+import 'package:provider/provider.dart';
 
 import 'app_config/manager/theme_manager.dart';
+import 'locator.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'PayMe',
-      theme: getApplicationTheme(),
-      home: const SplashScreen(),
+    return MultiProvider(
+      providers: allProviders,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'PayMe',
+        theme: getApplicationTheme(),
+        home: const SplashScreen(),
 
-      routes: {
-        "/home": (context) => const HomePageScreen(),
-        "/login": (context) => const LoginScreen(),
-        "/splash": (context) => const SplashScreen(),
-        "/raise_payment": (context) => const RaisePaymentScreen(),
-        "/buy_power": (context) => const BuyPowerScreen(),
-        "/transfer": (context) => const TransferToBankScreen(),
-        "/show_all_beneficiaries": (context) => ShowAllRecentTransactionsScreen(banks: dummyBanks),
-        "/pin_dialog": (context) {
-          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-          final amount = double.tryParse(args['amount'].replaceAll('₦', '').replaceAll(',', '').trim()) ?? 0.0;
-          return PinDialog(
-            amount: amount,
-            accountName: args['accountName'],
-          );
+        routes: {
+          "/home": (context) => const HomePageScreen(),
+          "/login": (context) => const LoginScreen(),
+          "/splash": (context) => const SplashScreen(),
+          "/raise_payment": (context) => const RaisePaymentScreen(),
+          "/buy_power": (context) => const BuyPowerScreen(),
+          "/transfer": (context) => const TransferToBankScreen(),
+          "/show_all_beneficiaries": (context) => ShowAllRecentTransactionsScreen(banks: dummyBanks),
+          "/pin_dialog": (context) {
+            final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+            final amount = double.tryParse(args['amount'].replaceAll('₦', '').replaceAll(',', '').trim()) ?? 0.0;
+            return PinDialog(
+              amount: amount,
+              accountName: args['accountName'],
+            );
+          },
+          "/confirm_page": (context) => const ConfirmPaymentScreen(),
+          "/cable_tv": (context) => const CableTvScreen(),
+          "/enter_pass_code": (context) => const EnterPassCodeScreen(),
+          "/set_pass_code": (context) => const SetPassCodeScreen(),
+          "/beneficiary_details": (context) {
+            final bank = ModalRoute.of(context)!.settings.arguments as DummyBank;
+            return SendMoneyScreen(bank: bank);
+          },
+          "/buy_airtime": (context) => const BuyAirtimeScreen(),
+          "/transaction_history": (context) => const TransactionHistoryScreen(),
+          "/transaction_details": (context) {
+            final transactionDetails = ModalRoute.of(context)!.settings.arguments as TransactionDetailsScreen;
+            return TransactionDetailsScreen(
+              amount: transactionDetails.amount,
+              transactionTimestamp: transactionDetails.transactionTimestamp,
+              accountName: transactionDetails.accountName,
+              bankName: transactionDetails.bankName,
+            );
+          },
+          "/repeat_transaction": (context) {
+            final args = ModalRoute.of(context)!.settings.arguments as RepeatTransactionScreen;
+            return RepeatTransactionScreen(
+              amount: args.amount,
+              transactionTimestamp: args.transactionTimestamp,
+              accountName: args.accountName,
+              description: args.description, isSent: true,
+            );
+          }
         },
-        "/confirm_page": (context) => const ConfirmPaymentScreen(),
-        "/cable_tv": (context) => const CableTvScreen(),
-        "/enter_pass_code": (context) => const EnterPassCodeScreen(),
-        "/set_pass_code": (context) => const SetPassCodeScreen(),
-        "/beneficiary_details": (context) {
-          final bank = ModalRoute.of(context)!.settings.arguments as DummyBank;
-          return SendMoneyScreen(bank: bank);
-        },
-        "/buy_airtime": (context) => const BuyAirtimeScreen(),
-        "/transaction_history": (context) => const TransactionHistoryScreen(),
-        "/transaction_details": (context) {
-          final transactionDetails = ModalRoute.of(context)!.settings.arguments as TransactionDetailsScreen;
-          return TransactionDetailsScreen(
-            amount: transactionDetails.amount,
-            transactionTimestamp: transactionDetails.transactionTimestamp,
-            accountName: transactionDetails.accountName,
-            bankName: transactionDetails.bankName,
-          );
-        },
-        "/repeat_transaction": (context) {
-          final args = ModalRoute.of(context)!.settings.arguments as RepeatTransactionScreen;
-          return RepeatTransactionScreen(
-            amount: args.amount,
-            transactionTimestamp: args.transactionTimestamp,
-            accountName: args.accountName,
-            description: args.description, isSent: true,
-          );
-        }
-      },
+      ),
     );
   }
 }

@@ -316,7 +316,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
-        const Padding(
+        Padding(
           padding: EdgeInsets.only(left: 15, right: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -443,8 +443,8 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                     onTap: () {
                       Navigator.pushNamed(context, "/show_all_beneficiaries");
                     },
-                    child: const Row(
-                      children: [
+                    child:  Row(
+                      children: const [
                         Text(
                           'View All',
                           style: TextStyle(
