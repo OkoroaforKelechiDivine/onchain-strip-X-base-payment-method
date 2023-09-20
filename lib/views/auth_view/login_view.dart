@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../data/view_models/auth/login_view_model.dart';
 import '../../token/token_provider.dart';
+import '../../widgets/app_button.dart';
 import 'connection/connectivity.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -120,25 +121,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildSignInButton(BuildContext context,{required void Function()? onPressed,required LoginState loginState}) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        child: loginState.state == ViewState.Busy ?
-        CircularProgressIndicator()
-            :
-        const Text(
-          'Sign in',
-          style: TextStyle(
-            fontSize: AppFontSize.size16,
-            color: AppColors.deepWhite,
-            fontWeight: AppFontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget _buildRequestForPOS() {
     return Center(
@@ -198,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  _buildSignInButton(context, onPressed: ()async{
+                  appButton(context, onPressed: ()async{
                     await model.login(username: userNameController.text,password: passwordController.text);
                     if(model.state == ViewState.Retrieved){
                     //   navigate to next screen
