@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: ">=2.18.4 <3.0.0"
 
 dependencies:
   flutter:
@@ -20,6 +20,8 @@ dependencies:
   provider:
   connectivity:
   jwt_decode:
+  flutter_secure_storage: ^8.1.0
+  get_it: ^7.6.0
 
 
 dev_dependencies:

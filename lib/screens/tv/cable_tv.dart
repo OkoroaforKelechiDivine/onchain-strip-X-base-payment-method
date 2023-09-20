@@ -167,7 +167,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
           ),
           _buildTVProviderTextField(),
           const SizedBox(height: 10),
-          const Row(
+           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(

@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:pay_me_mobile/data/constants/environment_initializer.dart';
 
 import '../constants/enum/request_type.dart';
+import '../utilities/secure_storage/secure_storage_utils.dart';
 
 class NetworkManager {
   static BaseOptions options = BaseOptions(
@@ -31,7 +32,7 @@ class NetworkManager {
       }) async {
     Map<String, dynamic> apiResponse;
 
-    String? token = "token"; //await SecureStorageUtils.retrieveToken();
+    String? token = await SecureStorageUtils.retrieveToken();
     var baseUrl = EnvironmentInitializer.BASE_URL;
     String url = '$baseUrl$requestUrl';
 

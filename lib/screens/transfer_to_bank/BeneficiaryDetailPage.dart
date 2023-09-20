@@ -77,7 +77,7 @@ class BeneficiaryDetailPage extends StatelessWidget {
                   color: AppColors.lightGreen,
                   child: InkWell(
                     onTap: () {},
-                    child: const Padding(
+                    child: Padding(
                       padding: EdgeInsets.all(10.0),
                       child: Row(
                         children: [
@@ -102,7 +102,7 @@ class BeneficiaryDetailPage extends StatelessWidget {
                 color: AppColors.lightGreen,
                 child: InkWell(
                   onTap: () {},
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Row(
                       children: [

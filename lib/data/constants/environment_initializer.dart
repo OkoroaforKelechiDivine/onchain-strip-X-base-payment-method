@@ -25,7 +25,7 @@ class _BaseUrlConfig {
   static const BASE_URL = 'BaseUrl';
 
   static Map<String, dynamic> debugConstants = {
-    BASE_URL: "Dev Base URL",
+    BASE_URL: "https://dzbilqfc4qszv.cloudfront.net",
   };
 
   static Map<String, dynamic> prodConstants = {
