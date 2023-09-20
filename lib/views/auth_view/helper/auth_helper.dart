@@ -89,8 +89,7 @@ class AuthHelper {
     }
   }
 
-  static Future<void> login(
-      BuildContext context, String username, String password) async {
+  static Future<void> login(BuildContext context, String username, String password) async {
     final dio = Dio();
     final connectivityResult = await Connectivity().checkConnectivity();
 

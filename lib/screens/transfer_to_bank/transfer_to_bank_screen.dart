@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -5,7 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import 'package:pay_me_mobile/views/auth_view/helper/transaction_helper.dart';
 
+import '../../views/auth_view/helper/auth_helper.dart';
 import '../../views/auth_view/process/processing_bar.dart';
 import '../../views/custom/custom_bottom_bar_navigation.dart';
 import '../transaction_history/repeat_transaction.dart';
@@ -157,43 +160,51 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   }
 
   Widget _buildBankList() {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: filteredBanks.length,
+    return FutureBuilder<List<Bank>>(
+      future: TransactionHelper.fetchBanks(context),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}', style: const TextStyle(color: AppColors.lightBlack));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Text('No banks available', style: TextStyle(color: AppColors.lightBlack));
+        } else {
+          final List<Bank>? banks = snapshot.data;
+          return ListView.builder(
+            itemCount: banks?.length ?? 0,
             itemBuilder: (BuildContext context, int index) {
-              if (index < filteredBanks.length) {
-                DummyBank bank = filteredBanks[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 1.0),
-                  child: ListTile(
-                    leading: Image.asset(
-                      bank.logo,
-                      width: 40,
+              final Bank? bank = banks?[index];
+              final String logoDataUri = bank!.logo;
+
+              final base64String = logoDataUri.split(',').last;
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 1.0),
+                child: ListTile(
+                  leading: bank.logo.isNotEmpty ? Image.memory(
+                    base64Decode(base64String),
+                    width: 40,
+                    height: 40,
+                  ) : const Icon(Icons.house),
+                  title: Text(
+                    bank.name,
+                    style: TextStyle(
+                      fontWeight: AppFontWeight.bold,
+                      fontFamily: GoogleFonts.alegreyaSans().fontFamily,
                     ),
-                    title: Text(
-                      bank.name,
-                      style: TextStyle(
-                        fontWeight: AppFontWeight.bold,
-                        fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-                      ),
-                    ),
-                    onTap: () {
-                      _selectedBankController.text = bank.name;
-                      _selectedBankLogo = bank.logo;
-                      _userName = "";
-                      Navigator.of(context).pop(bank);
-                    },
                   ),
-                );
-              } else {
-                return null;
-              }
+                  onTap: () {
+                    _selectedBankController.text = bank.name;
+                    _selectedBankLogo = bank.logo;
+                    _userName = "";
+                    Navigator.of(context).pop(bank);
+                  },
+                ),
+              );
             },
-          ),
-        ),
-      ],
+          );
+        }
+      },
     );
   }
 
@@ -219,6 +230,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   }
 
   Widget _buildRecipientCard(BuildContext context) {
+    final bankLogoAsset = _selectedBankLogo.isEmpty ? null : _selectedBankLogo.startsWith("data:image") ? _selectedBankLogo.split(',')[1] : _selectedBankLogo;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -256,7 +268,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                   ),
                   child: Row(
                     children: [
-                      _selectedBankLogo.isEmpty ? Container() : Image.asset(_selectedBankLogo, width: 30.0, height: 30.0),
+                      bankLogoAsset != null ? Image.memory(base64Decode(bankLogoAsset), width: 30.0, height: 30.0) : Container(),
                       const SizedBox(width: 8.0),
                       Expanded(
                         child: GestureDetector(
@@ -408,7 +420,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6.0),
       child: Card(
-        color: AppColors.lightBlue,
+        color: AppColors.pureWhite,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -431,8 +443,8 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                     onTap: () {
                       Navigator.pushNamed(context, "/show_all_beneficiaries");
                     },
-                    child: Row(
-                      children: const [
+                    child: const Row(
+                      children: [
                         Text(
                           'View All',
                           style: TextStyle(
@@ -478,7 +490,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                         );
                       },
                       child: Container(
-                        color: AppColors.lightBlue,
+                        color: AppColors.pureWhite,
                         child: Column(
                           children: [
                             Row(
@@ -544,7 +556,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
       ),
     );
     UnderlineInputBorder customFocusedErrorBorder = const UnderlineInputBorder(
-      borderSide: BorderSide(color: AppColors.errorRed),
+        borderSide: BorderSide(color: AppColors.errorRed)
     );
     return TextFormField(
       controller: _accountNumberController,
@@ -591,11 +603,11 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
             _showLinearProcessing = true;
             _isAccountNumberErrorVisible = false;
             _isAccountNumberLengthInvalid = false;
-            Future.delayed(const Duration(seconds: 3), () {
-              DummyBank matchingBank;
+            Future.delayed(const Duration(seconds: 3), () async {
               try {
-                matchingBank = dummyBanks.firstWhere((bank) => bank.accountNumber == value && bank.name == _selectedBankController.text);
-                _userName = matchingBank.accountName;
+                String accountType = "inter";
+                String beneficiaryAccount = await TransactionHelper.fetchBeneficiaryAccount(context, value, _selectedBankController.text, accountType);
+                _userName = beneficiaryAccount;
               } catch (e) {
                 _isAccountNumberErrorVisible = true;
                 _userName = 'Account not found';
@@ -605,8 +617,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
               setState(() {});
             });
           }
-        }
-        );
+        });
       },
       validator: (value) {
         if (value == null || value.isEmpty) {
