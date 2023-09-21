@@ -1,26 +1,25 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/screens/buy_airtime/buy_airtime_screen.dart';
-import 'package:pay_me_mobile/screens/buy_power/buy_power_screen.dart';
-import 'package:pay_me_mobile/screens/home_page/home_page_screen.dart';
-import 'package:pay_me_mobile/screens/raise_payment/raise_payment.dart';
-import 'package:pay_me_mobile/screens/splash/splash_screen.dart';
-import 'package:pay_me_mobile/screens/transaction_history/repeat_transaction.dart';
-import 'package:pay_me_mobile/screens/transaction_history/transaction_details.dart';
-import 'package:pay_me_mobile/screens/transaction_history/transaction_history.dart';
-import 'package:pay_me_mobile/screens/transfer_to_bank/send_money.dart';
-import 'package:pay_me_mobile/screens/transfer_to_bank/show_all_recent_transaction.dart';
-import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.dart';
-import 'package:pay_me_mobile/screens/tv/cable_tv.dart';
-import 'package:pay_me_mobile/views/auth_view/login_view.dart';
-import 'package:pay_me_mobile/views/auth_view/passcode/enter_passcode.dart';
-import 'package:pay_me_mobile/views/auth_view/passcode/set_pass_code.dart';
-import 'package:pay_me_mobile/views/custom/confirm_page.dart';
-import 'package:pay_me_mobile/views/custom/show_pin_dialog.dart';
 import 'package:provider/provider.dart';
 
 import 'app_config/manager/theme_manager.dart';
+import 'data/custom/confirm_page.dart';
+import 'data/custom/show_pin_dialog.dart';
+import 'data/screens/buy_airtime/buy_airtime_screen.dart';
+import 'data/screens/buy_power/buy_power_screen.dart';
+import 'data/screens/home_page/home_page_screen.dart';
+import 'data/screens/login/set_login_screen.dart';
+import 'data/screens/passcode/enter_passcode.dart';
+import 'data/screens/passcode/set_pass_code.dart';
+import 'data/screens/raise_payment/raise_payment.dart';
+import 'data/screens/splash/splash_screen.dart';
+import 'data/screens/transaction_history/repeat_transaction.dart';
+import 'data/screens/transaction_history/transaction_details.dart';
+import 'data/screens/transaction_history/transaction_history.dart';
+import 'data/screens/transfer_to_bank/send_money.dart';
+import 'data/screens/transfer_to_bank/show_all_recent_transaction.dart';
+import 'data/screens/transfer_to_bank/transfer_to_bank_screen.dart';
+import 'data/screens/tv/cable_tv.dart';
 import 'locator.dart';
 
 class MyApp extends StatelessWidget {
