@@ -13,7 +13,7 @@ import 'package:pay_me_mobile/screens/transfer_to_bank/send_money.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/show_all_recent_transaction.dart';
 import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.dart';
 import 'package:pay_me_mobile/screens/tv/cable_tv.dart';
-import 'package:pay_me_mobile/views/auth_view/login_view.dart';
+import 'package:pay_me_mobile/screens/login/set_login_screen.dart';
 import 'package:pay_me_mobile/views/auth_view/passcode/enter_passcode.dart';
 import 'package:pay_me_mobile/views/auth_view/passcode/set_pass_code.dart';
 import 'package:pay_me_mobile/views/custom/confirm_page.dart';

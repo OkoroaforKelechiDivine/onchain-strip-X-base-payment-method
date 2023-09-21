@@ -12,7 +12,6 @@ class LoginViewModel extends LoginState {
   String? _message;
   String? get message => _message;
 
-  ///password visibility flag
   bool _hidePassword = true;
   bool get hidePassword => _hidePassword;
   set hidePassword(bool val) {
@@ -32,20 +31,24 @@ class LoginViewModel extends LoginState {
 
   String? _pwd;
   String? get pwd => _pwd;
+  // String? _errorMessage;
+  // String? get errorMessage => _errorMessage;
 
-  ///login
-  login(
-  {String? username,
-  String? password,}) async {
-  setState(ViewState.Busy);
-  final data = {
-    "username": username,
-    "password": password,
-  };
-  await _authDataProvider.login(data).then((response) {
-    setState(ViewState.Retrieved);
-    ///save user token to secure storage
-    SecureStorageUtils.saveToken(token: response.token ?? "null");
-  });
+
+  login({String? username, String? password}) async {
+    setState(ViewState.Busy);
+    final data = {
+      "username": username,
+      "password": password,
+    };
+    try {
+      final response = await _authDataProvider.login(data);
+      SecureStorageUtils.saveToken(token: response.token ?? "null");
+      setState(ViewState.Retrieved);
+    } catch (e) {
+      _message = "Incorrect username or password";
+      setState(ViewState.Error);
+    }
   }
+
 }

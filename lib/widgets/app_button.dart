@@ -12,12 +12,11 @@ Widget appButton(BuildContext context,{required void Function()? onPressed,requi
     child: ElevatedButton(
       onPressed: onPressed,
       child: loginState.state == ViewState.Busy ?
-      CircularProgressIndicator()
-          :
+      const CircularProgressIndicator() :
       const Text(
         'Sign in',
         style: TextStyle(
-          fontSize: AppFontSize.size16,
+          fontSize: AppFontSize.size14,
           color: AppColors.deepWhite,
           fontWeight: AppFontWeight.bold,
         ),

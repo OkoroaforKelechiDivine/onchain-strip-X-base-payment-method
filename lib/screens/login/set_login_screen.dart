@@ -55,7 +55,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildTextField(String hintText, TextEditingController controller, bool isPassword, bool isVisible, void Function() toggleVisibility) {
+  Widget _buildTextField(String hintText, TextEditingController controller,
+      bool isPassword, bool isVisible, void Function() toggleVisibility) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -86,13 +87,15 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: InputDecoration(
               hintText: 'Enter $hintText',
               filled: true,
-              hintStyle: const TextStyle(color: AppColors.lightGrey, fontSize: AppFontSize.size12),
+              hintStyle: const TextStyle(
+                  color: AppColors.lightGrey, fontSize: AppFontSize.size12
+              ),
               fillColor: AppColors.deepWhite,
               border: InputBorder.none,
               suffixIcon: isPassword ? GestureDetector(
                 onTap: toggleVisibility,
                 child: Icon(
-                  isVisible ? Icons.visibility : Icons.visibility_off ,
+                  isVisible ? Icons.visibility : Icons.visibility_off,
                   color: AppColors.lightGrey,
                 ),
               )
@@ -100,7 +103,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             textCapitalization: TextCapitalization.none,
             textInputAction: TextInputAction.next,
-            keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.text,
+            keyboardType: isPassword
+                ? TextInputType.visiblePassword
+                : TextInputType.text,
             obscureText: isPassword ? !isVisible : false,
             controller: controller,
           ),
@@ -144,6 +149,21 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Widget _buildErrorMessage(BuildContext context) {
+    final model = Provider.of<LoginViewModel>(context);
+    if (model.message != null && model.state == ViewState.Error) {
+      return Text(
+        model.message!,
+        style: const TextStyle(
+          fontWeight: AppFontWeight.light,
+          color: AppColors.errorRed,
+        ),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginViewModel>(
@@ -161,21 +181,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 25),
                   _buildLockImage(),
                   const SizedBox(height: 10),
-                  _buildTextField(
-                    "Username",
-                    userNameController,
-                    false,
-                    false,
-                        (){}
-                  ),
+                  _buildTextField("Username", userNameController, false, false, (){}),
                   const SizedBox(height: 20),
-                  _buildTextField(
-                    "Password",
-                    passwordController,
-                    true,
-                    _obscurePassword,
-                    toggleVisibility,
-                  ),
+                  _buildTextField("Password", passwordController, true, _obscurePassword, toggleVisibility),
                   _buildForgotPasswordButton(),
                   Center(
                     child: Text(
@@ -186,6 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
+                  _buildErrorMessage(context),
                   const SizedBox(height: 10),
                   appButton(context, onPressed: ()async{
                     await model.login(

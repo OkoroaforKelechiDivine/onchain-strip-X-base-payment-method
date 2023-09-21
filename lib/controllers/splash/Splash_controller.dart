@@ -1,7 +1,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../views/auth_view/login_view.dart';
+import '../../screens/login/set_login_screen.dart';
 
 
 class SplashController {
