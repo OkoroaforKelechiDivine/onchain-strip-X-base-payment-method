@@ -6,6 +6,7 @@ import 'package:pay_me_mobile/data/constants/enum/view_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../../widgets/app_button.dart';
+import '../../../widgets/error_message.dart';
 import '../../view_models/auth/login_model.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -55,8 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildTextField(String hintText, TextEditingController controller,
-      bool isPassword, bool isVisible, void Function() toggleVisibility) {
+  Widget _buildTextField(String hintText, TextEditingController controller, bool isPassword, bool isVisible, void Function() toggleVisibility) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -149,21 +149,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildErrorMessage(BuildContext context) {
-    final model = Provider.of<LoginViewModel>(context);
-    if (model.message != null && model.state == ViewState.Error) {
-      return Text(
-        model.message!,
-        style: const TextStyle(
-          fontWeight: AppFontWeight.light,
-          color: AppColors.errorRed,
-        ),
-      );
-    } else {
-      return const SizedBox.shrink();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginViewModel>(
@@ -194,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  _buildErrorMessage(context),
+                  buildErrorMessage(context),
                   const SizedBox(height: 10),
                   appButton(context, onPressed: ()async{
                     await model.login(
