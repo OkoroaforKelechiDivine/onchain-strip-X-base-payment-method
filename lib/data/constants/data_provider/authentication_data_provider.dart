@@ -31,4 +31,28 @@ class AuthenticationDataProvider {
     }
     return completer.future;
   }
+
+  Future<EnterPasscodeResponse> enterPasscode(Map<String, dynamic> passcodeDetails) async {
+    var completer = Completer<EnterPasscodeResponse>();
+    try {
+      Map<String, dynamic>? response = await networkManager.networkRequestManager(
+        RequestType.POST,
+        ApiRoutes.enterPasscode,
+        body: json.encode(passcodeDetails),
+        useAuth: true,
+        retrieveResponse: true,
+        retrieveUnauthorizedResponse: false,
+      );
+      if (response != null) {
+        var result = EnterPasscodeResponse.fromJson(response);
+        completer.complete(result);
+      } else {
+        completer.completeError("Network error or no response received.");
+      }
+    } catch (e) {
+      completer.completeError(e);
+    }
+    return completer.future;
+  }
+
 }

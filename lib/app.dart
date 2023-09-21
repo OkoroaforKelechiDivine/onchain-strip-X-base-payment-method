@@ -1,9 +1,10 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/screens/buy_airtime/buy_airtime_screen.dart';
 import 'package:pay_me_mobile/screens/buy_power/buy_power_screen.dart';
 import 'package:pay_me_mobile/screens/home_page/home_page_screen.dart';
+import 'package:pay_me_mobile/screens/passcode/enter_passcode.dart';
+import 'package:pay_me_mobile/screens/passcode/set_pass_code.dart';
 import 'package:pay_me_mobile/screens/raise_payment/raise_payment.dart';
 import 'package:pay_me_mobile/screens/splash/splash_screen.dart';
 import 'package:pay_me_mobile/screens/transaction_history/repeat_transaction.dart';
@@ -14,8 +15,6 @@ import 'package:pay_me_mobile/screens/transfer_to_bank/show_all_recent_transacti
 import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.dart';
 import 'package:pay_me_mobile/screens/tv/cable_tv.dart';
 import 'package:pay_me_mobile/screens/login/set_login_screen.dart';
-import 'package:pay_me_mobile/views/auth_view/passcode/enter_passcode.dart';
-import 'package:pay_me_mobile/views/auth_view/passcode/set_pass_code.dart';
 import 'package:pay_me_mobile/views/custom/confirm_page.dart';
 import 'package:pay_me_mobile/views/custom/show_pin_dialog.dart';
 import 'package:provider/provider.dart';
