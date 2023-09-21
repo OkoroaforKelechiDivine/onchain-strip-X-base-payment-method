@@ -1,7 +1,7 @@
 import 'package:pay_me_mobile/data/constants/enum/view_state.dart';
 
 import '../../../locator.dart';
-import '../../constants/data_provider/authentication_data_provider.dart';
+import '../../data_provider/authentication_data_provider.dart';
 import '../../states/auth/login_state.dart';
 import '../../utilities/secure_storage/secure_storage_utils.dart';
 

@@ -1,4 +1,4 @@
 class ApiRoutes {
   static var login = "login";
-  static var enterPasscode = "enter_passcode";
+  static var enterPasscode = "validate_passcode";
 }
