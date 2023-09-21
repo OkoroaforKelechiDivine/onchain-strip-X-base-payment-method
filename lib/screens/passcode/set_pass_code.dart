@@ -6,19 +6,20 @@ import 'package:pay_me_mobile/views/auth_view/process/processing_bar.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../../app_config/manager/theme_manager.dart';
-import '../helper/auth_helper.dart';
+import '../../views/auth_view/helper/auth_helper.dart';
 
-class EnterPassCodeScreen extends StatefulWidget {
-  const EnterPassCodeScreen({Key? key}) : super(key: key);
+class SetPassCodeScreen extends StatefulWidget {
+  const SetPassCodeScreen({Key? key}) : super(key: key);
 
   @override
-  State<EnterPassCodeScreen> createState() => _EnterPassCodeScreenState();
+  State<SetPassCodeScreen> createState() => _SetPassCodeScreenState();
 }
 
-class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
+class _SetPassCodeScreenState extends State<SetPassCodeScreen> {
   List<String> enteredDigits = [];
   bool isProcessing = false;
-  bool isError = false;
+  String? firstPassCode;
+  String? secondPassCode;
 
   void _onButtonPressed(String buttonText) {
     if (buttonText == 'Delete') {
@@ -32,15 +33,31 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
         setState(() {
           enteredDigits.add(buttonText);
           if (enteredDigits.length == 6) {
-            _verifyPassCode(enteredDigits.join());
+            if (firstPassCode == null) {
+              setState(() {
+                firstPassCode = enteredDigits.join();
+                enteredDigits.clear();
+              });
+            } else {
+              setState(() {
+                secondPassCode = enteredDigits.join();
+                if (firstPassCode == secondPassCode) {
+                  isProcessing = true;
+                  _savePasscodeToEndpointAndNavigate();
+                }
+              });
+            }
           }
         });
       }
     }
   }
 
-  Future<void> _verifyPassCode(String passcode) async {
-    await AuthHelper.verifyPassCode(context, passcode);
+  void _savePasscodeToEndpointAndNavigate() {
+    Future.delayed(const Duration(seconds: 5), () {
+      Navigator.of(context).pushReplacementNamed("/home");
+    });
+    AuthHelper.savePasscodeToEndpoint(context, firstPassCode!);
   }
 
   @override
@@ -63,14 +80,6 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
                         const ProcessingBar(),
                       _buildLogo(),
                       _buildWelcomeText(),
-                      if (isError)
-                        const Text(
-                          'Incorrect passcode. Please try again.',
-                          style: TextStyle(
-                            color: AppColors.errorRed,
-                            fontSize: 16.0,
-                          ),
-                        ),
                       Keypad(
                         enteredDigits: enteredDigits,
                         onButtonPressed: _onButtonPressed,
@@ -100,7 +109,9 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
             style: TextStyle(
               fontSize: AppFontSize.size22,
               color: AppColors.lightBlack,
-              fontFamily: GoogleFonts.alegreyaSans().fontFamily,
+              fontFamily: GoogleFonts
+                  .alegreyaSans()
+                  .fontFamily,
             ),
           ),
         ],
@@ -137,7 +148,7 @@ class Keypad extends StatelessWidget {
 
   Widget _buildPasscodeText() {
     return const Text(
-      "Enter Passcode",
+      "Set Passcode",
       style: TextStyle(
         fontSize: AppFontSize.size18,
         color: AppColors.lightGrey,

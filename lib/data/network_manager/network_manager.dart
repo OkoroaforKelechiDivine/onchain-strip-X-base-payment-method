@@ -36,8 +36,6 @@ class NetworkManager {
     var baseUrl = EnvironmentInitializer.BASE_URL;
     String url = '$baseUrl$requestUrl';
 
-    // print("Bearer: $token, Url: $url, Body: $body, Query: $queryParameters");
-
     if (useAuth) {
       client!.interceptors.add(InterceptorsWrapper(onRequest:
           (RequestOptions options, RequestInterceptorHandler handler) async {

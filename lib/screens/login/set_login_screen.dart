@@ -5,7 +5,7 @@ import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/data/constants/enum/view_state.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/view_models/auth/login_view_model.dart';
+import '../../data/view_models/auth/login_model.dart';
 import '../../widgets/app_button.dart';
 
 class LoginScreen extends StatefulWidget {

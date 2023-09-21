@@ -6,9 +6,7 @@ import '../../states/auth/login_state.dart';
 import '../../utilities/secure_storage/secure_storage_utils.dart';
 
 class LoginViewModel extends LoginState {
-  ///data provider
   final AuthenticationDataProvider _authDataProvider = locator<AuthenticationDataProvider>();
-  /// message
   String? _message;
   String? get message => _message;
 
@@ -19,7 +17,6 @@ class LoginViewModel extends LoginState {
     notifyListeners();
   }
 
-  ///enable button flag
   bool _enableButton = false;
   bool get enableButton => _enableButton;
   set enableButton(bool val) {
@@ -31,9 +28,6 @@ class LoginViewModel extends LoginState {
 
   String? _pwd;
   String? get pwd => _pwd;
-  // String? _errorMessage;
-  // String? get errorMessage => _errorMessage;
-
 
   login({String? username, String? password}) async {
     setState(ViewState.Busy);
