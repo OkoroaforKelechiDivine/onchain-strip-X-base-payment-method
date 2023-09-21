@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/views/custom/confirm_page.dart';
-import 'package:pay_me_mobile/views/custom/show_pin_dialog.dart';
 import 'package:provider/provider.dart';
 
 import 'app_config/manager/theme_manager.dart';
+import 'data/custom/confirm_page.dart';
+import 'data/custom/show_pin_dialog.dart';
 import 'data/screens/buy_airtime/buy_airtime_screen.dart';
 import 'data/screens/buy_power/buy_power_screen.dart';
 import 'data/screens/home_page/home_page_screen.dart';

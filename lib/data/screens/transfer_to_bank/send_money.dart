@@ -3,9 +3,9 @@ import 'package:pay_me_mobile/data/screens/transfer_to_bank/transfer_to_bank_scr
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../../app_config/manager/theme_manager.dart';
-import '../../../views/custom/custom_dynamic_label_textfield.dart';
-import '../../../views/custom/custom_underline.dart';
-import '../../../views/custom/show_pin_dialog.dart';
+import '../../custom/custom_dynamic_label_textfield.dart';
+import '../../custom/custom_underline.dart';
+import '../../custom/show_pin_dialog.dart';
 
 class SendMoneyScreen extends StatefulWidget {
   final DummyBank bank;

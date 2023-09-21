@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/views/custom/set_congratulations_screen.dart';
-import 'package:pay_me_mobile/views/custom/show_processing_screen.dart';
+import 'package:pay_me_mobile/data/custom/set_congratulations_screen.dart';
+import 'package:pay_me_mobile/data/custom/show_processing_screen.dart';
 import 'dart:ui';
 
 import '../../app_config/manager/font_manager.dart';

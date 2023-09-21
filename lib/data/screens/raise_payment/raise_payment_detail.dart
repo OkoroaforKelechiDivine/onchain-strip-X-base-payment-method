@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 
 import '../../../app_config/manager/font_manager.dart';
-import '../../../views/custom/custom_bottom_bar_navigation.dart';
+import '../../custom/custom_bottom_bar_navigation.dart';
 import '../transaction_history/repeat_transaction.dart';
 
 class RaisePaymentDetailsScreen extends StatefulWidget {
