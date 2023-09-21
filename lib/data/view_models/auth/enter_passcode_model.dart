@@ -8,15 +8,8 @@ import '../../utilities/secure_storage/secure_storage_utils.dart';
 class EnterPasscodeModel extends EnterPasscodeState {
   final AuthenticationDataProvider _authDataProvider = locator<AuthenticationDataProvider>();
   String? _message;
-  ViewState _viewState = ViewState.Idle;
 
-  ViewState get viewState => _viewState;
   String? get message => _message;
-
-  @override
-  void setState(ViewState viewState) {
-    _viewState = viewState;
-  }
 
   enterPasscode(BuildContext context, {String? passcode}) async {
     setState(ViewState.Busy);

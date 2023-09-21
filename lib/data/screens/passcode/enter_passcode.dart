@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../../app_config/manager/theme_manager.dart';
-import '../../custom/process/processing_bar.dart';
 import '../../view_models/auth/enter_passcode_model.dart';
 
 class EnterPassCodeScreen extends StatefulWidget {
@@ -56,8 +55,6 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      if (isProcessing)
-                        const ProcessingBar(),
                       _buildLogo(),
                       _buildWelcomeText(),
                       if (isError)

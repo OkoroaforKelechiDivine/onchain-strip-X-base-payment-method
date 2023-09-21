@@ -52,7 +52,7 @@ class AuthenticationDataProvider {
 
       if (response != null) {
         if (response['message'] == true) {
-          navigateToHome(context);
+            navigateToHome(context);
         }
         else {
           print('Incorrect passcode. Please try again.');
