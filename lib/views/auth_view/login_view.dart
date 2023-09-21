@@ -1,18 +1,12 @@
-import 'package:connectivity/connectivity.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jwt_decode/jwt_decode.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/data/constants/enum/view_state.dart';
-import 'package:pay_me_mobile/data/states/auth/login_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/view_models/auth/login_view_model.dart';
-import '../../token/token_provider.dart';
 import '../../widgets/app_button.dart';
-import 'connection/connectivity.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -22,11 +16,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final bool _obscurePassword = true;
+  bool _obscurePassword = true;
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String message = "";
 
+  void toggleVisibility() {
+    setState(() {
+      _obscurePassword = !_obscurePassword;
+    });
+  }
 
   Widget _buildLogo() {
     return Image.asset(
@@ -65,37 +64,46 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Text(
             hintText,
             style: const TextStyle(
-                color: AppColors.lightBlack,
-                fontSize: AppFontSize.size16,
-                fontWeight: AppFontWeight.light
+              color: AppColors.lightBlack,
+              fontSize: AppFontSize.size16,
+              fontWeight: AppFontWeight.light,
             ),
           ),
         ),
         const SizedBox(height: 5),
-        TextFormField(
-          decoration: InputDecoration(
-            hintText: 'Enter $hintText',
-            filled: true,
-            fillColor: AppColors.pureWhite,
-            border: OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: AppColors.pureWhite,
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.deepWhite,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.lightGrey.withOpacity(0.1),
+                blurRadius: 4,
               ),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            suffixIcon: isPassword ? GestureDetector(
-              onTap: toggleVisibility,
-              child: Icon(
-                isVisible ? Icons.visibility_off : Icons.visibility,
-                color: AppColors.lightBlack,
-              ),
-            ) : null,
+            ],
           ),
-          textCapitalization: TextCapitalization.none,
-          textInputAction: TextInputAction.next,
-          keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.text,
-          obscureText: isPassword && !_obscurePassword,
-          controller: controller,
+          child: TextFormField(
+            decoration: InputDecoration(
+              hintText: 'Enter $hintText',
+              filled: true,
+              hintStyle: const TextStyle(color: AppColors.lightGrey, fontSize: AppFontSize.size12),
+              fillColor: AppColors.deepWhite,
+              border: InputBorder.none,
+              suffixIcon: isPassword ? GestureDetector(
+                onTap: toggleVisibility,
+                child: Icon(
+                  isVisible ? Icons.visibility : Icons.visibility_off ,
+                  color: AppColors.lightGrey,
+                ),
+              )
+                  : null,
+            ),
+            textCapitalization: TextCapitalization.none,
+            textInputAction: TextInputAction.next,
+            keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.text,
+            obscureText: isPassword ? !isVisible : false,
+            controller: controller,
+          ),
         ),
       ],
     );
@@ -120,7 +128,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 
   Widget _buildRequestForPOS() {
     return Center(
@@ -166,8 +173,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     "Password",
                     passwordController,
                     true,
-                    false,
-                        (){}
+                    _obscurePassword,
+                    toggleVisibility,
                   ),
                   _buildForgotPasswordButton(),
                   Center(
@@ -181,9 +188,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 10),
                   appButton(context, onPressed: ()async{
-                    await model.login(username: userNameController.text,password: passwordController.text);
+                    await model.login(
+                        username: userNameController.text,
+                        password: passwordController.text
+                    );
                     if(model.state == ViewState.Retrieved){
-                    //   navigate to next screen
                       _gotoNextScreen();
                     }
                     }, loginState: model),
