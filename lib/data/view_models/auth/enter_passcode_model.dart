@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pay_me_mobile/data/states/auth/enter_passcode_state.dart';
 import '../../../locator.dart';
 import '../../constants/enum/view_state.dart';
 import '../../data_provider/authentication_data_provider.dart';
 import '../../utilities/secure_storage/secure_storage_utils.dart';
 
-class EnterPasscodeModel {
+class EnterPasscodeModel extends EnterPasscodeState {
   final AuthenticationDataProvider _authDataProvider = locator<AuthenticationDataProvider>();
   String? _message;
   ViewState _viewState = ViewState.Idle;
@@ -12,8 +13,9 @@ class EnterPasscodeModel {
   ViewState get viewState => _viewState;
   String? get message => _message;
 
-  void setState(ViewState newState) {
-    _viewState = newState;
+  @override
+  void setState(ViewState viewState) {
+    _viewState = viewState;
   }
 
   enterPasscode(BuildContext context, {String? passcode}) async {

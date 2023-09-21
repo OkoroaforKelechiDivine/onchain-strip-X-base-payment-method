@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pay_me_mobile/views/auth_view/process/processing_bar.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../../app_config/manager/theme_manager.dart';
 import '../../../views/auth_view/helper/auth_helper.dart';
+import '../../custom/process/processing_bar.dart';
 
 class SetPassCodeScreen extends StatefulWidget {
   const SetPassCodeScreen({Key? key}) : super(key: key);

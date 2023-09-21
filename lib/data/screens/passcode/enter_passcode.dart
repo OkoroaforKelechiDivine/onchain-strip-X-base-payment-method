@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pay_me_mobile/views/auth_view/process/processing_bar.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../../app_config/manager/theme_manager.dart';
+import '../../custom/process/processing_bar.dart';
 import '../../view_models/auth/enter_passcode_model.dart';
 
 class EnterPassCodeScreen extends StatefulWidget {
