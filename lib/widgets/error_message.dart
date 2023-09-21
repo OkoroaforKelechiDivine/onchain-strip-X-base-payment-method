@@ -15,6 +15,7 @@ Widget buildErrorMessage(BuildContext context) {
       style: const TextStyle(
         fontWeight: AppFontWeight.light,
         color: AppColors.errorRed,
+        fontSize: AppFontSize.size18
       ),
     );
   } else {

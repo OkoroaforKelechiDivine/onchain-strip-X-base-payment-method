@@ -15,7 +15,7 @@ Widget appButton(BuildContext context,{required void Function()? onPressed,requi
       const Text(
         'Sign in',
         style: TextStyle(
-          fontSize: AppFontSize.size14,
+          fontSize: AppFontSize.size18,
           color: AppColors.deepWhite,
           fontWeight: AppFontWeight.bold,
         ),

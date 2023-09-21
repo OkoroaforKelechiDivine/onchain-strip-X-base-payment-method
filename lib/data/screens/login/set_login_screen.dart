@@ -66,16 +66,17 @@ class _LoginScreenState extends State<LoginScreen> {
             hintText,
             style: const TextStyle(
               color: AppColors.lightBlack,
-              fontSize: AppFontSize.size16,
+              fontSize: AppFontSize.size18,
               fontWeight: AppFontWeight.light,
             ),
           ),
         ),
         const SizedBox(height: 5),
         Container(
+          height: 70,
           decoration: BoxDecoration(
             color: AppColors.deepWhite,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
                 color: AppColors.lightGrey.withOpacity(0.1),
@@ -83,31 +84,31 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ],
           ),
-          child: TextFormField(
-            decoration: InputDecoration(
-              hintText: 'Enter $hintText',
-              filled: true,
-              hintStyle: const TextStyle(
-                  color: AppColors.lightGrey, fontSize: AppFontSize.size12
-              ),
-              fillColor: AppColors.deepWhite,
-              border: InputBorder.none,
-              suffixIcon: isPassword ? GestureDetector(
-                onTap: toggleVisibility,
-                child: Icon(
-                  isVisible ? Icons.visibility : Icons.visibility_off,
-                  color: AppColors.lightGrey,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 5.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: 'Enter $hintText',
+                filled: true,
+                hintStyle: const TextStyle(
+                    color: AppColors.lightGrey, fontSize: AppFontSize.size16
                 ),
-              )
-                  : null,
+                fillColor: AppColors.deepWhite,
+                border: InputBorder.none,
+                suffixIcon: isPassword ? GestureDetector(
+                  onTap: toggleVisibility,
+                  child: Icon(
+                    isVisible ? Icons.visibility_off:Icons.visibility ,
+                    color: AppColors.lightGrey,
+                  ),
+                ) : null,
+              ),
+              textCapitalization: TextCapitalization.none,
+              textInputAction: TextInputAction.next,
+              obscureText: isPassword ? !isVisible : false,
+              keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.text,
+              controller: controller,
             ),
-            textCapitalization: TextCapitalization.none,
-            textInputAction: TextInputAction.next,
-            keyboardType: isPassword
-                ? TextInputType.visiblePassword
-                : TextInputType.text,
-            obscureText: isPassword ? !isVisible : false,
-            controller: controller,
           ),
         ),
       ],
@@ -125,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
           style: GoogleFonts.alegreyaSans(
             textStyle: const TextStyle(
               color: AppColors.lightBlack,
-              fontSize: 14,
+              fontSize: AppFontSize.size18,
               fontWeight: AppFontWeight.light,
             ),
           ),
@@ -179,7 +180,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  buildErrorMessage(context),
+                  const SizedBox(height: 10),
+                  Center(
+                      child: buildErrorMessage(context)
+                  ),
                   const SizedBox(height: 10),
                   appButton(context, onPressed: ()async{
                     await model.login(
@@ -190,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       _gotoNextScreen();
                     }
                     }, loginState: model),
-                  const SizedBox(height: 60),
+                  const SizedBox(height: 50),
                   _buildRequestForPOS(),
                 ],
               ),
