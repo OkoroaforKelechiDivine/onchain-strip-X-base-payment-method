@@ -2,12 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pay_me_mobile/data/screens/home_page/home_page_screen.dart';
 import 'package:pay_me_mobile/views/auth_view/process/processing_bar.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../../app_config/manager/theme_manager.dart';
-import '../../constants/enum/view_state.dart';
 import '../../view_models/auth/enter_passcode_model.dart';
 
 class EnterPassCodeScreen extends StatefulWidget {
@@ -85,10 +83,6 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
     );
   }
 
-  void _gotoNextScreen(){
-    Navigator.pushReplacementNamed(context, "/home");
-  }
-
   Widget _buildLogo() {
     return Image.asset('assets/png/payme.png', width: 150.0, height: 100.0);
   }
@@ -116,7 +110,9 @@ class Keypad extends StatelessWidget {
   final Function(String) onButtonPressed;
   final List<String> enteredDigits;
 
-  const Keypad({super.key, required this.onButtonPressed, required this.enteredDigits});
+  const Keypad({
+    super.key, required this.onButtonPressed, required this.enteredDigits
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +152,8 @@ class Keypad extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: enteredDigits.length > index ? AppColors.lightBlack : Colors.transparent,
+        color: enteredDigits.length > index ? AppColors.lightBlack : Colors
+            .transparent,
         border: Border.all(
           color: AppColors.lightBlack,
         ),
@@ -178,14 +175,24 @@ class Keypad extends StatelessWidget {
           '7', '8', '9',
           'Sign out', '0', 'Delete',
         ][index];
+        final isDeleteButtonDisabled = buttonText == 'Delete' && enteredDigits.isEmpty;
         return MaterialButton(
           onPressed: () {
             if (buttonText == 'Sign out') {
-            } else {
+            } else if (!isDeleteButtonDisabled) {
               onButtonPressed(buttonText);
             }
           },
-          child: (buttonText == 'Sign out' || buttonText == 'Delete') ? OverflowBox(
+          child: isDeleteButtonDisabled ? Text(
+            buttonText,
+            style: TextStyle(
+              fontSize: AppFontSize.size20,
+              fontWeight: AppFontWeight.bold,
+              fontFamily: GoogleFonts.alegreyaSans().fontFamily,
+              color: AppColors.deepWhite,
+            ),
+            textAlign: TextAlign.center,
+          ) : (buttonText == 'Sign out' || buttonText == 'Delete') ? OverflowBox(
             maxWidth: 100.0,
             alignment: Alignment.center,
             child: Text(
@@ -211,4 +218,3 @@ class Keypad extends StatelessWidget {
     );
   }
 }
-
