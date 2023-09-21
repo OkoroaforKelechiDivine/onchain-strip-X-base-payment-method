@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../app_config/manager/font_manager.dart';
-import '../../app_config/manager/theme_manager.dart';
-import '../../views/custom/custom_amount_input_field.dart';
-import '../../views/custom/custom_bottom_bar_navigation.dart';
+import '../../../app_config/manager/font_manager.dart';
+import '../../../app_config/manager/theme_manager.dart';
+import '../../../views/custom/custom_amount_input_field.dart';
+import '../../../views/custom/custom_bottom_bar_navigation.dart';
 
 class CableTvScreen extends StatefulWidget {
   const CableTvScreen({super.key});

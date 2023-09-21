@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import '../../model/auth/enter_passcode_response.dart';
 import '../../model/auth/login_response.dart';
 import '../../network_manager/network_manager.dart';
 import '../api_routes.dart';

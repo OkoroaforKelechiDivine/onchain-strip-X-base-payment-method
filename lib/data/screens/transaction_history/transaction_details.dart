@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
-import 'package:pay_me_mobile/screens/transaction_history/repeat_transaction.dart';
+import 'package:pay_me_mobile/data/screens/transaction_history/repeat_transaction.dart';
 
-import '../../app_config/manager/font_manager.dart';
-import '../../views/custom/custom_bottom_bar_navigation.dart';
+import '../../../app_config/manager/font_manager.dart';
+import '../../../views/custom/custom_bottom_bar_navigation.dart';
 
 class TransactionDetailsScreen extends StatefulWidget {
   final String amount;

@@ -8,9 +8,8 @@ import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/views/auth_view/helper/transaction_helper.dart';
 
-import '../../views/auth_view/helper/auth_helper.dart';
-import '../../views/auth_view/process/processing_bar.dart';
-import '../../views/custom/custom_bottom_bar_navigation.dart';
+import '../../../views/auth_view/process/processing_bar.dart';
+import '../../../views/custom/custom_bottom_bar_navigation.dart';
 import '../transaction_history/repeat_transaction.dart';
 import 'BeneficiaryDetailPage.dart';
 import 'send_money.dart';

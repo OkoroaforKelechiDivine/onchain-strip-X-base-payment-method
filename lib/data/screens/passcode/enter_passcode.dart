@@ -6,7 +6,7 @@ import 'package:pay_me_mobile/views/auth_view/process/processing_bar.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../../app_config/manager/theme_manager.dart';
-import '../../views/auth_view/helper/auth_helper.dart';
+import '../../../views/auth_view/helper/auth_helper.dart';
 
 class EnterPassCodeScreen extends StatefulWidget {
   const EnterPassCodeScreen({Key? key}) : super(key: key);
@@ -46,43 +46,43 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          BackdropFilter(
-            filter: isProcessing ? ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0) : ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
-            child: Container(
-              color: Colors.transparent,
-              width: double.infinity,
-              height: double.infinity,
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      if (isProcessing)
-                        const ProcessingBar(),
-                      _buildLogo(),
-                      _buildWelcomeText(),
-                      if (isError)
-                        const Text(
-                          'Incorrect passcode. Please try again.',
-                          style: TextStyle(
-                            color: AppColors.errorRed,
-                            fontSize: 16.0,
+        body: Stack(
+          children: [
+            BackdropFilter(
+              filter: isProcessing ? ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0) : ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
+              child: Container(
+                color: Colors.transparent,
+                width: double.infinity,
+                height: double.infinity,
+                child: Center(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        if (isProcessing)
+                          const ProcessingBar(),
+                        _buildLogo(),
+                        _buildWelcomeText(),
+                        if (isError)
+                          const Text(
+                            'Incorrect passcode. Please try again.',
+                            style: TextStyle(
+                              color: AppColors.errorRed,
+                              fontSize: 16.0,
+                            ),
                           ),
+                        Keypad(
+                          enteredDigits: enteredDigits,
+                          onButtonPressed: _onButtonPressed,
                         ),
-                      Keypad(
-                        enteredDigits: enteredDigits,
-                        onButtonPressed: _onButtonPressed,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
     );
   }
 

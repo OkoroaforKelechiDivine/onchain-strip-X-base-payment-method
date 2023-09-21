@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../app_config/manager/font_manager.dart';
-import '../../app_config/manager/theme_manager.dart';
-import '../../views/custom/custom_amount_input_field.dart';
-import '../../views/custom/custom_bottom_bar_navigation.dart';
-import '../../views/custom/show_pin_dialog.dart';
+import '../../../app_config/manager/font_manager.dart';
+import '../../../app_config/manager/theme_manager.dart';
+import '../../../views/custom/custom_amount_input_field.dart';
+import '../../../views/custom/custom_bottom_bar_navigation.dart';
+import '../../../views/custom/show_pin_dialog.dart';
 
 class BuyPowerScreen extends StatefulWidget {
   const BuyPowerScreen({super.key});

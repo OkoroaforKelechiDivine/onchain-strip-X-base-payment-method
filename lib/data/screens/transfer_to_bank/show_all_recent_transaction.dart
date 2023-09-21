@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
-import 'package:pay_me_mobile/screens/transfer_to_bank/transfer_to_bank_screen.dart';
+import 'package:pay_me_mobile/data/screens/transfer_to_bank/transfer_to_bank_screen.dart';
 
-import '../../views/custom/custom_bottom_bar_navigation.dart';
+import '../../../views/custom/custom_bottom_bar_navigation.dart';
 
 class ShowAllRecentTransactionsScreen extends StatelessWidget {
   final List<DummyBank> banks;

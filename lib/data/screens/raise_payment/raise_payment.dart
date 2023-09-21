@@ -4,78 +4,78 @@ import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
-import 'package:pay_me_mobile/screens/transaction_history/transaction_details.dart';
+import 'package:pay_me_mobile/data/screens/raise_payment/raise_payment_detail.dart';
 
-import '../../views/custom/custom_bottom_bar_navigation.dart';
+import '../../../views/custom/custom_bottom_bar_navigation.dart';
 import '../transfer_to_bank/transfer_to_bank_screen.dart';
 
-class TransactionHistoryScreen extends StatefulWidget {
-  const TransactionHistoryScreen({Key? key}) : super(key: key);
+class RaisePaymentScreen extends StatefulWidget {
+  const RaisePaymentScreen({Key? key}) : super(key: key);
 
   @override
-  _TransactionHistoryScreenState createState() => _TransactionHistoryScreenState();
+  _RaisePaymentScreenState createState() => _RaisePaymentScreenState();
 }
 
-class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
+class _RaisePaymentScreenState extends State<RaisePaymentScreen> {
 
   String formatTimestamp(DateTime timestamp) {
     return DateFormat('HH:mm a').format(timestamp);
   }
 
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   PreferredSizeWidget buildAppBar() {
     return AppBar(
-      title: const Padding(
-        padding: EdgeInsets.only(left: 20),
-        child: Text(
-          'Transaction History',
-          style: TextStyle(
-            color: AppColors.lightGreen,
-            fontSize: AppFontSize.size20,
-          ),
-        ),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.pushNamed(context, "/home");
+        },
       ),
-    );
-  }
-
-  Widget buildTransactionCard(String text, String routeName) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
-            side: const BorderSide(
-              color: AppColors.lightGreen,
-            ),
-          ),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, routeName);
-            },
-            child: Center(
-              child: Text(
-                text,
-                style: CustomStyles.transactionHistoryTextStyle,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildTransactionCards() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 5.0),
-      child: SizedBox(
-        height: 80.0,
+      title: Padding(
+        padding: const EdgeInsets.only(left: 20),
         child: Row(
           children: [
-            buildTransactionCard("Transfer", "/transfer"),
-            buildTransactionCard("Airtime", "/buy_airtime"),
-            buildTransactionCard("Buy Power", "/buy_power"),
+            const Text(
+              'Raise Payment',
+              style: TextStyle(
+                color: AppColors.lightGreen,
+                fontSize: AppFontSize.size20,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 45.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Container(
+                  color: AppColors.lightGreen,
+                  constraints: const BoxConstraints(maxWidth: 80, maxHeight: 25),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/transfer");
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(0),
+                    ),
+                    child: Row(
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.only(left: 15.0),
+                          child: Text(
+                            'Add New',
+                            style: TextStyle(
+                              fontSize: AppFontSize.size12,
+                              fontWeight: AppFontWeight.medium,
+                              color: AppColors.pureWhite,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -85,7 +85,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
   Widget buildTransactionList() {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.only(left: 15.0, right: 10.0),
+        padding: const EdgeInsets.only(left: 15.0, right: 10.0, top: 20),
         child: GroupedListView<DummyBank, String>(
           elements: dummyBanks,
           groupBy: (element) {
@@ -116,16 +116,15 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
             DummyBank bank = element;
             return GestureDetector(
               onTap: () {
-                final transactionDetails = TransactionDetailsScreen(
-                  amount: "₦ 20,000",
-                  transactionTimestamp: bank.timestamp,
-                  accountName: bank.accountName,
-                  bankName: bank.name,
-                );
-                Navigator.pushNamed(context,
-                    "/transaction_details",
-                    arguments: transactionDetails
-                );
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => RaisePaymentDetailsScreen(
+                    amount: "₦ 20,000",
+                    transactionTimestamp: bank.timestamp,
+                    accountName: bank.accountName,
+                    bankName: bank.name,
+                    status: bank.status
+                  )
+                ));
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 0),
@@ -158,10 +157,10 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                               fontSize: AppFontSize.size14,
                             ),
                           ),
-                          const Text(
-                            "₦20,000.00",
+                          Text(
+                            bank.status,
                             style: TextStyle(
-                              color: AppColors.lightGreen,
+                              color: bank.status == 'Approved' ? AppColors.brightGreen : bank.status == 'Declined' ? AppColors.errorRed : AppColors.dullOrange,
                               fontWeight: AppFontWeight.bold,
                               fontSize: AppFontSize.size14,
                             ),
@@ -185,7 +184,6 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
       appBar: buildAppBar(),
       body: Column(
         children: [
-          buildTransactionCards(),
           buildTransactionList(),
         ],
       ),
