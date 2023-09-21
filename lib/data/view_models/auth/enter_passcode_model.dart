@@ -1,4 +1,4 @@
-import 'package:pay_me_mobile/data/states/auth/enter_passcode_state.dart';
+import 'package:flutter/cupertino.dart';
 import '../../../locator.dart';
 import '../../constants/enum/view_state.dart';
 import '../../data_provider/authentication_data_provider.dart';
@@ -16,13 +16,13 @@ class EnterPasscodeModel {
     _viewState = newState;
   }
 
-  enterPasscode({String? passcode}) async {
+  enterPasscode(BuildContext context, {String? passcode}) async {
     setState(ViewState.Busy);
     final data = {
       "passcode": passcode,
     };
     try {
-      final response = await _authDataProvider.enterPasscode(data);
+      final response = await _authDataProvider.enterPasscode(context, data);
       SecureStorageUtils.saveToken(token: response.token ?? "null");
       setState(ViewState.Retrieved);
     } catch (e) {

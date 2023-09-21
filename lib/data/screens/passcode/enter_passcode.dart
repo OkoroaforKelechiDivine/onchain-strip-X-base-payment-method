@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pay_me_mobile/data/screens/home_page/home_page_screen.dart';
 import 'package:pay_me_mobile/views/auth_view/process/processing_bar.dart';
 
 import '../../../app_config/manager/font_manager.dart';
@@ -34,7 +35,7 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
           enteredDigits.add(buttonText);
           if (enteredDigits.length == 6) {
             final passcode = enteredDigits.join();
-            EnterPasscodeModel().enterPasscode(passcode: passcode);
+            EnterPasscodeModel().enterPasscode(context, passcode: passcode);
           }
         });
       }
@@ -82,6 +83,10 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
         ],
       ),
     );
+  }
+
+  void _gotoNextScreen(){
+    Navigator.pushReplacementNamed(context, "/home");
   }
 
   Widget _buildLogo() {
@@ -206,3 +211,4 @@ class Keypad extends StatelessWidget {
     );
   }
 }
+

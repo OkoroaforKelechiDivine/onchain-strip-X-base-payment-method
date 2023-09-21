@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:pay_me_mobile/widgets/app_button.dart';
 
 import '../constants/api_routes.dart';
 import '../constants/enum/request_type.dart';
@@ -37,7 +38,7 @@ class AuthenticationDataProvider {
     return completer.future;
   }
 
-  Future<EnterPasscodeResponse> enterPasscode(Map<String, dynamic> passcodeDetails) async {
+  Future<EnterPasscodeResponse> enterPasscode(BuildContext context, Map<String, dynamic> passcodeDetails) async {
     var completer = Completer<EnterPasscodeResponse>();
     try {
       Map<String, dynamic>? response = await networkManager.networkRequestManager(
@@ -51,7 +52,7 @@ class AuthenticationDataProvider {
 
       if (response != null) {
         if (response['message'] == true) {
-          print("Now at home screen");
+          navigateToHome(context);
         }
         else {
           print('Incorrect passcode. Please try again.');
@@ -63,7 +64,6 @@ class AuthenticationDataProvider {
         completer.completeError("Network error or no response received.");
       }
     } catch (e) {
-      print('An error occurred while verifying the passcode, please check your internet connection.');
       completer.completeError(e);
     }
     return completer.future;

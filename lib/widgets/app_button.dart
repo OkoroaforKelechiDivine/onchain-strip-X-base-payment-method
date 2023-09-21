@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../app_config/manager/font_manager.dart';
 import '../app_config/manager/theme_manager.dart';
 import '../data/constants/enum/view_state.dart';
-import '../data/states/auth/login_state.dart';
 
 Widget appButton(BuildContext context,{required void Function()? onPressed,required dynamic loginState}) {
   return Align(
@@ -23,4 +22,8 @@ Widget appButton(BuildContext context,{required void Function()? onPressed,requi
       ),
     ),
   );
+}
+
+void navigateToHome(BuildContext context) {
+  Navigator.pushReplacementNamed(context, '/home');
 }
