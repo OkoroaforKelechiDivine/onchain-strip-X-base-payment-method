@@ -152,8 +152,7 @@ class Keypad extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: enteredDigits.length > index ? AppColors.lightBlack : Colors
-            .transparent,
+        color: enteredDigits.length > index ? AppColors.lightBlack : Colors.transparent,
         border: Border.all(
           color: AppColors.lightBlack,
         ),
