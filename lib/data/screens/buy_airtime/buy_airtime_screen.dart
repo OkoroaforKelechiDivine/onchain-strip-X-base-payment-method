@@ -359,7 +359,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
           String enteredAmount = amountController.text;
           enteredAmount = enteredAmount.replaceAll("₦", "").replaceAll(",", "");
           if(transferModel.state == ViewState.Retrieved) {
-            ProcessingBar();
+            const ProcessingBar();
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) =>
