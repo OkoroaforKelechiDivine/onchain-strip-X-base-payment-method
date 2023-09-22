@@ -170,9 +170,9 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
           ),
           _buildElectricityProviderTextField(),
           const SizedBox(height: 10),
-           Row(
+           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               Padding(
                 padding: EdgeInsets.only(left: 20.0),
                 child: Text(

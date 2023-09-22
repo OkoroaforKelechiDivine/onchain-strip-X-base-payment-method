@@ -143,7 +143,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 children: [
                   _buildActionColumn(addMoneyImage, 'Earnings', () {}, textColor: AppColors.pureWhite),
                   _buildActionColumn(transferImage, 'Transfer', () { Navigator.of(context).pushReplacementNamed('/transfer'); }, textColor: AppColors.pureWhite),
-                  _buildActionColumn(posDeviceImage, 'POS Device', () {}, textColor: AppColors.pureWhite),
+                  _buildActionColumn(posDeviceImage, 'POS Device', () { Navigator.of(context).pushReplacementNamed("/pos_device"); }, textColor: AppColors.pureWhite),
                 ],
               ),
             ),

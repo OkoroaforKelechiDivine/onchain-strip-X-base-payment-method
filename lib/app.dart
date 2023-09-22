@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/data/screens/pos/set_pos_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'app_config/manager/theme_manager.dart';
@@ -9,6 +10,7 @@ import 'data/screens/buy_airtime/buy_airtime_screen.dart';
 import 'data/screens/buy_power/buy_power_screen.dart';
 import 'data/screens/home_page/home_page_screen.dart';
 import 'data/screens/login/set_login_screen.dart';
+import 'data/screens/outlet/outlet_screen.dart';
 import 'data/screens/passcode/enter_passcode.dart';
 import 'data/screens/passcode/set_pass_code.dart';
 import 'data/screens/raise_payment/raise_payment.dart';
@@ -55,6 +57,8 @@ class MyApp extends StatelessWidget {
           "/cable_tv": (context) => const CableTvScreen(),
           "/enter_pass_code": (context) => const EnterPassCodeScreen(),
           "/set_pass_code": (context) => const SetPassCodeScreen(),
+          "/pos_device": (context) => const PosDeviceScreen(),
+          "/outlet": (context) => const OutletScreen(),
           "/beneficiary_details": (context) {
             final bank = ModalRoute.of(context)!.settings.arguments as DummyBank;
             return SendMoneyScreen(bank: bank);
