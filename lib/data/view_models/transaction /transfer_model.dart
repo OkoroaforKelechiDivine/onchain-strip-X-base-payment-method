@@ -13,7 +13,7 @@ class TransferModel extends TransferState {
   String? get message => _message;
 
   fetchBankList(BuildContext context) async {
-    setState(ViewState.Busy);
+    setState(ViewState.Retrieved);
     try {
       final response = await _transferDataProvider.fetchBankList(context);
       SecureStorageUtils.saveToken(token: response.token ?? "null");

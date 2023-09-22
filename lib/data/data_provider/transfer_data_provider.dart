@@ -19,24 +19,22 @@ class TransferDataProvider {
         retrieveResponse: true,
         retrieveUnauthorizedResponse: false,
       );
-
       if (response != null) {
         if (response.containsKey('data') && response['data'] is List) {
           List<dynamic> bankList = response['data'];
           List<Bank> banks = bankList.map((bankJson) => Bank.fromJson(bankJson)).toList();
-          completer.complete();
+          completer.complete(AppResponse(token: "Success"));
         } else {
-          completer.completeError("Invalid response format.");
+          completer.complete(AppResponse(token: "Invalid response format."));
         }
       } else {
-        completer.completeError("Network error or no response received.");
+        completer.complete(AppResponse(token: "Network error or no response received."));
       }
     } catch (e) {
-      completer.completeError(e);
+      completer.complete(AppResponse(token: "An error occurred: $e"));
     }
     return completer.future;
   }
-
 }
 
   class Bank {

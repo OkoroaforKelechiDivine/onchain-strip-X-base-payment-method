@@ -6,7 +6,6 @@ class AppResponse{
   });
 
   factory AppResponse.fromJson(Map<String, dynamic> json) => AppResponse(token: json["token"]);
-
   Map<String, dynamic> toJson() => {
     "token": token
   };
