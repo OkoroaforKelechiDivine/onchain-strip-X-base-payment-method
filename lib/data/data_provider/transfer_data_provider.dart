@@ -6,6 +6,44 @@ import '../constants/enum/request_type.dart';
 import '../model/auth/app_response.dart';
 import '../network_manager/network_manager.dart';
 
+
+class Bank {
+  final String name;
+  final String logo;
+  final int id;
+  final String code;
+
+  Bank(this.name, this.logo, this.id, this.code);
+
+  factory Bank.fromJson(Map<String, dynamic> json) {
+    return Bank(
+      json['name'] as String,
+      json['logo'] as String,
+      json['id'] as int,
+      json['code'] as String,
+    );
+  }
+}
+
+class Biller{
+  final String id;
+  final String name;
+  final String division;
+  final String product;
+  final String category;
+
+  Biller(this.id, this.name, this.division, this.product, this.category);
+  factory Biller.fromJson(Map<String, dynamic> json) {
+    return Biller(
+      json["id"] as String,
+      json["name"] as String,
+      json["division"] as String,
+      json["product"] as String,
+      json["category"] as String,
+    );
+  }
+}
+
 class TransferDataProvider {
   NetworkManager networkManager = NetworkManager();
 
@@ -35,22 +73,99 @@ class TransferDataProvider {
     }
     return completer.future;
   }
-}
 
-  class Bank {
-  final String name;
-  final String logo;
-  final int id;
-  final String code;
+  Future<List<Biller>> fetchAllBillers(BuildContext context) async {
+    var completer = Completer<List<Biller>>();
+    try {
+      Map<String, dynamic>? response = await networkManager.networkRequestManager(
+        RequestType.GET,
+        ApiRoutes.getAllBillers,
+        useAuth: true,
+        retrieveResponse: true,
+        retrieveUnauthorizedResponse: false,
+      );
 
-  Bank(this.name, this.logo, this.id, this.code);
+      if (response != null) {
+        if (response.containsKey('data') && response['data'] is List) {
+          List<dynamic> billerList = response['data'];
+          List<Biller> billers = billerList.map((billerJson) => Biller.fromJson(billerJson)).toList();
+          print(billers);
+          completer.complete(billers);
+        } else {
+          completer.completeError("Invalid response format.");
+        }
+      } else {
+        completer.completeError("Network error or no response received.");
+      }
+    } catch (e) {
+      print("An Error Occurred: $e");
+      completer.completeError("An error occurred while fetching billers: $e");
+    }
+    return completer.future;
+  }
 
-  factory Bank.fromJson(Map<String, dynamic> json) {
-    return Bank(
-      json['name'] as String,
-      json['logo'] as String,
-      json['id'] as int,
-      json['code'] as String,
-    );
+  Future<List<Map<String, dynamic>>> fetchBillerItems(
+      BuildContext context, String billerId, String divisionId, String productId) async {
+    var completer = Completer<List<Map<String, dynamic>>>();
+    try {
+      String routes = ApiRoutes.getBillerItems(billerId, divisionId, productId);
+      Map<String, dynamic>? response = await networkManager.networkRequestManager(
+        RequestType.GET,
+        routes,
+        useAuth: true,
+        retrieveResponse: true,
+        retrieveUnauthorizedResponse: false,
+      );
+
+      if (response != null) {
+        if (response.containsKey('data') && response['data'] is Map<String, dynamic>) {
+          Map<String, dynamic> data = response['data'];
+          if (data.containsKey('paymentitems') && data['paymentitems'] is List) {
+            List<dynamic> paymentItemsList = data['paymentitems'];
+            List<Map<String, dynamic>> paymentItems =
+            paymentItemsList.map((item) => item as Map<String, dynamic>).toList();
+            completer.complete(paymentItems);
+          } else {
+            completer.completeError("Invalid response format: 'paymentitems' not found.");
+          }
+        } else {
+          completer.completeError("Invalid response format: 'data' not found or not a Map.");
+        }
+      } else {
+        completer.completeError("Network error or no response received.");
+      }
+    } catch (e) {
+      print("An Error Occurred: $e");
+      completer.completeError("An error occurred while fetching biller items: $e");
+    }
+    return completer.future;
+  }
+
+  Future<AppResponse> payBill(Map<String, dynamic> payBillsDetails) async {
+    var completer = Completer<AppResponse>();
+    try {
+      Map<String, dynamic>? response = await networkManager.networkRequestManager(
+        RequestType.POST,
+        ApiRoutes.payBills,
+        useAuth: true,
+        retrieveResponse: true,
+        retrieveUnauthorizedResponse: false,
+      );
+
+      if (response != null) {
+        if (response.containsKey('status') && response['status'] == '200') {
+          final reference = response['data']['reference'];
+          print(reference);
+          completer.complete(AppResponse(token: "Payment Successful. Reference: $reference"));
+        } else {
+          completer.complete(AppResponse(token: "Payment Failed. Message: ${response['message']}"));
+        }
+      } else {
+        completer.complete(AppResponse(token: "Network error or no response received."));
+      }
+    } catch (e) {
+      completer.complete(AppResponse(token: "An error occurred: $e"));
+    }
+    return completer.future;
   }
 }
