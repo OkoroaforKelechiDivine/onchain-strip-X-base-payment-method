@@ -10,6 +10,7 @@ import 'package:pay_me_mobile/views/auth_view/helper/transaction_helper.dart';
 
 import '../../custom/custom_bottom_bar_navigation.dart';
 import '../../custom/process/processing_bar.dart';
+import '../../view_models/transaction /transfer_model.dart';
 import '../transaction_history/repeat_transaction.dart';
 import 'BeneficiaryDetailPage.dart';
 import 'send_money.dart';
@@ -159,11 +160,14 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   }
 
   Widget _buildBankList() {
+    final transferModel = TransferModel();
+    transferModel.fetchBankList(context);
     return FutureBuilder<List<Bank>>(
-      future: TransactionHelper.fetchBanks(context),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+              child: CircularProgressIndicator()
+          );
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}', style: const TextStyle(color: AppColors.lightBlack));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -175,7 +179,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
             itemBuilder: (BuildContext context, int index) {
               final Bank? bank = banks?[index];
               final String logoDataUri = bank!.logo;
-
               final base64String = logoDataUri.split(',').last;
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 1.0),
@@ -206,6 +209,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
       },
     );
   }
+
 
   PreferredSizeWidget? _buildAppBar(BuildContext context) {
     return AppBar(
