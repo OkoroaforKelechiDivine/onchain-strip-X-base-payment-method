@@ -6,7 +6,6 @@ import '../../custom/custom_amount_input_field.dart';
 import '../../custom/custom_bottom_bar_navigation.dart';
 import '../../custom/show_pin_dialog.dart';
 
-
 class BuyAirtimeScreen extends StatefulWidget {
   const BuyAirtimeScreen({Key? key}) : super(key: key);
 
@@ -30,19 +29,19 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
     networkItems = [
       DropdownMenuItem<String>(
         value: "MTN",
-        child: _buildNetworkItem('MTN', 'assets/jpg/mtn_logo.jpg'),
+        child: _buildNetworkItem('MTN', 'assets/jpg/mtn_logo.jpg', 'mtnng', "C", "425"),
       ),
       DropdownMenuItem<String>(
         value: "GLO",
-        child: _buildNetworkItem('GLO', 'assets/jpg/glo_logo.jpg'),
+        child: _buildNetworkItem('GLO', 'assets/jpg/glo_logo.jpg', 'glong', "C", "424"),
       ),
       DropdownMenuItem<String>(
         value: "9 Mobile",
-        child: _buildNetworkItem('9 Mobile', 'assets/jpg/9_mobile_logo.jpg'),
+        child: _buildNetworkItem('9 Mobile', 'assets/jpg/9_mobile_logo.jpg', 'eting', "C", "422"),
       ),
       DropdownMenuItem<String>(
         value: "Airtel",
-        child: _buildNetworkItem('Airtel', 'assets/jpg/airtel_logo.jpg'),
+        child: _buildNetworkItem('Airtel', 'assets/jpg/airtel_logo.jpg', 'airng', "C", "423"),
       ),
     ];
   }
@@ -137,7 +136,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
   }
 
   Widget _buildAmountInfo() {
-    return  const Padding(
+    return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0,),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -184,7 +183,9 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
             if (amountController.text != formattedAmount) {
               amountController.value = amountController.value.copyWith(
                 text: formattedAmount,
-                selection: TextSelection.collapsed(offset: formattedAmount.length),
+                selection: TextSelection.collapsed(
+                    offset: formattedAmount.length
+                ),
               );
             }
           },
@@ -208,7 +209,6 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
       ),
     );
   }
-
 
   Widget _buildNetworkDropdown() {
     return Padding(
@@ -294,15 +294,14 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
       child: ElevatedButton(
         onPressed: () {
           String enteredAmount = amountController.text;
-
           enteredAmount = enteredAmount.replaceAll("₦", "").replaceAll(",", "");
-
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => PinDialog(
-                amount: double.parse(enteredAmount),
-                accountName: "",
-              ),
+              builder: (context) =>
+                  PinDialog(
+                    amount: double.parse(enteredAmount),
+                    accountName: "",
+                  ),
             ),
           );
         },
@@ -363,7 +362,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
     );
   }
 
-  DropdownMenuItem<String> _buildNetworkItem(String networkName, String logoAsset) {
+  DropdownMenuItem<String> _buildNetworkItem(String networkName, String logoAsset, String billerId, String divisionId, String productId) {
     return DropdownMenuItem<String>(
       value: networkName,
       child: Row(
