@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 
 import '../constants/api_routes.dart';
@@ -141,4 +142,31 @@ class TransferDataProvider {
     return completer.future;
   }
 
+  Future<AppResponse> payBill(Map<String, dynamic> payBillsDetails) async {
+    var completer = Completer<AppResponse>();
+    try {
+      Map<String, dynamic>? response = await networkManager.networkRequestManager(
+        RequestType.POST,
+        ApiRoutes.payBills,
+        useAuth: true,
+        retrieveResponse: true,
+        retrieveUnauthorizedResponse: false,
+      );
+
+      if (response != null) {
+        if (response.containsKey('status') && response['status'] == '200') {
+          final reference = response['data']['reference'];
+          print(reference);
+          completer.complete(AppResponse(token: "Payment Successful. Reference: $reference"));
+        } else {
+          completer.complete(AppResponse(token: "Payment Failed. Message: ${response['message']}"));
+        }
+      } else {
+        completer.complete(AppResponse(token: "Network error or no response received."));
+      }
+    } catch (e) {
+      completer.complete(AppResponse(token: "An error occurred: $e"));
+    }
+    return completer.future;
+  }
 }

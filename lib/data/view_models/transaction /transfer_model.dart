@@ -57,4 +57,23 @@ class TransferModel extends TransferState {
     }
   }
 
+  payBill({String? customerId, String? amount, String? division, String? paymentItem, String? productId, String? billerId}) async {
+    setState(ViewState.Busy);
+     final requestBody = {
+       "customerId": customerId,
+       "amount": amount,
+       "division": division,
+       "paymentItem": paymentItem,
+       "productId": productId,
+       "billerId": billerId,
+    };
+     try{
+       final response = await _transferDataProvider.payBill(requestBody);
+       SecureStorageUtils.saveToken(token: response.token ?? "null");
+       setState(ViewState.Retrieved);
+     } catch (e) {
+       _message = "Please try again.";
+       setState(ViewState.Error);
+     }
+  }
 }
