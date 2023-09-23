@@ -7,10 +7,10 @@ class ProcessingDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const AlertDialog(
+    return   AlertDialog(
       content: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: const [
           CircularProgressIndicator(),
           SizedBox(height: 16),
           Text(

@@ -146,15 +146,26 @@ class TransferDataProvider {
     var completer = Completer<AppResponse>();
     try {
       print("Request Body: ${json.encode(payBillsDetails)}");
+      var data = {
+        "customerId":"08011111122",
+        "amount":"2000",
+        "division":"C",
+        "paymentItem":null,
+        "productId":"425",
+        "billerId":"mtnng"
+      };
 
       Map<String, dynamic>? response = await networkManager.networkRequestManager(
         RequestType.POST,
         ApiRoutes.payBills,
-        body: json.encode(payBillsDetails),
+        body: data,
         useAuth: true,
         retrieveResponse: true,
         retrieveUnauthorizedResponse: false,
       );
+      print("++++++++++++++++");
+      print(response);
+      print("++++++++++++++++");
 
       if (response != null) {
         if (response.containsKey('status') && response['status'] == '200') {

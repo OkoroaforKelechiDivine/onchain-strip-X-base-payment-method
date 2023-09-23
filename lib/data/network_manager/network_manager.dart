@@ -15,6 +15,7 @@ class NetworkManager {
   );
 
   Dio? client = Dio(options);
+  Response<dynamic>? response;
 
   Future<Map<String, dynamic>?> networkRequestManager(
       RequestType requestType,
@@ -22,11 +23,6 @@ class NetworkManager {
         dynamic body,
         queryParameters,
         bool useAuth = true,
-        bool addToHeader = false,
-        bool addPinToHeader = false,
-        String? detailsToAdd,
-        String? pin,
-        File? backFile,
         bool retrieveResponse = true,
         bool retrieveUnauthorizedResponse = false,
       }) async {
@@ -35,6 +31,8 @@ class NetworkManager {
     String? token = await SecureStorageUtils.retrieveToken();
     var baseUrl = EnvironmentInitializer.BASE_URL;
     String url = '$baseUrl$requestUrl';
+    print(url);
+    print(body);
 
     if (useAuth) {
       client!.interceptors.add(InterceptorsWrapper(onRequest:
@@ -46,49 +44,49 @@ class NetworkManager {
     try {
       switch (requestType) {
         case RequestType.GET:
-          var response =
+           response =
           await client!.get(url, queryParameters: queryParameters);
           // log("get ....: ${response.data.toString()}");
-          apiResponse = response.data;
+          apiResponse = response?.data;
           break;
 
         case RequestType.POST:
-          var response = await client!
+          response = await client!
               .post(url, data: body, queryParameters: queryParameters,);
-          //log("post ....: ${response.data.toString()}");
-          apiResponse = response.data;
+
+          apiResponse = response?.data;
           break;
 
         case RequestType.PUT:
-          var response = await client!
+          response = await client!
               .put(url, data: body, queryParameters: queryParameters);
-          //log("put ....: ${response.data.toString()}");
-          apiResponse = response.data;
+          apiResponse = response?.data;
           break;
 
         case RequestType.PATCH:
-          var response = await client!
+         response = await client!
               .patch(url, data: body, queryParameters: queryParameters);
-          //log("patch ....: ${response.data.toString()}");
-          apiResponse = response.data;
+          apiResponse = response?.data;
           break;
 
         case RequestType.DELETE:
-          var response = await client!
+         response = await client!
               .delete(url, data: body, queryParameters: queryParameters);
-          //log("delete ....: ${response.data.toString()}");
-          apiResponse = response.data;
+          apiResponse = response?.data;
           break;
         default:
-          var response = await client!
+         response = await client!
               .post(url, data: body, queryParameters: queryParameters);
-          apiResponse = response.data;
+          apiResponse = response?.data;
           break;
       }
+      print(apiResponse);
       return apiResponse;
     } on TimeoutException catch (_) {
+      print("timeout");
       throw ("Network timed out, please check your network connection and try again");
     } on DioError catch (e) {
+      print("status code ===> ${response?.statusCode}");
 
       if (DioErrorType.receiveTimeout == e.type ||
           DioErrorType.connectTimeout == e.type) {
@@ -103,7 +101,15 @@ class NetworkManager {
         }
       }
 
+      if(response?.statusCode == 400){
+        print("Unauthorirzed Error");
+      }
+      if(response?.statusCode == 500){
+        print("Internal Server Error");
+      }
+
     } catch (e) {
+      print("catched error");
       throw ("An error occurred while processing this request");
     }
     return null;
