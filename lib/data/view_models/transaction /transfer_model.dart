@@ -57,9 +57,9 @@ class TransferModel extends TransferState {
     }
   }
 
-  payBill({String? customerId, String? amount, String? division, String? paymentItem, String? productId, String? billerId}) async {
+  payBill(BuildContext context, {String? customerId, String? amount, String? division, String? paymentItem, String? productId, String? billerId}) async {
     setState(ViewState.Busy);
-     final requestBody = {
+     final data = {
        "customerId": customerId,
        "amount": amount,
        "division": division,
@@ -68,9 +68,9 @@ class TransferModel extends TransferState {
        "billerId": billerId,
     };
      try{
-       final response = await _transferDataProvider.payBill(requestBody);
-       SecureStorageUtils.saveToken(token: response.token ?? "null");
-       setState(ViewState.Retrieved);
+         final response = await _transferDataProvider.payBill(context, data);
+         SecureStorageUtils.saveToken(token: response.token ?? "null");
+         setState(ViewState.Retrieved);
      } catch (e) {
        _message = "Please try again.";
        setState(ViewState.Error);

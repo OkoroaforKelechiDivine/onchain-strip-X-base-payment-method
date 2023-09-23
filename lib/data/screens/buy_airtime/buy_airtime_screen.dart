@@ -19,6 +19,7 @@ class BuyAirtimeScreen extends StatefulWidget {
 class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
   String selectedAmount = "";
   TextEditingController amountController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
   String? selectedNetwork;
   int _currentIndex = 2;
   int? selectedAmountIndex;
@@ -294,6 +295,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
           ],
         ),
         child: TextField(
+          controller: phoneNumberController,
           decoration: InputDecoration(
             hintText: "Enter Phone number",
             hintStyle: const TextStyle(
@@ -310,45 +312,28 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
             ),
           ),
           keyboardType: TextInputType.number,
+          maxLength: 11,
         ),
       ),
     );
   }
 
   Padding _buildNextButton() {
-    TransferModel transferModel = TransferModel();
     return Padding(
       padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
       child: ElevatedButton(
         onPressed: () {
-          if (selectedNetwork == null) {
-            setState(() {
-              ViewState.Error;
-              print("error in");
-            });
-            return;
-          }
+          Map<String, String> selectedNetworkMap = networks.firstWhere((network) => network['name'] == selectedNetwork);
 
-
-          Map<String, String> selectedNetworkMap = networks.firstWhere((network) => network['name'] == selectedNetwork,
-            orElse: () => {
-              'name': '',
-              'logoAsset': '',
-              'billerId': '',
-              'divisionId': '',
-              'productId': '',
-            },
-          );
-          String? customerId = selectedNetworkMap['customerId'];
+          String? customerId = phoneNumberController.text;
           String amount = amountController.text;
           String? divisionId = selectedNetworkMap['divisionId'];
           String? paymentItem = selectedNetworkMap['paymentItem'];
           String? productId = selectedNetworkMap['productId'];
           String? billerId = selectedNetworkMap['billerId'];
 
-          print(billerId);
-
-          transferModel.payBill(
+          TransferModel().payBill(
+            context,
             customerId: customerId,
             amount: amount,
             division: divisionId,
@@ -358,18 +343,15 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
           );
           String enteredAmount = amountController.text;
           enteredAmount = enteredAmount.replaceAll("₦", "").replaceAll(",", "");
-          if(transferModel.state == ViewState.Retrieved) {
-            const ProcessingBar();
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) =>
                     PinDialog(
                       amount: double.parse(enteredAmount),
                       accountName: "",
-                    ),
+                    )
               ),
             );
-          }
         },
         child: const Text(
             "Next",
