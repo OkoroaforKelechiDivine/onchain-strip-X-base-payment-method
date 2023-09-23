@@ -153,7 +153,7 @@ class TransferDataProvider {
         body: json.encode(payBillsDetails),
         useAuth: true,
         retrieveResponse: true,
-        retrieveUnauthorizedResponse: true,
+        retrieveUnauthorizedResponse: false,
       );
 
       if (response != null) {
