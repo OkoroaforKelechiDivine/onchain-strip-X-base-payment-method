@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 
 import '../constants/api_routes.dart';
@@ -141,31 +142,38 @@ class TransferDataProvider {
     return completer.future;
   }
 
-  Future<AppResponse> payBill(Map<String, dynamic> payBillsDetails) async {
+  Future<AppResponse> payBill(BuildContext context, Map<String, dynamic> payBillsDetails) async {
     var completer = Completer<AppResponse>();
     try {
+      print("Request Body: ${json.encode(payBillsDetails)}");
+
       Map<String, dynamic>? response = await networkManager.networkRequestManager(
         RequestType.POST,
         ApiRoutes.payBills,
+        body: json.encode(payBillsDetails),
         useAuth: true,
         retrieveResponse: true,
-        retrieveUnauthorizedResponse: false,
+        retrieveUnauthorizedResponse: true,
       );
 
       if (response != null) {
         if (response.containsKey('status') && response['status'] == '200') {
-          final reference = response['data']['reference'];
-          print(reference);
-          completer.complete(AppResponse(token: "Payment Successful. Reference: $reference"));
+          print("Response Message: ${response["message"]}");
+          print("Response Data - Reference: ${response["data"]["reference"]}");
+          completer.complete(AppResponse.fromJson(response));
         } else {
-          completer.complete(AppResponse(token: "Payment Failed. Message: ${response['message']}"));
+          String errorMessage = response.containsKey("message") ? response["message"] : "Payment Failed";
+          print(errorMessage);
         }
       } else {
-        completer.complete(AppResponse(token: "Network error or no response received."));
+        completer.completeError("Network error or no response received.");
       }
     } catch (e) {
-      completer.complete(AppResponse(token: "An error occurred: $e"));
+      print("Error occurred: $e");
+      completer.completeError("An error occurred: $e");
     }
     return completer.future;
   }
+
+
 }

@@ -21,7 +21,7 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
   TextEditingController electricityProviderController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   int _currentIndex = 3;
-
+  // electricityProviderItems
   List<DropdownMenuItem<String>> electricityProviderItems = [
     const DropdownMenuItem<String>(
       value: "Provider 1",
