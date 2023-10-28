@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import 'package:pay_me_mobile/data/screens/transaction_history/transaction_details.dart';
+import 'package:pay_me_mobile/data/utilities/navigator.dart';
 
 class RepeatTransactionScreen extends StatefulWidget {
   final String amount;
@@ -81,7 +83,8 @@ class _RepeatTransactionScreenState extends State<RepeatTransactionScreen> {
       ),
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, "/transaction_details");
+          pushNavigation(context: context, widget: TransactionDetailsScreen(amount: widget.amount, transactionTimestamp: widget.transactionTimestamp, accountName: widget.accountName, bankName: "Bank Name"));
+          // Navigator.pushNamed(context, "/transaction_details");
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,169 +167,169 @@ class _RepeatTransactionScreenState extends State<RepeatTransactionScreen> {
               narrationError = narrationController.text.isEmpty;
             });
           }
-          showGeneralDialog(
-            context: context,
-            barrierDismissible: true,
-            barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-            barrierColor: AppColors.lightBlack.withOpacity(0.5),
-            transitionDuration: const Duration(milliseconds: 300),
-            pageBuilder: (BuildContext context, Animation animation, Animation secondaryAnimation) {
-              return Material(
-                color: Colors.transparent,
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 250.0),
-                    child: Container(
-                      height: 280,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(20),
-                      color: AppColors.pureWhite,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0.0),
-                            child: SizedBox(
-                              height: 60,
-                              width: 400,
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(1.0, 0.0, 10.0, 0.0),
-                                child: Card(
-                                  color: AppColors.lightGreen,
-                                  child: Center(
-                                    child: Text(
-                                      "NGN Balance: ₦ ${double.tryParse(widget.amount.replaceAll('₦', '').replaceAll(',', '').trim())?.toStringAsFixed(2) ?? 'Invalid'}",
-                                      style: TextStyle(
-                                        fontSize: AppFontSize.size16,
-                                        fontWeight: AppFontWeight.bold,
-                                        fontFamily: GoogleFonts.inter().fontFamily,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Material(
-                                  elevation: 4,
-                                  child: Container(
-                                    height: 50,
-                                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                                    color: AppColors.lightBlue,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 10.0),
-                                      child: TextField(
-                                        decoration: const InputDecoration(
-                                          hintText: '₦ 0.00',
-                                          hintStyle: TextStyle(
-                                            color: AppColors.lightBlack,
-                                            fontWeight: AppFontWeight.bold,
-                                            fontSize: AppFontSize.size20,
-                                          ),
-                                          filled: true,
-                                          fillColor: AppColors.lightBlue,
-                                          border: InputBorder.none,
-                                        ),
-                                        style: TextStyle(
-                                          fontSize: AppFontSize.size16,
-                                          color: AppColors.lightBlack,
-                                          fontFamily: GoogleFonts.inter().fontFamily,
-                                          fontWeight: AppFontWeight.bold,
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        inputFormatters: <TextInputFormatter>[
-                                          FilteringTextInputFormatter.digitsOnly,
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 40.0),
-                                child: Text(
-                                  'NGN',
-                                  style: TextStyle(
-                                    fontSize: AppFontSize.size20,
-                                    color: AppColors.lightBlack,
-                                    fontWeight: AppFontWeight.bold,
-                                    fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Material(
-                                  child: Container(
-                                    height: 50,
-                                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                                    color: AppColors.lightGreen,
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        hintText: 'Narration (eg: Sent from Kelechi)',
-                                        hintStyle: TextStyle(
-                                          color: AppColors.darkWhite.withOpacity(1),
-                                          fontWeight: AppFontWeight.bold,
-                                          fontSize: AppFontSize.size12,
-                                        ),
-                                        filled: true,
-                                        fillColor: AppColors.lightGreen,
-                                        border: InputBorder.none,
-                                      ),
-                                      style: TextStyle(
-                                        fontSize: AppFontSize.size16,
-                                        color: AppColors.pureWhite,
-                                        fontFamily: GoogleFonts.inter().fontFamily,
-                                        fontWeight: AppFontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(context, "/pin_dialog", arguments: {
-                                    'amount': widget.amount,
-                                    'accountName': widget.accountName,
-                                  });
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 50.0),
-                                  child: Image.asset(
-                                    'assets/jpg/send.jpg',
-                                    width: 30,
-                                    height: 30,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            },
-            transitionBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-              return SlideTransition(
-                position: Tween(
-                  begin: const Offset(0, 1),
-                  end: Offset.zero,
-                ).animate(animation),
-                child: child,
-              );
-            },
-          );
+          // showGeneralDialog(
+          //   context: context,
+          //   barrierDismissible: true,
+          //   barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+          //   barrierColor: AppColors.lightBlack.withOpacity(0.5),
+          //   transitionDuration: const Duration(milliseconds: 300),
+          //   pageBuilder: (BuildContext context, Animation animation, Animation secondaryAnimation) {
+          //     return Material(
+          //       color: Colors.transparent,
+          //       child: Align(
+          //         alignment: Alignment.bottomCenter,
+          //         child: Padding(
+          //           padding: const EdgeInsets.only(bottom: 250.0),
+          //           child: Container(
+          //             height: 280,
+          //             width: MediaQuery.of(context).size.width,
+          //             padding: const EdgeInsets.all(20),
+          //             color: AppColors.pureWhite,
+          //             child: Column(
+          //               mainAxisSize: MainAxisSize.min,
+          //               children: [
+          //                 Padding(
+          //                   padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0.0),
+          //                   child: SizedBox(
+          //                     height: 60,
+          //                     width: 400,
+          //                     child: Padding(
+          //                       padding: const EdgeInsets.fromLTRB(1.0, 0.0, 10.0, 0.0),
+          //                       child: Card(
+          //                         color: AppColors.lightGreen,
+          //                         child: Center(
+          //                           child: Text(
+          //                             "NGN Balance: ₦ ${double.tryParse(widget.amount.replaceAll('₦', '').replaceAll(',', '').trim())?.toStringAsFixed(2) ?? 'Invalid'}",
+          //                             style: TextStyle(
+          //                               fontSize: AppFontSize.size16,
+          //                               fontWeight: AppFontWeight.bold,
+          //                               fontFamily: GoogleFonts.inter().fontFamily,
+          //                             ),
+          //                           ),
+          //                         ),
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ),
+          //                 const SizedBox(height: 20),
+          //                 Row(
+          //                   children: [
+          //                     Expanded(
+          //                       child: Material(
+          //                         elevation: 4,
+          //                         child: Container(
+          //                           height: 50,
+          //                           padding: const EdgeInsets.symmetric(horizontal: 20),
+          //                           color: AppColors.lightBlue,
+          //                           child: Padding(
+          //                             padding: const EdgeInsets.only(top: 10.0),
+          //                             child: TextField(
+          //                               decoration: const InputDecoration(
+          //                                 hintText: '₦ 0.00',
+          //                                 hintStyle: TextStyle(
+          //                                   color: AppColors.lightBlack,
+          //                                   fontWeight: AppFontWeight.bold,
+          //                                   fontSize: AppFontSize.size20,
+          //                                 ),
+          //                                 filled: true,
+          //                                 fillColor: AppColors.lightBlue,
+          //                                 border: InputBorder.none,
+          //                               ),
+          //                               style: TextStyle(
+          //                                 fontSize: AppFontSize.size16,
+          //                                 color: AppColors.lightBlack,
+          //                                 fontFamily: GoogleFonts.inter().fontFamily,
+          //                                 fontWeight: AppFontWeight.bold,
+          //                               ),
+          //                               keyboardType: TextInputType.number,
+          //                               inputFormatters: <TextInputFormatter>[
+          //                                 FilteringTextInputFormatter.digitsOnly,
+          //                               ],
+          //                             ),
+          //                           ),
+          //                         ),
+          //                       ),
+          //                     ),
+          //                     Padding(
+          //                       padding: const EdgeInsets.only(left: 40.0),
+          //                       child: Text(
+          //                         'NGN',
+          //                         style: TextStyle(
+          //                           fontSize: AppFontSize.size20,
+          //                           color: AppColors.lightBlack,
+          //                           fontWeight: AppFontWeight.bold,
+          //                           fontFamily: GoogleFonts.alegreyaSans().fontFamily,
+          //                         ),
+          //                       ),
+          //                     ),
+          //                   ],
+          //                 ),
+          //                 const SizedBox(height: 20),
+          //                 Row(
+          //                   children: [
+          //                     Expanded(
+          //                       child: Material(
+          //                         child: Container(
+          //                           height: 50,
+          //                           padding: const EdgeInsets.symmetric(horizontal: 20),
+          //                           color: AppColors.lightGreen,
+          //                           child: TextField(
+          //                             decoration: InputDecoration(
+          //                               hintText: 'Narration (eg: Sent from Kelechi)',
+          //                               hintStyle: TextStyle(
+          //                                 color: AppColors.darkWhite.withOpacity(1),
+          //                                 fontWeight: AppFontWeight.bold,
+          //                                 fontSize: AppFontSize.size12,
+          //                               ),
+          //                               filled: true,
+          //                               fillColor: AppColors.lightGreen,
+          //                               border: InputBorder.none,
+          //                             ),
+          //                             style: TextStyle(
+          //                               fontSize: AppFontSize.size16,
+          //                               color: AppColors.pureWhite,
+          //                               fontFamily: GoogleFonts.inter().fontFamily,
+          //                               fontWeight: AppFontWeight.bold,
+          //                             ),
+          //                           ),
+          //                         ),
+          //                       ),
+          //                     ),
+          //                     GestureDetector(
+          //                       onTap: () {
+          //                         Navigator.pushNamed(context, "/pin_dialog", arguments: {
+          //                           'amount': widget.amount,
+          //                           'accountName': widget.accountName,
+          //                         });
+          //                       },
+          //                       child: Padding(
+          //                         padding: const EdgeInsets.only(left: 50.0),
+          //                         child: Image.asset(
+          //                           'assets/jpg/send.jpg',
+          //                           width: 30,
+          //                           height: 30,
+          //                         ),
+          //                       ),
+          //                     )
+          //                   ],
+          //                 ),
+          //               ],
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     );
+          //   },
+          //   transitionBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+          //     return SlideTransition(
+          //       position: Tween(
+          //         begin: const Offset(0, 1),
+          //         end: Offset.zero,
+          //       ).animate(animation),
+          //       child: child,
+          //     );
+          //   },
+          // );
         },
         child: const Text(
           "Submit",
@@ -339,7 +342,10 @@ class _RepeatTransactionScreenState extends State<RepeatTransactionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white10,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

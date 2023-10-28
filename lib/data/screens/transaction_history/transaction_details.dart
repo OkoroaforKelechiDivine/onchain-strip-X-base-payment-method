@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/data/screens/transaction_history/repeat_transaction.dart';
+import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../custom/custom_bottom_bar_navigation.dart';
@@ -32,43 +33,52 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
     String formattedTimestamp = DateFormat('MMMM dd, yyyy \'at\' hh:mm a').format(widget.transactionTimestamp);
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 60.0),
-              child: Center(
-                child: Text(
-                  'Transaction',
-                  style: TextStyle(
-                    color: AppColors.lightGreen,
-                    fontSize: AppFontSize.size20,
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 40),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Container(
-                  color: AppColors.lightGreen,
-                  constraints: const BoxConstraints(maxWidth: 70, maxHeight: 25),
-                  child: ElevatedButton(
-                    onPressed: () {_showHelloDialog(context);},
-                    child: const Text(
-                      'Share',
-                      style: TextStyle(
-                        fontSize: AppFontSize.size12,
-                        fontWeight: AppFontWeight.medium,
-                        color: AppColors.pureWhite,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+        elevation: 0,
+        backgroundColor: Colors.white10,
+        title: Text(
+          'Transaction',
+          style: sans(
+            color: AppColors.lightGreen,
+            fontSize: AppFontSize.size20,
+          ),
+        )
+        // Row(
+        //   children: [
+        //      Padding(
+        //       padding: EdgeInsets.only(left: 60.0),
+        //       child: Center(
+        //         child: Text(
+        //           'Transaction',
+        //           style: sans(
+        //             color: AppColors.lightGreen,
+        //             fontSize: AppFontSize.size20,
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //     Padding(
+        //       padding: const EdgeInsets.only(left: 40),
+        //       child: ClipRRect(
+        //         borderRadius: BorderRadius.circular(8.0),
+        //         child: Container(
+        //           color: AppColors.lightGreen,
+        //           constraints: const BoxConstraints(maxWidth: 70, maxHeight: 25),
+        //           child: ElevatedButton(
+        //             onPressed: () {_showHelloDialog(context);},
+        //             child: const Text(
+        //               'Share',
+        //               style: TextStyle(
+        //                 fontSize: AppFontSize.size12,
+        //                 fontWeight: AppFontWeight.medium,
+        //                 color: AppColors.pureWhite,
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
       ),
       body: SingleChildScrollView(
         child: Column(

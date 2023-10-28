@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
 
 class OutletDetailsScreen extends StatefulWidget {
   final String outletName;
@@ -14,7 +16,9 @@ class _OutletDetailsScreenState extends State<OutletDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.outletName),
+        elevation: 0,
+        backgroundColor: Colors.white10,
+        title: Text(widget.outletName, style: sans(color: AppColors.lightGreen),),
       ),
       body: Center(
         child: Text("Outlet Details for ${widget.outletName}"),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/data/screens/outlet/outlet_detail_screen.dart';
+import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../../app_config/manager/theme_manager.dart';
@@ -17,20 +18,14 @@ class _OutletScreenState extends State<OutletScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushNamed(context, "/home");
-          },
-        ),
-        title: const Padding(
-          padding: EdgeInsets.only(left: 70.0),
-          child: Text(
-            "Outlet",
-            style: TextStyle(
-              fontSize: AppFontSize.size20,
-              color: AppColors.lightGreen,
-            ),
+        elevation: 0,
+        backgroundColor: Colors.white10,
+        leading: const BackButton(),
+        title: Text(
+          "Outlet",
+          style: sans(
+            fontSize: AppFontSize.size20,
+            color: AppColors.lightGreen,
           ),
         ),
       ),

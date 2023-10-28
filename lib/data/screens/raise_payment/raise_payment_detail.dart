@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../custom/custom_bottom_bar_navigation.dart';
@@ -34,16 +35,13 @@ class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
     String formattedTimestamp = DateFormat('MMMM dd, yyyy \'at\' hh:mm a').format(widget.transactionTimestamp);
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Padding(
-            padding: EdgeInsets.only(right: 50.0),
-            child: Text(
-              'Raise Payment',
-              style: TextStyle(
-                color: AppColors.lightGreen,
-                fontSize: AppFontSize.size20,
-              ),
-            ),
+        backgroundColor: Colors.white10,
+        elevation: 0,
+        title:  Text(
+          'Raise Payment',
+          style: sans(
+            color: AppColors.lightGreen,
+            fontSize: AppFontSize.size20,
           ),
         ),
       ),

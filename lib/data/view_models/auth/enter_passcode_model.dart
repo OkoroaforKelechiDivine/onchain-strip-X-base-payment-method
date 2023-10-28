@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pay_me_mobile/data/states/auth/enter_passcode_state.dart';
-import '../../../locator.dart';
+import '../../../src/locator.dart';
 import '../../constants/enum/view_state.dart';
 import '../../data_provider/authentication_data_provider.dart';
 import '../../utilities/secure_storage/secure_storage_utils.dart';

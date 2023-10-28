@@ -3,11 +3,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/data/constants/enum/view_state.dart';
+import 'package:pay_me_mobile/src/views/screens/home/home_page_screen.dart';
+import 'package:pay_me_mobile/data/utilities/navigator.dart';
+import 'package:pay_me_mobile/src/core/constants/page_named_routes.dart';
+import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
+import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
+import 'package:pay_me_mobile/src/views/widgets/app_button.dart';
+import 'package:pay_me_mobile/src/views/widgets/app_textfield.dart';
 import 'package:provider/provider.dart';
 
-import '../../../widgets/app_button.dart';
-import '../../../widgets/error_message.dart';
-import '../../view_models/auth/login_model.dart';
+import '../../../../widgets/app_button.dart';
+import '../../../../widgets/error_message.dart';
+import '../../../../data/view_models/auth/login_model.dart';
+import '../home/home_page_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -115,26 +123,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildForgotPasswordButton() {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: TextButton(
-        onPressed: () {},
-        child: Text(
-          "Forgot password?",
-          textAlign: TextAlign.center,
-          style: GoogleFonts.alegreyaSans(
-            textStyle: const TextStyle(
-              color: AppColors.lightBlack,
-              fontSize: AppFontSize.size18,
-              fontWeight: AppFontWeight.light,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _buildRequestForPOS() {
     return Center(
       child: Text(
@@ -167,10 +155,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 25),
                   _buildLockImage(),
                   const SizedBox(height: 10),
-                  _buildTextField("Username", userNameController, false, false, (){}),
+                  AppTextField(title: 'Username', hintText: 'Enter Username',controller: userNameController,),
                   const SizedBox(height: 20),
-                  _buildTextField("Password", passwordController, true, _obscurePassword, toggleVisibility),
-                  _buildForgotPasswordButton(),
+                  AppTextField(title: 'Password',isPassword: true, controller: passwordController,),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Forgot password?",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.alegreyaSans(
+                          textStyle: const TextStyle(
+                            color: AppColors.lightBlack,
+                            fontSize: AppFontSize.size18,
+                            fontWeight: AppFontWeight.light,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   Center(
                     child: Text(
                       message,
@@ -181,19 +185,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Center(
-                      child: buildErrorMessage(context)
-                  ),
+
                   const SizedBox(height: 10),
-                  appButton(context, onPressed: ()async{
-                    await model.login(
-                        username: userNameController.text,
-                        password: passwordController.text
-                    );
-                    if(model.state == ViewState.Retrieved){
-                      _gotoNextScreen();
-                    }
-                    }, loginState: model),
+                  AppButton.filledButton(context,
+                  color: AppColors.lightGreen,
+                      child: model.state == ViewState.Busy
+                          ? const CircularProgressIndicator(
+                        color: Colors.white,
+                      )
+                          : Text('Sign in', style: cairo(),),
+                      onTap: ()async{
+                        // await model.login(
+                        //     username: userNameController.text,
+                        //     password: passwordController.text
+                        // );
+                        if(model.state == ViewState.Idle){
+                          _gotoNextScreen();
+                        }
+                      }),
+
                   const SizedBox(height: 50),
                   _buildRequestForPOS(),
                 ],
@@ -206,6 +216,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _gotoNextScreen(){
-    Navigator.pushReplacementNamed(context, "/enter_pass_code");
+    replaceNavigation(context: context, widget: BottomNav(), routeName: PageNamedRoutes.home);
   }
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:pay_me_mobile/data/constants/environment_initializer.dart';
 
 import '../constants/enum/request_type.dart';
@@ -9,13 +10,16 @@ import '../utilities/secure_storage/secure_storage_utils.dart';
 
 class NetworkManager {
   static BaseOptions options = BaseOptions(
-      connectTimeout: 30000,
-      receiveTimeout: 30000,
-      headers: {'Accept': 'application/json'}
+      connectTimeout: const Duration(seconds: 20),
+      receiveTimeout: const Duration(seconds: 20),
+      headers: {
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'Connection': 'keep-alive'
+      }
   );
 
-  Dio? client = Dio(options);
-  Response<dynamic>? response;
+  Dio client = Dio(options);
 
   Future<Map<String, dynamic>?> networkRequestManager(
       RequestType requestType,
@@ -31,11 +35,13 @@ class NetworkManager {
     String? token = await SecureStorageUtils.retrieveToken();
     var baseUrl = EnvironmentInitializer.BASE_URL;
     String url = '$baseUrl$requestUrl';
-    print(url);
-    print(body);
+    if (kDebugMode) {
+      print(url);
+      print(body);
+    }
 
     if (useAuth) {
-      client!.interceptors.add(InterceptorsWrapper(onRequest:
+      client.interceptors.add(InterceptorsWrapper(onRequest:
           (RequestOptions options, RequestInterceptorHandler handler) async {
         options.headers["Authorization"] = "Bearer $token";
         return handler.next(options);
@@ -44,70 +50,49 @@ class NetworkManager {
     try {
       switch (requestType) {
         case RequestType.GET:
-           response =
-          await client!.get(url, queryParameters: queryParameters);
-          // log("get ....: ${response.data.toString()}");
+          var response =
+          await client.get(url, queryParameters: queryParameters);
           apiResponse = response?.data;
           break;
 
         case RequestType.POST:
-          response = await client!
+         var response = await client!
               .post(url, data: body, queryParameters: queryParameters,);
 
           apiResponse = response?.data;
           break;
 
         case RequestType.PUT:
-          response = await client!
+         var response = await client!
               .put(url, data: body, queryParameters: queryParameters);
           apiResponse = response?.data;
           break;
 
         case RequestType.PATCH:
-         response = await client!
+         var response = await client!
               .patch(url, data: body, queryParameters: queryParameters);
           apiResponse = response?.data;
           break;
 
         case RequestType.DELETE:
-         response = await client!
+         var response = await client!
               .delete(url, data: body, queryParameters: queryParameters);
           apiResponse = response?.data;
           break;
         default:
-         response = await client!
+         var response = await client!
               .post(url, data: body, queryParameters: queryParameters);
           apiResponse = response?.data;
           break;
       }
+      print("This is response:");
       print(apiResponse);
       return apiResponse;
     } on TimeoutException catch (_) {
       print("timeout");
       throw ("Network timed out, please check your network connection and try again");
-    } on DioError catch (e) {
-      print("status code ===> ${response?.statusCode}");
-
-      if (DioErrorType.receiveTimeout == e.type ||
-          DioErrorType.connectTimeout == e.type) {
-        throw ("Network timed out, please check your network connection and try again");
-      }
-
-      if (DioErrorType.other == e.type) {
-        if (e.message.contains('SocketException')) {
-          throw ("No internet connection, please check your network connection and try again");
-        } else {
-          throw ("An error occurred processing this request, please try again later");
-        }
-      }
-
-      if(response?.statusCode == 400){
-        print("Unauthorirzed Error");
-      }
-      if(response?.statusCode == 500){
-        print("Internal Server Error");
-      }
-
+    } on DioException catch (e) {
+      print("error message ===> ${e.message}");
     } catch (e) {
       print("catched error");
       throw ("An error occurred while processing this request");

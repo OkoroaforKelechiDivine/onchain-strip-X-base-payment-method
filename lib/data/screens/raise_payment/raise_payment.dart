@@ -5,9 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/data/screens/raise_payment/raise_payment_detail.dart';
+import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
 
 import '../../custom/custom_bottom_bar_navigation.dart';
-import '../transfer_to_bank/transfer_to_bank_screen.dart';
+import '../../../src/views/screens/transactions/transfer/transfer_to_bank_screen.dart';
 
 class RaisePaymentScreen extends StatefulWidget {
   const RaisePaymentScreen({Key? key}) : super(key: key);
@@ -26,59 +27,59 @@ class _RaisePaymentScreenState extends State<RaisePaymentScreen> {
 
   PreferredSizeWidget buildAppBar() {
     return AppBar(
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.pushNamed(context, "/home");
-        },
-      ),
-      title: Padding(
-        padding: const EdgeInsets.only(left: 20),
-        child: Row(
-          children: [
-            const Text(
-              'Raise Payment',
-              style: TextStyle(
-                color: AppColors.lightGreen,
-                fontSize: AppFontSize.size20,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 45.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Container(
-                  color: AppColors.lightGreen,
-                  constraints: const BoxConstraints(maxWidth: 80, maxHeight: 25),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/transfer");
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(0),
-                    ),
-                    child: Row(
-                      children: const [
-                        Padding(
-                          padding: EdgeInsets.only(left: 15.0),
-                          child: Text(
-                            'Add New',
-                            style: TextStyle(
-                              fontSize: AppFontSize.size12,
-                              fontWeight: AppFontWeight.medium,
-                              color: AppColors.pureWhite,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+     elevation: 0,
+      backgroundColor: Colors.white10,
+      title: Text(
+        'Raise Payment',
+        style: sans(
+          color: AppColors.lightGreen,
+          fontSize: AppFontSize.size20,
         ),
-      ),
+      )
+      // Row(
+      //   children: [
+      //     const Text(
+      //       'Raise Payment',
+      //       style: TextStyle(
+      //         color: AppColors.lightGreen,
+      //         fontSize: AppFontSize.size20,
+      //       ),
+      //     ),
+      //     Padding(
+      //       padding: const EdgeInsets.only(left: 45.0),
+      //       child: ClipRRect(
+      //         borderRadius: BorderRadius.circular(8.0),
+      //         child: Container(
+      //           color: AppColors.lightGreen,
+      //           constraints: const BoxConstraints(maxWidth: 80, maxHeight: 25),
+      //           child: ElevatedButton(
+      //             onPressed: () {
+      //               Navigator.pushNamed(context, "/transfer");
+      //             },
+      //             style: ElevatedButton.styleFrom(
+      //               padding: const EdgeInsets.all(0),
+      //             ),
+      //             child: Row(
+      //               children: const [
+      //                 Padding(
+      //                   padding: EdgeInsets.only(left: 15.0),
+      //                   child: Text(
+      //                     'Add New',
+      //                     style: TextStyle(
+      //                       fontSize: AppFontSize.size12,
+      //                       fontWeight: AppFontWeight.medium,
+      //                       color: AppColors.pureWhite,
+      //                     ),
+      //                   ),
+      //                 ),
+      //               ],
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 

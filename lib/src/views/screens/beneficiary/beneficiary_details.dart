@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
 
-import '../../../app_config/manager/font_manager.dart';
-import '../../../app_config/manager/theme_manager.dart';
+import '../../../../app_config/manager/font_manager.dart';
+import '../../../../app_config/manager/theme_manager.dart';
 
 class BeneficiaryDetailPage extends StatelessWidget {
   final Color circleColor;
@@ -21,14 +22,13 @@ class BeneficiaryDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.only(left: 50.0),
-          child: Text(
-            'Beneficiary',
-            style: TextStyle(
-              fontSize: AppFontSize.size20,
-              color: AppColors.lightGreen,
-            ),
+        elevation: 0,
+        backgroundColor: Colors.white10,
+        title: Text(
+          'Beneficiary',
+          style: sans(
+            fontSize: AppFontSize.size20,
+            color: AppColors.lightGreen,
           ),
         ),
       ),

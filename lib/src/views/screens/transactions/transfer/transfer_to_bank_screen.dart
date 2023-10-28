@@ -6,14 +6,17 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import 'package:pay_me_mobile/data/screens/transfer_to_bank/show_all_recent_transaction.dart';
+import 'package:pay_me_mobile/data/utilities/navigator.dart';
+import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/views/auth_view/helper/transaction_helper.dart';
 
-import '../../custom/custom_bottom_bar_navigation.dart';
-import '../../custom/process/processing_bar.dart';
-import '../../view_models/transaction /transfer_model.dart';
-import '../transaction_history/repeat_transaction.dart';
-import 'BeneficiaryDetailPage.dart';
-import 'send_money.dart';
+import '../../../../../data/custom/custom_bottom_bar_navigation.dart';
+import '../../../../../data/custom/process/processing_bar.dart';
+import '../../../../../data/view_models/transaction /transfer_model.dart';
+import '../../../../../data/screens/transaction_history/repeat_transaction.dart';
+import '../../beneficiary/beneficiary_details.dart';
+import '../../../../../data/screens/transfer_to_bank/send_money.dart';
 
 class TransferToBankScreen extends StatefulWidget {
   const TransferToBankScreen({Key? key}) : super(key: key);
@@ -69,9 +72,6 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   void initState() {
     super.initState();
     filteredBanks = dummyBanks;
-    Future.delayed(Duration.zero, () {
-      _showBankSelectionDialog(context);
-    });
   }
 
   void filterBanks(String keyword) {
@@ -86,151 +86,10 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
     });
   }
 
-  void _showBankSelectionDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return _buildBankSelectionDialog(context);
-      },
-    ).then((selectedBank) {
-      if (selectedBank != null) {
-        setState(() {
-          _bankSelected = true;
-        });
-      }
-    });
-  }
-
-  Widget _buildBankSelectionDialog(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.only(left: 60.0),
-          child: Text('Select Bank',
-              style: TextStyle(
-                  fontSize: AppFontSize.size20,
-                  color: AppColors.lightGreen
-              )
-          ),
-        ),
-      ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildBankSearchTextField(),
-          Expanded(
-            child: _buildBankList(),
-          ),
-        ],
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
-    );
-  }
-
-  Widget _buildBankSearchTextField() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextField(
-        controller: _searchController,
-        decoration: const InputDecoration(
-          labelText: 'Search all banks',
-          prefixIcon: Icon(Icons.search),
-          border: OutlineInputBorder(),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.lightBlue),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.lightBlue),
-          ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 14.0),
-        ),
-        onChanged: (text) {
-          filterBanks(text);
-        },
-      ),
-    );
-  }
-
-  Widget _buildBankList() {
-    final transferModel = TransferModel();
-    transferModel.fetchBankList(context);
-    return FutureBuilder<List<Bank>>(
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-              child: CircularProgressIndicator()
-          );
-        } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}', style: const TextStyle(color: AppColors.lightBlack));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Text('No banks available', style: TextStyle(color: AppColors.lightBlack));
-        } else {
-          final List<Bank>? banks = snapshot.data;
-          return ListView.builder(
-            itemCount: banks?.length ?? 0,
-            itemBuilder: (BuildContext context, int index) {
-              final Bank? bank = banks?[index];
-              final String logoDataUri = bank!.logo;
-              final base64String = logoDataUri.split(',').last;
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 1.0),
-                child: ListTile(
-                  leading: bank.logo.isNotEmpty ? Image.memory(
-                    base64Decode(base64String),
-                    width: 40,
-                    height: 40,
-                  ) : const Icon(Icons.house),
-                  title: Text(
-                    bank.name,
-                    style: TextStyle(
-                      fontWeight: AppFontWeight.bold,
-                      fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-                    ),
-                  ),
-                  onTap: () {
-                    _selectedBankController.text = bank.name;
-                    _selectedBankLogo = bank.logo;
-                    _userName = "";
-                    Navigator.of(context).pop(bank);
-                  },
-                ),
-              );
-            },
-          );
-        }
-      },
-    );
-  }
 
 
-  PreferredSizeWidget? _buildAppBar(BuildContext context) {
-    return AppBar(
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.pushNamed(context, "/home");
-        },
-      ),
-      title: const Padding(
-        padding: EdgeInsets.only(left: 60.0),
-        child: Text(
-          "Transfer to Bank",
-          style: TextStyle(
-            color: AppColors.lightGreen,
-            fontSize: AppFontSize.size20,
-          ),
-        ),
-      ),
-    );
-  }
+
+
 
   Widget _buildRecipientCard(BuildContext context) {
     final bankLogoAsset = _selectedBankLogo.isEmpty ? null : _selectedBankLogo.startsWith("data:image") ? _selectedBankLogo.split(',')[1] : _selectedBankLogo;
@@ -276,7 +135,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            _showBankSelectionDialog(context);
+
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -444,7 +303,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, "/show_all_beneficiaries");
+                      pushNavigation(context: context, widget: ShowAllRecentTransactionsScreen(banks: dummyBanks));
                     },
                     child:  Row(
                       children: const [
@@ -744,7 +603,11 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context),
+      appBar: AppBar(
+        backgroundColor: Colors.white10,
+        elevation: 0,
+        title: Text('Transfer to Bank', style: sans(color: AppColors.lightGreen),),
+      ),
       body: Stack(
         children: [
           SingleChildScrollView(

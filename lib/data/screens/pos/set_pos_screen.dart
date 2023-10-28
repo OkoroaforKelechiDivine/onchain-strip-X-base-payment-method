@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/data/screens/pos/total_transaction.dart';
+import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 
@@ -26,20 +28,13 @@ class _PosDeviceScreenState extends State<PosDeviceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushNamed(context, "/home");
-          },
-        ),
-        title: const Padding(
-          padding: EdgeInsets.only(left: 60.0),
-          child: Text(
-            "POS Device",
-            style: TextStyle(
-              fontSize: AppFontSize.size20,
-              color: AppColors.lightGreen,
-            ),
+        elevation: 0,
+        backgroundColor: Colors.white10,
+        title: Text(
+          "POS Device",
+          style: sans(
+            fontSize: AppFontSize.size20.sp,
+            color: AppColors.lightGreen,
           ),
         ),
       ),

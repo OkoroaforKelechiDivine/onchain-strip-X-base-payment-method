@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
-import 'package:pay_me_mobile/data/screens/transfer_to_bank/transfer_to_bank_screen.dart';
+import 'package:pay_me_mobile/data/screens/transfer_to_bank/send_money.dart';
+import 'package:pay_me_mobile/data/utilities/navigator.dart';
+import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_to_bank_screen.dart';
 
-import '../../custom/custom_bottom_bar_navigation.dart';
 
 class ShowAllRecentTransactionsScreen extends StatelessWidget {
   final List<DummyBank> banks;
@@ -13,17 +15,19 @@ class ShowAllRecentTransactionsScreen extends StatelessWidget {
     return PreferredSize(
       preferredSize: const Size.fromHeight(80),
       child: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white10,
         title: null,
-        leading: const BackButton(),
+        // leading: const BackButton(),
         flexibleSpace:  Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
+          children:  [
             Padding(
               padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
               child: Text(
                 'All Beneficiaries',
-                style: TextStyle(
+                style: sans(
                   color: AppColors.lightGreen,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -53,11 +57,12 @@ class ShowAllRecentTransactionsScreen extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            Navigator.pushNamed(
-              context,
-              "/beneficiary_details",
-              arguments: bank,
-            );
+            pushNavigation(context: context, widget: SendMoneyScreen(bank: bank));
+            // Navigator.pushNamed(
+            //   context,
+            //   "/beneficiary_details",
+            //   arguments: bank,
+            // );
           },
           child: ListTile(
             leading: Image.asset(
@@ -103,29 +108,13 @@ class ShowAllRecentTransactionsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNavigationBar() {
-    return CustomBottomNavigationBar(
-      currentIndex: 0,
-      onTap: (index) {
-        if (index == 0) {
-          // Handle index 0
-        } else if (index == 1) {
-          // Handle index 1
-        } else if (index == 2) {
-          // Handle index 2
-        } else if (index == 3) {
-          // Handle index 3
-        }
-      },
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
       body: _buildBody(context),
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 }

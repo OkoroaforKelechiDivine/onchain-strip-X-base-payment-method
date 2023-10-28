@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../app_config/manager/font_manager.dart';
-import '../../../app_config/manager/theme_manager.dart';
-import '../../custom/custom_amount_input_field.dart';
-import '../../custom/custom_bottom_bar_navigation.dart';
-import '../../custom/show_pin_dialog.dart';
+import '../../../../../app_config/manager/font_manager.dart';
+import '../../../../../app_config/manager/theme_manager.dart';
+import '../../../../core/utilities/app_fonts.dart';
+import '../../../widgets/app_button.dart';
+import '../../../../../data/custom/custom_amount_input_field.dart';
+import '../../../../../data/custom/custom_bottom_bar_navigation.dart';
+import '../../../../../data/custom/show_pin_dialog.dart';
 
 class BuyPowerScreen extends StatefulWidget {
   const BuyPowerScreen({super.key});
@@ -63,18 +66,10 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.only(left: 60.0),
-          child: Text(
-            'Buy Power',
-            style: TextStyle(
-              fontSize: AppFontSize.size20,
-              color: AppColors.lightGreen,
-            ),
-          ),
-        ),
-      ),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: Text('Buy Power', style: sans(color: AppColors.lightGreen),),),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -84,18 +79,26 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
             _buildPackage(),
             const SizedBox(height: 10),
             _buildMeterName(),
-            _buildNextButton(),
+        Container(
+          margin: EdgeInsets.only(top: 24.h),
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 100.0,
+              right: 100.0,
+            ),
+            child:
+            AppButton.filledButton(context,
+              onTap: (){},
+              color: AppColors.lightGreen,
+              child: Text(
+                'Next',
+                style: cairo(),
+              )),),
+        )
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
+
     );
   }
 

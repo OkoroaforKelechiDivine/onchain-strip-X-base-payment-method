@@ -4,10 +4,12 @@ import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/data/constants/enum/view_state.dart';
 import 'package:pay_me_mobile/data/custom/process/processing_bar.dart';
 import 'package:pay_me_mobile/data/view_models/transaction%20/transfer_model.dart';
+import 'package:pay_me_mobile/src/views/widgets/app_button.dart';
 
-import '../../custom/custom_amount_input_field.dart';
-import '../../custom/custom_bottom_bar_navigation.dart';
-import '../../custom/show_pin_dialog.dart';
+import '../../../../core/utilities/app_fonts.dart';
+import '../../../../../data/custom/custom_amount_input_field.dart';
+import '../../../../../data/custom/custom_bottom_bar_navigation.dart';
+import '../../../../../data/custom/show_pin_dialog.dart';
 
 class BuyAirtimeScreen extends StatefulWidget {
   const BuyAirtimeScreen({Key? key}) : super(key: key);
@@ -21,7 +23,6 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
   TextEditingController amountController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   String? selectedNetwork;
-  int _currentIndex = 2;
   int? selectedAmountIndex;
 
   late List<DropdownMenuItem<String>> networkItems;
@@ -78,15 +79,11 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.only(left: 60.0),
-          child: Text(
-            'Buy Airtime',
-            style: TextStyle(
-              fontSize: AppFontSize.size20,
-              color: AppColors.lightGreen,
-            ),
-          ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'Buy Airtime',
+          style: sans(color: AppColors.lightGreen),
         ),
       ),
       body: SingleChildScrollView(
@@ -103,7 +100,9 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 5,),
+            const SizedBox(
+              height: 5,
+            ),
             _buildAmountCards(),
             const SizedBox(height: 10),
             Padding(
@@ -123,19 +122,20 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
               child: _buildPhoneNumberTextField(),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 100.0, right: 100.0,),
-              child: _buildNextButton(),
+              padding: const EdgeInsets.only(
+                left: 100.0,
+                right: 100.0,
+              ),
+              child: AppButton.filledButton(context,
+                  onTap: (){},
+                  color: AppColors.lightGreen,
+                  child: Text(
+                    'Next',
+                    style: cairo(),
+                  )),
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
       ),
     );
   }
@@ -164,8 +164,11 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
   }
 
   Widget _buildAmountInfo() {
-    return  Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0,),
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 8.0,
+        vertical: 8.0,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: const [
@@ -192,7 +195,10 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
 
   Widget _buildAmountTextField() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0,),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8.0,
+        vertical: 8.0,
+      ),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -211,9 +217,8 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
             if (amountController.text != formattedAmount) {
               amountController.value = amountController.value.copyWith(
                 text: formattedAmount,
-                selection: TextSelection.collapsed(
-                    offset: formattedAmount.length
-                ),
+                selection:
+                    TextSelection.collapsed(offset: formattedAmount.length),
               );
             }
           },
@@ -222,8 +227,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
             hintStyle: const TextStyle(
                 color: AppColors.lightGrey,
                 fontSize: AppFontSize.size14,
-                fontWeight: AppFontWeight.light
-            ),
+                fontWeight: AppFontWeight.light),
             filled: true,
             fillColor: AppColors.pureWhite,
             focusColor: AppColors.pureWhite,
@@ -240,7 +244,10 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
 
   Widget _buildNetworkDropdown() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0,),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8.0,
+        vertical: 8.0,
+      ),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -258,8 +265,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
             hintStyle: const TextStyle(
                 color: AppColors.lightGrey,
                 fontSize: AppFontSize.size14,
-                fontWeight: AppFontWeight.light
-            ),
+                fontWeight: AppFontWeight.light),
             filled: true,
             fillColor: AppColors.pureWhite,
             focusColor: AppColors.pureWhite,
@@ -282,7 +288,10 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
 
   Widget _buildPhoneNumberTextField() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0,),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8.0,
+        vertical: 8.0,
+      ),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -301,8 +310,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
             hintStyle: const TextStyle(
                 color: AppColors.lightGrey,
                 fontSize: AppFontSize.size14,
-                fontWeight: AppFontWeight.light
-            ),
+                fontWeight: AppFontWeight.light),
             filled: true,
             fillColor: AppColors.pureWhite,
             focusColor: AppColors.pureWhite,
@@ -323,7 +331,8 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
       padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
       child: ElevatedButton(
         onPressed: () {
-          Map<String, String> selectedNetworkMap = networks.firstWhere((network) => network['name'] == selectedNetwork);
+          Map<String, String> selectedNetworkMap = networks
+              .firstWhere((network) => network['name'] == selectedNetwork);
 
           String? customerId = phoneNumberController.text;
           String amount = amountController.text;
@@ -343,22 +352,15 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
           );
           String enteredAmount = amountController.text;
           enteredAmount = enteredAmount.replaceAll("₦", "").replaceAll(",", "");
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) =>
-                    PinDialog(
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) => PinDialog(
                       amount: double.parse(enteredAmount),
                       accountName: "",
-                    )
-              ),
-            );
+                    )),
+          );
         },
-        child: const Text(
-            "Next",
-            style: TextStyle(
-                color: AppColors.pureWhite
-            )
-        ),
+        child: const Text("Next", style: TextStyle(color: AppColors.pureWhite)),
       ),
     );
   }
@@ -410,7 +412,8 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
     );
   }
 
-  DropdownMenuItem<String> _buildNetworkItem(String networkName, String logoAsset, String billerId, String divisionId, String productId) {
+  DropdownMenuItem<String> _buildNetworkItem(String networkName,
+      String logoAsset, String billerId, String divisionId, String productId) {
     return DropdownMenuItem<String>(
       value: networkName,
       child: Row(

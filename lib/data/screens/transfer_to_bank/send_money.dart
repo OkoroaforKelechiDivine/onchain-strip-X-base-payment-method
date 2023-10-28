@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/data/screens/transfer_to_bank/transfer_to_bank_screen.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_to_bank_screen.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../../app_config/manager/theme_manager.dart';
@@ -272,6 +272,8 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white10,
+        elevation: 0,
         title: const Text(''),
       ),
       body: SingleChildScrollView(

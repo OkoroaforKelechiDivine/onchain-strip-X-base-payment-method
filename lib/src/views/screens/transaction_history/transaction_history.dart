@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/data/screens/transaction_history/transaction_details.dart';
+import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
 
-import '../../custom/custom_bottom_bar_navigation.dart';
-import '../transfer_to_bank/transfer_to_bank_screen.dart';
+import '../../../../data/custom/custom_bottom_bar_navigation.dart';
+import '../transactions/transfer/transfer_to_bank_screen.dart';
 
 class TransactionHistoryScreen extends StatefulWidget {
   const TransactionHistoryScreen({Key? key}) : super(key: key);
@@ -22,22 +24,6 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
     return DateFormat('HH:mm a').format(timestamp);
   }
 
-  int _currentIndex = 1;
-
-  PreferredSizeWidget buildAppBar() {
-    return AppBar(
-      title: const Padding(
-        padding: EdgeInsets.only(left: 20),
-        child: Text(
-          'Transaction History',
-          style: TextStyle(
-            color: AppColors.lightGreen,
-            fontSize: AppFontSize.size20,
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget buildTransactionCard(String text, String routeName) {
     return Expanded(
@@ -46,18 +32,18 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0),
-            side: const BorderSide(
+            side:  BorderSide(
               color: AppColors.lightGreen,
+              width: 2.w
             ),
           ),
           child: GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, routeName);
             },
             child: Center(
               child: Text(
                 text,
-                style: CustomStyles.transactionHistoryTextStyle,
+                style: sans(color: AppColors.lightGreen)
               ),
             ),
           ),
@@ -111,7 +97,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
               ),
             );
           },
-          itemComparator: (DummyBank item1, DummyBank item2) => item2.timestamp.compareTo(item1.timestamp),
+          itemComparator: ( item1, item2) => item2.timestamp.compareTo(item1.timestamp),
           indexedItemBuilder: (context, element, index) {
             DummyBank bank = element;
             return GestureDetector(
@@ -123,7 +109,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                   bankName: bank.name,
                 );
                 Navigator.pushNamed(context,
-                    "/transaction_details",
+                    "/home",
                     arguments: transactionDetails
                 );
               },
@@ -182,29 +168,16 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text('Transaction History', style: sans(color: AppColors.lightGreen),),),
       body: Column(
         children: [
           buildTransactionCards(),
           buildTransactionList(),
         ],
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
     );
   }
-}
-
-class CustomStyles {
-  static const TextStyle transactionHistoryTextStyle = TextStyle(
-    fontSize: AppFontSize.size14,
-    color: AppColors.lightGreen,
-    fontWeight: AppFontWeight.light,
-  );
 }

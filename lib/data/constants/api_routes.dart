@@ -1,7 +1,7 @@
 class ApiRoutes {
   static var login = "/auth/login";
   static var enterPasscode = "/auth/validate_passcode";
-  static var getAllBanks = "/transaction/get-all-banks";
+  static var getAllBanks = "/api/get_all_banks";
   static var getAllBillers = "/transaction/get-biller-list/AIRTIME";
   static var payBills = "/transaction/pay-bill";
 

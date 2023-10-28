@@ -26,6 +26,6 @@ class _BaseUrlConfig {
   };
 
   static Map<String, dynamic> prodConstants = {
-    BASE_URL: "Prod Base URL",
+    BASE_URL: "https://d216tse86yqz4.cloudfront.net",
   };
 }

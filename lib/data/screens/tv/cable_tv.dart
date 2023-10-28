@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../app_config/manager/font_manager.dart';
 import '../../../app_config/manager/theme_manager.dart';
+import '../../../src/core/utilities/app_fonts.dart';
 import '../../custom/custom_amount_input_field.dart';
 import '../../custom/custom_bottom_bar_navigation.dart';
 
@@ -17,7 +18,6 @@ class _CableTvScreenState extends State<CableTvScreen> {
   String? selectedCableTvPackage;
   TextEditingController cableTvProviderController = TextEditingController();
   TextEditingController amountController = TextEditingController();
-  int _currentIndex = 3;
 
   List<DropdownMenuItem<String>> cableTvBiller = [
     const DropdownMenuItem<String>(
@@ -61,14 +61,13 @@ class _CableTvScreenState extends State<CableTvScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.only(left: 60.0),
-          child: Text(
-            'Cable TV',
-            style: TextStyle(
-              fontSize: AppFontSize.size20,
-              color: AppColors.lightGreen,
-            ),
+        elevation: 0,
+        backgroundColor: Colors.white10,
+        title:  Text(
+          'Cable TV',
+          style: sans(
+            fontSize: AppFontSize.size20,
+            color: AppColors.lightGreen,
           ),
         ),
       ),
@@ -84,14 +83,6 @@ class _CableTvScreenState extends State<CableTvScreen> {
             _buildNextButton(),
           ],
         ),
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
       ),
     );
   }
