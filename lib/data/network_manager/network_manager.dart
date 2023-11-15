@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:pay_me_mobile/data/constants/environment_initializer.dart';
+import 'package:pay_me_mobile/core/constants/environment_initializer.dart';
 
-import '../constants/enum/request_type.dart';
+import '../../core/constants/enum/request_type.dart';
 import '../utilities/secure_storage/secure_storage_utils.dart';
 
 class NetworkManager {

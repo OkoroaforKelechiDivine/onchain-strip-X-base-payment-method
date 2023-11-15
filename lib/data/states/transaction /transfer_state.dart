@@ -1,7 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 
-import '../../constants/enum/view_state.dart';
+import '../../../core/constants/enum/view_state.dart';
 
 class TransferState extends ChangeNotifier{
   ViewState _state = ViewState.Idle ;

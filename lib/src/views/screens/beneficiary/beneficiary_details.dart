@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
+import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 
 import '../../../../app_config/manager/font_manager.dart';
 import '../../../../app_config/manager/theme_manager.dart';
+import 'package:pay_me_mobile/core/cores.dart';
 
 class BeneficiaryDetailPage extends StatelessWidget {
   final Color circleColor;

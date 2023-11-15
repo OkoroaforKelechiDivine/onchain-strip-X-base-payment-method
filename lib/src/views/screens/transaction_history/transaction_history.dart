@@ -5,10 +5,11 @@ import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
-import 'package:pay_me_mobile/data/screens/transaction_history/transaction_details.dart';
-import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
+import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_details.dart';
+import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
+import 'package:pay_me_mobile/core/cores.dart';
 
-import '../../../../data/custom/custom_bottom_bar_navigation.dart';
+import '../../../custom/custom_bottom_bar_navigation.dart';
 import '../transactions/transfer/transfer_to_bank_screen.dart';
 
 class TransactionHistoryScreen extends StatefulWidget {

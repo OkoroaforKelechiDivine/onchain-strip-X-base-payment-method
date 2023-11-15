@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
-import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
-import 'package:pay_me_mobile/data/constants/enum/view_state.dart';
-import 'package:pay_me_mobile/src/views/screens/home/home_page_screen.dart';
-import 'package:pay_me_mobile/data/utilities/navigator.dart';
-import 'package:pay_me_mobile/src/core/constants/page_named_routes.dart';
-import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
+import 'package:pay_me_mobile/core/constants/enum/view_state.dart';
+import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 import 'package:pay_me_mobile/src/views/widgets/app_button.dart';
 import 'package:pay_me_mobile/src/views/widgets/app_textfield.dart';
+import 'package:pay_me_mobile/core/cores.dart';
+
 import 'package:provider/provider.dart';
 
-import '../../../../widgets/app_button.dart';
-import '../../../../widgets/error_message.dart';
+
 import '../../../../data/view_models/auth/login_model.dart';
 import '../home/home_page_screen.dart';
 
@@ -216,6 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _gotoNextScreen(){
-    replaceNavigation(context: context, widget: BottomNav(), routeName: PageNamedRoutes.home);
+    navigationService.pushReplacement(BottomNav());
+    //replaceNavigation(context: context, widget: , routeName: PageNamedRoutes.home);
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:provider/provider.dart';
+import 'package:pay_me_mobile/core/cores.dart';
 
 import '../../data/view_models/bottom_nav_vm.dart';
 import '../widgets/bottom_nav_items.dart';

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import '../../constants/enum/view_state.dart';
+import '../../../core/constants/enum/view_state.dart';
 
 class EnterPasscodeState extends ChangeNotifier{
   ViewState _state = ViewState.Idle ;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../core/utilities/app_fonts.dart';
+import '../../../core/utilities/app_fonts.dart';
 
 class AppTextField extends StatefulWidget {
   final String title;

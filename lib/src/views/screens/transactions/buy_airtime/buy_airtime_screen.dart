@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
-import 'package:pay_me_mobile/data/constants/enum/view_state.dart';
-import 'package:pay_me_mobile/data/custom/process/processing_bar.dart';
+import 'package:pay_me_mobile/core/constants/enum/view_state.dart';
+import 'package:pay_me_mobile/src/custom/process/processing_bar.dart';
 import 'package:pay_me_mobile/data/view_models/transaction%20/transfer_model.dart';
 import 'package:pay_me_mobile/src/views/widgets/app_button.dart';
+import 'package:pay_me_mobile/core/cores.dart';
 
-import '../../../../core/utilities/app_fonts.dart';
-import '../../../../../data/custom/custom_amount_input_field.dart';
-import '../../../../../data/custom/custom_bottom_bar_navigation.dart';
-import '../../../../../data/custom/show_pin_dialog.dart';
+import '../../../../../core/utilities/app_fonts.dart';
+import '../../../../custom/custom_amount_input_field.dart';
+import '../../../../custom/custom_bottom_bar_navigation.dart';
+import '../../../../custom/show_pin_dialog.dart';
 
 class BuyAirtimeScreen extends StatefulWidget {
   const BuyAirtimeScreen({Key? key}) : super(key: key);

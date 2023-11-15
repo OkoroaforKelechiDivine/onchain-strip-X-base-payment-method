@@ -5,18 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
-import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
-import 'package:pay_me_mobile/data/screens/transfer_to_bank/show_all_recent_transaction.dart';
-import 'package:pay_me_mobile/data/utilities/navigator.dart';
-import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
+import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/transfer/send_money.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/transfer/show_all_recent_transaction.dart';
 import 'package:pay_me_mobile/views/auth_view/helper/transaction_helper.dart';
+import 'package:pay_me_mobile/core/cores.dart';
 
-import '../../../../../data/custom/custom_bottom_bar_navigation.dart';
-import '../../../../../data/custom/process/processing_bar.dart';
+import '../../../../custom/custom_bottom_bar_navigation.dart';
+import '../../../../custom/process/processing_bar.dart';
 import '../../../../../data/view_models/transaction /transfer_model.dart';
-import '../../../../../data/screens/transaction_history/repeat_transaction.dart';
+import '../../transaction_history/repeat_transaction.dart';
 import '../../beneficiary/beneficiary_details.dart';
-import '../../../../../data/screens/transfer_to_bank/send_money.dart';
+
 
 class TransferToBankScreen extends StatefulWidget {
   const TransferToBankScreen({Key? key}) : super(key: key);
@@ -303,7 +303,8 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      pushNavigation(context: context, widget: ShowAllRecentTransactionsScreen(banks: dummyBanks));
+                      navigationService.push(ShowAllRecentTransactionsScreen(banks: dummyBanks));
+                      //pushNavigation(context: context, widget: ShowAllRecentTransactionsScreen(banks: dummyBanks));
                     },
                     child:  Row(
                       children: const [
@@ -452,34 +453,34 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
       ],
       keyboardType: TextInputType.number,
       onChanged: (value) {
-        setState(() {
-          if (value.isEmpty) {
-            _isAccountNumberErrorVisible = true;
-            _isAccountNumberLengthInvalid = false;
-            _userName = '';
-          } else if (value.length != 10) {
-            _isAccountNumberErrorVisible = false;
-            _isAccountNumberLengthInvalid = true;
-            _userName = '';
-          } else {
-            _showLinearProcessing = true;
-            _isAccountNumberErrorVisible = false;
-            _isAccountNumberLengthInvalid = false;
-            Future.delayed(const Duration(seconds: 3), () async {
-              try {
-                String accountType = "inter";
-                String beneficiaryAccount = await TransactionHelper.fetchBeneficiaryAccount(context, value, _selectedBankController.text, accountType);
-                _userName = beneficiaryAccount;
-              } catch (e) {
-                _isAccountNumberErrorVisible = true;
-                _userName = 'Account not found';
-              } finally {
-                _showLinearProcessing = false;
-              }
-              setState(() {});
-            });
-          }
-        });
+        // setState(() {
+        //   if (value.isEmpty) {
+        //     _isAccountNumberErrorVisible = true;
+        //     _isAccountNumberLengthInvalid = false;
+        //     _userName = '';
+        //   } else if (value.length != 10) {
+        //     _isAccountNumberErrorVisible = false;
+        //     _isAccountNumberLengthInvalid = true;
+        //     _userName = '';
+        //   } else {
+        //     _showLinearProcessing = true;
+        //     _isAccountNumberErrorVisible = false;
+        //     _isAccountNumberLengthInvalid = false;
+        //     Future.delayed(const Duration(seconds: 3), () async {
+        //       try {
+        //         String accountType = "inter";
+        //         String beneficiaryAccount = await TransactionHelper.fetchBeneficiaryAccount(context, value, _selectedBankController.text, accountType);
+        //         _userName = beneficiaryAccount;
+        //       } catch (e) {
+        //         _isAccountNumberErrorVisible = true;
+        //         _userName = 'Account not found';
+        //       } finally {
+        //         _showLinearProcessing = false;
+        //       }
+        //       setState(() {});
+        //     });
+        //   }
+        // });
       },
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -570,15 +571,9 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                 final selectedBank = dummyBanks.firstWhere((bank) =>
                 bank.name == _selectedBankController.text);
                 if (selectedBank != null) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          SendMoneyScreen(
+                  navigationService.push(SendMoneyScreen(
                             bank: selectedBank,
-                          ),
-                    ),
-                  );
+                          ));
                 } else {}
               }
             },

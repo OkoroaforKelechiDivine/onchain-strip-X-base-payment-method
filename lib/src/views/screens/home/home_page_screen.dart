@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pay_me_mobile/data/screens/pos/set_pos_screen.dart';
+import 'package:pay_me_mobile/src/views/screens/pos/set_pos_screen.dart';
+import 'package:pay_me_mobile/src/views/screens/raise_payment/raise_payment.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_to_bank_screen.dart';
 import 'package:pay_me_mobile/data/utilities/navigator.dart';
-import 'package:pay_me_mobile/src/core/utilities/app_fonts.dart';
+import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/src/views/screens/home/widgets/home_card_cta.dart';
 import 'package:pay_me_mobile/src/views/screens/home/widgets/shadow_wrapper.dart';
-
+import 'package:pay_me_mobile/core/cores.dart';
 import '../../../../app_config/manager/font_manager.dart';
 import '../../../../app_config/manager/theme_manager.dart';
-import '../../../../data/screens/outlet/outlet_screen.dart';
-import '../../../../data/screens/passcode/enter_passcode.dart';
-import '../../../../data/screens/passcode/set_pass_code.dart';
-import '../../../../data/screens/raise_payment/raise_payment.dart';
-import '../../../../data/screens/transfer_to_bank/send_money.dart';
-import '../../../../data/screens/tv/cable_tv.dart';
+import '../outlet/outlet_screen.dart';
+
+
+import '../tv/cable_tv.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
@@ -123,16 +122,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             title: 'Transfer',
                             asset: 'assets/jpg/transfer.jpg',
                             onPressed: () {
-                              pushNavigation(
-                                  context: context,
-                                  widget: const TransferToBankScreen());
+                              navigationService.push(const TransferToBankScreen());
+                              // pushNavigation(
+                              //     context: context,
+                              //     widget: const TransferToBankScreen());
                             },
                           ),
                           HomeCardCTA(
                             title: 'POS Device',
                             asset: 'assets/jpg/pos_device.jpg',
                             onPressed: () {
-                              pushNavigation(context: context, widget: const PosDeviceScreen());
+                              navigationService.push(const PosDeviceScreen());
+                              //pushNavigation(context: context, widget: const PosDeviceScreen());
                             },
                           ),
                         ],
@@ -178,7 +179,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             asset: 'assets/jpg/raise_payment.jpg',
                             textColor: AppColors.lightGreen,
                             onPressed: (){
-                              pushNavigation(context: context, widget: RaisePaymentScreen());
+                              navigationService.push(const RaisePaymentScreen());
+                              //pushNavigation(context: context, widget: RaisePaymentScreen());
                             },
                           ),
                         ),
@@ -233,7 +235,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        pushNavigation(context: context, widget: OutletScreen());
+                        navigationService.push(const OutletScreen());
+                        //pushNavigation(context: context, widget: OutletScreen());
                       },
                       child: const ShadowWrapper(
                         child: HomeCardCTA(
@@ -321,7 +324,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        pushNavigation(context: context, widget: CableTvScreen());
+                        navigationService.push(const CableTvScreen());
+
+                        //pushNavigation(context: context, widget: CableTvScreen());
                       },
                       child: const ShadowWrapper(
                         child: HomeCardCTA(

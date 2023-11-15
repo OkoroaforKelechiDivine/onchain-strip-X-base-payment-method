@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../app_config/manager/theme_manager.dart';
-import '../../../../core/utilities/app_fonts.dart';
+import '../../../../../core/utilities/app_fonts.dart';
+import 'package:pay_me_mobile/core/cores.dart';
 
 class HomeCardCTA extends StatelessWidget {
   final void Function()? onPressed;

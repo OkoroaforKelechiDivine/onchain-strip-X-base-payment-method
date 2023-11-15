@@ -2,14 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pay_me_mobile/core/cores.dart';
 
 import '../../../../../app_config/manager/font_manager.dart';
 import '../../../../../app_config/manager/theme_manager.dart';
-import '../../../../core/utilities/app_fonts.dart';
+import '../../../../../core/utilities/app_fonts.dart';
 import '../../../widgets/app_button.dart';
-import '../../../../../data/custom/custom_amount_input_field.dart';
-import '../../../../../data/custom/custom_bottom_bar_navigation.dart';
-import '../../../../../data/custom/show_pin_dialog.dart';
+import '../../../../custom/custom_amount_input_field.dart';
+import '../../../../custom/custom_bottom_bar_navigation.dart';
+import '../../../../custom/show_pin_dialog.dart';
 
 class BuyPowerScreen extends StatefulWidget {
   const BuyPowerScreen({super.key});

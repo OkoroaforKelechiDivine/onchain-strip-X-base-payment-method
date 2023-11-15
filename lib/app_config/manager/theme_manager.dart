@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
+import 'package:pay_me_mobile/core/constants/colors.dart';
 
 import 'font_style_manager.dart';
 
-class AppColors {
-  static const Color lightBlack = Color(0xFF000000);
-  static const Color deepWhite = Color(0xFFFFFCFC);
-  static const Color lightGreen = Color.fromRGBO(43, 96, 110, 1);
-  static const Color lightGrey = Color.fromRGBO(0, 0, 0, 0.6);
-  static const Color lightBlue = Color.fromRGBO(240, 251, 254, 1);
-  static const Color pureWhite = Color(0xFFFFFFFF);
-  static const Color darkWhite = Color.fromRGBO(139, 134, 134, 0.5);
-  static const Color errorRed =  Color(0xFFDF1414);
-  static const Color brightGreen =  Color.fromRGBO(19, 232, 79, 1);
-  static const Color dullOrange =  Color.fromRGBO(232, 211, 19, 1);
-}
+
 
 ThemeData _appTheme = ThemeData(
   textTheme: TextTheme(

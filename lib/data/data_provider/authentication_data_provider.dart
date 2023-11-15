@@ -2,10 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:pay_me_mobile/widgets/app_button.dart';
 
-import '../constants/api_routes.dart';
-import '../constants/enum/request_type.dart';
+import '../../core/constants/api_routes.dart';
+import '../../core/constants/enum/request_type.dart';
 import '../model/auth/app_response.dart';
 import '../network_manager/network_manager.dart';
 
@@ -49,7 +48,8 @@ class AuthenticationDataProvider {
 
       if (response != null) {
         if (response['message'] == true) {
-            navigateToHome(context);
+          //TODO: Navigate to home page
+            //navigateToHome(context);
         }
         else {
           print('Incorrect passcode. Please try again.');
