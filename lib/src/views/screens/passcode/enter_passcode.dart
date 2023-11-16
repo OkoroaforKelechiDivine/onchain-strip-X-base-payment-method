@@ -1,12 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/data/view_models/auth/enter_passcode_model.dart';
+import 'package:pay_me_mobile/src/views/screens/auth/components/logo.dart';
+import 'package:pay_me_mobile/src/views/screens/auth/components/welcome_text.dart';
 
-
+import 'keypad.dart';
 
 class EnterPassCodeScreen extends StatefulWidget {
   const EnterPassCodeScreen({Key? key}) : super(key: key);
@@ -46,7 +46,7 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
       body: Stack(
         children: [
           BackdropFilter(
-            filter: isProcessing ? ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0) : ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
+            filter: isProcessing ? ImageFilter.blur(sigmaX: 20, sigmaY: 20) : ImageFilter.blur(sigmaX: 0, sigmaY: 0),
             child: Container(
               color: Colors.transparent,
               width: double.infinity,
@@ -56,8 +56,8 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      _buildLogo(),
-                      _buildWelcomeText(),
+                      const BuildLogo(),
+                      const BuildWelcomeText(),
                       if (isError)
                         const Text(
                           'Incorrect passcode. Please try again.',
@@ -78,140 +78,6 @@ class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildLogo() {
-    return Image.asset('assets/png/payme.png', width: 150.0, height: 100.0);
-  }
-
-  Widget _buildWelcomeText() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 50.0),
-      child: Column(
-        children: [
-          Text(
-            "Welcome Back",
-            style: TextStyle(
-              fontSize: AppFontSize.size22,
-              color: AppColors.lightBlack,
-              fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Keypad extends StatelessWidget {
-  final Function(String) onButtonPressed;
-  final List<String> enteredDigits;
-
-  const Keypad({
-    super.key, required this.onButtonPressed, required this.enteredDigits
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
-      child: Column(
-        children: [
-          _buildPasscodeText(),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              for (int index = 0; index < 6; index++) _buildCircle(index),
-            ],
-          ),
-          _buildKeypadButtons(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPasscodeText() {
-    return const Text(
-      "Enter Passcode",
-      style: TextStyle(
-        fontSize: AppFontSize.size18,
-        color: AppColors.lightGrey,
-        fontWeight: AppFontWeight.light,
-      ),
-    );
-  }
-
-  Widget _buildCircle(int index) {
-    return Container(
-      width: 15,
-      height: 20,
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: enteredDigits.length > index ? AppColors.lightBlack : Colors.transparent,
-        border: Border.all(
-          color: AppColors.lightBlack,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildKeypadButtons() {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-      ),
-      shrinkWrap: true,
-      itemCount: 12, // 12 keypad buttons
-      itemBuilder: (BuildContext context, int index) {
-        final buttonText = [
-          '1', '2', '3',
-          '4', '5', '6',
-          '7', '8', '9',
-          'Sign out', '0', 'Delete',
-        ][index];
-        final isDeleteButtonDisabled = buttonText == 'Delete' && enteredDigits.isEmpty;
-        return MaterialButton(
-          onPressed: () {
-            if (buttonText == 'Sign out') {
-            } else if (!isDeleteButtonDisabled) {
-              onButtonPressed(buttonText);
-            }
-          },
-          child: isDeleteButtonDisabled ? Text(
-            buttonText,
-            style: TextStyle(
-              fontSize: AppFontSize.size20,
-              fontWeight: AppFontWeight.bold,
-              fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-              color: AppColors.deepWhite,
-            ),
-            textAlign: TextAlign.center,
-          ) : (buttonText == 'Sign out' || buttonText == 'Delete') ? OverflowBox(
-            maxWidth: 100.0,
-            alignment: Alignment.center,
-            child: Text(
-              buttonText,
-              style: TextStyle(
-                fontSize: AppFontSize.size20,
-                fontWeight: buttonText == 'Sign out' ? AppFontWeight.bold : AppFontWeight.bold,
-                fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-                color: buttonText == 'Sign out' ? AppColors.lightGreen : AppColors.lightBlack,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ) : Text(
-            buttonText,
-            style: TextStyle(
-              fontSize: AppFontSize.size30,
-              fontWeight: AppFontWeight.bold,
-              fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-            ),
-          ),
-        );
-      },
     );
   }
 }
