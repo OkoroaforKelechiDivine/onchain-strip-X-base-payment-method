@@ -4,7 +4,7 @@ import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import '../../../../app_config/manager/font_manager.dart';
 
 import '../../../../core/constants/colors.dart';
-import 'components/card_text_button.dart';
+import 'components/outlet_card_text_button.dart';
 class OutletScreen extends StatefulWidget {
   const OutletScreen({super.key});
 
