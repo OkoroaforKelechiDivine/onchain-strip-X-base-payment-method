@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pay_me_mobile/data/data_provider/transfer_data_provider.dart';
+import 'package:pay_me_mobile/data/datasources/remote/transfer_data_provider.dart';
 import 'package:pay_me_mobile/data/states/transaction%20/transfer_state.dart';
 import '../../../core/di/locator.dart';
 import '../../../core/constants/enum/view_state.dart';

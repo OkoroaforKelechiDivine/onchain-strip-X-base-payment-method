@@ -3,10 +3,10 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 
-import '../../core/constants/api_routes.dart';
-import '../../core/constants/enum/request_type.dart';
-import '../model/auth/app_response.dart';
-import '../network_manager/network_manager.dart';
+import '../../../core/constants/api_routes.dart';
+import '../../../core/constants/enum/request_type.dart';
+import '../../model/auth/app_response.dart';
+import '../../network_manager/network_manager.dart';
 
 class AuthenticationDataProvider {
   NetworkManager networkManager = NetworkManager();

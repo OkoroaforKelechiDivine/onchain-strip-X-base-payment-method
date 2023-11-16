@@ -1,31 +1,33 @@
-// import 'package:flutter/material.dart';
-// import 'package:simplyassess/core/cores.dart';
-// import 'package:simplyassess/data/data.dart';
+import 'package:flutter/material.dart';
 
-// class AppGlobals extends ChangeNotifier {
-//   static AppGlobals instance = AppGlobals._();
-//   AppGlobals._();
+import '../../data/model/model.dart';
+import '../cores.dart';
 
-//   String? _token;
-//   User? _user;
 
-//   Future<void> init() async {
-//     _token = authLocalStorage.getToken();
-//     _user = appLocalStorage.getUser();
-//   }
+class AppGlobals extends ChangeNotifier {
+  static AppGlobals instance = AppGlobals._();
+  AppGlobals._();
 
-//   String get userType => user?.role ?? UserType.student;
+  String? _token;
+  User? _user;
 
-//   set token(String? value) {
-//     _token = value;
-//     notifyListeners();
-//   }
+  Future<void> init() async {
+    _token = authLocalStorage.getToken();
+    _user = appLocalStorage.getUser();
+  }
 
-//   set user(User? value) {
-//     _user = value;
-//     notifyListeners();
-//   }
 
-//   String? get token => _token;
-//   User? get user => _user;
-// }
+
+  set token(String? value) {
+    _token = value;
+    notifyListeners();
+  }
+
+  set user(User? value) {
+    _user = value;
+    notifyListeners();
+  }
+
+  String? get token => _token;
+  User? get user => _user;
+}
