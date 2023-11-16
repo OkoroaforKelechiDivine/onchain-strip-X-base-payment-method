@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/src/views/screens/outlet/outlet_detail_screen.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 
 import '../../../../app_config/manager/font_manager.dart';
-import '../../../../app_config/manager/theme_manager.dart';
 
 import '../../../../core/constants/colors.dart';
+import 'components/card_text_button.dart';
 class OutletScreen extends StatefulWidget {
   const OutletScreen({super.key});
 
@@ -30,38 +28,13 @@ class _OutletScreenState extends State<OutletScreen> {
           ),
         ),
       ),
-      body: Column(
+      body: const Column(
         children: [
-          const SizedBox(height: 30),
-          _buildCardWithTextButton(context, "Outlet Isolo"),
-          _buildCardWithTextButton(context, "Outlet Ijebu"),
-          _buildCardWithTextButton(context, "Outlet Ipaja"),
+          SizedBox(height: 30),
+          BuildCardWithTextButton(text: "Outlet Isolo"),
+          BuildCardWithTextButton(text:  "Outlet Ijebu"),
+          BuildCardWithTextButton(text:  "Outlet Ipaja"),
         ],
-      ),
-    );
-  }
-
-  Widget _buildCardWithTextButton(BuildContext context, String text) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.all(10),
-      child: Card(
-        child: TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => OutletDetailsScreen(outletName: text),
-              ),
-            );
-          },
-          child: Text(
-            text,
-            style: const TextStyle(
-              color: AppColors.lightBlack,
-            ),
-          ),
-        ),
       ),
     );
   }
