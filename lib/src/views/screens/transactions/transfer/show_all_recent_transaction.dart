@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
-
-import 'package:pay_me_mobile/data/utilities/navigator.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/send_money.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_to_bank_screen.dart';

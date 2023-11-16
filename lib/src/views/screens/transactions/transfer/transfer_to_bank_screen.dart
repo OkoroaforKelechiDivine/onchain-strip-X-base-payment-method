@@ -8,7 +8,7 @@ import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/send_money.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/show_all_recent_transaction.dart';
-import 'package:pay_me_mobile/views/auth_view/helper/transaction_helper.dart';
+
 import 'package:pay_me_mobile/core/cores.dart';
 
 import '../../../../custom/custom_bottom_bar_navigation.dart';

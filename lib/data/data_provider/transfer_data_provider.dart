@@ -186,5 +186,61 @@ class TransferDataProvider {
     return completer.future;
   }
 
+  //   static const String baseUrl = 'https://dzbilqfc4qszv.cloudfront.net/transaction';
+
+//   static Future<List<Bank>> fetchBanks(BuildContext context) async {
+//     final token = Provider.of<TokenProvider>(context, listen: false).token;
+
+//     final options = BaseOptions(
+//       headers: {
+//         'Authorization': 'Bearer $token',
+//       },
+//     );
+//     final dio = Dio(options);
+//     const url = '$baseUrl/get-all-banks';
+
+//     try {
+//       final response = await dio.get(url);
+
+//       if (response.statusCode == 200) {
+//         final Map<String, dynamic> responseData = response.data;
+//         final List<dynamic> bankData = responseData['data']['bank'];
+//         List<Bank> banks = bankData.map((data) => Bank.fromJson(data)).toList();
+//         return banks;
+//       } else {
+//         throw Exception('Failed to load banks');
+//       }
+//     } catch (exception) {
+//       throw Exception('Error fetching banks: $exception');
+//     }
+//   }
+
+//   static Future<String> fetchBeneficiaryAccount(BuildContext context, String accountNo, String bankCode, String transferType) async {
+//     final token = Provider.of<TokenProvider>(context, listen: false).token;
+
+//     final options = BaseOptions(
+//       headers: {
+//         'Authorization': 'Bearer $token',
+//       },
+//     );
+//     final dio = Dio(options);
+//     final url = '$baseUrl/get-beneficiary-account?accountNo=$accountNo&bank=$bankCode&transfer_type=$transferType';
+//     print(url);
+
+//     try {
+//       final response = await dio.get(url);
+
+//       if (response.statusCode == 200) {
+//         final Map<String, dynamic> responseData = response.data;
+//         final String accountNumber = responseData['data']['account']['number'];
+//         return accountNumber;
+//       } else {
+//         throw Exception('Failed to load beneficiary account');
+//       }
+//     } catch (exception) {
+//       throw Exception('Error fetching beneficiary account: $exception');
+//     }
+//   }
+
 
 }

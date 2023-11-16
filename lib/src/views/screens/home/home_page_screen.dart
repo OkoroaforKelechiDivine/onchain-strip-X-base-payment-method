@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/src/views/screens/pos/set_pos_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/raise_payment/raise_payment.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_to_bank_screen.dart';
-import 'package:pay_me_mobile/data/utilities/navigator.dart';
+
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/src/views/screens/home/widgets/home_card_cta.dart';
 import 'package:pay_me_mobile/src/views/screens/home/widgets/shadow_wrapper.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import '../../../../app_config/manager/font_manager.dart';
-import '../../../../app_config/manager/theme_manager.dart';
+
 import '../outlet/outlet_screen.dart';
 
 

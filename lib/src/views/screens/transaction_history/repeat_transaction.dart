@@ -1,11 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
-import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_details.dart';
-import 'package:pay_me_mobile/data/utilities/navigator.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 
 class RepeatTransactionScreen extends StatefulWidget {
