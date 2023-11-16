@@ -21,7 +21,7 @@ class BuildKeyPadButtons extends StatelessWidget {
         crossAxisCount: 3,
       ),
       shrinkWrap: true,
-      itemCount: 12, // 12 keypad buttons
+      itemCount: 12,
       itemBuilder: (BuildContext context, int index) {
         final buttonText = [
           '1', '2', '3',
