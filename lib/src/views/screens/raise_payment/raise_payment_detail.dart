@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
-import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/src/custom/custom_bottom_bar_navigation.dart';
+import 'package:pay_me_mobile/src/views/screens/raise_payment/components/info_row.dart';
+import 'package:pay_me_mobile/src/views/screens/raise_payment/components/more_actions.dart';
+import 'package:pay_me_mobile/src/views/screens/raise_payment/components/status_circle.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/repeat_transaction.dart';
-
-
 
 class RaisePaymentDetailsScreen extends StatefulWidget {
   final String amount;
@@ -67,7 +67,7 @@ class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
                     const SizedBox(width: 65),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
-                      child: _buildStatusCircle(widget.status),
+                      child: BuildStatusCircle(status: widget.status)
                     ),
                   ],
                 ),
@@ -101,31 +101,42 @@ class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
               padding: const EdgeInsets.only(top: 30, right: 10, left: 10),
               child: Column(
                 children: [
-                  _buildInfoRow('Account Name', widget.accountName),
+                  BuildInfoRow(label: 'Account Name', value: widget.accountName),
                   const SizedBox(height: 10),
                   _buildDivider(),
                   const SizedBox(height: 10),
-                  _buildInfoRow('To', widget.bankName),
+                  BuildInfoRow(label: 'To', value: widget.bankName),
                   const SizedBox(height: 15),
                   _buildDivider(),
                   const SizedBox(height: 15),
-                  _buildInfoRow('Description', 'Garri'),
+                  const BuildInfoRow(label: 'Description', value: 'Garri'),
                   const SizedBox(height: 15),
                   _buildDivider(),
                   const SizedBox(height: 15),
-                  _buildInfoRow('Outward Transfer', '₦ 0.00'),
+                  const BuildInfoRow(label: 'Outward Transfer', value: '₦ 0.00'),
                   const SizedBox(height: 15),
                   _buildDivider(),
                   const SizedBox(height: 15),
-                  _buildInfoRow('Payment Method', 'Fees'),
+                  const BuildInfoRow(label: 'Payment Method', value: 'Fees'),
                   const SizedBox(height: 15),
                   _buildDivider(),
                   const SizedBox(height: 15),
-                  _buildInfoRow('Transaction Reference', '090267230811083838'),
+                  const BuildInfoRow(label: 'Transaction Reference', value: '090267230811083838'),
                   const SizedBox(height: 15),
                   _buildDivider(),
                   const SizedBox(height: 15),
-                  _buildMoreActions(),
+                  BuildMoreActions(status: widget.status, onTap: () {
+                    navigationService.push(
+                      RepeatTransactionScreen(
+                        amount: widget.amount,
+                        transactionTimestamp: widget.transactionTimestamp,
+                        accountName: widget.accountName,
+                        description: 'Garri',
+                        isSent: true,
+                      ),
+                    );
+                  }
+                  ),
                 ],
               ),
             ),
@@ -144,156 +155,10 @@ class _RaisePaymentDetailsScreenState extends State<RaisePaymentDetailsScreen> {
     );
   }
 
-  Widget _buildStatusCircle(String status) {
-    Color circleColor = AppColors.brightGreen;
-
-    if (status == 'Declined') {
-      circleColor = AppColors.errorRed;
-    } else if (status == 'Pending') {
-      circleColor = AppColors.dullOrange;
-    }
-
-    return Row(
-      children: [
-        Container(
-          width: 15,
-          height: 15,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: circleColor,
-          ),
-        ),
-        const SizedBox(width: 5),
-        Text(
-          status,
-          style: TextStyle(
-            fontSize: AppFontSize.size12,
-            color: circleColor,
-            fontWeight: AppFontWeight.bold,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildInfoRow(String label, String value) {
-    return Row(
-      children: [
-        Text(
-          '$label ',
-          style: const TextStyle(
-            fontSize: AppFontSize.size16,
-            fontWeight: AppFontWeight.bold,
-            color: AppColors.lightBlack,
-          ),
-        ),
-        const Spacer(),
-        Text(
-          value,
-          style: const TextStyle(
-            color: AppColors.lightBlack,
-            fontWeight: AppFontWeight.light,
-            fontSize: AppFontSize.size16,
-          ),
-        )
-      ],
-    );
-  }
-
   Widget _buildDivider() {
     return Container(
       color: AppColors.lightGreen,
       height: 0.5,
-    );
-  }
-
-  Widget _buildMoreActions() {
-    if (widget.status == 'Approved') {
-      return Container();
-    } else if (widget.status == 'Declined') {
-      return  Row(
-        children: const [
-          Padding(
-            padding: EdgeInsets.only(right: 200, bottom: 20),
-            child: Text(
-              "Reason:",
-              style: TextStyle(
-                color: AppColors.lightBlack,
-                fontWeight: AppFontWeight.bold,
-                fontSize: AppFontSize.size18,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 20, bottom: 20),
-            child: Text(
-              "blah blah",
-              style: TextStyle(
-                color: AppColors.lightBlack,
-                fontWeight: AppFontWeight.light,
-                fontSize: AppFontSize.size16,
-              ),
-            ),
-          ),
-        ],
-      );
-
-    } else {
-      return Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(right: 240, bottom: 20),
-            child: Text(
-              "More Actions",
-              style: TextStyle(
-                color: AppColors.lightBlack,
-                fontWeight: AppFontWeight.bold,
-                fontSize: AppFontSize.size18,
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              navigationService.push(RepeatTransactionScreen(
-                    amount: widget.amount,
-                    transactionTimestamp: widget.transactionTimestamp,
-                    accountName: widget.accountName,
-                    description: 'Garri',
-                    isSent: true,
-                  ),);
-              
-            },
-            child: _buildActionRow(
-              'assets/jpg/reset.jpg',
-              'Terminate Transaction',
-              Icons.arrow_forward_ios,
-            ),
-          ),
-        ],
-      );
-    }
-  }
-
-  Widget _buildActionRow(String imagePath, String label, IconData icon) {
-    return Row(
-      children: [
-        Image.asset(
-          imagePath,
-          width: 20,
-          height: 20,
-        ),
-        const SizedBox(width: 10),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: AppFontSize.size16,
-            fontWeight: AppFontWeight.bold,
-            color: AppColors.lightBlack,
-          ),
-        ),
-        const Spacer(),
-        Icon(icon),
-      ],
     );
   }
 }
