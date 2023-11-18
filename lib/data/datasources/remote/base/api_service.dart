@@ -48,7 +48,8 @@ class ApiService {
       final res = await _dio.post(path, data: data);
       return res.data;
     } on DioError catch (e) {
-      throw ApiFailure(e.message ?? 'Something went wrong!');
+      String errorMessage = e.response?.data["error"] ?? e.message;
+      throw ApiFailure(errorMessage);
     }
   }
 

@@ -1,16 +1,16 @@
 class User {
   String? firstName;
   String? lastName;
-  String? email;
-  String? role;
+  String? middleName;
+  String? gender;
 
-  User({this.firstName, this.lastName, this.email, this.role, });
+  User({this.firstName, this.lastName, this.middleName, this.gender, });
 
   User.fromJson(Map<String, dynamic> json) {
     firstName = json['firstName'];
     lastName = json['lastName'];
-    email = json['email'];
-    role = json['role'];
+    middleName = json['middle_name'];
+    gender = json['gender'];
     
   }
 
@@ -18,8 +18,8 @@ class User {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['firstName'] = firstName;
     data['lastName'] = lastName;
-    data['email'] = email;
-    data['role'] = role;
+    data['middle_name'] = middleName;
+    data['gender'] = gender;
     return data;
   }
 }

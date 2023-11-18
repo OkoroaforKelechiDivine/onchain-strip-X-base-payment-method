@@ -1,4 +1,5 @@
 import 'package:pay_me_mobile/core/constants/enum/view_state.dart';
+import 'package:pay_me_mobile/data/model/response/auth/login_response.dart';
 
 import '../../../core/di/locator.dart';
 import '../../datasources/remote/authentication_data_provider.dart';
@@ -28,6 +29,20 @@ class LoginViewModel extends LoginState {
 
   String? _pwd;
   String? get pwd => _pwd;
+
+
+//Login Implementation
+  void appLogin({required String username, required String password}) async {
+    final res = await authRepo.login(email: username, password: password);
+    if(res.success){
+      LoginResponse(
+        token: res.data?.token,
+        user: res.data?.user,
+      );
+    }else{
+      
+    }
+  }
 
   login({String? username, String? password}) async {
     setState(ViewState.Busy);

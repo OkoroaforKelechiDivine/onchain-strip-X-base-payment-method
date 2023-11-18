@@ -2,13 +2,32 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:pay_me_mobile/data/datasources/remote/base/api_failure.dart';
+import 'package:pay_me_mobile/data/datasources/remote/base/api_response.dart';
+import 'package:pay_me_mobile/data/datasources/remote/base/api_service.dart';
 
 import '../../../core/constants/api_routes.dart';
 import '../../../core/constants/enum/request_type.dart';
-import '../../model/auth/app_response.dart';
+import '../../model/response/auth/app_response.dart';
+import '../../model/response/auth/login_response.dart';
 import '../../network_manager/network_manager.dart';
 
 class AuthenticationDataProvider {
+  final _apiService = ApiService(path: '/auth');
+
+  Future<ApiResponse<LoginResponse?>> loginAPI(
+      {required String email, required String password}) async {
+    try {
+      final res = await _apiService
+          .post('/login', data: {'email': email, 'password': password});
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..data = LoginResponse.fromJson(res['data']);
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+  
   NetworkManager networkManager = NetworkManager();
 
   Future<AppResponse> login(Map<String, dynamic> loginDetails) async {
