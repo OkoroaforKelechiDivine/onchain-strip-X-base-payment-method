@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
+import 'package:pay_me_mobile/src/views/screens/raise_payment/components/info_row.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/repeat_transaction.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/core/cores.dart';
@@ -43,43 +44,6 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
             fontSize: AppFontSize.size20,
           ),
         )
-        // Row(
-        //   children: [
-        //      Padding(
-        //       padding: EdgeInsets.only(left: 60.0),
-        //       child: Center(
-        //         child: Text(
-        //           'Transaction',
-        //           style: sans(
-        //             color: AppColors.lightGreen,
-        //             fontSize: AppFontSize.size20,
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //     Padding(
-        //       padding: const EdgeInsets.only(left: 40),
-        //       child: ClipRRect(
-        //         borderRadius: BorderRadius.circular(8.0),
-        //         child: Container(
-        //           color: AppColors.lightGreen,
-        //           constraints: const BoxConstraints(maxWidth: 70, maxHeight: 25),
-        //           child: ElevatedButton(
-        //             onPressed: () {_showHelloDialog(context);},
-        //             child: const Text(
-        //               'Share',
-        //               style: TextStyle(
-        //                 fontSize: AppFontSize.size12,
-        //                 fontWeight: AppFontWeight.medium,
-        //                 color: AppColors.pureWhite,
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //   ],
-        // ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -125,35 +89,34 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
               padding: const EdgeInsets.only(top: 30, right: 10, left: 10),
               child: Column(
                 children: [
-                  _buildInfoRow('Account Name', widget.accountName),
+                  BuildInfoRow(label: 'Account Name', value: widget.accountName),
                   const SizedBox(height: 10),
                   _buildDivider(),
                   const SizedBox(height: 10),
-                  _buildInfoRow('To', widget.bankName),
+                  BuildInfoRow(label: 'To', value: widget.bankName),
                   const SizedBox(height: 15),
                   _buildDivider(),
                   const SizedBox(height: 15),
-                  _buildInfoRow('Description', 'Garri'),
+                  const BuildInfoRow(label: 'Description', value:'Garri'),
                   const SizedBox(height: 15),
                   _buildDivider(),
                   const SizedBox(height: 15),
-                  _buildInfoRow('Outward Transfer', '₦ 0.00'),
+                  const BuildInfoRow(label: 'Outward Transfer', value: '₦ 0.00'),
                   const SizedBox(height: 15),
                   _buildDivider(),
                   const SizedBox(height: 15),
-                  _buildInfoRow('Payment Method', 'Fees'),
+                  const BuildInfoRow(label: 'Payment Method', value: 'Fees'),
                   const SizedBox(height: 15),
                   _buildDivider(),
                   const SizedBox(height: 15),
-                  _buildInfoRow('Status', 'Successful'),
+                  const BuildInfoRow(label: 'Status', value: 'Successful'),
                   const SizedBox(height: 15),
                   _buildDivider(),
                   const SizedBox(height: 15),
-                  _buildInfoRow('Transaction Reference', '090267230811083838'),
+                  const BuildInfoRow(label: 'Transaction Reference', value: '090267230811083838'),
                   const SizedBox(height: 15),
                   _buildDivider(),
                   const SizedBox(height: 15),
-                  _buildMoreActions(),
                 ],
               ),
             ),
@@ -181,9 +144,9 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
           child: Container(
             color: AppColors.deepWhite,
             padding: const EdgeInsets.all(16),
-            child:  Center(
+            child:  const Center(
               child: Column(
-                children: const [
+                children: [
                   Text('Share Receipt',
                       style: TextStyle(
                           fontSize: AppFontSize.size20,
@@ -216,100 +179,10 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
     );
   }
 
-
-  Widget _buildInfoRow(String label, String value) {
-    return Row(
-      children: [
-        Text(
-          '$label ',
-          style: const TextStyle(
-            fontSize: AppFontSize.size16,
-            fontWeight: AppFontWeight.bold,
-            color: AppColors.lightBlack,
-          ),
-        ),
-        const Spacer(),
-        Text(
-          value,
-          style: const TextStyle(
-            color: AppColors.lightBlack,
-            fontWeight: AppFontWeight.light,
-            fontSize: AppFontSize.size16,
-          ),
-        )
-      ],
-    );
-  }
-
   Widget _buildDivider() {
     return Container(
       color: AppColors.lightGreen,
       height: 0.5,
-    );
-  }
-
-  Widget _buildMoreActions() {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(right: 240, bottom: 20),
-          child: Text("More Actions",
-            style: TextStyle(
-                color: AppColors.lightBlack,
-                fontWeight: AppFontWeight.bold,
-              fontSize: AppFontSize.size18
-            )
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => RepeatTransactionScreen(
-                  amount: widget.amount,
-                  transactionTimestamp: widget.transactionTimestamp,
-                  accountName: widget.accountName,
-                  description: 'Garri', isSent: true,
-                ),
-              ),
-            );
-          },
-          child: _buildActionRow(
-            'assets/jpg/reset.jpg',
-            'Repeat Transaction',
-            Icons.arrow_forward_ios,
-          ),
-        ),
-        const SizedBox(height: 20),
-        _buildActionRow(
-          'assets/jpg/report_card.jpg',
-          'Report Transaction',
-          Icons.arrow_forward_ios,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildActionRow(String imagePath, String label, IconData icon) {
-    return Row(
-      children: [
-        Image.asset(
-          imagePath,
-          width: 20,
-          height: 20,
-        ),
-        const SizedBox(width: 10),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: AppFontSize.size16,
-            fontWeight: AppFontWeight.bold,
-            color: AppColors.lightBlack,
-          ),
-        ),
-        const Spacer(),
-        Icon(icon),
-      ],
     );
   }
 }
