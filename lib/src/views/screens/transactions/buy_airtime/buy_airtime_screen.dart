@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
-import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
-import 'package:pay_me_mobile/core/constants/enum/view_state.dart';
-import 'package:pay_me_mobile/src/custom/process/processing_bar.dart';
-import 'package:pay_me_mobile/data/view_models/transaction%20/transfer_model.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/components/amount_cards.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/components/amount-text-field.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/components/amount_info.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/components/network_dropdown.dart';
 import 'package:pay_me_mobile/src/views/widgets/app_button.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 
 import '../../../../../core/utilities/app_fonts.dart';
-import '../../../../custom/custom_amount_input_field.dart';
-import '../../../../custom/custom_bottom_bar_navigation.dart';
-import '../../../../custom/show_pin_dialog.dart';
+import 'components/network_item.dart';
+import 'components/phone_number.dart';
 
 class BuyAirtimeScreen extends StatefulWidget {
   const BuyAirtimeScreen({Key? key}) : super(key: key);
@@ -65,12 +64,9 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
     networkItems = networks.map((network) {
       return DropdownMenuItem<String>(
         value: network['name'],
-        child: _buildNetworkItem(
-          network['name']!,
-          network['logoAsset']!,
-          network['billerId']!,
-          network['divisionId']!,
-          network['productId']!,
+        child: NetworkItem(
+          networkName: network['name']!,
+          logoAsset: network['logoAsset']!,
         ),
       );
     }).toList();
@@ -104,325 +100,40 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
             const SizedBox(
               height: 5,
             ),
-            _buildAmountCards(),
+            const BuildAmountCards(),
             const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: _buildAmountInfo(),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: BuildAmountInfo(),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _buildAmountTextField(),
+            const Padding(
+              padding: EdgeInsets.all(8),
+              child: BuildAmountTextField(),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _buildNetworkDropdown(),
+            const Padding(
+              padding: EdgeInsets.all(8),
+              child: BuildNetworkDropDown(),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _buildPhoneNumberTextField(),
+            const Padding(
+              padding: EdgeInsets.all(8),
+              child: BuildPhoneNumberTextField(),
             ),
             Padding(
               padding: const EdgeInsets.only(
-                left: 100.0,
-                right: 100.0,
+                left: 100,
+                right: 100,
               ),
               child: AppButton.filledButton(context,
-                  onTap: (){},
+                  onTap: () {},
                   color: AppColors.lightGreen,
                   child: Text(
                     'Next',
                     style: cairo(),
-                  )),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Column _buildAmountCards() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildAmountCard("₦200", CustomStyles.buyAirtimeTextStyleInfo, 0),
-            _buildAmountCard("₦500", CustomStyles.buyAirtimeTextStyleInfo, 1),
-            _buildAmountCard("₦1000", CustomStyles.buyAirtimeTextStyleInfo, 2),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildAmountCard("₦2000", CustomStyles.buyAirtimeTextStyleInfo, 3),
-            _buildAmountCard("₦3000", CustomStyles.buyAirtimeTextStyleInfo, 4),
-            _buildAmountCard("₦5000", CustomStyles.buyAirtimeTextStyleInfo, 5),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildAmountInfo() {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 8.0,
-        vertical: 8.0,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          Text(
-            'Amount',
-            style: TextStyle(
-              fontSize: AppFontSize.size16,
-              color: AppColors.lightBlack,
-              fontWeight: AppFontWeight.bold,
-            ),
-          ),
-          Text(
-            'Balance: NGN7,361.87',
-            style: TextStyle(
-              fontSize: AppFontSize.size16,
-              color: AppColors.lightBlack,
-              fontWeight: AppFontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAmountTextField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8.0,
-        vertical: 8.0,
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.lightGrey.withOpacity(0.1),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: TextField(
-          controller: amountController,
-          onChanged: (text) {
-            String formattedAmount = AmountFormatter.formatAmount(text);
-            if (amountController.text != formattedAmount) {
-              amountController.value = amountController.value.copyWith(
-                text: formattedAmount,
-                selection:
-                    TextSelection.collapsed(offset: formattedAmount.length),
-              );
-            }
-          },
-          decoration: InputDecoration(
-            hintText: "Enter amount here",
-            hintStyle: const TextStyle(
-                color: AppColors.lightGrey,
-                fontSize: AppFontSize.size14,
-                fontWeight: AppFontWeight.light),
-            filled: true,
-            fillColor: AppColors.pureWhite,
-            focusColor: AppColors.pureWhite,
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-          ),
-          keyboardType: TextInputType.number,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNetworkDropdown() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8.0,
-        vertical: 8.0,
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.lightGrey.withOpacity(0.1),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: DropdownButtonFormField<String>(
-          decoration: InputDecoration(
-            hintText: "Choose Network",
-            hintStyle: const TextStyle(
-                color: AppColors.lightGrey,
-                fontSize: AppFontSize.size14,
-                fontWeight: AppFontWeight.light),
-            filled: true,
-            fillColor: AppColors.pureWhite,
-            focusColor: AppColors.pureWhite,
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-          ),
-          value: selectedNetwork,
-          onChanged: (newValue) {
-            setState(() {
-              selectedNetwork = newValue;
-            });
-          },
-          items: networkItems,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPhoneNumberTextField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8.0,
-        vertical: 8.0,
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.lightGrey.withOpacity(0.1),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: TextField(
-          controller: phoneNumberController,
-          decoration: InputDecoration(
-            hintText: "Enter Phone number",
-            hintStyle: const TextStyle(
-                color: AppColors.lightGrey,
-                fontSize: AppFontSize.size14,
-                fontWeight: AppFontWeight.light),
-            filled: true,
-            fillColor: AppColors.pureWhite,
-            focusColor: AppColors.pureWhite,
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-          ),
-          keyboardType: TextInputType.number,
-          maxLength: 11,
-        ),
-      ),
-    );
-  }
-
-  Padding _buildNextButton() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
-      child: ElevatedButton(
-        onPressed: () {
-          Map<String, String> selectedNetworkMap = networks
-              .firstWhere((network) => network['name'] == selectedNetwork);
-
-          String? customerId = phoneNumberController.text;
-          String amount = amountController.text;
-          String? divisionId = selectedNetworkMap['divisionId'];
-          String? paymentItem = selectedNetworkMap['paymentItem'];
-          String? productId = selectedNetworkMap['productId'];
-          String? billerId = selectedNetworkMap['billerId'];
-
-          TransferModel().payBill(
-            context,
-            customerId: customerId,
-            amount: amount,
-            division: divisionId,
-            paymentItem: paymentItem,
-            productId: productId,
-            billerId: billerId,
-          );
-          String enteredAmount = amountController.text;
-          enteredAmount = enteredAmount.replaceAll("₦", "").replaceAll(",", "");
-          Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) => PinDialog(
-                      amount: double.parse(enteredAmount),
-                      accountName: "",
-                    )),
-          );
-        },
-        child: const Text("Next", style: TextStyle(color: AppColors.pureWhite)),
-      ),
-    );
-  }
-
-  Widget _buildAmountCard(String title, TextStyle style, int cardIndex) {
-    bool isSelected = selectedAmountIndex == cardIndex;
-
-    return Padding(
-      padding: const EdgeInsets.all(9.0),
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            String formattedAmount = AmountFormatter.formatAmount(title);
-            amountController.text = formattedAmount;
-            selectedAmountIndex = cardIndex;
-          });
-        },
-        child: Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6.0),
-          ),
-          color: isSelected ? AppColors.lightGreen : AppColors.lightBlue,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                width: 70,
-                height: 10,
+                  )
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5, bottom: 15.0),
-                child: Center(
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      color: isSelected ? AppColors.pureWhite : style.color,
-                      fontSize: style.fontSize,
-                      fontWeight: style.fontWeight,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ),
-    );
-  }
-
-  DropdownMenuItem<String> _buildNetworkItem(String networkName,
-      String logoAsset, String billerId, String divisionId, String productId) {
-    return DropdownMenuItem<String>(
-      value: networkName,
-      child: Row(
-        children: [
-          Image.asset(logoAsset, width: 40),
-          const SizedBox(width: 8),
-          Text(networkName),
-        ],
       ),
     );
   }
