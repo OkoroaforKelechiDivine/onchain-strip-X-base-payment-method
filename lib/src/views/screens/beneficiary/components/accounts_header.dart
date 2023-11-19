@@ -9,11 +9,11 @@ class BuildNGNAccountsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 25.0),
+      padding: const EdgeInsets.only(left: 25),
       child: Container(
         color: AppColors.pureWhite,
         child: const Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(10),
           child: Text(
             "NGN Accounts",
             style: TextStyle(

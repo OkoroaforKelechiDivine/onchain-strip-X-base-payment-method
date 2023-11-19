@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../app_config/manager/font_manager.dart';
 import '../../../../../core/constants/colors.dart';
+import '../../transactions/transfer/components/dummy_bank.dart';
 import '../../transactions/transfer/transfer_to_bank_screen.dart';
 import '../transaction_details.dart';
 
