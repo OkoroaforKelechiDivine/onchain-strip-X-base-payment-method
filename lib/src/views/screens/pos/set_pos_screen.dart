@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
-import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/src/views/screens/pos/components/pos_card_text_with_button.dart';
 import 'package:pay_me_mobile/src/views/screens/pos/total_transaction.dart';
-
-
 
 class PosDeviceScreen extends StatefulWidget {
   const PosDeviceScreen({Key? key}) : super(key: key);
@@ -18,12 +16,7 @@ class PosDeviceScreen extends StatefulWidget {
 
 class _PosDeviceScreenState extends State<PosDeviceScreen> {
 
-
   void _navigateToHelloScreen(BuildContext context) {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => const TotalTransactionScreen()),
-    // );
     navigationService.push(const TotalTransactionScreen());
   }
 
@@ -42,36 +35,13 @@ class _PosDeviceScreenState extends State<PosDeviceScreen> {
           ),
         ),
       ),
-      body: Column(
+      body: const Column(
         children: [
-          const SizedBox(height: 30),
-          _buildCardWithTextButton(context, "POS Isolo"),
-          _buildCardWithTextButton(context, "POS Ijebu"),
-          _buildCardWithTextButton(context, "POS Ipaja"),
+          SizedBox(height: 30),
+          BuildPosCardTextWithButton(text: "POS Isolo"),
+          BuildPosCardTextWithButton(text: "POS Ijebu"),
+          BuildPosCardTextWithButton(text: "POS Ipaja"),
         ],
-      ),
-    );
-  }
-
-  Widget _buildCardWithTextButton(BuildContext context, String text) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.all(10),
-      child: Card(
-        child: TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const TotalTransactionScreen()),
-            );
-          },
-          child: Text(
-            text,
-            style: const TextStyle(
-              color: AppColors.lightBlack,
-            ),
-          ),
-        ),
       ),
     );
   }

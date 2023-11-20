@@ -3,6 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/core/constants/enum/view_state.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
+import 'package:pay_me_mobile/src/views/screens/auth/components/logo.dart';
+import 'package:pay_me_mobile/src/views/screens/auth/components/request_pos.dart';
+import 'package:pay_me_mobile/src/views/screens/auth/components/welcome_text.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 import 'package:pay_me_mobile/src/views/widgets/app_button.dart';
 import 'package:pay_me_mobile/src/views/widgets/app_textfield.dart';
@@ -12,7 +15,7 @@ import 'package:provider/provider.dart';
 
 
 import '../../../../data/view_models/auth/login_model.dart';
-import '../home/home_page_screen.dart';
+import 'components/lock_image.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -33,108 +36,6 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  Widget _buildLogo() {
-    return Image.asset(
-      "assets/png/payme.png",
-      height: 50,
-    );
-  }
-
-  Widget _buildWelcomeText() {
-    return Text(
-      "WELCOME BACK",
-      textAlign: TextAlign.center,
-      style: GoogleFonts.alegreyaSc(
-        textStyle: const TextStyle(
-          color: AppColors.lightGreen,
-          fontSize: AppFontSize.size18,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLockImage() {
-    return Image.asset(
-      "assets/jpg/lock.jpg",
-      height: 50,
-    );
-  }
-
-  Widget _buildTextField(String hintText, TextEditingController controller, bool isPassword, bool isVisible, void Function() toggleVisibility) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            hintText,
-            style: const TextStyle(
-              color: AppColors.lightBlack,
-              fontSize: AppFontSize.size18,
-              fontWeight: AppFontWeight.light,
-            ),
-          ),
-        ),
-        const SizedBox(height: 5),
-        Container(
-          height: 70,
-          decoration: BoxDecoration(
-            color: AppColors.deepWhite,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.lightGrey.withOpacity(0.1),
-                blurRadius: 4,
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 5.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Enter $hintText',
-                filled: true,
-                hintStyle: const TextStyle(
-                    color: AppColors.lightGrey, fontSize: AppFontSize.size16
-                ),
-                fillColor: AppColors.deepWhite,
-                border: InputBorder.none,
-                suffixIcon: isPassword ? GestureDetector(
-                  onTap: toggleVisibility,
-                  child: Icon(
-                    isVisible ? Icons.visibility_off:Icons.visibility ,
-                    color: AppColors.lightGrey,
-                  ),
-                ) : null,
-              ),
-              textCapitalization: TextCapitalization.none,
-              textInputAction: TextInputAction.next,
-              obscureText: isPassword ? !isVisible : false,
-              keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.text,
-              controller: controller,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildRequestForPOS() {
-    return Center(
-      child: Text(
-        "Request for POS?",
-        style: GoogleFonts.alegreyaSans(
-          textStyle: const TextStyle(
-            color: AppColors.lightGrey,
-            fontSize: AppFontSize.size18,
-            fontWeight: AppFontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginViewModel>(
@@ -146,11 +47,11 @@ class _LoginScreenState extends State<LoginScreen> {
               child: ListView(
                 children: [
                   const SizedBox(height: 50),
-                  _buildLogo(),
+                  const BuildLogo(),
                   const SizedBox(height: 30),
-                  _buildWelcomeText(),
+                  const BuildWelcomeText(),
                   const SizedBox(height: 25),
-                  _buildLockImage(),
+                  const BuildLockImage(),
                   const SizedBox(height: 10),
                   AppTextField(title: 'Username', hintText: 'Enter Username',controller: userNameController,),
                   const SizedBox(height: 20),
@@ -202,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }),
 
                   const SizedBox(height: 50),
-                  _buildRequestForPOS(),
+                  const BuildRequestForPOS()
                 ],
               ),
             ),
@@ -213,7 +114,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _gotoNextScreen(){
-    navigationService.pushReplacement(BottomNav());
-    //replaceNavigation(context: context, widget: , routeName: PageNamedRoutes.home);
+    navigationService.pushReplacement(const BottomNav());
   }
 }

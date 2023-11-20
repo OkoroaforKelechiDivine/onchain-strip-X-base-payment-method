@@ -1,10 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
+import 'package:pay_me_mobile/src/views/screens/beneficiary/components/action_button.dart';
+import 'package:pay_me_mobile/src/views/screens/beneficiary/components/circle_avatar.dart';
 
 import '../../../../app_config/manager/font_manager.dart';
-import '../../../../app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+
+import 'components/account_number_text.dart';
+import 'components/accounts_header.dart';
 
 class BeneficiaryDetailPage extends StatelessWidget {
   final Color circleColor;
@@ -12,129 +15,49 @@ class BeneficiaryDetailPage extends StatelessWidget {
   final String accountNumber;
   final String accountName;
 
-  BeneficiaryDetailPage({
+  const BeneficiaryDetailPage({
+    Key? key,
     required this.circleColor,
     required this.accountName,
     required this.logo,
-    required this.accountNumber
-  });
+    required this.accountNumber,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white10,
-        title: Text(
-          'Beneficiary',
-          style: sans(
-            fontSize: AppFontSize.size20,
-            color: AppColors.lightGreen,
-          ),
+      appBar: buildAppBar(),
+      body: buildBody(),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Colors.white10,
+      title: Text(
+        'Beneficiary',
+        style: sans(
+          fontSize: AppFontSize.size20,
+          color: AppColors.lightGreen,
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 30),
-          Center(
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: circleColor,
-              ),
-              child: Center(
-                child: Text(
-                  accountName.isNotEmpty ? accountName[0].toUpperCase() : '',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: AppFontSize.size20,
-                    color: AppColors.pureWhite,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Center(
-            child: Text(
-              accountName,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: AppFontSize.size20,
-                color: AppColors.lightBlack,
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Card(
-                  color: AppColors.lightGreen,
-                  child: InkWell(
-                    onTap: () {},
-                    child: Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Row(
-                        children: [
-                          Icon(
-                              Icons.edit,
-                              color: AppColors.pureWhite
-                          ),
-                          // SizedBox(width: 8),
-                          Text("Edit Beneficiary",
-                              style: TextStyle(
-                                  fontWeight: AppFontWeight.bold,
-                              )
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 60),
-              Card(
-                color: AppColors.lightGreen,
-                child: InkWell(
-                  onTap: () {},
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                            Icons.add,
-                            color: AppColors.pureWhite
-                        ),
-                        // SizedBox(width: 8),
-                        Text("Add Account",
-                          style: TextStyle(
-                              fontWeight: AppFontWeight.bold
-                          )
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 25),
-          Padding(
-            padding: const EdgeInsets.only(left: 25.0),
-            child: Container(
-              color: AppColors.pureWhite,
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text("NGN Accounts", style: TextStyle(color: AppColors.lightBlack, fontWeight: AppFontWeight.bold),),
-                )),
-          )
-        ],
-      ),
+    );
+  }
+
+  Widget buildBody() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 30),
+        BuildCircleAvatar(circleColor: circleColor, accountName: accountName),
+        const SizedBox(height: 10),
+        BuildAddAccountNumberText(accountNumber: accountNumber),
+        const SizedBox(height: 20),
+        const BuildActionButton(),
+        const SizedBox(height: 25),
+        const BuildNGNAccountsHeader(),
+      ],
     );
   }
 }
