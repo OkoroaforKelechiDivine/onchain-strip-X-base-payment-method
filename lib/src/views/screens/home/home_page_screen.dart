@@ -34,9 +34,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Hi, Adeola',
-              style: lato(),
+            AppText(
+              'Hi, ${appGlobals.user?.firstName}',
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
             ),
             IconButton(
               icon: const Icon(Icons.notifications),

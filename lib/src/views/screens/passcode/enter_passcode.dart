@@ -105,13 +105,8 @@ class PassCodeScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 35),
             const Center(child: BuildLogo()),
-            // UserIcon.image(
-            //   url: "https://banner2.cleanpng.com/20180627/wio/kisspng-computer-icons-user-profile-avatar-jain-icon-5b332c5add9336.0201786915300803469076.jpg",
-            //   height: 50,
-            //   width: 50,
-            // ),
             const SizedBox(height: 16),
-            const AppText("Welcome back Glory, Enter your 6-Digit PIN", fontSize: 18, fontWeight: FontWeight.w500,),
+            AppText("Welcome back ${appGlobals.user?.firstName}, Enter your 6-Digit PIN", fontSize: 18, fontWeight: FontWeight.w500,),
             const SizedBox(height: 16),
             const Row(
               children: [

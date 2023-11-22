@@ -6,33 +6,38 @@ import '../../../../../../app_config/manager/font_manager.dart';
 import '../../../../../../core/constants/colors.dart';
 
 class BuildAccountNumberTextField extends StatefulWidget {
-  const BuildAccountNumberTextField({super.key});
+  final Function() onCheckAccount;
+  final TextEditingController textController;
+  const BuildAccountNumberTextField(
+      {super.key, required this.onCheckAccount, required this.textController});
 
   @override
-  State<BuildAccountNumberTextField> createState() => _BuildAccountNumberTextFieldState();
+  State<BuildAccountNumberTextField> createState() =>
+      _BuildAccountNumberTextFieldState();
 }
 
-class _BuildAccountNumberTextFieldState extends State<BuildAccountNumberTextField> {
-  final TextEditingController _accountNumberController = TextEditingController();
+class _BuildAccountNumberTextFieldState
+    extends State<BuildAccountNumberTextField> {
   final bool _isAccountNumberErrorVisible = true;
   final bool _isAccountNumberLengthInvalid = false;
 
   @override
   Widget build(BuildContext context) {
-    bool isAccountNumberEmpty = _accountNumberController.text.isEmpty;
-    bool isAccountNumberInvalid = _accountNumberController.text.length < 10;
+    bool isAccountNumberEmpty = widget.textController.text.isEmpty;
+    bool isAccountNumberInvalid = widget.textController.text.length < 10;
     String labelText = isAccountNumberEmpty ? 'Enter Account Number' : '';
 
     UnderlineInputBorder customErrorBorder = UnderlineInputBorder(
       borderSide: BorderSide(
-        color: (isAccountNumberEmpty || isAccountNumberInvalid) ? AppColors.errorRed : AppColors.darkWhite.withOpacity(0.5),
+        color: (isAccountNumberEmpty || isAccountNumberInvalid)
+            ? AppColors.errorRed
+            : AppColors.darkWhite.withOpacity(0.5),
       ),
     );
     UnderlineInputBorder customFocusedErrorBorder = const UnderlineInputBorder(
-        borderSide: BorderSide(color: AppColors.errorRed)
-    );
+        borderSide: BorderSide(color: AppColors.errorRed));
     return TextFormField(
-      controller: _accountNumberController,
+      controller: widget.textController,
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: const TextStyle(
@@ -42,7 +47,10 @@ class _BuildAccountNumberTextFieldState extends State<BuildAccountNumberTextFiel
         ),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: (_isAccountNumberErrorVisible || _isAccountNumberLengthInvalid) ? AppColors.errorRed : AppColors.darkWhite.withOpacity(0.5),
+            color:
+                (_isAccountNumberErrorVisible || _isAccountNumberLengthInvalid)
+                    ? AppColors.errorRed
+                    : AppColors.darkWhite.withOpacity(0.5),
           ),
         ),
         focusedBorder: const UnderlineInputBorder(
@@ -63,34 +71,9 @@ class _BuildAccountNumberTextFieldState extends State<BuildAccountNumberTextFiel
       ],
       keyboardType: TextInputType.number,
       onChanged: (value) {
-        // setState(() {
-        //   if (value.isEmpty) {
-        //     _isAccountNumberErrorVisible = true;
-        //     _isAccountNumberLengthInvalid = false;
-        //     _userName = '';
-        //   } else if (value.length != 10) {
-        //     _isAccountNumberErrorVisible = false;
-        //     _isAccountNumberLengthInvalid = true;
-        //     _userName = '';
-        //   } else {
-        //     _showLinearProcessing = true;
-        //     _isAccountNumberErrorVisible = false;
-        //     _isAccountNumberLengthInvalid = false;
-        //     Future.delayed(const Duration(seconds: 3), () async {
-        //       try {
-        //         String accountType = "inter";
-        //         String beneficiaryAccount = await TransactionHelper.fetchBeneficiaryAccount(context, value, _selectedBankController.text, accountType);
-        //         _userName = beneficiaryAccount;
-        //       } catch (e) {
-        //         _isAccountNumberErrorVisible = true;
-        //         _userName = 'Account not found';
-        //       } finally {
-        //         _showLinearProcessing = false;
-        //       }
-        //       setState(() {});
-        //     });
-        //   }
-        // });
+        if (value.length == 10) {
+          widget.onCheckAccount();
+        }
       },
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -100,5 +83,6 @@ class _BuildAccountNumberTextFieldState extends State<BuildAccountNumberTextFiel
         }
         return null;
       },
-    );  }
+    );
+  }
 }

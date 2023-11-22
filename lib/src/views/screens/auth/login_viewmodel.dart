@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/data/model/response/auth/login_response.dart';
+import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
+import 'package:pay_me_mobile/src/views/screens/passcode/enter_passcode.dart';
 import 'package:stacked/stacked.dart';
-
-import '../../app_nav/app_nav.dart';
 
 class LoginViewModel extends BaseViewModel{
   bool isLoading = false;
@@ -26,7 +26,7 @@ class LoginViewModel extends BaseViewModel{
         token: res.data?.token,
         user: res.data?.user,
       );
-      navigationService.push(const AppNav());
+      navigationService.pushReplacement(const PassCodeScreen(page: BottomNav(),));
       snackbarService.success(message: "Welcome ${appGlobals.user?.firstName}");
       isLoading = false;
     }else{
@@ -35,4 +35,5 @@ class LoginViewModel extends BaseViewModel{
     }
     notifyListeners();
   }
+  
 }
