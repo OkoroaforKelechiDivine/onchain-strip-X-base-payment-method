@@ -1,7 +1,7 @@
 class ApiResponse<T> {
   int? insertedId;
   bool success = true;
-  String message = '';
+  String? message = '';
   int? totalCount;
   int? pageSize;
   int? statusCode;
@@ -27,7 +27,7 @@ class ApiResponse<T> {
   ApiResponse.fromJson(Map<String, dynamic> json) {
     insertedId = json['insertedId'];
     success = json['isSuccess'] ?? true;
-    message = json['message'];
+    message = json['message'].toString();
     totalCount = json['totalCount'];
     pageSize = json['pageSize'];
     currentPage = json['currentPage'];

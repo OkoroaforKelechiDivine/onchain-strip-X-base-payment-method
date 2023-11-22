@@ -18,6 +18,14 @@ Future<void> main() async{
   EnvironmentInitializer.setEnvironment(Environment.DEV);
   SecureStorageInit.initSecureStorage();
 
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      //statusBarColor: AppColors.sdp25, // status bar color
+      // Status bar brightness (optional)
+      statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+      statusBarBrightness: Brightness.light,
+    ),
+  );
   
 
   runApp(

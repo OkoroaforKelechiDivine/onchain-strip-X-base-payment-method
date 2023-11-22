@@ -1,3 +1,3 @@
 class Endpoints {
-  static const baseUrl = 'https://simplyassess.herokuapp.com';
+  static const baseUrl = 'https://dzbilqfc4qszv.cloudfront.net';
 }

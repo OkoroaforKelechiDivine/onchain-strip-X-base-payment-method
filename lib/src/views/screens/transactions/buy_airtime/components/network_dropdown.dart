@@ -13,7 +13,7 @@ class BuildNetworkDropDown extends StatefulWidget {
 
 class _BuildNetworkDropDownState extends State<BuildNetworkDropDown> {
   String? selectedNetwork;
-  late List<DropdownMenuItem<String>> networkItems;
+  List<DropdownMenuItem<String>> networkItems = [];
 
   @override
   Widget build(BuildContext context) {

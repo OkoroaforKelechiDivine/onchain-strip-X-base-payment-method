@@ -6,15 +6,16 @@ import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/components/logo.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/components/request_pos.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/components/welcome_text.dart';
+import 'package:pay_me_mobile/src/views/screens/auth/login_viewmodel.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 import 'package:pay_me_mobile/src/views/widgets/app_button.dart';
 import 'package:pay_me_mobile/src/views/widgets/app_textfield.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 
 import 'package:provider/provider.dart';
+import 'package:stacked/stacked.dart';
 
 
-import '../../../../data/view_models/auth/login_model.dart';
 import 'components/lock_image.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -25,22 +26,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _obscurePassword = true;
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  String message = "";
 
-  void toggleVisibility() {
-    setState(() {
-      _obscurePassword = !_obscurePassword;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoginViewModel>(
-      builder: (context, model, child)  {
-        return Scaffold(
+    return ViewModelBuilder<LoginViewModel>.reactive(
+      viewModelBuilder:() => LoginViewModel(), 
+      builder: (context, model, _) {
+      return Scaffold(
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -53,9 +46,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 25),
                   const BuildLockImage(),
                   const SizedBox(height: 10),
-                  AppTextField(title: 'Username', hintText: 'Enter Username',controller: userNameController,),
+                  AppTextField(title: 'Username', hintText: 'Enter Username',controller: model.userNameController,),
                   const SizedBox(height: 20),
-                  AppTextField(title: 'Password',isPassword: true, controller: passwordController,),
+                  AppTextField(title: 'Password',isPassword: true, controller: model.passwordController,),
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -75,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Center(
                     child: Text(
-                      message,
+                      model.message,
                       style: const TextStyle(
                         fontWeight: AppFontWeight.light,
                         color: AppColors.errorRed,
@@ -85,22 +78,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 10),
 
                   const SizedBox(height: 10),
-                  AppButton.filledButton(context,
-                  color: AppColors.lightGreen,
-                      child: model.state == ViewState.Busy
-                          ? const CircularProgressIndicator(
-                        color: Colors.white,
-                      )
-                          : Text('Sign in', style: cairo(),),
-                      onTap: ()async{
-                        // await model.login(
-                        //     username: userNameController.text,
-                        //     password: passwordController.text
-                        // );
-                        if(model.state == ViewState.Idle){
-                          _gotoNextScreen();
-                        }
-                      }),
+
+                  AppCustomButton(
+                    onPressed: () {
+                      model.onLogin();
+                    },
+                    title: "Sign in",
+                    loading: model.isLoading,
+                    color: AppColors.lightGreen,
+                    radius: 12,
+                  ),
 
                   const SizedBox(height: 50),
                   const BuildRequestForPOS()
@@ -109,11 +96,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         );
-      }
-    );
-  }
-
-  _gotoNextScreen(){
-    navigationService.pushReplacement(const BottomNav());
+    },);
   }
 }

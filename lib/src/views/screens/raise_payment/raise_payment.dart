@@ -92,14 +92,14 @@ class _RaisePaymentScreenState extends State<RaisePaymentScreen> {
           BuildTransactionList(dummyBanks: dummyBanks),
         ],
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
+      // bottomNavigationBar: CustomBottomNavigationBar(
+      //   currentIndex: _currentIndex,
+      //   onTap: (int index) {
+      //     setState(() {
+      //       _currentIndex = index;
+      //     });
+      //   },
+      // ),
     );
   }
 }

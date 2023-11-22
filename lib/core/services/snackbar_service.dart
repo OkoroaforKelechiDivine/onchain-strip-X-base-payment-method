@@ -5,8 +5,6 @@ import 'package:overlay_support/overlay_support.dart';
 import '../cores.dart';
 
 
-
-
 class SnackbarService {
   final NavigationService _navigationService = navigationService as NavigationService ;
   final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
@@ -108,7 +106,7 @@ class SnackbarService {
                   ),
                   Expanded(
                     child:
-                        AppText(message, fontSize: 20, color: AppColors.lightGreen),
+                        AppText(message, fontSize: 18, color: AppColors.lightGreen),
                   )
                 ],
               ),

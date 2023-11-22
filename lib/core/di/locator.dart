@@ -20,6 +20,9 @@ Future<void> setupLocator() async {
 
 
   locator.registerLazySingleton<NavigationService>(() => NavigationService());
+  locator.registerLazySingleton<SnackbarService>(() => SnackbarService());
+
+
   //STORAGES
   locator.registerLazySingleton(() => AuthLocalStorage());
   locator.registerLazySingleton(() => AppLocalStorage());
@@ -34,6 +37,7 @@ Future<void> setupLocator() async {
 AppGlobals appGlobals = locator.get<AppGlobals>();
 
 NavigationService navigationService = locator.get<NavigationService>();
+SnackbarService snackbarService = locator.get<SnackbarService>();
 
 //STORAGES
 AuthLocalStorage authLocalStorage = locator.get<AuthLocalStorage>();
@@ -45,7 +49,7 @@ AuthRepo authRepo = locator.get<AuthRepo>();
 
 final allProviders = <SingleChildWidget>[
   ///authentication view models
-  ChangeNotifierProvider(create: (_) => LoginViewModel()),
+  //ChangeNotifierProvider(create: (_) => LoginViewModel()),
   ChangeNotifierProvider(create: (_) => BottomNavViewModel()),
 
 ];

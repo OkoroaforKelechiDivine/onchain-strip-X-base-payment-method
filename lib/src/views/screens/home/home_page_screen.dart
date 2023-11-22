@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/src/views/screens/pos/set_pos_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/raise_payment/raise_payment.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/buy_airtime_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_to_bank_screen.dart';
 
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
@@ -269,11 +270,14 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   Expanded(
                     child: InkWell(
                       onTap: () {},
-                      child: const ShadowWrapper(
+                      child:  ShadowWrapper(
                         child: HomeCardCTA(
                           asset: "assets/jpg/mobile.jpg",
                           title: 'Buy Airtime',
                           textColor: AppColors.lightGreen,
+                          onPressed: () {
+                            navigationService.push(const BuyAirtimeScreen());
+                          },
                         ),
                       ),
                     ),
@@ -281,6 +285,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ],
               ),
             ),
+            
             SizedBox(
               height: 16.h,
             ),

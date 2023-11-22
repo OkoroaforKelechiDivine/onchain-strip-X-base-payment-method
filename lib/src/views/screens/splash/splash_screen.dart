@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
+import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
+import 'package:pay_me_mobile/src/views/screens/passcode/enter_passcode.dart';
 import '../auth/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,7 +16,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(const Duration(milliseconds: 900), () {
-      navigationService.pushReplacement(const LoginScreen());
+      final isAuthenticated = appGlobals.token != null;
+    if (isAuthenticated) {
+      navigationService.pushReplacement(const PassCodeScreen(page: BottomNav(),));
+      } else {
+        navigationService.pushReplacement(const LoginScreen());
+      }
+      
       //replaceNavigation(context: context, widget: const LoginScreen(), routeName: PageNamedRoutes.login);
     });
     super.initState();
