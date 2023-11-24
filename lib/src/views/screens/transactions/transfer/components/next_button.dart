@@ -21,7 +21,9 @@ class _BuildNextTextButtonState extends State<BuildNextTextButton> {
 
   @override
   Widget build(BuildContext context) {
-    bool isButtonDisabled = !_bankSelected || _isAccountNumberErrorVisible || _isAccountNumberLengthInvalid;
+    bool isButtonDisabled = !_bankSelected ||
+        _isAccountNumberErrorVisible ||
+        _isAccountNumberLengthInvalid;
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Center(
@@ -29,17 +31,19 @@ class _BuildNextTextButtonState extends State<BuildNextTextButton> {
           height: 50,
           width: 100,
           child: ElevatedButton(
-            onPressed: isButtonDisabled ? null : () {
-              if (_bankSelected) {
-                final selectedBank = dummyBanks.firstWhere((bank) =>
-                bank.name == _selectedBankController.text);
-                if (selectedBank != null) {
-                  navigationService.push(SendMoneyScreen(
-                    bank: selectedBank,
-                  ));
-                } else {}
-              }
-            },
+            onPressed: !isButtonDisabled
+                ? null
+                : () {
+                    // if (!_bankSelected) {
+                    //   final selectedBank = dummyBanks.firstWhere(
+                    //       (bank) => bank.name == _selectedBankController.text);
+                    //   if (selectedBank != null) {
+                    //     navigationService.push(SendMoneyScreen(
+                    //       bank: selectedBank,
+                    //     ));
+                    //   } else {}
+                    // }
+                  },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               backgroundColor: AppColors.lightGreen,
@@ -55,5 +59,6 @@ class _BuildNextTextButtonState extends State<BuildNextTextButton> {
           ),
         ),
       ),
-    );  }
+    );
+  }
 }

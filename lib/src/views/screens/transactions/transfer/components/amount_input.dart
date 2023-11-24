@@ -1,49 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/transfer/send_money_viewmodel.dart';
 
 import '../../../../../../core/constants/colors.dart';
 import '../../../../../custom/custom_dynamic_label_textfield.dart';
 
-class BuildAmountInput extends StatefulWidget {
-  const BuildAmountInput({super.key});
-
-  @override
-  State<BuildAmountInput> createState() => _BuildAmountInputState();
-}
-
-class _BuildAmountInputState extends State<BuildAmountInput> {
-  final TextEditingController amountController = TextEditingController();
-  String emptyAmountErrorMessage = 'Amount is empty';
-  double balance = 20000;
-
-  @override
-  void initState() {
-    super.initState();
-    amountController.addListener(amountErrorHandling);
-  }
-
-  @override
-  void dispose() {
-    amountController.dispose();
-    super.dispose();
-  }
-
-  void amountErrorHandling() {
-    double enteredAmount = double.tryParse(amountController.text) ?? 0.0;
-
-    if (amountController.text.isEmpty) {
-      setState(() {
-        emptyAmountErrorMessage = 'Amount is empty';
-      });
-    } else if (enteredAmount > balance) {
-      setState(() {
-        emptyAmountErrorMessage = 'Amount exceeds the available balance';
-      });
-    } else {
-      setState(() {
-        emptyAmountErrorMessage = '';
-      });
-    }
-  }
+class BuildAmountInput extends StatelessWidget {
+  final SendMoneyViewModel model;
+  const BuildAmountInput({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +16,10 @@ class _BuildAmountInputState extends State<BuildAmountInput> {
           child: Container(
             color: AppColors.deepWhite,
             child: TextFieldWithDynamicLabel(
-              controller: amountController,
+              controller: model.amountController,
               labelText: '₦ 0.00',
               onChanged: (value) {
-                amountErrorHandling();
+                //amountErrorHandling();
               },
               onValidation: (value) {},
               hintText: '',

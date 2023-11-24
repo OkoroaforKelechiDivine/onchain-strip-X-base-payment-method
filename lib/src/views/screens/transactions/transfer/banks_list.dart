@@ -6,18 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/widgets/app_text.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/bank_response.dart';
 import 'package:pay_me_mobile/data/utilities/file_util.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_viewmmodel.dart';
+
+import '../../../../../core/cores.dart';
 
 class BankList extends StatelessWidget {
   final Function() onBack;
   final Function(BankResponse bank) onSelectBank;
   final bool isLoading;
   final List<BankResponse>? bankList;
+  final TransferViewModel model;
   const BankList(
       {super.key,
       required this.onBack,
       required this.onSelectBank,
       required this.isLoading,
-      required this.bankList});
+      required this.bankList,
+      required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -47,33 +52,49 @@ class BankList extends StatelessWidget {
                 ],
               ),
               isLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? const Expanded(
+                      child: Center(child: CircularProgressIndicator()))
                   : bankList == null
                       ? const AppText("Unable to Fetch Banks. Please Reload")
                       : Expanded(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: bankList!.length,
-                            itemBuilder: (context, index) {
-                              final bank = bankList![index];
-
-                              return ListTile(
-                                //I want a circularavatar here
-                                leading: bank.logo.isNotEmpty
-                                    ? CircleAvatar(
-                                        backgroundImage: MemoryImage(
-                                          processImage(bank.logo),
-                                        ),
-                                      )
-                                    : const CircleAvatar(
-                                        child: Icon(Icons.food_bank),
-                                      ),
-                                title: AppText(bank.name),
-                                onTap: () {
-                                  onSelectBank(bank);
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 20),
+                              AppCustomTextField(
+                                textEditingController: model.searchController,
+                                prefixIcon: const Icon(CupertinoIcons.search),
+                                hintText: 'Search Bank',
+                                onChanged: (value) {
+                                  model.onSearchBank(value);
                                 },
-                              );
-                            },
+                              ),
+                              //const SizedBox(height: 20),
+                              Expanded(
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: model.filteredBanks.length,
+                                  itemBuilder: (context, index) {
+                                    final bank = model.filteredBanks[index];
+                                    return ListTile(
+                                      //I want a circularavatar here
+                                      leading: bank.logo.isNotEmpty
+                                          ? CircleAvatar(
+                                              backgroundImage: MemoryImage(
+                                                processImage(bank.logo),
+                                              ),
+                                            )
+                                          : const CircleAvatar(
+                                              child: Icon(Icons.food_bank),
+                                            ),
+                                      title: AppText(bank.name),
+                                      onTap: () {
+                                        onSelectBank(bank);
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
                         ),
             ],

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_failure.dart';
 
-
 import '../../../../core/cores.dart';
 import 'endpoints.dart';
 import 'logging_interceptor.dart';
@@ -30,7 +29,8 @@ class ApiService {
       final res = await _dio.get(path, queryParameters: queryParams);
       return res.data;
     } on DioError catch (e) {
-      throw ApiFailure(e.message ?? 'Something went wrong!');
+      String errorMessage = e.response?.data["error"] ?? e.message;
+      throw ApiFailure(errorMessage);
     }
   }
 
@@ -39,7 +39,8 @@ class ApiService {
       final res = await _dio.delete(path);
       return res.data;
     } on DioError catch (e) {
-      throw ApiFailure(e.message ?? 'Something went wrong!');
+      String errorMessage = e.response?.data["error"] ?? e.message;
+      throw ApiFailure(errorMessage);
     }
   }
 

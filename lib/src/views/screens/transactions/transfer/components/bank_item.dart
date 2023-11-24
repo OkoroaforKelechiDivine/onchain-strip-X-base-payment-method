@@ -23,7 +23,7 @@ class _BuildBankItemState extends State<BuildBankItem> {
       children: [
         InkWell(
           onTap: () {
-            navigationService.push(SendMoneyScreen(bank: bank));
+            //navigationService.push(SendMoneyScreen(bank: bank));
           },
           child: ListTile(
             leading: Image.asset(

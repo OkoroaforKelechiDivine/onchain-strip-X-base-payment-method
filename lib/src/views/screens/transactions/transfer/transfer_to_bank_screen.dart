@@ -71,6 +71,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                   }
                 },
                 child: BankList(
+                  model: model,
                   isLoading: model.isLoadingBankList,
                   onBack: () {
                     model.onHideBank();
@@ -108,6 +109,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                               children: [
                                 const BuildProcessingCircle(),
                                 BuildRecipientCard(
+                                  model: model,
                                   amountController:
                                       model.accountNumberController,
                                   selectedBank: model.selectedBank,
@@ -117,6 +119,10 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                                   onGetBeneficiaryDetails: () {
                                     model.getBeneficiaryDetails();
                                   },
+                                  isLoadingbeneficiaryDetail:
+                                      model.isLoadingbeneficiaryDetail,
+                                  beneficiaryDetailResponse:
+                                      model.beneficiaryDetailResponse,
                                 ),
                                 BuildBeneficiary(context: context),
                                 BuildRecentCard(context: context),

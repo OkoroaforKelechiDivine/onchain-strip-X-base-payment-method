@@ -11,7 +11,7 @@ class BuildUsernameText extends StatefulWidget {
 }
 
 class _BuildUsernameTextState extends State<BuildUsernameText> {
-  final String _userName = '';
+  final String _userName = 'Glory Olaifa';
 
   @override
   Widget build(BuildContext context) {

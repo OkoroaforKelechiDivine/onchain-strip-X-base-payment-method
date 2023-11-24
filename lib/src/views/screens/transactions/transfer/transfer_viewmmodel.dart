@@ -9,9 +9,11 @@ import 'package:stacked/stacked.dart';
 
 class TransferViewModel extends BaseViewModel {
   TextEditingController accountNumberController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
   BeneficiaryDetailResponse? beneficiaryDetailResponse;
   bool showBankList = true;
   bool isLoadingBankList = true;
+  bool isLoadingbeneficiaryDetail = false;
   final String userName = '';
   final bool showLinearProcessing = false;
   final String selectedBankLogo = '';
@@ -19,12 +21,11 @@ class TransferViewModel extends BaseViewModel {
   final String? selectedBankController = null;
   int currentIndex = 0;
   final List<BankResponse> bankList = [];
+  List<BankResponse> filteredBanks = [];
 
   void init() async {
     await getBankList();
   }
-
-  List<DummyBank> filteredBanks = [];
 
   void onShowBank() {
     showBankList = !showBankList;
@@ -42,6 +43,7 @@ class TransferViewModel extends BaseViewModel {
     if (res.success) {
       bankList.addAll(res.data!);
       isLoadingBankList = false;
+      filteredBanks = bankList;
       notifyListeners();
     } else {
       isLoadingBankList = false;
@@ -57,13 +59,24 @@ class TransferViewModel extends BaseViewModel {
   }
 
   Future<void> getBeneficiaryDetails() async {
+    isLoadingbeneficiaryDetail = true;
+    notifyListeners();
     final res = await bankRepo.getBeneficiaryAccountDetails(
         bank: selectedBank!, accountNumber: accountNumberController.text);
     if (res.success) {
       beneficiaryDetailResponse = res.data;
       notifyListeners();
     } else {
+      isLoadingbeneficiaryDetail = false;
       snackbarService.error(message: res.message ?? "Something went wrong");
     }
+    notifyListeners();
+  }
+
+  void onSearchBank(String value) {
+    filteredBanks = bankList
+        .where((item) => item.name.toLowerCase().contains(value.toLowerCase()))
+        .toList();
+    notifyListeners();
   }
 }
