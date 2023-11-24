@@ -160,60 +160,60 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  // money transfer
-                  Card(
-                    elevation: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Money Transfer',
-                            style: inter(fontSize: 14.sp),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: HomeCardCTA(
-                                  title: 'To Bank',
-                                  asset: 'assets/jpg/bank.jpg',
-                                  textColor: AppColors.lightGreen,
-                                  onPressed: () {
-                                    // todo: From Beneficiary --->
-                                    // pushNavigation(context: context, widget: SendMoneyScreen(bank: DummyBank("Kuda Bank", "assets/jpg/kudabank_logo.jpg", "Ifeoluwa Rabiu", "1234567890",DateTime(2023, 2, 12), "Approved"),));
-                                  },
-                                ),
-                              ),
-                              Expanded(
-                                child: HomeCardCTA(
-                                  title: 'Payment',
-                                  asset: 'assets/jpg/raise_payment.jpg',
-                                  textColor: AppColors.lightGreen,
-                                  onPressed: () {
-                                    navigationService
-                                        .push(const RaisePaymentScreen());
-                                    //pushNavigation(context: context, widget: RaisePaymentScreen());
-                                  },
-                                ),
-                              ),
-                              const Expanded(
-                                child: HomeCardCTA(
-                                  title: 'Approve Payment',
-                                  asset: 'assets/jpg/approved_payment.jpg',
-                                  textColor: AppColors.lightGreen,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // SizedBox(
+                  //   height: 16.h,
+                  // ),
+                  // // money transfer
+                  // Card(
+                  //   elevation: 5,
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(16.0),
+                  //     child: Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Text(
+                  //           'Money Transfer',
+                  //           style: inter(fontSize: 14.sp),
+                  //         ),
+                  //         Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //           children: [
+                  //             Expanded(
+                  //               child: HomeCardCTA(
+                  //                 title: 'To Bank',
+                  //                 asset: 'assets/jpg/bank.jpg',
+                  //                 textColor: AppColors.lightGreen,
+                  //                 onPressed: () {
+                  //                   // todo: From Beneficiary --->
+                  //                   // pushNavigation(context: context, widget: SendMoneyScreen(bank: DummyBank("Kuda Bank", "assets/jpg/kudabank_logo.jpg", "Ifeoluwa Rabiu", "1234567890",DateTime(2023, 2, 12), "Approved"),));
+                  //                 },
+                  //               ),
+                  //             ),
+                  //             Expanded(
+                  //               child: HomeCardCTA(
+                  //                 title: 'Payment',
+                  //                 asset: 'assets/jpg/raise_payment.jpg',
+                  //                 textColor: AppColors.lightGreen,
+                  //                 onPressed: () {
+                  //                   navigationService
+                  //                       .push(const RaisePaymentScreen());
+                  //                   //pushNavigation(context: context, widget: RaisePaymentScreen());
+                  //                 },
+                  //               ),
+                  //             ),
+                  //             const Expanded(
+                  //               child: HomeCardCTA(
+                  //                 title: 'Approve Payment',
+                  //                 asset: 'assets/jpg/approved_payment.jpg',
+                  //                 textColor: AppColors.lightGreen,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 16.h,
                   ),
