@@ -54,7 +54,7 @@ class TransferViewModel extends BaseViewModel {
   void onSelectBank(BankResponse bank) {
     selectedBank = bank;
     showBankList = false;
-    log(selectedBank!.name);
+    log(selectedBank!.code);
     notifyListeners();
   }
 

@@ -32,7 +32,7 @@ class BankApi {
         queryParams: {
           "bank": bank.code,
           "accountNo": accountNumber,
-          "transfer_type": "inter"
+          "transfer_type": bank.code == "999999" ? "intra" : "inter"
         },
       );
       return ApiResponse.fromJson(res)

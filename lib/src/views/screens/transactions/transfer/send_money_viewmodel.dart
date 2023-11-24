@@ -8,6 +8,7 @@ import 'package:pay_me_mobile/data/model/response/transaction_response/bank_resp
 import 'package:pay_me_mobile/data/model/response/transaction_response/beneficiary_detail_response.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/sender_detail_response.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_success_screen.dart';
 import 'package:stacked/stacked.dart';
 
 class SendMoneyViewModel extends BaseViewModel {
@@ -19,6 +20,7 @@ class SendMoneyViewModel extends BaseViewModel {
   Future<void> sendMoney(
       {required BankResponse selectedbank,
       required BeneficiaryDetailResponse beneficiary}) async {
+    log((selectedbank.code == "999999").toString());
     isSendingMoney = true;
     notifyListeners();
     if (amountController.text.isEmpty || narrationController.text.isEmpty) {
@@ -49,13 +51,15 @@ class SendMoneyViewModel extends BaseViewModel {
         toKyc: beneficiary.status,
         toSavingsId: beneficiary.account.id,
         toSession: beneficiary.account.id,
-        transferType: "inter",
+        transferType: selectedbank.code == "999999" ? "Intra" : "inter",
       ));
       if (res.success) {
         snackbarService.success(message: "Success Transfer");
         isSendingMoney = false;
         notifyListeners();
-        navigationService.pushAndRemoveUntil(const BottomNav());
+        navigationService.pushAndRemoveUntil(TransferSuccessPage(
+          message: amountController.text,
+        ));
       } else {
         snackbarService.error(message: res.message ?? "Something went wrong");
         isSendingMoney = false;
