@@ -13,14 +13,13 @@ class BuildTransactionCard extends StatelessWidget {
   final String accountName;
   final String description;
 
-  const BuildTransactionCard({
-    super.key,
-    required this.isSent,
-    required this.amount,
-    required this.transactionTimestamp,
-    required this.accountName,
-    required this.description
-  });
+  const BuildTransactionCard(
+      {super.key,
+      required this.isSent,
+      required this.amount,
+      required this.transactionTimestamp,
+      required this.accountName,
+      required this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +31,9 @@ class BuildTransactionCard extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: () {
-          navigationService.push(
-              TransactionDetailsScreen(amount: amount, transactionTimestamp: transactionTimestamp, accountName: accountName, bankName: "Bank Name",)
-          );
+          // navigationService.push(
+          //     //TransactionDetailsScreen(transactionResponse: Transa())
+          //     );
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +49,9 @@ class BuildTransactionCard extends StatelessWidget {
                     bottomLeft: Radius.circular(20.0),
                   ),
                 ),
-                color: isSent ? AppColors.lightGreen : AppColors.lightBlue.withOpacity(0.5),
+                color: isSent
+                    ? AppColors.lightGreen
+                    : AppColors.lightBlue.withOpacity(0.5),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
@@ -75,9 +76,9 @@ class BuildTransactionCard extends StatelessWidget {
               padding: const EdgeInsets.only(left: 50),
               child: Text(
                 ""
-                    "${transactionTimestamp.hour.toString().padLeft(2, '0')}:"
-                    "${transactionTimestamp.minute.toString().padLeft(2, '0')} "
-                    "${transactionTimestamp.hour >= 12 ? 'PM' : 'AM'}",
+                "${transactionTimestamp.hour.toString().padLeft(2, '0')}:"
+                "${transactionTimestamp.minute.toString().padLeft(2, '0')} "
+                "${transactionTimestamp.hour >= 12 ? 'PM' : 'AM'}",
                 style: TextStyle(
                   fontSize: AppFontSize.size10,
                   color: AppColors.lightBlack,

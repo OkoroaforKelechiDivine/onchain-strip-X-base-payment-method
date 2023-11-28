@@ -11,24 +11,37 @@ class BuildInfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '$label ',
+          "$label:",
           style: const TextStyle(
             fontSize: AppFontSize.size16,
             fontWeight: AppFontWeight.bold,
             color: AppColors.lightBlack,
           ),
         ),
-        const Spacer(),
-        Text(
-          value,
-          style: const TextStyle(
-            color: AppColors.lightBlack,
-            fontWeight: AppFontWeight.light,
-            fontSize: AppFontSize.size16,
-          ),
+        const SizedBox(
+          height: 4,
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Text(
+                value,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: AppColors.lightBlack,
+                  fontWeight: AppFontWeight.light,
+                  fontSize: AppFontSize.size16,
+                ),
+              ),
+            ),
+          ],
         )
       ],
     );

@@ -5,7 +5,7 @@ import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 import 'package:pay_me_mobile/src/views/screens/passcode/enter_passcode.dart';
 import 'package:stacked/stacked.dart';
 
-class LoginViewModel extends BaseViewModel{
+class LoginViewModel extends BaseViewModel {
   bool isLoading = false;
   bool obscurePassword = true;
   TextEditingController userNameController = TextEditingController();
@@ -13,27 +13,29 @@ class LoginViewModel extends BaseViewModel{
   String message = "";
 
   void toggleVisibility() {
-      obscurePassword = !obscurePassword;
-      notifyListeners();
+    obscurePassword = !obscurePassword;
+    notifyListeners();
   }
 
-  void onLogin() async{
+  void onLogin() async {
     isLoading = true;
     notifyListeners();
-    final res = await authRepo.login(username: userNameController.text, password: passwordController.text);
-    if(res.success){
+    final res = await authRepo.login(
+        username: userNameController.text, password: passwordController.text);
+    if (res.success) {
       LoginResponse(
         token: res.data?.token,
-        user: res.data?.user,
       );
-      navigationService.pushReplacement(const PassCodeScreen(page: BottomNav(),));
+      navigationService.pushReplacement(PassCodeScreen(
+        isFirstTime: appGlobals.user?.isFirstLogin ?? false,
+        page: const BottomNav(),
+      ));
       snackbarService.success(message: "Welcome ${appGlobals.user?.firstName}");
       isLoading = false;
-    }else{
+    } else {
       snackbarService.error(message: res.message ?? "Someting went wrong");
       isLoading = false;
     }
     notifyListeners();
   }
-  
 }

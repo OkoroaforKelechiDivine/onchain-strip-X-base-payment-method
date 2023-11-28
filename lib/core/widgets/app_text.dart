@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../cores.dart';
-
 class AppText extends StatelessWidget {
   final String text;
   final double? fontSize, letterSpacing, height;

@@ -57,8 +57,9 @@ class BuildDecoderName extends StatelessWidget {
               ),
             ],
           ),
-          BuildAmountTextField(),
+          //BuildAmountTextField(),
         ],
       ),
-    );  }
+    );
+  }
 }

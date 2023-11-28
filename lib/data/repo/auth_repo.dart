@@ -1,7 +1,11 @@
+import 'dart:developer';
+
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pay_me_mobile/core/states/app_state.dart';
 import 'package:pay_me_mobile/data/datasources/remote/authentication_data_provider.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_response.dart';
 import 'package:pay_me_mobile/data/model/params/signup_param.dart';
+import 'package:pay_me_mobile/data/model/user_model.dart';
 
 import '../../core/cores.dart';
 import '../model/response/auth/login_response.dart';
@@ -16,8 +20,12 @@ class AuthRepo {
     if (res.success) {
       authLocalStorage.saveToken(res.data?.token);
       appLocalStorage.saveAppState(AppState.authenticated);
-      appLocalStorage.saveUser(res.data?.user);
-      appGlobals.user = res.data?.user;
+      Map<String, dynamic> decodedToken = JwtDecoder.decode(res.data!.token!);
+      final user = User.fromJson(decodedToken);
+      log(decodedToken.toString());
+      log(user.business!);
+      appLocalStorage.saveUser(user);
+      appGlobals.user = user;
       appGlobals.token = res.data?.token;
     }
     return res;
@@ -27,8 +35,8 @@ class AuthRepo {
     return _authApi.register(param: param);
   }
 
-  Future<ApiResponse<PasscodeResponse>> validatePascode({required String code}) {
-    return _authApi.validatePascode(code: code);
+  Future<ApiResponse<PasscodeResponse>> validatePascode(
+      {required String code, required bool isFirstLogin}) {
+    return _authApi.validatePascode(code: code, isFirstLogin: isFirstLogin);
   }
-  
 }

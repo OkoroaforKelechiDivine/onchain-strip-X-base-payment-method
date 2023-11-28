@@ -4,73 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/widgets/screen_button.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/components/logo.dart';
-import 'package:pay_me_mobile/src/views/screens/auth/components/welcome_text.dart';
-import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 import 'package:pay_me_mobile/src/views/screens/passcode/passcode_viewmodel.dart';
 import 'package:pinput/pinput.dart';
 import 'package:stacked/stacked.dart';
 
 import 'keypad.dart';
 
-class EnterPassCodeScreen extends StatefulWidget {
-  const EnterPassCodeScreen({Key? key}) : super(key: key);
-
-  @override
-  State<EnterPassCodeScreen> createState() => _EnterPassCodeScreenState();
-}
-
-class _EnterPassCodeScreenState extends State<EnterPassCodeScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return ViewModelBuilder<PasscodeViewModel>.reactive(
-        viewModelBuilder: () => PasscodeViewModel(),
-        builder: (context, model, _) {
-          return Scaffold(
-            body: Stack(
-              children: [
-                BackdropFilter(
-                  filter: model.isProcessing
-                      ? ImageFilter.blur(sigmaX: 20, sigmaY: 20)
-                      : ImageFilter.blur(sigmaX: 0, sigmaY: 0),
-                  child: Container(
-                    color: Colors.transparent,
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: Center(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            const BuildLogo(),
-                            const BuildWelcomeText(),
-                            if (model.isError)
-                              const Text(
-                                'Incorrect passcode. Please try again.',
-                                style: TextStyle(
-                                  color: AppColors.errorRed,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                            Keypad(
-                              enteredDigits: model.enteredDigits,
-                              onButtonPressed: model.onButtonPressed,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        });
-  }
-}
-
 class PassCodeScreen extends StatelessWidget {
   final Widget page;
-  const PassCodeScreen({super.key, required this.page});
+  final bool isFirstTime;
+  const PassCodeScreen(
+      {super.key, required this.page, required this.isFirstTime});
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +51,9 @@ class PassCodeScreen extends StatelessWidget {
                   const Center(child: BuildLogo()),
                   const SizedBox(height: 16),
                   AppText(
-                    "Welcome back ${appGlobals.user?.firstName}, Enter your 6-Digit PIN",
+                    isFirstTime
+                        ? "Welcome ${appGlobals.user?.firstName}, Set your 6-Digit PIN"
+                        : "Welcome back ${appGlobals.user?.firstName}, Enter your 6-Digit PIN",
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
@@ -138,7 +84,8 @@ class PassCodeScreen extends StatelessWidget {
                       onChanged: (value) async {
                         debugPrint('onChanged: $value');
                         if (value.length == 6) {
-                          final result = await model.onPassCode(value);
+                          final result =
+                              await model.onPassCode(value, isFirstTime);
                           if (result) {
                             navigationService.pushReplacement(page);
                           }

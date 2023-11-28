@@ -7,7 +7,7 @@ import '../../../../core/di/locator.dart';
 class HomeViewModel extends BaseViewModel {
   bool isVisible = false;
   bool isLoadingWalletBalance = false;
-  String walletBalance = "";
+  String walletBalance = "N/A";
   void onToggleVisibility() {
     isVisible = !isVisible;
     notifyListeners();

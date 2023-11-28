@@ -3,29 +3,40 @@ import 'package:pay_me_mobile/src/views/screens/transaction_history/components/c
 import 'package:pay_me_mobile/src/views/screens/transaction_history/components/transaction_list.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history_viewmodel.dart';
+import 'package:stacked/stacked.dart';
 
-class TransactionHistoryScreen extends StatefulWidget {
-  const TransactionHistoryScreen({Key? key}) : super(key: key);
-
-  @override
-  _TransactionHistoryScreenState createState() => _TransactionHistoryScreenState();
-}
-
-class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
+class TransactionHistoryScreen extends StatelessWidget {
+  const TransactionHistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Text('Transaction History', style: sans(color: AppColors.lightGreen),),),
-      body: const Column(
-        children: [
-          BuildCardWidget(),
-          BuildTransactionList(),
-        ],
-      ),
+    return ViewModelBuilder.reactive(
+      viewModelBuilder: () => TransactionHistoryViewModel(),
+      //onModelReady: (viewModel) => viewModel.init(),
+      onViewModelReady: (viewModel) async {
+        await viewModel.init();
+      },
+      builder: (context, model, child) {
+        return Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            title: Text(
+              'Transaction History',
+              style: sans(color: AppColors.lightGreen),
+            ),
+          ),
+          body: Column(
+            children: [
+              //const BuildCardWidget(),
+              BuildTransactionList(
+                model: model,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

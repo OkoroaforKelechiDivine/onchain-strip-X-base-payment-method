@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/buy_airtime_viewmodel.dart';
 
 import '../../../../../../app_config/manager/font_manager.dart';
 import '../../../../../../core/constants/colors.dart';
 
 class BuildNetworkDropDown extends StatefulWidget {
-  const BuildNetworkDropDown({super.key});
+  final BuyAirtimeViewModel model;
+  const BuildNetworkDropDown({super.key, required this.model});
 
   @override
   State<BuildNetworkDropDown> createState() => _BuildNetworkDropDownState();
-
 }
 
 class _BuildNetworkDropDownState extends State<BuildNetworkDropDown> {
-  String? selectedNetwork;
-  List<DropdownMenuItem<String>> networkItems = [];
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,40 +21,33 @@ class _BuildNetworkDropDownState extends State<BuildNetworkDropDown> {
         vertical: 8,
       ),
       child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.lightGrey.withOpacity(0.1),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: DropdownButtonFormField<String>(
-          decoration: InputDecoration(
-            hintText: "Choose Network",
-            hintStyle: const TextStyle(
-                color: AppColors.lightGrey,
-                fontSize: AppFontSize.size14,
-                fontWeight: AppFontWeight.light),
-            filled: true,
-            fillColor: AppColors.pureWhite,
-            focusColor: AppColors.pureWhite,
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(8),
-            ),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.lightGrey.withOpacity(0.1),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 3),
+              ),
+            ],
           ),
-          value: selectedNetwork,
-          onChanged: (newValue) {
-            setState(() {
-              selectedNetwork = newValue;
-            });
-          },
-          items: networkItems,
-        ),
-      ),
+          child: DropdownButton<String>(
+            isExpanded: true,
+            value: widget.model.selectedValue,
+            onChanged: (newValue) {
+              widget.model.onSelelectNetwork(newValue!);
+            },
+            items: widget.model.dropdownItems
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          )),
     );
   }
 }

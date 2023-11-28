@@ -17,16 +17,20 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Timer(const Duration(milliseconds: 900), () {
       final isAuthenticated = appGlobals.token != null;
-    if (isAuthenticated) {
-      navigationService.pushReplacement(const PassCodeScreen(page: BottomNav(),));
+      if (isAuthenticated) {
+        navigationService.pushReplacement(PassCodeScreen(
+          page: const BottomNav(),
+          isFirstTime: appGlobals.user?.isFirstLogin ?? false,
+        ));
       } else {
         navigationService.pushReplacement(const LoginScreen());
       }
-      
+
       //replaceNavigation(context: context, widget: const LoginScreen(), routeName: PageNamedRoutes.login);
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

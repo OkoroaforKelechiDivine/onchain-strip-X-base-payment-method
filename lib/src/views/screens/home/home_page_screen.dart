@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pay_me_mobile/src/views/screens/home/add_money_view.dart';
 import 'package:pay_me_mobile/src/views/screens/home/home_viewmodel.dart';
 import 'package:pay_me_mobile/src/views/screens/pos/set_pos_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/raise_payment/raise_payment.dart';
+import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/buy_airtime_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_to_bank_screen.dart';
 
@@ -45,7 +47,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AppText(
-                    'Hi, ${appGlobals.user?.firstName}',
+                    'Hi, ${appGlobals.user?.business}',
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
@@ -57,7 +59,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
               ),
             ),
             body: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 16.h),
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.w,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -112,16 +116,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
                               ),
                             ],
                           ),
-                          Text(
-                            'ACCOUNT NUMBER: 157766678939',
-                            style: sans(),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            'Account Type: MERCHANT',
-                            style: sans(),
-                          ),
-                          const SizedBox(height: 35),
+                          // Text(
+                          //   'ACCOUNT NUMBER: 157766678939',
+                          //   style: sans(),
+                          // ),
+                          // const SizedBox(height: 5),
+                          // Text(
+                          //   'Account Type: MERCHANT',
+                          //   style: sans(),
+                          // ),
+                          const SizedBox(height: 15),
                           Padding(
                             padding: const EdgeInsets.only(left: 16, right: 16),
                             child: Row(
@@ -130,7 +134,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                 HomeCardCTA(
                                   title: 'Add Money',
                                   asset: 'assets/jpg/add_money.jpg',
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    bottomSheetService
+                                        .show(const AddMoneyView());
+                                  },
                                 ),
                                 HomeCardCTA(
                                   title: 'Transfer',
@@ -259,7 +266,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             child: const ShadowWrapper(
                               child: HomeCardCTA(
                                 asset: "assets/jpg/outlet.jpg",
-                                title: 'Outlets',
+                                title: 'Inflow',
                                 textColor: AppColors.lightGreen,
                               ),
                             ),
@@ -270,7 +277,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         ),
                         Expanded(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              navigationService
+                                  .push(const TransactionHistoryScreen());
+                            },
                             child: const ShadowWrapper(
                               child: HomeCardCTA(
                                 asset: "assets/jpg/history.jpg",
