@@ -1,16 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
+import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
+import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_failure.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_response.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_service.dart';
 import 'package:pay_me_mobile/data/model/params/signup_param.dart';
 import 'package:pay_me_mobile/data/model/response/auth/passcode_response.dart';
 
-import '../../../core/constants/api_routes.dart';
-import '../../../core/constants/enum/request_type.dart';
-import '../../model/response/auth/app_response.dart';
 import '../../model/response/auth/login_response.dart';
 
 class AuthenticationDataProvider {
@@ -39,11 +36,14 @@ class AuthenticationDataProvider {
     }
   }
 
-  Future<ApiResponse<PasscodeResponse>> validatePascode(
-      {required String code, required bool isFirstLogin}) async {
+  Future<ApiResponse<PasscodeResponse>> validatePascode({
+    required String code,
+  }) async {
     try {
+      final firstLogin = appGlobals.user?.isFirstLogin ?? false;
+      log(firstLogin.toString());
       final res = await _apiService.post(
-          isFirstLogin ? "/set_passcode" : '/validate_passcode',
+          firstLogin ? "/set_passcode" : '/validate_passcode',
           data: {"passcode": code});
       return ApiResponse.fromJson(res)
         ..success = true

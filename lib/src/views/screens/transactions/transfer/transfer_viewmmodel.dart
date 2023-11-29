@@ -24,7 +24,14 @@ class TransferViewModel extends BaseViewModel {
   List<BankResponse> filteredBanks = [];
 
   void init() async {
-    await getBankList();
+    if (appGlobals.banks == null) {
+      await getBankList();
+    } else {
+      bankList.addAll(appGlobals.banks!);
+      filteredBanks = bankList;
+      isLoadingBankList = false;
+      notifyListeners();
+    }
   }
 
   void onShowBank() {

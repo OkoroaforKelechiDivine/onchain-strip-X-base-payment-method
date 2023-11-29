@@ -35,8 +35,11 @@ class AuthRepo {
     return _authApi.register(param: param);
   }
 
-  Future<ApiResponse<PasscodeResponse>> validatePascode(
-      {required String code, required bool isFirstLogin}) {
-    return _authApi.validatePascode(code: code, isFirstLogin: isFirstLogin);
+  Future<ApiResponse<PasscodeResponse>> validatePascode({
+    required String code,
+  }) {
+    return _authApi.validatePascode(
+      code: code,
+    );
   }
 }

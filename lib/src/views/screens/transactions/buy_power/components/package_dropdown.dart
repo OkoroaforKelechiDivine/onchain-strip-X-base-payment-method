@@ -1,38 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/buy_power_view_model.dart';
 
 import '../../../../../../app_config/manager/font_manager.dart';
 import '../../../../../../core/constants/colors.dart';
 
-class BuildPackageDropdown extends StatefulWidget {
-  const BuildPackageDropdown({super.key});
+// class BuildPackageDropdown extends StatefulWidget {
+//   const BuildPackageDropdown({super.key});
 
-  @override
-  State<BuildPackageDropdown> createState() => _BuildPackageDropdownState();
-}
+//   @override
+//   State<BuildPackageDropdown> createState() => _BuildPackageDropdownState();
+// }
 
-class _BuildPackageDropdownState extends State<BuildPackageDropdown> {
+// class _BuildPackageDropdownState extends State<BuildPackageDropdown> {
 
-  String? selectedPackage;
+//   @override
+//   Widget build(BuildContext context) {
+//     return
+//   }
+// }
 
-  List<DropdownMenuItem<String>> packageItems = [
-    const DropdownMenuItem<String>(
-      value: "Package 1",
-      child: Text("Package 1"),
-    ),
-    const DropdownMenuItem<String>(
-      value: "Package 2",
-      child: Text("Package 2"),
-    ),
-    const DropdownMenuItem<String>(
-      value: "Package 3",
-      child: Text("Package 3"),
-    ),
-    const DropdownMenuItem<String>(
-      value: "Package 4",
-      child: Text("Package 4"),
-    ),
-  ];
+class BuildPackageDropdown extends StatelessWidget {
+  final BuyPowerViewModel model;
+  const BuildPackageDropdown({super.key, required this.model});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -64,13 +55,11 @@ class _BuildPackageDropdownState extends State<BuildPackageDropdown> {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          value: selectedPackage,
+          value: model.selectedPackage,
           onChanged: (newValue) {
-            setState(() {
-              selectedPackage = newValue;
-            });
+            model.onSelectPackage(newValue);
           },
-          items: packageItems,
+          items: model.packageItems,
         ),
       ),
     );

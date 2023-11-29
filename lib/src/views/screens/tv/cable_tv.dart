@@ -34,9 +34,9 @@ class _CableTvScreenState extends State<CableTvScreen> {
         child: Column(
           children: [
             SizedBox(height: 20),
-            BuildServiceProviders(),
+            //BuildServiceProviders(),
             SizedBox(height: 10),
-            BuildPackage(),
+            //BuildPackage(),
             SizedBox(height: 10),
             BuildDecoderName(),
             BuildNextButton(),

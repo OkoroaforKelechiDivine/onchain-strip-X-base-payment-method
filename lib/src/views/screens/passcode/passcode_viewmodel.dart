@@ -10,9 +10,12 @@ class PasscodeViewModel extends BaseViewModel {
   bool isProcessing = false;
   bool isError = false;
 
-  Future<bool> onPassCode(String passcode, bool isFirstLogin) async {
+  Future<bool> onPassCode(
+    String passcode,
+  ) async {
     final res = await authRepo.validatePascode(
-        code: passcode, isFirstLogin: isFirstLogin);
+      code: passcode,
+    );
     if (res.success) {
       return true;
     } else {

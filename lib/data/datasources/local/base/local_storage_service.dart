@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pay_me_mobile/data/datasources/local/base/hive_boxes.dart';
 
-
 class LocalStorageService {
   LocalStorageService(this.box);
   final Box box;
@@ -27,9 +26,21 @@ class LocalStorageService {
     box.put(key, value == null ? null : jsonEncode(value));
   }
 
+  //Save List of Maps
+  saveMapList(String key, List<Map> value) {
+    box.put(key, value.map((e) => jsonEncode(e)).toList());
+  }
+
   Map<String, dynamic>? getMap(String key) {
     final res = box.get(key, defaultValue: null);
     return res == null ? null : jsonDecode(res);
+  }
+
+  //Get List of Maps
+  List? getMapList(String key) {
+    final res = box.get(key, defaultValue: null);
+    if (res == null) return null;
+    return (res as List).map((e) => jsonDecode(e)).toList();
   }
 
   String? getString(String key) {

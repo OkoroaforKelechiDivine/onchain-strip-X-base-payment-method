@@ -1,35 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/buy_power_view_model.dart';
 
 import '../../../../../../app_config/manager/font_manager.dart';
 import '../../../../../../core/constants/colors.dart';
 
-class BuildElectricityProviderDropdown extends StatefulWidget {
-  const BuildElectricityProviderDropdown({super.key});
+// class BuildElectricityProviderDropdown extends StatelessWidget {
+//   final BuyPowerViewModel viewModel;
+//    BuildElectricityProviderDropdown({super.key, required this.viewModel});
 
-  @override
-  State<BuildElectricityProviderDropdown> createState() => _BuildElectricityProviderDropdownState();
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return
+//   }
+// }
 
-class _BuildElectricityProviderDropdownState extends State<BuildElectricityProviderDropdown> {
-  String? selectedElectricityProvider;
-  List<DropdownMenuItem<String>> electricityProviderItems = [
-    const DropdownMenuItem<String>(
-      value: "Provider 1",
-      child: Text("Provider 1"),
-    ),
-    const DropdownMenuItem<String>(
-      value: "Provider 2",
-      child: Text("Provider 2"),
-    ),
-    const DropdownMenuItem<String>(
-      value: "Provider 3",
-      child: Text("Provider 3"),
-    ),
-    const DropdownMenuItem<String>(
-      value: "Provider 4",
-      child: Text("Provider 4"),
-    ),
-  ];
+class BuildElectricityProviderDropdown extends StatelessWidget {
+  final BuyPowerViewModel viewModel;
+  const BuildElectricityProviderDropdown({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +49,12 @@ class _BuildElectricityProviderDropdownState extends State<BuildElectricityProvi
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          value: selectedElectricityProvider,
+          value: viewModel.selectedElectricityProvider,
           onChanged: (newValue) {
-            setState(() {
-              selectedElectricityProvider = newValue;
-            });
+            viewModel.onSelectProvider(newValue);
+            //selectedElectricityProvider = newValue;
           },
-          items: electricityProviderItems,
+          items: viewModel.electricityProviderItems,
         ),
       ),
     );

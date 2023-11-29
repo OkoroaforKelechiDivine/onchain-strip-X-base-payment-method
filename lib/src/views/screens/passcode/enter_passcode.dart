@@ -8,13 +8,12 @@ import 'package:pay_me_mobile/src/views/screens/passcode/passcode_viewmodel.dart
 import 'package:pinput/pinput.dart';
 import 'package:stacked/stacked.dart';
 
-import 'keypad.dart';
-
 class PassCodeScreen extends StatelessWidget {
   final Widget page;
-  final bool isFirstTime;
-  const PassCodeScreen(
-      {super.key, required this.page, required this.isFirstTime});
+  const PassCodeScreen({
+    super.key,
+    required this.page,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,7 @@ class PassCodeScreen extends StatelessWidget {
                   const Center(child: BuildLogo()),
                   const SizedBox(height: 16),
                   AppText(
-                    isFirstTime
+                    appGlobals.user?.isFirstLogin ?? false
                         ? "Welcome ${appGlobals.user?.firstName}, Set your 6-Digit PIN"
                         : "Welcome back ${appGlobals.user?.firstName}, Enter your 6-Digit PIN",
                     fontSize: 18,
@@ -84,8 +83,9 @@ class PassCodeScreen extends StatelessWidget {
                       onChanged: (value) async {
                         debugPrint('onChanged: $value');
                         if (value.length == 6) {
-                          final result =
-                              await model.onPassCode(value, isFirstTime);
+                          final result = await model.onPassCode(
+                            value,
+                          );
                           if (result) {
                             navigationService.pushReplacement(page);
                           }

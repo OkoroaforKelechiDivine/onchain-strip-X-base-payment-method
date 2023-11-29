@@ -26,9 +26,8 @@ class LoginViewModel extends BaseViewModel {
       LoginResponse(
         token: res.data?.token,
       );
-      navigationService.pushReplacement(PassCodeScreen(
-        isFirstTime: appGlobals.user?.isFirstLogin ?? false,
-        page: const BottomNav(),
+      navigationService.pushReplacement(const PassCodeScreen(
+        page: BottomNav(),
       ));
       snackbarService.success(message: "Welcome ${appGlobals.user?.firstName}");
       isLoading = false;

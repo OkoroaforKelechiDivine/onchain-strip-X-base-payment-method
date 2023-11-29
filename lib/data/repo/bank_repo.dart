@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/data/datasources/remote/bank_api.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_failure.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_response.dart';
@@ -17,7 +20,13 @@ class BankRepo {
   final _bankApi = BankApi();
 
   Future<ApiResponse<List<BankResponse>?>> getBankList() async {
-    return await _bankApi.getBankList();
+    final res = await _bankApi.getBankList();
+    if (res.success) {
+      appLocalStorage.saveBanks(res.data!);
+      appGlobals.banks = res.data;
+      log(appGlobals.banks.toString());
+    }
+    return res;
   }
 
   Future<ApiResponse<BeneficiaryDetailResponse>> getBeneficiaryAccountDetails(

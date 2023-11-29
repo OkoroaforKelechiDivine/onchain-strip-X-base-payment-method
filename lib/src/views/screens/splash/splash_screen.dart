@@ -18,9 +18,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(milliseconds: 900), () {
       final isAuthenticated = appGlobals.token != null;
       if (isAuthenticated) {
-        navigationService.pushReplacement(PassCodeScreen(
-          page: const BottomNav(),
-          isFirstTime: appGlobals.user?.isFirstLogin ?? false,
+        navigationService.pushReplacement(const PassCodeScreen(
+          page: BottomNav(),
         ));
       } else {
         navigationService.pushReplacement(const LoginScreen());
