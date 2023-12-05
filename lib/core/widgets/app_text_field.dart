@@ -202,7 +202,7 @@ class AppCustomTextField extends StatelessWidget {
                     color: errorBorderColor ?? Colors.red,
                     width: borderWidth ?? 1),
               ),
-          filled: true,
+          filled: false,
           fillColor: backgroundColor ?? Colors.white,
           hintText: hintText,
           hintMaxLines: hintMaxLines,

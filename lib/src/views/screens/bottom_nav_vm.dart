@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/src/views/screens/settings_page/settings_page.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/buy_airtime_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/buy_power_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/home/home_page_screen.dart';
@@ -15,7 +16,7 @@ class BottomNavViewModel extends ChangeNotifier {
     HomePageScreen(),
     TransactionHistoryScreen(),
     BuyAirtimeScreen(),
-    BuyPowerScreen()
+    SettingsPage(),
   ];
   List<Widget> get children => _children;
 

@@ -1,35 +1,35 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pay_me_mobile/src/views/screens/tv/components/package_dropdown.dart';
 import 'package:pay_me_mobile/src/views/screens/tv/components/tv_provider_dropdown.dart';
+import 'package:pay_me_mobile/src/views/screens/tv/tv_cable_viewModel.dart';
 
 import '../../../../../app_config/manager/font_manager.dart';
 import '../../../../../core/constants/colors.dart';
 
-class BuildServiceProviders extends StatelessWidget {
-  const BuildServiceProviders({super.key});
+class BuildTVServiceProviders extends StatelessWidget {
+  final TvCableViewModel model;
+  const BuildTVServiceProviders({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Text(
-                "Service provider",
-                style: TextStyle(
-                  color: AppColors.lightBlack,
-                  fontWeight: AppFontWeight.bold,
-                  fontSize: AppFontSize.size16,
-                ),
-              ),
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          child: Text(
+            "Service provider",
+            style: TextStyle(
+              color: AppColors.lightBlack,
+              fontWeight: AppFontWeight.bold,
+              fontSize: AppFontSize.size16,
             ),
           ),
-          BuildTvProviderDropdown(),
-        ],
-      ),
+        ),
+        const SizedBox(height: 10),
+        TvServiceProviderDropdown(
+          viewModel: model,
+        ),
+      ],
     );
   }
 }

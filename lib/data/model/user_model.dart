@@ -39,7 +39,9 @@ class User {
         isDefaultPassword: json["is_default_password"],
         isFirstLogin: json["is_first_login"],
         lastName: json["last_name"],
-        permissions: List<String>.from(json["permissions"].map((x) => x)),
+        permissions: json["permissions"] != null
+            ? List<String>.from(json["permissions"].map((x) => x))
+            : [],
         role: json["role"],
         sub: json["sub"],
         username: json["username"],

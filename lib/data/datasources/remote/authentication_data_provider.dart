@@ -43,7 +43,9 @@ class AuthenticationDataProvider {
       final firstLogin = appGlobals.user?.isFirstLogin ?? false;
       log(firstLogin.toString());
       final res = await _apiService.post(
-          firstLogin ? "/set_passcode" : '/validate_passcode',
+
+          ///firstLogin ? "/set_passcode" : '/validate_passcode',
+          "/validate_passcode",
           data: {"passcode": code});
       return ApiResponse.fromJson(res)
         ..success = true

@@ -11,29 +11,24 @@ class BuildPackage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        children: [
-          const SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Text(
-                "Package",
-                style: TextStyle(
-                  color: AppColors.lightBlack,
-                  fontWeight: AppFontWeight.bold,
-                  fontSize: AppFontSize.size16,
-                ),
-              ),
+    return Column(
+      children: [
+        const SizedBox(
+          width: double.infinity,
+          child: Text(
+            "Package",
+            style: TextStyle(
+              color: AppColors.lightBlack,
+              fontWeight: AppFontWeight.bold,
+              fontSize: AppFontSize.size16,
             ),
           ),
-          BuildPackageDropdown(
-            model: model,
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 10),
+        BuildPackageDropdown(
+          model: model,
+        ),
+      ],
     );
   }
 }

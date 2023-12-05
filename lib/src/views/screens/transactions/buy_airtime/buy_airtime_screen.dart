@@ -42,11 +42,12 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
             ),
           ),
           body: SingleChildScrollView(
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 20, right: 200),
-                  child: Text(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
                     'Choose an amount',
                     style: TextStyle(
                       fontSize: AppFontSize.size16,
@@ -54,137 +55,120 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
                       fontWeight: AppFontWeight.bold,
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                BuildAmountCards(model: model),
-                const SizedBox(height: 10),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: BuildAmountInfo(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0,
-                      vertical: 8.0,
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.lightGrey.withOpacity(0.1),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: TextField(
-                        controller: model.amountController,
-                        onChanged: (text) {
-                          String formattedAmount =
-                              AmountFormatter.formatAmount(text);
-                          if (model.amountController.text != formattedAmount) {
-                            model.amountController.value =
-                                model.amountController.value.copyWith(
-                              text: formattedAmount,
-                              selection: TextSelection.collapsed(
-                                  offset: formattedAmount.length),
-                            );
-                          }
-                        },
-                        decoration: InputDecoration(
-                          hintText: "Enter amount here",
-                          hintStyle: const TextStyle(
-                              color: AppColors.lightGrey,
-                              fontSize: AppFontSize.size14,
-                              fontWeight: AppFontWeight.light),
-                          filled: true,
-                          fillColor: AppColors.pureWhite,
-                          focusColor: AppColors.pureWhite,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                        keyboardType: TextInputType.number,
-                      ),
-                    ),
+                  const SizedBox(
+                    height: 5,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: BuildNetworkDropDown(
+                  BuildAmountCards(model: model),
+                  const SizedBox(height: 24),
+                  const BuildAmountInfo(),
+                  const SizedBox(height: 24),
+                  AppCustomTextField(
+                    textEditingController: model.amountController,
+                    onChanged: (text) {
+                      String formattedAmount =
+                          AmountFormatter.formatAmount(text);
+                      if (model.amountController.text != formattedAmount) {
+                        model.amountController.value =
+                            model.amountController.value.copyWith(
+                          text: formattedAmount,
+                          selection: TextSelection.collapsed(
+                              offset: formattedAmount.length),
+                        );
+                      }
+                    },
+                    hintText: "Enter amount here",
+                    textInputType: TextInputType.number,
+                  ),
+
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8),
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.symmetric(
+                  //       horizontal: 8.0,
+                  //       vertical: 8.0,
+                  //     ),
+                  //     child: Container(
+                  //       decoration: BoxDecoration(
+                  //         boxShadow: [
+                  //           BoxShadow(
+                  //             color: AppColors.lightGrey.withOpacity(0.1),
+                  //             spreadRadius: 5,
+                  //             blurRadius: 7,
+                  //             offset: const Offset(0, 3),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       child: TextField(
+                  //         controller: model.amountController,
+                  //         onChanged: (text) {
+                  //           String formattedAmount =
+                  //               AmountFormatter.formatAmount(text);
+                  //           if (model.amountController.text != formattedAmount) {
+                  //             model.amountController.value =
+                  //                 model.amountController.value.copyWith(
+                  //               text: formattedAmount,
+                  //               selection: TextSelection.collapsed(
+                  //                   offset: formattedAmount.length),
+                  //             );
+                  //           }
+                  //         },
+                  //         decoration: InputDecoration(
+                  //           hintText: "Enter amount here",
+                  //           hintStyle: const TextStyle(
+                  //               color: AppColors.lightGrey,
+                  //               fontSize: AppFontSize.size14,
+                  //               fontWeight: AppFontWeight.light),
+                  //           filled: true,
+                  //           fillColor: AppColors.pureWhite,
+                  //           focusColor: AppColors.pureWhite,
+                  //           border: OutlineInputBorder(
+                  //             borderSide: BorderSide.none,
+                  //             borderRadius: BorderRadius.circular(8.0),
+                  //           ),
+                  //         ),
+                  //         keyboardType: TextInputType.number,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  const SizedBox(height: 24),
+                  BuildNetworkDropDown(
                     model: model,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0,
-                      vertical: 8.0,
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.lightGrey.withOpacity(0.1),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: TextField(
-                        controller: model.phoneNumberController,
-                        decoration: InputDecoration(
-                          hintText: "Enter Phone number",
-                          hintStyle: const TextStyle(
-                              color: AppColors.lightGrey,
-                              fontSize: AppFontSize.size14,
-                              fontWeight: AppFontWeight.light),
-                          filled: true,
-                          fillColor: AppColors.pureWhite,
-                          focusColor: AppColors.pureWhite,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                        keyboardType: TextInputType.number,
-                        maxLength: 11,
-                      ),
+                  const SizedBox(height: 24),
+                  AppCustomTextField(
+                    textEditingController: model.phoneNumberController,
+                    hintText: "Enter Phone number",
+                    textInputType: TextInputType.number,
+                    maxLength: 11,
+                  ),
+                  const SizedBox(height: 24),
+                  Center(
+                    child: AppCustomButton(
+                      width: 200,
+                      onPressed: () {
+                        model.onBuyAirtime();
+                      },
+                      title: "Buy Airtime",
+                      loading: model.buyingAirtime,
+                      //color: AppColors.lightGreen,
                     ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                AppCustomButton(
-                  width: 200,
-                  onPressed: () {
-                    model.onBuyAirtime();
-                  },
-                  title: "Buy Airtime",
-                  loading: model.buyingAirtime,
-                  //color: AppColors.lightGreen,
-                ),
-                // Padding(
-                //   padding: const EdgeInsets.only(
-                //     left: 100,
-                //     right: 100,
-                //   ),
-                //   child: AppButton.filledButton(context,
-                //       onTap: () {},
-                //       color: AppColors.lightGreen,
-                //       child: Text(
-                //         'Next',
-                //         style: cairo(),
-                //       )),
-                // ),
-              ],
+                  // Padding(
+                  //   padding: const EdgeInsets.only(
+                  //     left: 100,
+                  //     right: 100,
+                  //   ),
+                  //   child: AppButton.filledButton(context,
+                  //       onTap: () {},
+                  //       color: AppColors.lightGreen,
+                  //       child: Text(
+                  //         'Next',
+                  //         style: cairo(),
+                  //       )),
+                  // ),
+                ],
+              ),
             ),
           ),
         );

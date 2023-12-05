@@ -20,42 +20,43 @@ class BuildElectricityProviderDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.lightGrey.withOpacity(0.1),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
-            ),
-          ],
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: AppColors.lightGrey,
         ),
-        child: DropdownButtonFormField<String>(
-          decoration: InputDecoration(
-            hintText: "Choose Electricity Provider",
-            hintStyle: const TextStyle(
-              color: AppColors.lightGrey,
-              fontSize: AppFontSize.size14,
-              fontWeight: AppFontWeight.light,
-            ),
-            filled: true,
-            fillColor: AppColors.pureWhite,
-            focusColor: AppColors.pureWhite,
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
+        borderRadius: BorderRadius.circular(8),
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: AppColors.lightGrey.withOpacity(0.1),
+        //     spreadRadius: 5,
+        //     blurRadius: 7,
+        //     offset: const Offset(0, 3),
+        //   ),
+        // ],
+      ),
+      child: DropdownButtonFormField<String>(
+        decoration: InputDecoration(
+          hintText: "Choose Electricity Provider",
+          hintStyle: const TextStyle(
+            color: AppColors.lightGrey,
+            fontSize: AppFontSize.size14,
+            fontWeight: AppFontWeight.light,
           ),
-          value: viewModel.selectedElectricityProvider,
-          onChanged: (newValue) {
-            viewModel.onSelectProvider(newValue);
-            //selectedElectricityProvider = newValue;
-          },
-          items: viewModel.electricityProviderItems,
+          filled: true,
+          fillColor: AppColors.pureWhite,
+          focusColor: AppColors.pureWhite,
+          border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(8.0),
+          ),
         ),
+        value: viewModel.selectedElectricityProvider,
+        onChanged: (newValue) {
+          viewModel.onSelectProvider(newValue);
+          //selectedElectricityProvider = newValue;
+        },
+        items: viewModel.electricityProviderItems,
       ),
     );
   }

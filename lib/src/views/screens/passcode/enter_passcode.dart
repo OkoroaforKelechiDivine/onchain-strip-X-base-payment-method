@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/widgets/screen_button.dart';
+import 'package:pay_me_mobile/data/datasources/local/base/local_storage_service.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/components/logo.dart';
+import 'package:pay_me_mobile/src/views/screens/auth/login_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/passcode/passcode_viewmodel.dart';
 import 'package:pinput/pinput.dart';
 import 'package:stacked/stacked.dart';
@@ -57,11 +59,18 @@ class PassCodeScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                   const SizedBox(height: 16),
-                  const Row(
+                  Row(
                     children: [
-                      AppText("Not your account?"),
-                      SizedBox(width: 5),
-                      AppText("Log out"),
+                      const AppText("Not your account?"),
+                      const SizedBox(width: 5),
+                      GestureDetector(
+                        onTap: () async {
+                          await LocalStorageService.clear();
+                          navigationService
+                              .pushAndRemoveUntil(const LoginScreen());
+                        },
+                        child: const AppText("Log out"),
+                      ),
                     ],
                   ),
                   const Spacer(),

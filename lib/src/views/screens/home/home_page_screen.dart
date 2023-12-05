@@ -6,6 +6,7 @@ import 'package:pay_me_mobile/src/views/screens/pos/set_pos_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/raise_payment/raise_payment.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/buy_airtime_screen.dart';
+import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/buy_power_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_to_bank_screen.dart';
 
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
@@ -324,8 +325,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: InkWell(
-                            onTap: () {},
+                          child: GestureDetector(
+                            onTap: () {
+                              navigationService.push(const BuyPowerScreen());
+                            },
                             child: const ShadowWrapper(
                               child: HomeCardCTA(
                                 asset: "assets/jpg/buy_power.jpg",

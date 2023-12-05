@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../../../core/widgets/app_text.dart';
+import '../../../../core/cores.dart';
 
-class BuyPowerViewModel extends BaseViewModel {
+class TvCableViewModel extends BaseViewModel {
   TextEditingController amountController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController meterNumberController = TextEditingController();
+  TextEditingController decoderNumberController = TextEditingController();
   String? selectedElectricityProvider;
   String? selectedPackage;
 

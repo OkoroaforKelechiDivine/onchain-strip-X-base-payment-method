@@ -6,7 +6,7 @@ import 'package:pay_me_mobile/data/repo/bank_repo.dart';
 import 'package:pay_me_mobile/data/repo/business_repo.dart';
 import 'package:pay_me_mobile/data/repo/ticket_repo.dart';
 import 'package:pay_me_mobile/data/repo/transaction_repo.dart';
-import 'package:pay_me_mobile/src/data/view_models/bottom_nav_vm.dart';
+import 'package:pay_me_mobile/src/views/screens/bottom_nav_vm.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
