@@ -5,8 +5,10 @@ import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
+import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/inflow_response.dart';
+import 'package:pay_me_mobile/src/views/screens/inflow/inflow_details.dart';
 import 'package:pay_me_mobile/src/views/screens/inflow/inflow_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -81,50 +83,57 @@ class InflowScreen extends StatelessWidget {
                 },
                 indexedItemBuilder: (context, element, index) {
                   final bank = element;
-                  return Container(
-                    color: AppColors.lightBlue,
-                    child: ListTile(
-                      leading: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: AppColors.lightGreen,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: const Icon(
-                          Icons.money,
-                          color: Colors.white,
-                        ),
-                      ),
-                      title: Text(
-                        bank.originatorAccountName,
-                        style: TextStyle(
-                          fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-                          fontWeight: AppFontWeight.bold,
-                          fontSize: AppFontSize.size14,
-                        ),
-                      ),
-                      subtitle: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            model.formatTimestamp(
-                                DateTime.tryParse(bank.timeStamp) ??
-                                    DateTime.now()),
-                            style: const TextStyle(
-                              color: AppColors.lightBlack,
-                              fontWeight: AppFontWeight.light,
-                              fontSize: AppFontSize.size14,
-                            ),
+                  return GestureDetector(
+                    onTap: () {
+                      bottomSheetService
+                          .show(InflowDetails(transactionResponse: bank));
+                      //navigationService.push();
+                    },
+                    child: Container(
+                      color: AppColors.lightBlue,
+                      child: ListTile(
+                        leading: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: AppColors.lightGreen,
+                            borderRadius: BorderRadius.circular(100),
                           ),
-                          Text(
-                            "#${formatBalance(bank.amount.toDouble())}",
-                            style: const TextStyle(
-                              color: AppColors.lightGreen,
-                              fontWeight: AppFontWeight.bold,
-                              fontSize: AppFontSize.size14,
-                            ),
+                          child: const Icon(
+                            Icons.money,
+                            color: Colors.white,
                           ),
-                        ],
+                        ),
+                        title: Text(
+                          bank.originatorAccountName,
+                          style: TextStyle(
+                            fontFamily: GoogleFonts.alegreyaSans().fontFamily,
+                            fontWeight: AppFontWeight.bold,
+                            fontSize: AppFontSize.size14,
+                          ),
+                        ),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              model.formatTimestamp(
+                                  DateTime.tryParse(bank.timeStamp) ??
+                                      DateTime.now()),
+                              style: const TextStyle(
+                                color: AppColors.lightBlack,
+                                fontWeight: AppFontWeight.light,
+                                fontSize: AppFontSize.size14,
+                              ),
+                            ),
+                            Text(
+                              "#${formatBalance(bank.amount.toDouble())}",
+                              style: const TextStyle(
+                                color: AppColors.lightGreen,
+                                fontWeight: AppFontWeight.bold,
+                                fontSize: AppFontSize.size14,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );
