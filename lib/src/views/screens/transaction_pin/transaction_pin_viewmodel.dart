@@ -4,7 +4,7 @@ import 'package:pay_me_mobile/src/views/screens/auth/login_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 import 'package:stacked/stacked.dart';
 
-class PasscodeViewModel extends BaseViewModel {
+class TransactionPinViewModel extends BaseViewModel {
   TextEditingController pinController = TextEditingController();
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
@@ -12,11 +12,10 @@ class PasscodeViewModel extends BaseViewModel {
   bool isError = false;
 
   Future<void> onPassCode() async {
-    //final firstLogin = appGlobals.user?.isFirstLogin ?? false;
+    final firstLogin = appGlobals.user?.isFirstLogin ?? false;
     isProcessing = true;
     notifyListeners();
-
-    if (false) {
+    if (firstLogin) {
       final res = await authRepo.setPascode(
         code: pinController.text,
       );

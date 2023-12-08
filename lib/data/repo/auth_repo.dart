@@ -35,11 +35,21 @@ class AuthRepo {
     return _authApi.register(param: param);
   }
 
+  Future<ApiResponse<String>> setPascode({
+    required String code,
+  }) async {
+    return _authApi.setPascode(code: code);
+  }
+
   Future<ApiResponse<PasscodeResponse>> validatePascode({
     required String code,
   }) {
     return _authApi.validatePascode(
       code: code,
     );
+  }
+
+  Future<ApiResponse<bool>> validatePin(String pin) {
+    return _authApi.validatePin(code: pin);
   }
 }

@@ -147,7 +147,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
                     child: AppCustomButton(
                       width: 200,
                       onPressed: () {
-                        model.onBuyAirtime();
+                        model.buyAirtime();
                       },
                       title: "Buy Airtime",
                       loading: model.buyingAirtime,

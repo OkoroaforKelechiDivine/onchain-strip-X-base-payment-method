@@ -124,7 +124,7 @@ class _TransferToBankScreenState extends State<TransferToBankScreen> {
                                   beneficiaryDetailResponse:
                                       model.beneficiaryDetailResponse,
                                 ),
-                                BuildBeneficiary(context: context),
+                                // BuildBeneficiary(context: context),
                                 BuildRecentCard(context: context),
                               ],
                             ),

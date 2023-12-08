@@ -37,10 +37,10 @@ class PassCodeScreen extends StatelessWidget {
     );
 
     return ViewModelBuilder<PasscodeViewModel>.reactive(
-        viewModelBuilder: () => PasscodeViewModel(),
-        builder: (context, model, _) {
-          return Scaffold(
-              body: Form(
+      viewModelBuilder: () => PasscodeViewModel(),
+      builder: (context, model, _) {
+        return Scaffold(
+          body: Form(
             key: model.formKey,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -92,12 +92,7 @@ class PassCodeScreen extends StatelessWidget {
                       onChanged: (value) async {
                         debugPrint('onChanged: $value');
                         if (value.length == 6) {
-                          final result = await model.onPassCode(
-                            value,
-                          );
-                          if (result) {
-                            navigationService.pushReplacement(page);
-                          }
+                          await model.onPassCode();
                         }
                       },
                       cursor: Column(
@@ -239,7 +234,9 @@ class PassCodeScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ));
-        });
+          ),
+        );
+      },
+    );
   }
 }

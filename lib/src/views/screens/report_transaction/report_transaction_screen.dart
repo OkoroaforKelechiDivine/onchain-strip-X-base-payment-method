@@ -30,17 +30,17 @@ class ReportTransactionScreen extends StatelessWidget {
             ),
           ),
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 AppCustomTextField(
                   textEditingController: model.titleController,
                   hintText: 'Title',
                   labelText: 'Title',
                   onChanged: (value) {},
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 AppCustomTextField(
                   textEditingController: model.descriptionController,
                   hintText: 'Description',
@@ -49,13 +49,13 @@ class ReportTransactionScreen extends StatelessWidget {
                   maxLines: 9,
                   minLines: 7,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 AppCustomButton(
                   title: 'Report',
                   loading: model.isReporting,
                   onPressed: () {
                     final param = CreateTicketParam(
-                      transactionId: "PayMe---495869940038",
+                      transactionId: transactionId,
                       title: model.titleController.text,
                       content: model.descriptionController.text,
                     );

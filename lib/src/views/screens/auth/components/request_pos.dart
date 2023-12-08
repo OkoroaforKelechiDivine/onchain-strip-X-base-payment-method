@@ -11,7 +11,7 @@ class BuildRequestForPOS extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        "Request for POS?",
+        "Request for POS/Account Number?",
         style: GoogleFonts.alegreyaSans(
           textStyle: const TextStyle(
             color: AppColors.lightGrey,

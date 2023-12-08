@@ -97,22 +97,30 @@ class TransactionDetailsScreen extends StatelessWidget {
                       BuildInfoRow(
                           label: 'To',
                           value: transactionResponse.originatorBank!),
-                      const SizedBox(height: 15),
+                      _buildDivider(),
+                      const SizedBox(height: 10),
+                      BuildInfoRow(
+                          label: 'Transaction Type',
+                          value: transactionResponse.transactionType!),
+                      const SizedBox(height: 10),
                       _buildDivider(),
                       const SizedBox(height: 15),
                       const BuildInfoRow(label: 'Description', value: 'Garri'),
                       const SizedBox(height: 15),
                       _buildDivider(),
                       const SizedBox(height: 15),
-                      const BuildInfoRow(
-                          label: 'Outward Transfer', value: '₦ 0.00'),
+                      BuildInfoRow(
+                        label: 'Outward Transfer',
+                        value:
+                            "#${formatBalance(transactionResponse.amount!.toDouble())}",
+                      ),
                       const SizedBox(height: 15),
                       _buildDivider(),
-                      const SizedBox(height: 15),
-                      const BuildInfoRow(
-                          label: 'Payment Method', value: 'Fees'),
-                      const SizedBox(height: 15),
-                      _buildDivider(),
+                      // const SizedBox(height: 15),
+                      // const BuildInfoRow(
+                      //     label: 'Payment Method', value: 'Fees'),
+                      // const SizedBox(height: 15),
+                      // _buildDivider(),
                       const SizedBox(height: 15),
                       const BuildInfoRow(label: 'Status', value: 'Successful'),
                       const SizedBox(height: 15),

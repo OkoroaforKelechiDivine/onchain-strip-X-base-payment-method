@@ -13,7 +13,7 @@ class BusinessApi {
       return ApiResponse.fromJson(res)
         ..success = true
         ..message = "Success"
-        ..data = res["message"];
+        ..data = double.parse(res["message"].toString());
     } on ApiFailure catch (e) {
       return ApiResponse(success: false, message: e.message);
     }

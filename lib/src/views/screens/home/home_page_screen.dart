@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/views/screens/home/add_money_view.dart';
 import 'package:pay_me_mobile/src/views/screens/home/home_viewmodel.dart';
 import 'package:pay_me_mobile/src/views/screens/pos/set_pos_screen.dart';
@@ -95,7 +96,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   ),
                                   Text(
                                     model.isVisible
-                                        ? model.walletBalance
+                                        ? formatBalance(
+                                            double.parse(model.walletBalance))
                                         : '*********',
                                     style: philosopher(
                                         color: Colors.white,
@@ -367,7 +369,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             child: const ShadowWrapper(
                               child: HomeCardCTA(
                                 asset: "assets/jpg/more.jpg",
-                                title: 'More',
+                                title: 'Tv Cable',
                                 textColor: AppColors.lightGreen,
                               ),
                             ),

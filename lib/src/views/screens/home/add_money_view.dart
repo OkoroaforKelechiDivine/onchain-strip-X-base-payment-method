@@ -24,11 +24,11 @@ class AddMoneyView extends StatelessWidget {
           valueContainer(appGlobals.user?.accountNumber ?? ""),
           const SizedBox(height: 20),
           const AppText(
-            'Account Type',
+            'Bank Name',
             fontSize: 16,
           ),
           const SizedBox(height: 8),
-          valueContainer(appGlobals.user?.accountType ?? ""),
+          valueContainer("VFD Microfinance Bank"),
           const SizedBox(height: 40),
         ],
       ),

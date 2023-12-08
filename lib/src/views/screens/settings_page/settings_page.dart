@@ -61,6 +61,16 @@ class SettingsPage extends StatelessWidget {
                         onTap: () async {},
                       ),
                       singleItem(
+                        icon: Icons.emergency,
+                        text: 'Set Transaction Limit',
+                        onTap: () async {},
+                      ),
+                      singleItem(
+                        icon: Icons.payment,
+                        text: 'Set Transaction pin',
+                        onTap: () async {},
+                      ),
+                      singleItem(
                         icon: Icons.password,
                         text: 'Change Password',
                         onTap: () async {},
@@ -68,6 +78,11 @@ class SettingsPage extends StatelessWidget {
                       singleItem(
                         icon: Icons.pin,
                         text: 'Change Passcode',
+                        onTap: () async {},
+                      ),
+                      singleItem(
+                        icon: Icons.device_hub,
+                        text: 'Request for POS Device',
                         onTap: () async {},
                       ),
                     ],

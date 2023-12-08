@@ -55,4 +55,39 @@ class AuthenticationDataProvider {
       return ApiResponse(success: false, message: e.message);
     }
   }
+
+  Future<ApiResponse<String>> setPascode({
+    required String code,
+  }) async {
+    try {
+      final res =
+          await _apiService.post("/set_passcode", data: {"passcode": code});
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = res["message"];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
+  Future<ApiResponse<bool>> validatePin({
+    required String code,
+  }) async {
+    try {
+      final firstLogin = appGlobals.user?.isFirstLogin ?? false;
+      log(firstLogin.toString());
+      final res = await _apiService.post(
+
+          ///firstLogin ? "/set_passcode" : '/validate_passcode',
+          "/validate_pin",
+          data: {"pin": code});
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = res["message"];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
 }

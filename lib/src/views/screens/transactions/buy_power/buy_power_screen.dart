@@ -44,7 +44,7 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
                   const SizedBox(height: 16),
                   BuildPackage(model: model),
                   const SizedBox(height: 16),
-                  Text(
+                  const Text(
                     "Phone Number",
                     style: TextStyle(
                       color: AppColors.lightBlack,
@@ -60,6 +60,12 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
                     textInputType: TextInputType.number,
                     maxLength: 10,
                     padding: const EdgeInsets.all(18),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter phone number';
+                      }
+                      return null;
+                    },
                   ),
                   // Padding(
                   //   padding: const EdgeInsets.all(18),
@@ -106,22 +112,31 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
                     viewModel: model,
                   ),
                   const SizedBox(height: 16),
-                  Container(
-                    margin: EdgeInsets.only(top: 24.h),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 100,
-                        right: 100,
-                      ),
-                      child: AppButton.filledButton(context,
-                          onTap: () {},
-                          color: AppColors.lightGreen,
-                          child: Text(
-                            'Next',
-                            style: cairo(),
-                          )),
-                    ),
-                  )
+                  AppCustomButton(
+                    loading: model.buyingPower,
+                    onPressed: () {
+                      model.onBuyPower();
+                    },
+                    title: 'Buy Power',
+                    color: AppColors.lightGreen,
+                    padding: const EdgeInsets.all(18),
+                  ),
+                  // Container(
+                  //   margin: EdgeInsets.only(top: 24.h),
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.only(
+                  //       left: 100,
+                  //       right: 100,
+                  //     ),
+                  //     child: AppButton.filledButton(context,
+                  //         onTap: () {},
+                  //         color: AppColors.lightGreen,
+                  //         child: Text(
+                  //           'Next',
+                  //           style: cairo(),
+                  //         )),
+                  //   ),
+                  // )
                 ],
               ),
             ),
