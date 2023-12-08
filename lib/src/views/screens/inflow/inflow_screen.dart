@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grouped_list/grouped_list.dart';
+import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
+import 'package:pay_me_mobile/data/model/response/transaction_response/inflow_response.dart';
 import 'package:pay_me_mobile/src/views/screens/inflow/inflow_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -41,9 +44,43 @@ class InflowScreen extends StatelessWidget {
                   child: Text('No inflow yet'),
                 );
               }
-              return ListView.separated(
-                itemBuilder: (context, index) {
-                  final bank = model.inflowList[index];
+              return GroupedListView<InflowResponse, String>(
+                elements: model.inflowList,
+                groupBy: (element) {
+                  final DateTime date =
+                      DateTime.parse(element.timeStamp).toLocal();
+                  return DateFormat('yyyy-MM-dd').format(date);
+                },
+                groupSeparatorBuilder: (String value) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                    child: Container(
+                      color: AppColors.deepWhite,
+                      height: 20,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          DateFormat('dd MMMM, yyyy')
+                              .format(DateTime.parse(value)),
+                          style: const TextStyle(
+                            fontWeight: AppFontWeight.bold,
+                            fontSize: AppFontSize.size12,
+                            color: AppColors.lightBlack,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                itemComparator: (item1, item2) {
+                  final DateTime item1Date =
+                      DateTime.parse(item1.timeStamp).toLocal();
+                  final DateTime item2Date =
+                      DateTime.parse(item2.timeStamp).toLocal();
+                  return item2Date.compareTo(item1Date);
+                },
+                indexedItemBuilder: (context, element, index) {
+                  final bank = element;
                   return Container(
                     color: AppColors.lightBlue,
                     child: ListTile(
@@ -59,7 +96,7 @@ class InflowScreen extends StatelessWidget {
                         ),
                       ),
                       title: Text(
-                        "Inflow",
+                        bank.originatorAccountName,
                         style: TextStyle(
                           fontFamily: GoogleFonts.alegreyaSans().fontFamily,
                           fontWeight: AppFontWeight.bold,
@@ -80,7 +117,7 @@ class InflowScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "${formatBalance(bank.amount.toDouble())}}",
+                            "#${formatBalance(bank.amount.toDouble())}",
                             style: const TextStyle(
                               color: AppColors.lightGreen,
                               fontWeight: AppFontWeight.bold,
@@ -92,9 +129,6 @@ class InflowScreen extends StatelessWidget {
                     ),
                   );
                 },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 10),
-                itemCount: model.inflowList.length,
               );
             },
           ),
@@ -103,3 +137,62 @@ class InflowScreen extends StatelessWidget {
     );
   }
 }
+
+
+
+
+        // ListView.separated(
+        //         itemBuilder: (context, index) {
+        //           final bank = model.inflowList[index];
+        //           return Container(
+        //             color: AppColors.lightBlue,
+        //             child: ListTile(
+        //               leading: Container(
+        //                 padding: const EdgeInsets.all(10),
+        //                 decoration: BoxDecoration(
+        //                   color: AppColors.lightGreen,
+        //                   borderRadius: BorderRadius.circular(100),
+        //                 ),
+        //                 child: const Icon(
+        //                   Icons.money,
+        //                   color: Colors.white,
+        //                 ),
+        //               ),
+        //               title: Text(
+        //                 bank.originatorAccountName,
+        //                 style: TextStyle(
+        //                   fontFamily: GoogleFonts.alegreyaSans().fontFamily,
+        //                   fontWeight: AppFontWeight.bold,
+        //                   fontSize: AppFontSize.size14,
+        //                 ),
+        //               ),
+        //               subtitle: Row(
+        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //                 children: [
+        //                   Text(
+        //                     model.formatTimestamp(
+        //                         DateTime.tryParse(bank.timeStamp) ??
+        //                             DateTime.now()),
+        //                     style: const TextStyle(
+        //                       color: AppColors.lightBlack,
+        //                       fontWeight: AppFontWeight.light,
+        //                       fontSize: AppFontSize.size14,
+        //                     ),
+        //                   ),
+        //                   Text(
+        //                     "#${formatBalance(bank.amount.toDouble())}",
+        //                     style: const TextStyle(
+        //                       color: AppColors.lightGreen,
+        //                       fontWeight: AppFontWeight.bold,
+        //                       fontSize: AppFontSize.size14,
+        //                     ),
+        //                   ),
+        //                 ],
+        //               ),
+        //             ),
+        //           );
+        //         },
+        //         separatorBuilder: (context, index) =>
+        //             const SizedBox(height: 10),
+        //         itemCount: model.inflowList.length,
+        //       );

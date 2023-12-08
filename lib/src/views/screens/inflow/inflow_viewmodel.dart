@@ -28,6 +28,6 @@ class InflowViewmodel extends BaseViewModel {
   }
 
   String formatTimestamp(DateTime timestamp) {
-    return DateFormat('HH:mm a').format(timestamp);
+    return DateFormat('dd/MM/yyyy HH:mm a').format(timestamp);
   }
 }

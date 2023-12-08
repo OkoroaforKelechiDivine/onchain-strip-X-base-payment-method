@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/views/screens/home/add_money_view.dart';
 import 'package:pay_me_mobile/src/views/screens/home/home_viewmodel.dart';
+import 'package:pay_me_mobile/src/views/screens/inflow/inflow_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/pos/set_pos_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/raise_payment/raise_payment.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history.dart';
@@ -263,7 +264,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              navigationService.push(const OutletScreen());
+                              navigationService.push(const InflowScreen());
                               //pushNavigation(context: context, widget: OutletScreen());
                             },
                             child: const ShadowWrapper(
