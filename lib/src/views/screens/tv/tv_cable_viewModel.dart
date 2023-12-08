@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -9,6 +11,26 @@ class TvCableViewModel extends BaseViewModel {
   TextEditingController decoderNumberController = TextEditingController();
   String? selectedElectricityProvider;
   String? selectedPackage;
+  bool isLoadingWalletBalance = false;
+  String walletBalance = "0.0";
+
+  void init() async {
+    await getWalletBalance();
+  }
+
+  Future<void> getWalletBalance() async {
+    isLoadingWalletBalance = true;
+    notifyListeners();
+    final res = await businessRepo.getWalletBalance();
+    if (res.success) {
+      log(res.data.toString());
+      walletBalance = res.data!.toDouble().toStringAsFixed(2);
+      notifyListeners();
+      isLoadingWalletBalance = false;
+      notifyListeners();
+    }
+    notifyListeners();
+  }
 
   List<DropdownMenuItem<String>> packageItems = [
     const DropdownMenuItem<String>(

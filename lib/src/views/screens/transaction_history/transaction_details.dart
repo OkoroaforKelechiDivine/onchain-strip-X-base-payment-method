@@ -5,6 +5,7 @@ import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/transaction_response.dart';
 import 'package:pay_me_mobile/src/views/screens/raise_payment/components/info_row.dart';
 import 'package:pay_me_mobile/src/views/screens/report_transaction/report_transaction_screen.dart';
+import 'package:pay_me_mobile/src/views/screens/transaction_history/components/transaction_type_design.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/repeat_transaction.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/core/cores.dart';
@@ -88,49 +89,35 @@ class TransactionDetailsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      BuildInfoRow(
-                          label: 'Account Name',
-                          value: transactionResponse.originatorAccountName!),
-                      const SizedBox(height: 10),
-                      _buildDivider(),
-                      const SizedBox(height: 10),
-                      BuildInfoRow(
-                          label: 'To',
-                          value: transactionResponse.originatorBank!),
-                      _buildDivider(),
-                      const SizedBox(height: 10),
-                      BuildInfoRow(
-                          label: 'Transaction Type',
-                          value: transactionResponse.transactionType!),
-                      const SizedBox(height: 10),
-                      _buildDivider(),
-                      const SizedBox(height: 15),
-                      const BuildInfoRow(label: 'Description', value: 'Garri'),
-                      const SizedBox(height: 15),
-                      _buildDivider(),
-                      const SizedBox(height: 15),
-                      BuildInfoRow(
-                        label: 'Outward Transfer',
-                        value:
-                            "#${formatBalance(transactionResponse.amount!.toDouble())}",
+                      Builder(
+                        builder: (context) {
+                          if (transactionResponse.transactionType ==
+                              "Outflow") {
+                            return OutflowReceipt(
+                              transactionResponse: transactionResponse,
+                            );
+                          }
+                          if (transactionResponse.transactionType ==
+                              "Airtime") {
+                            return AirtimeRecept(
+                              transactionResponse: transactionResponse,
+                            );
+                          }
+                          if (transactionResponse.transactionType == "Power") {
+                            return PowerRecept(
+                              transactionResponse: transactionResponse,
+                            );
+                          }
+                          if (transactionResponse.transactionType == "Inflow") {
+                            return InflowRecept(
+                              transactionResponse: transactionResponse,
+                            );
+                          }
+                          return TvCableRecept(
+                            transactionResponse: transactionResponse,
+                          );
+                        },
                       ),
-                      const SizedBox(height: 15),
-                      _buildDivider(),
-                      // const SizedBox(height: 15),
-                      // const BuildInfoRow(
-                      //     label: 'Payment Method', value: 'Fees'),
-                      // const SizedBox(height: 15),
-                      // _buildDivider(),
-                      const SizedBox(height: 15),
-                      const BuildInfoRow(label: 'Status', value: 'Successful'),
-                      const SizedBox(height: 15),
-                      _buildDivider(),
-                      const SizedBox(height: 15),
-                      BuildInfoRow(
-                          label: 'Transaction Id',
-                          value: transactionResponse.transactionId ?? ""),
-                      const SizedBox(height: 15),
-                      _buildDivider(),
                       const SizedBox(height: 15),
                       AppCustomButton(
                         onPressed: () {

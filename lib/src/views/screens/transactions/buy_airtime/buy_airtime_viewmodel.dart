@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/core/utilities/general_util.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/custom/custom_amount_input_field.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_pin/transaction_pin_view.dart';
@@ -16,6 +17,26 @@ class BuyAirtimeViewModel extends BaseViewModel {
   String selectedValue = 'Airtel';
   int selectedAmountIndex = 7;
   bool buyingAirtime = false;
+  bool isLoadingWalletBalance = false;
+  String walletBalance = "0.0";
+
+  void init() async {
+    await getWalletBalance();
+  }
+
+  Future<void> getWalletBalance() async {
+    isLoadingWalletBalance = true;
+    notifyListeners();
+    final res = await businessRepo.getWalletBalance();
+    if (res.success) {
+      log(res.data.toString());
+      walletBalance = res.data!.toDouble().toStringAsFixed(2);
+      notifyListeners();
+      isLoadingWalletBalance = false;
+      notifyListeners();
+    }
+    notifyListeners();
+  }
 
   List<String> dropdownItems = ['Airtel', 'MTN', 'Glo', '9Mobile'];
 
@@ -49,6 +70,7 @@ class BuyAirtimeViewModel extends BaseViewModel {
     bottomSheetService.show(
       TransactionPinView(
         onPinComplete: (val) async {
+          navigationService.pop();
           buyingAirtime = true;
           notifyListeners();
           final res = await confirmPin(val!);
@@ -63,19 +85,26 @@ class BuyAirtimeViewModel extends BaseViewModel {
   }
 
   Future<void> onBuyAirtime() async {
-    log(amountController.text);
-    final res = await bankRepo.buyAirtime(
-      amount: int.parse(decomposeAmount(amountController.text)),
-      number: int.parse(phoneNumberController.text),
-      network: selectedValue.toLowerCase(),
+    final sufficuentBalance = compareAmounts(
+      accountBalance: 0.0,
+      inputAmount: amountController.text,
     );
-    if (res.success) {
-      navigationService.pushAndRemoveUntil(
-        AirtimeSuccessPage(res: res.data!),
-      );
-      snackbarService.success(message: res.message!);
+    if (sufficuentBalance) {
+      snackbarService.error(message: "Insufficient balance");
     } else {
-      snackbarService.error(message: res.message!);
+      final res = await bankRepo.buyAirtime(
+        amount: int.parse(decomposeAmount(amountController.text)),
+        number: int.parse(phoneNumberController.text),
+        network: selectedValue.toLowerCase(),
+      );
+      if (res.success) {
+        navigationService.pushAndRemoveUntil(
+          AirtimeSuccessPage(res: res.data!),
+        );
+        snackbarService.success(message: res.message!);
+      } else {
+        snackbarService.error(message: res.message!);
+      }
     }
   }
 }

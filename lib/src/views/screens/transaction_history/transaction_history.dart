@@ -27,13 +27,35 @@ class TransactionHistoryScreen extends StatelessWidget {
               style: sans(color: AppColors.lightGreen),
             ),
           ),
-          body: Column(
-            children: [
-              //const BuildCardWidget(),
-              BuildTransactionList(
+          body: Builder(
+            builder: (context) {
+              if (model.isLoadingTransaction) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.lightGreen,
+                  ),
+                );
+              }
+              if (model.isTransactionError) {
+                return Center(
+                  child: Text(
+                    "An error occured while fetching transactions",
+                    style: sans(color: AppColors.lightGreen),
+                  ),
+                );
+              }
+              if (model.transactionList.isEmpty) {
+                return Center(
+                  child: Text(
+                    "No Transaction Found",
+                    style: sans(color: AppColors.lightGreen),
+                  ),
+                );
+              }
+              return BuildTransactionList(
                 model: model,
-              ),
-            ],
+              );
+            },
           ),
         );
       },

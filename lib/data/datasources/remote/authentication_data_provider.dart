@@ -75,13 +75,28 @@ class AuthenticationDataProvider {
     required String code,
   }) async {
     try {
-      final firstLogin = appGlobals.user?.isFirstLogin ?? false;
-      log(firstLogin.toString());
-      final res = await _apiService.post(
+      final res = await _apiService.post("/validate_pin", data: {"pin": code});
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = res["message"];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
 
-          ///firstLogin ? "/set_passcode" : '/validate_passcode',
-          "/validate_pin",
-          data: {"pin": code});
+  Future<ApiResponse<String>> resetPassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    try {
+      final res = await _apiService.post(
+        "/reset_password",
+        data: {
+          "old_password": oldPassword,
+          "new_password": newPassword,
+        },
+      );
       return ApiResponse.fromJson(res)
         ..success = true
         ..message = "Success"

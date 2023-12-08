@@ -52,4 +52,14 @@ class AuthRepo {
   Future<ApiResponse<bool>> validatePin(String pin) {
     return _authApi.validatePin(code: pin);
   }
+
+  Future<ApiResponse<String>> resetPassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    return _authApi.resetPassword(
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    );
+  }
 }

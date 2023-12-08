@@ -4,6 +4,7 @@ import 'package:stacked/stacked.dart';
 
 class TransactionHistoryViewModel extends BaseViewModel {
   bool isLoadingTransaction = false;
+  bool isTransactionError = false;
   List<TransactionResponse> transactionList = [];
 
   Future<void> init() async {
@@ -15,8 +16,13 @@ class TransactionHistoryViewModel extends BaseViewModel {
     notifyListeners();
     final response = await transactionRepo.getTransactionList();
     if (response.success) {
+      isLoadingTransaction = false;
+      notifyListeners();
       transactionList = response.data!;
     } else {
+      isTransactionError = true;
+      isLoadingTransaction = false;
+      notifyListeners();
       snackbarService.error(message: response.message!);
     }
     setBusy(false);

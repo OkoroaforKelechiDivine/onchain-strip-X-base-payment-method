@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/bank_response.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/beneficiary_detail_response.dart';
-import 'package:pay_me_mobile/data/utilities/file_util.dart';
+import 'package:pay_me_mobile/core/utilities/file_util.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/components/account_number.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/components/account_number_error.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/components/next_button.dart';

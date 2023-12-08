@@ -40,6 +40,10 @@ class PasscodeViewModel extends BaseViewModel {
           navigationService.pushAndRemoveUntil(const BottomNav());
           isProcessing = false;
           notifyListeners();
+        } else {
+          snackbarService.error(message: "Incorrect Passcode");
+          isProcessing = false;
+          notifyListeners();
         }
       } else {
         isProcessing = false;

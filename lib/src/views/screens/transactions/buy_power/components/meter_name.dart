@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/custom/custom_amount_input_field.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/buy_power_view_model.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/components/provider_text_field.dart';
@@ -84,8 +85,8 @@ class BuildMeterName extends StatelessWidget {
         ),
 
         //const BuildElectricityProviderTextField(),
-        //const SizedBox(height: 24),
-        const Row(
+        const SizedBox(height: 24),
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -97,7 +98,8 @@ class BuildMeterName extends StatelessWidget {
               ),
             ),
             Text(
-              'Balance: NGN7,361.87',
+              "Balance: ₦ ${viewModel.isLoadingWalletBalance ? "N/A" : formatBalance(double.parse(viewModel.walletBalance))}",
+              //'Balance: NGN7,361.87',
               style: TextStyle(
                 fontSize: AppFontSize.size12,
                 color: AppColors.lightBlack,

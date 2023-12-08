@@ -14,7 +14,7 @@ class BuildBalanceSection extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Balance: ₦ ${formatBalance(model.balance)}",
+          "Balance: ₦ ${model.isLoadingWalletBalance ? "N/A" : formatBalance(double.parse(model.walletBalance))}",
           style: const TextStyle(
               fontSize: AppFontSize.size20,
               color: AppColors.lightBlack,

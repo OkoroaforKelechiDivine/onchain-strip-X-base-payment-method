@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/custom/custom_amount_input_field.dart';
 import 'package:pay_me_mobile/src/views/screens/tv/components/package.dart';
 import 'package:pay_me_mobile/src/views/screens/tv/components/service_providers.dart';
@@ -20,6 +21,9 @@ class _CableTvScreenState extends State<CableTvScreen> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
+      onViewModelReady: (viewModel) {
+        viewModel.init();
+      },
       viewModelBuilder: () => TvCableViewModel(),
       builder: (context, viewModel, child) {
         return Scaffold(
@@ -50,7 +54,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
                     model: viewModel,
                   ),
                   const SizedBox(height: 24),
-                  AppText(
+                  const AppText(
                     "Decoder Number",
                     color: AppColors.lightBlack,
                     fontWeight: AppFontWeight.bold,
@@ -67,7 +71,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
                   ),
                   //BuildTvProviderTextField(),
                   const SizedBox(height: 16),
-                  Text(
+                  const Text(
                     "Phone Number",
                     style: TextStyle(
                       color: AppColors.lightBlack,
@@ -85,10 +89,10 @@ class _CableTvScreenState extends State<CableTvScreen> {
                     padding: const EdgeInsets.all(18),
                   ),
                   const SizedBox(height: 24),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Amount',
                         style: TextStyle(
                           fontSize: AppFontSize.size16,
@@ -97,8 +101,8 @@ class _CableTvScreenState extends State<CableTvScreen> {
                         ),
                       ),
                       Text(
-                        'Balance: NGN7,361.87',
-                        style: TextStyle(
+                        "Balance: ₦${viewModel.isLoadingWalletBalance ? "N/A" : formatBalance(double.parse(viewModel.walletBalance))}",
+                        style: const TextStyle(
                           fontSize: AppFontSize.size16,
                           color: AppColors.lightBlack,
                           fontWeight: AppFontWeight.bold,

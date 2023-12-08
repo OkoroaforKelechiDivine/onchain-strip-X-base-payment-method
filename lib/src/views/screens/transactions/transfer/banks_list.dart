@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/widgets/app_text.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/bank_response.dart';
-import 'package:pay_me_mobile/data/utilities/file_util.dart';
+import 'package:pay_me_mobile/core/utilities/file_util.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_viewmmodel.dart';
 
 import '../../../../../core/cores.dart';
@@ -27,78 +27,83 @@ class BankList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 15,
-          ),
-          child: Column(
-            children: [
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                      onTap: () {
-                        onBack();
-                      },
-                      child: const Icon(Icons.arrow_back_ios)),
-                  const Spacer(),
-                  const AppText(
-                    'Select Bank',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  const Spacer(),
-                ],
-              ),
-              isLoading
-                  ? const Expanded(
-                      child: Center(child: CircularProgressIndicator()))
-                  : bankList == null
-                      ? const AppText("Unable to Fetch Banks. Please Reload")
-                      : Expanded(
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 20),
-                              AppCustomTextField(
-                                textEditingController: model.searchController,
-                                prefixIcon: const Icon(CupertinoIcons.search),
-                                hintText: 'Search Bank',
-                                onChanged: (value) {
-                                  model.onSearchBank(value);
-                                },
-                              ),
-                              //const SizedBox(height: 20),
-                              Expanded(
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: model.filteredBanks.length,
-                                  itemBuilder: (context, index) {
-                                    final bank = model.filteredBanks[index];
-                                    return ListTile(
-                                      //I want a circularavatar here
-                                      leading: bank.logo.isNotEmpty
-                                          ? CircleAvatar(
-                                              backgroundImage: MemoryImage(
-                                                processImage(bank.logo),
-                                              ),
-                                            )
-                                          : const CircleAvatar(
-                                              child: Icon(Icons.food_bank),
-                                            ),
-                                      title: AppText(bank.name),
-                                      onTap: () {
-                                        onSelectBank(bank);
-                                      },
-                                    );
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await model.getBankList();
+        },
+        child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 15,
+            ),
+            child: Column(
+              children: [
+                const SizedBox(height: 50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          onBack();
+                        },
+                        child: const Icon(Icons.arrow_back_ios)),
+                    const Spacer(),
+                    const AppText(
+                      'Select Bank',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    const Spacer(),
+                  ],
+                ),
+                isLoading
+                    ? const Expanded(
+                        child: Center(child: CircularProgressIndicator()))
+                    : bankList == null
+                        ? const AppText("Unable to Fetch Banks. Please Reload")
+                        : Expanded(
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 20),
+                                AppCustomTextField(
+                                  textEditingController: model.searchController,
+                                  prefixIcon: const Icon(CupertinoIcons.search),
+                                  hintText: 'Search Bank',
+                                  onChanged: (value) {
+                                    model.onSearchBank(value);
                                   },
                                 ),
-                              ),
-                            ],
+                                //const SizedBox(height: 20),
+                                Expanded(
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: model.filteredBanks.length,
+                                    itemBuilder: (context, index) {
+                                      final bank = model.filteredBanks[index];
+                                      return ListTile(
+                                        //I want a circularavatar here
+                                        leading: bank.logo.isNotEmpty
+                                            ? CircleAvatar(
+                                                backgroundImage: MemoryImage(
+                                                  processImage(bank.logo),
+                                                ),
+                                              )
+                                            : const CircleAvatar(
+                                                child: Icon(Icons.food_bank),
+                                              ),
+                                        title: AppText(bank.name),
+                                        onTap: () {
+                                          onSelectBank(bank);
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-            ],
-          )),
+              ],
+            )),
+      ),
     );
   }
 }

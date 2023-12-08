@@ -22,87 +22,85 @@ class BuildTransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 15.0, right: 10.0),
-        child: ListView.separated(
-          itemBuilder: (context, index) {
-            final bank = model.transactionList[index];
-            final isDebit = bank.transactionType! == "Outflow" ||
-                bank.transactionType! == "Airtime";
-            return GestureDetector(
-              onTap: () {
-                navigationService
-                    .push(TransactionDetailsScreen(transactionResponse: bank));
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(0),
-                  child: Container(
-                    color: AppColors.lightBlue,
-                    child: ListTile(
-                      leading: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: isDebit
-                                ? const Color.fromARGB(255, 82, 10, 10)
-                                : AppColors.lightGreen,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: Icon(
-                            Icons.money,
-                            color: Colors.white,
-                          )),
-                      title: Text(
-                        bank.transactionType! == "Outflow" ||
-                                bank.transactionType! == "Airtime"
-                            ? "Sent"
-                            : "Received",
-                        style: TextStyle(
-                          fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-                          fontWeight: AppFontWeight.bold,
-                          fontSize: AppFontSize.size14,
+    return Padding(
+      padding: const EdgeInsets.only(left: 15.0, right: 10.0),
+      child: ListView.separated(
+        itemBuilder: (context, index) {
+          final bank = model.transactionList[index];
+          final isDebit = bank.transactionType! == "Outflow" ||
+              bank.transactionType! == "Airtime";
+          return GestureDetector(
+            onTap: () {
+              navigationService
+                  .push(TransactionDetailsScreen(transactionResponse: bank));
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(0),
+                child: Container(
+                  color: AppColors.lightBlue,
+                  child: ListTile(
+                    leading: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: isDebit
+                              ? const Color.fromARGB(255, 82, 10, 10)
+                              : AppColors.lightGreen,
+                          borderRadius: BorderRadius.circular(100),
                         ),
+                        child: Icon(
+                          Icons.money,
+                          color: Colors.white,
+                        )),
+                    title: Text(
+                      bank.transactionType! == "Outflow" ||
+                              bank.transactionType! == "Airtime"
+                          ? "Sent"
+                          : "Received",
+                      style: TextStyle(
+                        fontFamily: GoogleFonts.alegreyaSans().fontFamily,
+                        fontWeight: AppFontWeight.bold,
+                        fontSize: AppFontSize.size14,
                       ),
-                      subtitle: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            formatTimestamp(DateTime.now()),
-                            style: const TextStyle(
-                              color: AppColors.lightBlack,
-                              fontWeight: AppFontWeight.light,
-                              fontSize: AppFontSize.size14,
-                            ),
+                    ),
+                    subtitle: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          formatTimestamp(DateTime.now()),
+                          style: const TextStyle(
+                            color: AppColors.lightBlack,
+                            fontWeight: AppFontWeight.light,
+                            fontSize: AppFontSize.size14,
                           ),
-                          Text(
-                            bank.transactionType! == "Outflow" ||
+                        ),
+                        Text(
+                          bank.transactionType! == "Outflow" ||
+                                  bank.transactionType! == "Airtime"
+                              ? "- #${formatBalance(bank.amount!.toDouble())}"
+                              : "+ #${formatBalance(bank.amount!.toDouble())}",
+                          style: TextStyle(
+                            color: bank.transactionType! == "Outflow" ||
                                     bank.transactionType! == "Airtime"
-                                ? "- #${formatBalance(bank.amount!.toDouble())}"
-                                : "+ #${formatBalance(bank.amount!.toDouble())}",
-                            style: TextStyle(
-                              color: bank.transactionType! == "Outflow" ||
-                                      bank.transactionType! == "Airtime"
-                                  ? AppColors.transRed
-                                  : AppColors.lightGreen,
-                              fontWeight: AppFontWeight.bold,
-                              fontSize: AppFontSize.size14,
-                            ),
+                                ? AppColors.transRed
+                                : AppColors.lightGreen,
+                            fontWeight: AppFontWeight.bold,
+                            fontSize: AppFontSize.size14,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
-            );
-          },
-          separatorBuilder: (context, index) {
-            return const SizedBox(height: 10);
-          },
-          itemCount: model.transactionList.length,
-        ),
+            ),
+          );
+        },
+        separatorBuilder: (context, index) {
+          return const SizedBox(height: 10);
+        },
+        itemCount: model.transactionList.length,
       ),
     );
   }

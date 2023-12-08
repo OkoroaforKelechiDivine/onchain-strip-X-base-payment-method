@@ -4,8 +4,9 @@ import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/buy_air
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/buy_power_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/home/home_page_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history.dart';
+import 'package:stacked/stacked.dart';
 
-class BottomNavViewModel extends ChangeNotifier {
+class BottomNavViewModel extends BaseViewModel {
   int _currentIndex = 0;
   int get currentIndex => _currentIndex;
   set setCurrentIndex(int value) {

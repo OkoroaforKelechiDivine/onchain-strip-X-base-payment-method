@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/widgets/user_icon.dart';
 import 'package:pay_me_mobile/data/datasources/local/base/local_storage_service.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/login_screen.dart';
+import 'package:pay_me_mobile/src/views/screens/settings_page/change_password/change_password.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/settings_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -78,7 +79,9 @@ class SettingsPage extends StatelessWidget {
                       singleItem(
                         icon: Icons.pin,
                         text: 'Change Passcode',
-                        onTap: () async {},
+                        onTap: () async {
+                          navigationService.push(const ChangePasswordScreen());
+                        },
                       ),
                       singleItem(
                         icon: Icons.device_hub,
@@ -153,7 +156,7 @@ Widget singleItem(
   return GestureDetector(
     onTap: onTap,
     child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
