@@ -16,7 +16,7 @@ class ReportTransactionViewModel extends BaseViewModel {
     notifyListeners();
     final res = await ticketRepo.createTicket(param: param);
     if (res.success) {
-      snackbarService.success(message: res.message!);
+      snackbarService.success(message: "Successfully reported");
     } else {
       snackbarService.error(message: res.message!);
     }

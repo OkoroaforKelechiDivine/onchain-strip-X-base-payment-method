@@ -21,10 +21,10 @@ class InflowDetails extends StatelessWidget {
               value: transactionResponse.originatorAccountName),
           const SizedBox(height: 10),
           buildDivider(),
-          const SizedBox(height: 10),
-          BuildInfoRow(
-              label: 'From', value: transactionResponse.originatorBank),
-          buildDivider(),
+          // const SizedBox(height: 10),
+          // BuildInfoRow(
+          //     label: 'From', value: transactionResponse.originatorBank),
+          // buildDivider(),
           const SizedBox(height: 15),
           BuildInfoRow(
               label: 'Description',
@@ -33,7 +33,7 @@ class InflowDetails extends StatelessWidget {
           buildDivider(),
           const SizedBox(height: 15),
           BuildInfoRow(
-            label: 'Outward Transfer',
+            label: 'Inward Transfer',
             value: "#${formatBalance(transactionResponse.amount.toDouble())}",
           ),
           const SizedBox(height: 15),

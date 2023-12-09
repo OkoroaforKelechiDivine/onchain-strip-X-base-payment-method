@@ -12,11 +12,11 @@ class PasscodeViewModel extends BaseViewModel {
   bool isError = false;
 
   Future<void> onPassCode() async {
-    //final firstLogin = appGlobals.user?.isFirstLogin ?? false;
+    final firstLogin = appGlobals.user?.isFirstLogin ?? false;
     isProcessing = true;
     notifyListeners();
 
-    if (false) {
+    if (firstLogin) {
       final res = await authRepo.setPascode(
         code: pinController.text,
       );

@@ -67,44 +67,46 @@ class BuyAirtimeViewModel extends BaseViewModel {
   }
 
   void buyAirtime() {
-    bottomSheetService.show(
-      TransactionPinView(
-        onPinComplete: (val) async {
-          navigationService.pop();
-          buyingAirtime = true;
-          notifyListeners();
-          final res = await confirmPin(val!);
-          if (res) {
-            await onBuyAirtime();
-          }
-          buyingAirtime = false;
-          notifyListeners();
-        },
-      ),
-    );
-  }
-
-  Future<void> onBuyAirtime() async {
     final sufficuentBalance = compareAmounts(
-      accountBalance: 0.0,
+      accountBalance: double.parse(walletBalance),
       inputAmount: amountController.text,
     );
+    log(amountController.text);
+    log(walletBalance);
     if (sufficuentBalance) {
       snackbarService.error(message: "Insufficient balance");
     } else {
-      final res = await bankRepo.buyAirtime(
-        amount: int.parse(decomposeAmount(amountController.text)),
-        number: int.parse(phoneNumberController.text),
-        network: selectedValue.toLowerCase(),
+      bottomSheetService.show(
+        TransactionPinView(
+          onPinComplete: (val) async {
+            navigationService.pop();
+            buyingAirtime = true;
+            notifyListeners();
+            final res = await confirmPin(val!);
+            if (res) {
+              await onBuyAirtime();
+            }
+            buyingAirtime = false;
+            notifyListeners();
+          },
+        ),
       );
-      if (res.success) {
-        navigationService.pushAndRemoveUntil(
-          AirtimeSuccessPage(res: res.data!),
-        );
-        snackbarService.success(message: res.message!);
-      } else {
-        snackbarService.error(message: res.message!);
-      }
+    }
+  }
+
+  Future<void> onBuyAirtime() async {
+    final res = await bankRepo.buyAirtime(
+      amount: int.parse(decomposeAmount(amountController.text)),
+      number: int.parse(phoneNumberController.text),
+      network: selectedValue.toLowerCase(),
+    );
+    if (res.success) {
+      navigationService.pushAndRemoveUntil(
+        AirtimeSuccessPage(res: res.data!),
+      );
+      snackbarService.success(message: res.message!);
+    } else {
+      snackbarService.error(message: res.message!);
     }
   }
 }

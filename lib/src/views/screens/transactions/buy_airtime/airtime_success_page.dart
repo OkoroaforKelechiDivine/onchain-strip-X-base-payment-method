@@ -18,7 +18,7 @@ class AirtimeSuccessPage extends StatelessWidget {
         children: [
           Icon(
             res.responseDescription == "TRANSACTION FAILED"
-                ? Icons.stop_circle
+                ? Icons.error
                 : Icons.check_circle,
             color: AppColors.lightGreen,
             size: 200,

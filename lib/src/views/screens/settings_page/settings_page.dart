@@ -4,7 +4,10 @@ import 'package:pay_me_mobile/core/widgets/user_icon.dart';
 import 'package:pay_me_mobile/data/datasources/local/base/local_storage_service.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/login_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/change_password/change_password.dart';
+import 'package:pay_me_mobile/src/views/screens/settings_page/request_pos/request_for_pos_screen.dart';
+import 'package:pay_me_mobile/src/views/screens/settings_page/set_transaction_pin/set_transaction_pin_page.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/settings_viewmodel.dart';
+import 'package:pay_me_mobile/src/views/screens/settings_page/update_passcode/update_passcode_page.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../../core/cores.dart';
@@ -69,24 +72,30 @@ class SettingsPage extends StatelessWidget {
                       singleItem(
                         icon: Icons.payment,
                         text: 'Set Transaction pin',
-                        onTap: () async {},
+                        onTap: () async {
+                          navigationService.push(const SetTransactionPinPage());
+                        },
                       ),
                       singleItem(
                         icon: Icons.password,
                         text: 'Change Password',
-                        onTap: () async {},
-                      ),
-                      singleItem(
-                        icon: Icons.pin,
-                        text: 'Change Passcode',
                         onTap: () async {
                           navigationService.push(const ChangePasswordScreen());
                         },
                       ),
                       singleItem(
+                        icon: Icons.pin,
+                        text: 'Change Passcode',
+                        onTap: () async {
+                          navigationService.push(const UpdatePasscodePage());
+                        },
+                      ),
+                      singleItem(
                         icon: Icons.device_hub,
                         text: 'Request for POS Device',
-                        onTap: () async {},
+                        onTap: () async {
+                          navigationService.push(const RequestForPOSPage());
+                        },
                       ),
                     ],
                   ),

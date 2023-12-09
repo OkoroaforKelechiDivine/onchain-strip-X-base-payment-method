@@ -3,6 +3,7 @@ import 'package:pay_me_mobile/data/datasources/remote/base/api_response.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_service.dart';
 import 'package:pay_me_mobile/data/model/params/bank_transfer_param.dart';
 import 'package:pay_me_mobile/data/model/params/buy_power_param.dart';
+import 'package:pay_me_mobile/data/model/params/tv_param.dart';
 import 'package:pay_me_mobile/data/model/params/verify_meter_paam.dart';
 import 'package:pay_me_mobile/data/model/response/power/buy_power_response.dart';
 import 'package:pay_me_mobile/data/model/response/power/verify_meter_response.dart';
@@ -11,6 +12,9 @@ import 'package:pay_me_mobile/data/model/response/transaction_response/bank_tran
 import 'package:pay_me_mobile/data/model/response/transaction_response/beneficiary_detail_response.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/buy_airtime_response.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/sender_detail_response.dart';
+import 'package:pay_me_mobile/data/model/response/tv_cable/buy_tv_cable_response.dart';
+import 'package:pay_me_mobile/data/model/response/tv_cable/tv_cable_package_response.dart';
+import 'package:pay_me_mobile/data/model/response/tv_cable/verify_smart_card_response.dart';
 
 class BankApi {
   final _apiService = ApiService(path: '/api');
@@ -132,6 +136,62 @@ class BankApi {
         ..success = true
         ..message = "Success"
         ..data = VerifyMeterResponse.fromJson(res);
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
+  //API FoR TV CABLE
+  Future<ApiResponse<List<TvCablePackageResponse>?>> getTvCablePackages(
+      {required String service}) async {
+    try {
+      final res = await _apiService.get(
+        "/get_variant_code",
+        queryParams: {
+          "serviceID": service,
+        },
+      );
+      return ApiResponse.fromJson(res)
+        ..data = (res['content']["varations"] as List)
+            .map((e) => TvCablePackageResponse.fromJson(e))
+            .toList();
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
+  Future<ApiResponse<VerifySmartCardResponse>> verifySmarcardNumber({
+    required int billersCode,
+    required String serviceID,
+  }) async {
+    try {
+      final res = await _apiService.post(
+        "/verify_card_number",
+        data: {
+          "billersCode": billersCode,
+          "serviceID": serviceID,
+        },
+      );
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = VerifySmartCardResponse.fromJson(res["content"]);
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
+  Future<ApiResponse<TvCableResponse>> buyTvCable(
+      {required TvCableParam param}) async {
+    try {
+      final res = await _apiService.post(
+        "/${param.serviceId}",
+        data: param.toJson(),
+      );
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = TvCableResponse.fromJson(res);
     } on ApiFailure catch (e) {
       return ApiResponse(success: false, message: e.message);
     }

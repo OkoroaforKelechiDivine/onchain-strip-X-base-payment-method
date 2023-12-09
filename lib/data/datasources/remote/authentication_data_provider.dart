@@ -105,4 +105,46 @@ class AuthenticationDataProvider {
       return ApiResponse(success: false, message: e.message);
     }
   }
+
+  Future<ApiResponse<String>> updatePasscode({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    try {
+      final res = await _apiService.post(
+        "/update_passcode",
+        data: {
+          "oldPasscode": oldPassword,
+          "newPasscode": newPassword,
+        },
+      );
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = res["message"];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
+  Future<ApiResponse<String>> updatePin({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    try {
+      final res = await _apiService.post(
+        "/update_pin",
+        data: {
+          "oldPin": oldPassword,
+          "newPin": newPassword,
+        },
+      );
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = res["message"];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
 }

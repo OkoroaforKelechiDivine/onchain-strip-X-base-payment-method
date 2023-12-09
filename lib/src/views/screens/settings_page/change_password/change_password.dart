@@ -71,18 +71,18 @@ class ChangePasswordScreen extends StatelessWidget {
                     textEditingController: model.newPasswordController,
                     hintText: "Enter your new password",
                     maxLines: 1,
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        model.toggleNewPasswordVisibility();
-                      },
-                      child: Icon(
-                        model.obscureNewPassword == false
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: Colors.grey,
-                        size: 16.sp,
-                      ),
-                    ),
+                    // suffixIcon: GestureDetector(
+                    //   onTap: () {
+                    //     model.toggleNewPasswordVisibility();
+                    //   },
+                    //   child: Icon(
+                    //     model.obscureNewPassword == false
+                    //         ? Icons.visibility
+                    //         : Icons.visibility_off,
+                    //     color: Colors.grey,
+                    //     size: 16.sp,
+                    //   ),
+                    // ),
                   ),
                   const SizedBox(height: 20),
                   const AppText(
@@ -95,18 +95,18 @@ class ChangePasswordScreen extends StatelessWidget {
                     obscureText: model.obscureConfirmPassword,
                     textEditingController: model.confirmPasswordController,
                     maxLines: 1,
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        model.toggleConfirmPasswordVisibility();
-                      },
-                      child: Icon(
-                        model.obscureConfirmPassword == false
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: Colors.grey,
-                        size: 16.sp,
-                      ),
-                    ),
+                    // suffixIcon: GestureDetector(
+                    //   onTap: () {
+                    //     model.toggleConfirmPasswordVisibility();
+                    //   },
+                    //   child: Icon(
+                    //     model.obscureConfirmPassword == false
+                    //         ? Icons.visibility
+                    //         : Icons.visibility_off,
+                    //     color: Colors.grey,
+                    //     size: 16.sp,
+                    //   ),
+                    // ),
                     hintText: "Confirm your new password",
                     validator: (value) {
                       if (value != model.newPasswordController.text) {

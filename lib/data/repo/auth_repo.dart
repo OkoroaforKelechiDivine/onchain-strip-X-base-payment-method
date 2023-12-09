@@ -62,4 +62,24 @@ class AuthRepo {
       newPassword: newPassword,
     );
   }
+
+  Future<ApiResponse<String>> updatePasscode({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    return _authApi.updatePasscode(
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    );
+  }
+
+  Future<ApiResponse<String>> updatePin({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    return _authApi.updatePin(
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    );
+  }
 }
