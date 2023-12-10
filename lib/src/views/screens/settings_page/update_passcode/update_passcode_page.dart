@@ -33,150 +33,151 @@ class UpdatePasscodePage extends StatelessWidget {
       viewModelBuilder: () => UpdatePasscodeVM(),
       builder: (context, model, child) {
         return Scaffold(
-            appBar: AppBar(
-              elevation: 0,
-              backgroundColor: Colors.white10,
-              title: Text(
-                'Update Passcode',
-                style: sans(
-                  color: AppColors.lightGreen,
-                  fontSize: AppFontSize.size20,
-                ),
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white10,
+            title: Text(
+              'Update Passcode',
+              style: sans(
+                color: AppColors.lightGreen,
+                fontSize: AppFontSize.size20,
               ),
             ),
-            body: Stack(
-              children: [
-                SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 20),
-                      const AppText(
-                        'Enter Old Transaction Pin',
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      const SizedBox(height: 20),
-                      Center(
-                        child: Pinput(
-                          controller: model.oldPinController,
-                          //focusNode: model.focusNode,
-                          obscureText: true,
-                          length: 6,
-                          defaultPinTheme: defaultPinTheme,
-                          keyboardType: TextInputType.number,
-                          separatorBuilder: (index) => const SizedBox(width: 8),
-                          // validator: (value) {
-                          //   //return value == '2222' ? null : 'Pin is incorrect';
-                          // },
-                          hapticFeedbackType: HapticFeedbackType.lightImpact,
-                          onCompleted: (pin) {
-                            debugPrint('onCompleted: $pin');
-                          },
-                          onChanged: (value) async {
-                            debugPrint('onChanged: $value');
-                            if (value.length == 6) {
-                              // onPinComplete(value);
-                              //await model.onPassCode();
-                            }
-                          },
-                          cursor: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(bottom: 9),
-                                width: 22,
-                                height: 1,
-                                color: focusedBorderColor,
-                              ),
-                            ],
-                          ),
-                          focusedPinTheme: defaultPinTheme.copyWith(
-                            decoration: defaultPinTheme.decoration!.copyWith(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: focusedBorderColor),
+          ),
+          body: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    const AppText(
+                      'Enter Old Transaction Pin',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: Pinput(
+                        controller: model.oldPinController,
+                        //focusNode: model.focusNode,
+                        obscureText: true,
+                        length: 6,
+                        defaultPinTheme: defaultPinTheme,
+                        keyboardType: TextInputType.number,
+                        separatorBuilder: (index) => const SizedBox(width: 8),
+                        // validator: (value) {
+                        //   //return value == '2222' ? null : 'Pin is incorrect';
+                        // },
+                        hapticFeedbackType: HapticFeedbackType.lightImpact,
+                        onCompleted: (pin) {
+                          debugPrint('onCompleted: $pin');
+                        },
+                        onChanged: (value) async {
+                          debugPrint('onChanged: $value');
+                          if (value.length == 6) {
+                            // onPinComplete(value);
+                            //await model.onPassCode();
+                          }
+                        },
+                        cursor: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 9),
+                              width: 22,
+                              height: 1,
+                              color: focusedBorderColor,
                             ),
-                          ),
-                          submittedPinTheme: defaultPinTheme.copyWith(
-                            decoration: defaultPinTheme.decoration!.copyWith(
-                              color: fillColor,
-                              borderRadius: BorderRadius.circular(19),
-                              border: Border.all(color: focusedBorderColor),
-                            ),
-                          ),
-                          errorPinTheme: defaultPinTheme.copyBorderWith(
-                            border: Border.all(color: Colors.redAccent),
+                          ],
+                        ),
+                        focusedPinTheme: defaultPinTheme.copyWith(
+                          decoration: defaultPinTheme.decoration!.copyWith(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: focusedBorderColor),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      const AppText(
-                        'Enter New Transaction Pin',
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      const SizedBox(height: 20),
-                      Center(
-                        child: Pinput(
-                          controller: model.newPinController,
-                          //focusNode: model.newfocusNode,
-                          obscureText: true,
-                          length: 6,
-                          defaultPinTheme: defaultPinTheme,
-                          separatorBuilder: (index) => const SizedBox(width: 8),
-                          // validator: (value) {
-                          //   //return value == '2222' ? null : 'Pin is incorrect';
-                          // },
-                          hapticFeedbackType: HapticFeedbackType.lightImpact,
-                          onCompleted: (pin) {
-                            debugPrint('onCompleted: $pin');
-                          },
-                          onChanged: (value) async {
-                            debugPrint('onChanged: $value');
-                            if (value.length == 6) {
-                              // onPinComplete(value);
-                              await model.onChangePasscode();
-                            }
-                          },
-                          cursor: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(bottom: 9),
-                                width: 22,
-                                height: 1,
-                                color: focusedBorderColor,
-                              ),
-                            ],
-                          ),
-                          focusedPinTheme: defaultPinTheme.copyWith(
-                            decoration: defaultPinTheme.decoration!.copyWith(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: focusedBorderColor),
-                            ),
-                          ),
-                          submittedPinTheme: defaultPinTheme.copyWith(
-                            decoration: defaultPinTheme.decoration!.copyWith(
-                              color: fillColor,
-                              borderRadius: BorderRadius.circular(19),
-                              border: Border.all(color: focusedBorderColor),
-                            ),
-                          ),
-                          errorPinTheme: defaultPinTheme.copyBorderWith(
-                            border: Border.all(color: Colors.redAccent),
+                        submittedPinTheme: defaultPinTheme.copyWith(
+                          decoration: defaultPinTheme.decoration!.copyWith(
+                            color: fillColor,
+                            borderRadius: BorderRadius.circular(19),
+                            border: Border.all(color: focusedBorderColor),
                           ),
                         ),
+                        errorPinTheme: defaultPinTheme.copyBorderWith(
+                          border: Border.all(color: Colors.redAccent),
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 20),
+                    const AppText(
+                      'Enter New Transaction Pin',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: Pinput(
+                        controller: model.newPinController,
+                        //focusNode: model.newfocusNode,
+                        obscureText: true,
+                        length: 6,
+                        defaultPinTheme: defaultPinTheme,
+                        separatorBuilder: (index) => const SizedBox(width: 8),
+                        // validator: (value) {
+                        //   //return value == '2222' ? null : 'Pin is incorrect';
+                        // },
+                        hapticFeedbackType: HapticFeedbackType.lightImpact,
+                        onCompleted: (pin) {
+                          debugPrint('onCompleted: $pin');
+                        },
+                        onChanged: (value) async {
+                          debugPrint('onChanged: $value');
+                          if (value.length == 6) {
+                            // onPinComplete(value);
+                            await model.onChangePasscode();
+                          }
+                        },
+                        cursor: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 9),
+                              width: 22,
+                              height: 1,
+                              color: focusedBorderColor,
+                            ),
+                          ],
+                        ),
+                        focusedPinTheme: defaultPinTheme.copyWith(
+                          decoration: defaultPinTheme.decoration!.copyWith(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: focusedBorderColor),
+                          ),
+                        ),
+                        submittedPinTheme: defaultPinTheme.copyWith(
+                          decoration: defaultPinTheme.decoration!.copyWith(
+                            color: fillColor,
+                            borderRadius: BorderRadius.circular(19),
+                            border: Border.all(color: focusedBorderColor),
+                          ),
+                        ),
+                        errorPinTheme: defaultPinTheme.copyBorderWith(
+                          border: Border.all(color: Colors.redAccent),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Visibility(
-                  visible: model.isProcessing,
-                  child: const Positioned(
-                    child: AppLoader(),
-                  ),
-                )
-              ],
-            ));
+              ),
+              Visibility(
+                visible: model.isProcessing,
+                child: const Positioned(
+                  child: AppLoader(),
+                ),
+              )
+            ],
+          ),
+        );
       },
     );
   }

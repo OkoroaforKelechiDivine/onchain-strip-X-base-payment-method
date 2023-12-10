@@ -111,7 +111,7 @@ class AuthenticationDataProvider {
     required String newPassword,
   }) async {
     try {
-      final res = await _apiService.post(
+      final res = await _apiService.put(
         "/update_passcode",
         data: {
           "oldPasscode": oldPassword,
@@ -132,13 +132,28 @@ class AuthenticationDataProvider {
     required String newPassword,
   }) async {
     try {
-      final res = await _apiService.post(
+      final res = await _apiService.put(
         "/update_pin",
         data: {
           "oldPin": oldPassword,
           "newPin": newPassword,
         },
       );
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = res["message"];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
+  Future<ApiResponse<String>> setTransactionPin({
+    required String code,
+  }) async {
+    try {
+      final res =
+          await _apiService.post("/set_transaction_pin", data: {"pin": code});
       return ApiResponse.fromJson(res)
         ..success = true
         ..message = "Success"

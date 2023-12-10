@@ -82,4 +82,10 @@ class AuthRepo {
       newPassword: newPassword,
     );
   }
+
+  Future<ApiResponse<String>> setTransactionPin({
+    required String code,
+  }) async {
+    return _authApi.setTransactionPin(code: code);
+  }
 }

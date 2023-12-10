@@ -54,6 +54,16 @@ class ApiService {
     }
   }
 
+  Future<dynamic> put(String path, {Object? data}) async {
+    try {
+      final res = await _dio.put(path, data: data);
+      return res.data;
+    } on DioError catch (e) {
+      String errorMessage = e.response?.data["error"] ?? e.message;
+      throw ApiFailure(errorMessage);
+    }
+  }
+
   Future<dynamic> patch(String path, {Object? data}) async {
     try {
       final res = await _dio.patch(path, data: data);

@@ -11,7 +11,7 @@ class UpdateTransactionPinVM extends BaseViewModel {
   bool isProcessing = false;
   bool isError = false;
 
-  Future<void> onChangePasscode() async {
+  Future<void> onChangePin() async {
     isProcessing = true;
     notifyListeners();
     final res = await authRepo.updatePin(
