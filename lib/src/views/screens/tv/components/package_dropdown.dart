@@ -44,12 +44,12 @@ class TvServiceProviderDropdown extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
         ),
-        value: viewModel.selectedElectricityProvider,
+        value: viewModel.selectedTvCableProvider,
         onChanged: (newValue) {
           viewModel.onSelectProvider(newValue);
           //selectedElectricityProvider = newValue;
         },
-        items: viewModel.electricityProviderItems,
+        items: viewModel.tvCableService,
       ),
     );
   }

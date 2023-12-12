@@ -8,6 +8,7 @@ import 'package:pay_me_mobile/src/views/screens/settings_page/request_pos/reques
 import 'package:pay_me_mobile/src/views/screens/settings_page/set_transaction_pin/set_transaction_pin_page.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/settings_viewmodel.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/update_passcode/update_passcode_page.dart';
+import 'package:pay_me_mobile/src/views/screens/settings_page/update_transaction_pin/update_transaction_pin_page.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../../core/cores.dart';
@@ -73,7 +74,7 @@ class SettingsPage extends StatelessWidget {
                         icon: Icons.payment,
                         text: 'Set Transaction pin',
                         onTap: () async {
-                          navigationService.push(const SetTransactionPinPage());
+                          navigationService.push(const UpdateTransactionPinPage());
                         },
                       ),
                       singleItem(

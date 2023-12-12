@@ -20,7 +20,7 @@ class CableTvScreen extends StatefulWidget {
 class _CableTvScreenState extends State<CableTvScreen> {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.reactive(
+    return ViewModelBuilder<TvCableViewModel>.reactive(
       onViewModelReady: (viewModel) {
         viewModel.init();
       },
@@ -68,6 +68,54 @@ class _CableTvScreenState extends State<CableTvScreen> {
                     textInputType: TextInputType.number,
                     maxLength: 10,
                     padding: const EdgeInsets.all(18),
+                    onChanged: (val) {
+                      if (val.length == 10) {
+                        viewModel.onResolveDecoderNumber();
+                      }
+                    },
+                  ),
+                  Visibility(
+                    visible: viewModel.isLoadingSmartCardDetails,
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        color: AppColors.lightGreen.withOpacity(0.1),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          viewModel.verifySmartCardResponse == null
+                              ? const SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    color: AppColors.lightGreen,
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                              : const Icon(
+                                  Icons.check_circle_rounded,
+                                  color: AppColors.lightGreen,
+                                ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              viewModel.verifySmartCardResponse != null
+                                  ? viewModel
+                                      .verifySmartCardResponse!.customerName
+                                  : "Checking account number..",
+                              style: const TextStyle(
+                                color: AppColors.lightGreen,
+                                fontWeight: AppFontWeight.bold,
+                                fontSize: AppFontSize.size14,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   //BuildTvProviderTextField(),
                   const SizedBox(height: 16),
@@ -90,50 +138,39 @@ class _CableTvScreenState extends State<CableTvScreen> {
                   ),
                   const SizedBox(height: 24),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const Text(
-                        'Amount',
-                        style: TextStyle(
-                          fontSize: AppFontSize.size16,
-                          color: AppColors.lightBlack,
-                          fontWeight: AppFontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "Balance: ₦${viewModel.isLoadingWalletBalance ? "N/A" : formatBalance(double.parse(viewModel.walletBalance))}",
-                        style: const TextStyle(
-                          fontSize: AppFontSize.size16,
-                          color: AppColors.lightBlack,
-                          fontWeight: AppFontWeight.bold,
-                        ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Amount: ${viewModel.selectedPackageResponse == null ? "N/A" : formatBalance(double.parse(viewModel.selectedPackageResponse!.variationAmount))}',
+                            style: TextStyle(
+                              fontSize: AppFontSize.size16,
+                              color: AppColors.lightBlack,
+                              fontWeight: AppFontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            "Balance: ₦${viewModel.isLoadingWalletBalance ? "N/A" : formatBalance(double.parse(viewModel.walletBalance))}",
+                            style: const TextStyle(
+                              fontSize: AppFontSize.size16,
+                              color: AppColors.lightBlack,
+                              fontWeight: AppFontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
-                  ),
-                  const SizedBox(height: 10),
-                  AppCustomTextField(
-                    textEditingController: viewModel.amountController,
-                    hintText: 'Enter amount here',
-                    textInputType: TextInputType.number,
-                    padding: const EdgeInsets.all(18),
-                    onChanged: (text) {
-                      String formattedAmount =
-                          AmountFormatter.formatAmount(text);
-                      if (viewModel.amountController.text != formattedAmount) {
-                        viewModel.amountController.value =
-                            viewModel.amountController.value.copyWith(
-                          text: formattedAmount,
-                          selection: TextSelection.collapsed(
-                              offset: formattedAmount.length),
-                        );
-                      }
-                    },
                   ),
                   const SizedBox(height: 24),
                   AppCustomButton(
                     title: 'Next',
+                    loading: viewModel.isLoadingPayment,
                     onPressed: () {
-                      // viewModel.navigateToNextScreen();
+                      viewModel.onBuyTvCable();
                     },
                   )
                 ],

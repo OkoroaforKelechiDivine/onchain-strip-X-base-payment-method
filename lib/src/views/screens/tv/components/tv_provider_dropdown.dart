@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/data/model/response/tv_cable/tv_cable_package_response.dart';
 import 'package:pay_me_mobile/src/views/screens/tv/tv_cable_viewModel.dart';
 
 import '../../../../../app_config/manager/font_manager.dart';
@@ -16,16 +17,8 @@ class BuildTVPackageDropdown extends StatelessWidget {
           color: AppColors.lightGrey,
         ),
         borderRadius: BorderRadius.circular(8),
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: AppColors.lightGrey.withOpacity(0.1),
-        //     spreadRadius: 5,
-        //     blurRadius: 7,
-        //     offset: const Offset(0, 3),
-        //   ),
-        // ],
       ),
-      child: DropdownButtonFormField<String>(
+      child: DropdownButtonFormField<TvCablePackageResponse>(
         decoration: InputDecoration(
           hintText: "Choose Package",
           hintStyle: const TextStyle(
@@ -41,7 +34,7 @@ class BuildTVPackageDropdown extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
         ),
-        value: model.selectedPackage,
+        value: model.selectedPackageResponse,
         onChanged: (newValue) {
           model.onSelectPackage(newValue);
         },
