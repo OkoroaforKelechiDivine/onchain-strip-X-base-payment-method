@@ -170,7 +170,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
                     title: 'Next',
                     loading: viewModel.isLoadingPayment,
                     onPressed: () {
-                      viewModel.onBuyTvCable();
+                      viewModel.buyCable();
                     },
                   )
                 ],

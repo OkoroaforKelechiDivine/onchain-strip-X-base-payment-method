@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/core/utilities/general_util.dart';
 import 'package:pay_me_mobile/data/model/params/tv_param.dart';
 import 'package:pay_me_mobile/data/model/response/tv_cable/buy_tv_cable_response.dart';
 import 'package:pay_me_mobile/data/model/response/tv_cable/tv_cable_package_response.dart';
 import 'package:pay_me_mobile/data/model/response/tv_cable/verify_smart_card_response.dart';
+import 'package:pay_me_mobile/src/views/screens/transaction_pin/transaction_pin_view.dart';
 import 'package:pay_me_mobile/src/views/screens/tv/tv_cable_success.dart';
 import 'package:stacked/stacked.dart';
 
@@ -133,8 +135,6 @@ class TvCableViewModel extends BaseViewModel {
       ),
     );
     if (res.success) {
-      isLoadingPayment = false;
-      notifyListeners();
       tvCableResponse = res.data;
       if (tvCableResponse != null) {
         navigationService
@@ -145,6 +145,47 @@ class TvCableViewModel extends BaseViewModel {
       isLoadingPayment = false;
       notifyListeners();
       snackbarService.error(message: "Unable to make payment");
+    }
+  }
+
+  Future<bool> confirmPin(String pin) async {
+    final res = await authRepo.validatePin(pin);
+    if (res.success) {
+      if (res.data!) {
+        return true;
+      } else {
+        snackbarService.error(message: "Invalid pin");
+        return false;
+      }
+    } else {
+      snackbarService.error(message: res.message!);
+      return false;
+    }
+  }
+
+  Future<void> buyCable() async {
+    final sufficuentBalance = double.parse(walletBalance) <
+        double.parse(selectedPackageResponse!.variationAmount);
+    log("From VM: ${double.parse(selectedPackageResponse!.variationAmount)}");
+    log(walletBalance);
+    if (sufficuentBalance) {
+      snackbarService.error(message: "Insufficient balance");
+    } else {
+      bottomSheetService.show(
+        TransactionPinView(
+          onPinComplete: (val) async {
+            navigationService.pop();
+            isLoadingPayment = true;
+            notifyListeners();
+            final res = await confirmPin(val!);
+            if (res) {
+              await onBuyTvCable();
+            }
+            isLoadingPayment = false;
+            notifyListeners();
+          },
+        ),
+      );
     }
   }
 }

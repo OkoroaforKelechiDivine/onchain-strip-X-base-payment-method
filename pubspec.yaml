@@ -33,12 +33,21 @@ dependencies:
   flutter_svg: ^1.1.5
   jwt_decoder: ^2.0.1
   loading_animation_widget: ^1.2.0+4
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+          image_path: "assets/png/appIcon.png" 
+          android: true
+          ios: true
+          # optionally, as transparency is not allowed on app store
+          remove_alpha_ios: true
 
 flutter:
   uses-material-design: true
