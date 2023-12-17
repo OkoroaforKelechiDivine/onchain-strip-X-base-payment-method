@@ -19,6 +19,7 @@ class TransactionHistoryViewModel extends BaseViewModel {
       isLoadingTransaction = false;
       notifyListeners();
       transactionList = response.data!;
+      transactionList = transactionList.reversed.toList();
     } else {
       isTransactionError = true;
       isLoadingTransaction = false;

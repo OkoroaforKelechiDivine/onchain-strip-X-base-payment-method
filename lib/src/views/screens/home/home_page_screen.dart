@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pay_me_mobile/core/utilities/permission.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/views/screens/home/add_money_view.dart';
 import 'package:pay_me_mobile/src/views/screens/home/home_viewmodel.dart';
@@ -115,7 +118,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   color: AppColors.deepWhite,
                                 ),
                                 onPressed: () {
-                                  model.onToggleVisibility();
+                                  log(Permissions()
+                                      .canUserViewBalance()
+                                      .toString());
+                                  if (Permissions().canUserViewBalance()) {
+                                    model.onToggleVisibility();
+                                  } else {
+                                    snackbarService.error(
+                                        message:
+                                            "Can't Perform this Operation");
+                                  }
                                 },
                               ),
                             ],

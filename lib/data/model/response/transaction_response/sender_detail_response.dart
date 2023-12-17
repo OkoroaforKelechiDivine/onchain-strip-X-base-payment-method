@@ -7,11 +7,11 @@ class SenderDetailsResponse {
   final String savingsProductName;
 
   SenderDetailsResponse({
-    this.accountNo = "1001589285",
+    this.accountNo = "1028912299",
     this.accountBalance = "1000000.000000",
-    this.accountId = "158928",
-    this.client = "PayMe",
-    this.clientId = "142713",
+    this.accountId = "2891229",
+    this.client = "SYSTEMSHIFT LIMITED",
+    this.clientId = "2751911",
     this.savingsProductName = "Corporate Current Account",
   });
 
@@ -34,3 +34,4 @@ class SenderDetailsResponse {
         "savingsProductName": savingsProductName,
       };
 }
+//1030143634

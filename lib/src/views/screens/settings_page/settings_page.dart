@@ -74,7 +74,7 @@ class SettingsPage extends StatelessWidget {
                         icon: Icons.payment,
                         text: 'Set Transaction pin',
                         onTap: () async {
-                          navigationService.push(const UpdateTransactionPinPage());
+                          navigationService.push(const SetTransactionPinPage());
                         },
                       ),
                       singleItem(

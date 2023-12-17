@@ -83,8 +83,11 @@ class BuildRecipientCard extends StatelessWidget {
                       child: Row(
                         children: [
                           selectedBank != null && selectedBank!.logo.isNotEmpty
-                              ? Image.memory(processImage(selectedBank!.logo),
-                                  width: 30, height: 30)
+                              ? const CircleAvatar(
+                                  child: Icon(Icons.food_bank),
+                                )
+                              // ? Image.memory(processImage(selectedBank!.logo),
+                              //     width: 30, height: 30)
                               : Container(),
                           const SizedBox(width: 8),
                           Expanded(

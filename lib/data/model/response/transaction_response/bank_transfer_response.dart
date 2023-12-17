@@ -1,14 +1,14 @@
 class BankTransferResponse {
-  final int amount;
-  final String txnId;
-  final String sessionId;
-  final String reference;
+  final int? amount;
+  final String? txnId;
+  final String? sessionId;
+  final String? reference;
 
   BankTransferResponse({
-    required this.amount,
-    required this.txnId,
-    required this.sessionId,
-    required this.reference,
+    this.amount,
+    this.txnId,
+    this.sessionId,
+    this.reference,
   });
 
   factory BankTransferResponse.fromJson(Map<String, dynamic> json) =>

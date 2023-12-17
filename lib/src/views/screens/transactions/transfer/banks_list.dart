@@ -82,10 +82,8 @@ class BankList extends StatelessWidget {
                                       return ListTile(
                                         //I want a circularavatar here
                                         leading: bank.logo.isNotEmpty
-                                            ? CircleAvatar(
-                                                backgroundImage: MemoryImage(
-                                                  processImage(bank.logo),
-                                                ),
+                                            ? const CircleAvatar(
+                                                child: Icon(Icons.food_bank),
                                               )
                                             : const CircleAvatar(
                                                 child: Icon(Icons.food_bank),
@@ -107,3 +105,8 @@ class BankList extends StatelessWidget {
     );
   }
 }
+// CircleAvatar(
+//                                                 backgroundImage: MemoryImage(
+//                                                   processImage(bank.logo),
+//                                                 ),
+//                                               )
