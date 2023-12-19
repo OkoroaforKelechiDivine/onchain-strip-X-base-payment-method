@@ -88,4 +88,19 @@ class AuthRepo {
   }) async {
     return _authApi.setTransactionPin(code: code);
   }
+
+  Future<ApiResponse<String>> sendResetPassordEmail({
+    required String username,
+  }) async {
+    return _authApi.sendResetPassordEmail(username: username);
+  }
+
+  Future<ApiResponse<String>> updatePassword({
+    required String username,
+    required int token,
+    required String password,
+  }) async {
+    return _authApi.updatePassword(
+        username: username, token: token, password: password);
+  }
 }

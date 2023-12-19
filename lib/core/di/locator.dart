@@ -4,6 +4,7 @@ import 'package:pay_me_mobile/data/datasources/local/auth_local_storage.dart';
 import 'package:pay_me_mobile/data/repo/auth_repo.dart';
 import 'package:pay_me_mobile/data/repo/bank_repo.dart';
 import 'package:pay_me_mobile/data/repo/business_repo.dart';
+import 'package:pay_me_mobile/data/repo/pos_repo.dart';
 import 'package:pay_me_mobile/data/repo/ticket_repo.dart';
 import 'package:pay_me_mobile/data/repo/transaction_repo.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav_vm.dart';
@@ -36,6 +37,7 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => BusinessRepo());
   locator.registerLazySingleton(() => TransactionRepo());
   locator.registerLazySingleton(() => TicketRepo());
+  locator.registerLazySingleton(() => POSRepo());
 }
 
 //GLOBALS
@@ -55,6 +57,7 @@ BankRepo bankRepo = locator.get<BankRepo>();
 BusinessRepo businessRepo = locator.get<BusinessRepo>();
 TransactionRepo transactionRepo = locator.get<TransactionRepo>();
 TicketRepo ticketRepo = locator.get<TicketRepo>();
+POSRepo posRepo = locator.get<POSRepo>();
 
 final allProviders = <SingleChildWidget>[
   ///authentication view models

@@ -71,6 +71,38 @@ class AuthenticationDataProvider {
     }
   }
 
+  Future<ApiResponse<String>> sendResetPassordEmail({
+    required String username,
+  }) async {
+    try {
+      final res = await _apiService
+          .post("/forgot_password", data: {"username": username});
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = res["message"];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
+  Future<ApiResponse<String>> updatePassword({
+    required String username,
+    required int token,
+    required String password,
+  }) async {
+    try {
+      final res = await _apiService.put("/update_password",
+          data: {"username": username, "token": token, "password": password});
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = res["message"];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
   Future<ApiResponse<bool>> validatePin({
     required String code,
   }) async {

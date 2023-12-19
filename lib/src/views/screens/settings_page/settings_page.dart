@@ -72,9 +72,19 @@ class SettingsPage extends StatelessWidget {
                       ),
                       singleItem(
                         icon: Icons.payment,
-                        text: 'Set Transaction pin',
+                        text: appGlobals.user!.isTransactionPinSet ?? false
+                            ? 'Change Transaction pin'
+                            : "Set Transaction pin",
                         onTap: () async {
-                          navigationService.push(const SetTransactionPinPage());
+                          final isSetTransactionPin =
+                              appGlobals.user!.isTransactionPinSet ?? false;
+                          if (isSetTransactionPin) {
+                            navigationService
+                                .push(const UpdateTransactionPinPage());
+                          } else {
+                            navigationService
+                                .push(const SetTransactionPinPage());
+                          }
                         },
                       ),
                       singleItem(

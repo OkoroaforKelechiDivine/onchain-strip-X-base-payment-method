@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/login_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
+import 'package:pay_me_mobile/src/views/screens/settings_page/change_password/change_password.dart';
 import 'package:stacked/stacked.dart';
 
 class PasscodeViewModel extends BaseViewModel {
@@ -32,23 +33,28 @@ class PasscodeViewModel extends BaseViewModel {
         notifyListeners();
       }
     } else {
-      final res = await authRepo.validatePascode(
-        code: pinController.text,
-      );
-      if (res.success) {
-        if (res.data!.message) {
-          navigationService.pushAndRemoveUntil(const BottomNav());
-          isProcessing = false;
-          notifyListeners();
+      final updatePass = appGlobals.user?.isDefaultPassword ?? false;
+      if (updatePass) {
+        navigationService.pushAndRemoveUntil(const ChangePasswordScreen());
+      } else {
+        final res = await authRepo.validatePascode(
+          code: pinController.text,
+        );
+        if (res.success) {
+          if (res.data!.message) {
+            navigationService.pushAndRemoveUntil(const BottomNav());
+            isProcessing = false;
+            notifyListeners();
+          } else {
+            snackbarService.error(message: "Incorrect Passcode");
+            isProcessing = false;
+            notifyListeners();
+          }
         } else {
-          snackbarService.error(message: "Incorrect Passcode");
           isProcessing = false;
+          snackbarService.error(message: res.message!);
           notifyListeners();
         }
-      } else {
-        isProcessing = false;
-        snackbarService.error(message: res.message!);
-        notifyListeners();
       }
     }
   }

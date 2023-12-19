@@ -159,8 +159,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   title: 'Transfer',
                                   asset: 'assets/jpg/transfer.jpg',
                                   onPressed: () {
-                                    navigationService
-                                        .push(const TransferToBankScreen());
+                                    log(Permissions()
+                                        .canUserTransfer()
+                                        .toString());
+                                    if (Permissions().canUserTransfer()) {
+                                      navigationService
+                                          .push(const TransferToBankScreen());
+                                    } else {
+                                      snackbarService.error(
+                                          message:
+                                              "Can't Perform this Operation");
+                                    }
+
                                     // pushNavigation(
                                     //     context: context,
                                     //     widget: const TransferToBankScreen());
@@ -170,8 +180,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   title: 'POS Device',
                                   asset: 'assets/jpg/pos_device.jpg',
                                   onPressed: () {
-                                    navigationService
-                                        .push(const PosDeviceScreen());
+                                    log(Permissions()
+                                        .canUserViewPosDevices()
+                                        .toString());
+                                    if (Permissions().canUserViewPosDevices()) {
+                                      navigationService
+                                          .push(const PosDeviceScreen());
+                                    } else {
+                                      snackbarService.error(
+                                          message:
+                                              "Can't Perform this Operation");
+                                    }
+
                                     //pushNavigation(context: context, widget: const PosDeviceScreen());
                                   },
                                 ),
@@ -248,21 +268,21 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         'Services',
                         style: inter(fontSize: 14.sp),
                       ),
-                      TextButton(
-                          onPressed: () {},
-                          child: Row(
-                            children: [
-                              Text(
-                                'More',
-                                style:
-                                    sans(color: Colors.grey, fontSize: 12.sp),
-                              ),
-                              Icon(
-                                Icons.chevron_right_outlined,
-                                size: 12.sp,
-                              )
-                            ],
-                          ))
+                      // TextButton(
+                      //     onPressed: () {},
+                      //     child: Row(
+                      //       children: [
+                      //         Text(
+                      //           'More',
+                      //           style:
+                      //               sans(color: Colors.grey, fontSize: 12.sp),
+                      //         ),
+                      //         Icon(
+                      //           Icons.chevron_right_outlined,
+                      //           size: 12.sp,
+                      //         )
+                      //       ],
+                      //     ))
                     ],
                   ),
                   SizedBox(
@@ -294,8 +314,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              navigationService
-                                  .push(const TransactionHistoryScreen());
+                              log(Permissions()
+                                  .canUserViewAllTransactions()
+                                  .toString());
+                              if (Permissions().canUserViewAllTransactions()) {
+                                navigationService
+                                    .push(const TransactionHistoryScreen());
+                              } else {
+                                snackbarService.error(
+                                    message: "Can't Perform this Operation");
+                              }
                             },
                             child: const ShadowWrapper(
                               child: HomeCardCTA(
@@ -312,7 +340,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         ),
                         Expanded(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              log(Permissions().canUserTransfer().toString());
+                              if (Permissions().canUserTransfer()) {
+                                navigationService
+                                    .push(const BuyAirtimeScreen());
+                              } else {
+                                snackbarService.error(
+                                    message: "Can't Perform this Operation");
+                              }
+                            },
                             child: ShadowWrapper(
                               child: HomeCardCTA(
                                 asset: "assets/jpg/mobile.jpg",
@@ -342,7 +379,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              navigationService.push(const BuyPowerScreen());
+                              log(Permissions().canUserTransfer().toString());
+                              if (Permissions().canUserTransfer()) {
+                                navigationService.push(const BuyPowerScreen());
+                              } else {
+                                snackbarService.error(
+                                    message: "Can't Perform this Operation");
+                              }
                             },
                             child: const ShadowWrapper(
                               child: HomeCardCTA(
@@ -358,7 +401,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         ),
                         Expanded(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              log(Permissions()
+                                  .canUserViewPosDevices()
+                                  .toString());
+                              if (Permissions().canUserViewPosDevices()) {
+                                navigationService.push(const PosDeviceScreen());
+                              } else {
+                                snackbarService.error(
+                                    message: "Can't Perform this Operation");
+                              }
+                            },
                             child: const ShadowWrapper(
                               child: HomeCardCTA(
                                 asset: "assets/jpg/pos_device.jpg",
@@ -375,7 +428,15 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              navigationService.push(const CableTvScreen());
+                              log(Permissions()
+                                  .canUserViewPosDevices()
+                                  .toString());
+                              if (Permissions().canUserViewPosDevices()) {
+                                navigationService.push(const CableTvScreen());
+                              } else {
+                                snackbarService.error(
+                                    message: "Can't Perform this Operation");
+                              }
 
                               //pushNavigation(context: context, widget: CableTvScreen());
                             },

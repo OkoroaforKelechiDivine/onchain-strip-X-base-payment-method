@@ -12,6 +12,7 @@ class User {
   final String? role;
   final int? sub;
   final String? username;
+  final bool? isTransactionPinSet;
 
   User({
     this.accountName,
@@ -27,6 +28,7 @@ class User {
     this.role,
     this.sub,
     this.username,
+    this.isTransactionPinSet,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -39,6 +41,7 @@ class User {
         isDefaultPassword: json["is_default_password"],
         isFirstLogin: json["is_first_login"],
         lastName: json["last_name"],
+        isTransactionPinSet: json["is_transaction_pin_set"],
         permissions: json["permissions"] != null
             ? List<String>.from(json["permissions"].map((x) => x))
             : [],
@@ -63,5 +66,6 @@ class User {
         "role": role,
         "sub": sub,
         "username": username,
+        "is_transaction_pin_set": isTransactionPinSet,
       };
 }
