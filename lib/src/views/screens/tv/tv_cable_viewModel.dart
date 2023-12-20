@@ -26,6 +26,7 @@ class TvCableViewModel extends BaseViewModel {
   bool isLoadingPackage = false;
   bool isLoadingSmartCardDetails = false;
   bool isLoadingPayment = false;
+  String type = 'renew';
 
   void init() async {
     await getWalletBalance();
@@ -130,7 +131,7 @@ class TvCableViewModel extends BaseViewModel {
         billersCode: decoderNumberController.text,
         amount: amount,
         phone: int.parse(phoneNumberController.text),
-        subscriptionType: 'renew',
+        subscriptionType: type,
         variationCode: selectedPackageResponse!.variationCode,
       ),
     );
@@ -187,5 +188,10 @@ class TvCableViewModel extends BaseViewModel {
         ),
       );
     }
+  }
+
+  void setRequestType(String value) {
+    type = value;
+    notifyListeners();
   }
 }

@@ -32,75 +32,76 @@ class BankList extends StatelessWidget {
           await model.getBankList();
         },
         child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 15,
-            ),
-            child: Column(
-              children: [
-                const SizedBox(height: 50),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          onBack();
-                        },
-                        child: const Icon(Icons.arrow_back_ios)),
-                    const Spacer(),
-                    const AppText(
-                      'Select Bank',
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    const Spacer(),
-                  ],
-                ),
-                isLoading
-                    ? const Expanded(
-                        child: Center(child: CircularProgressIndicator()))
-                    : bankList == null
-                        ? const AppText("Unable to Fetch Banks. Please Reload")
-                        : Expanded(
-                            child: Column(
-                              children: [
-                                const SizedBox(height: 20),
-                                AppCustomTextField(
-                                  textEditingController: model.searchController,
-                                  prefixIcon: const Icon(CupertinoIcons.search),
-                                  hintText: 'Search Bank',
-                                  onChanged: (value) {
-                                    model.onSearchBank(value);
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+          ),
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        onBack();
+                      },
+                      child: const Icon(Icons.arrow_back_ios)),
+                  const Spacer(),
+                  const AppText(
+                    'Select Bank',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  const Spacer(),
+                ],
+              ),
+              isLoading
+                  ? const Expanded(
+                      child: Center(child: CircularProgressIndicator()))
+                  : bankList == null
+                      ? const AppText("Unable to Fetch Banks. Please Reload")
+                      : Expanded(
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 20),
+                              AppCustomTextField(
+                                textEditingController: model.searchController,
+                                prefixIcon: const Icon(CupertinoIcons.search),
+                                hintText: 'Search Bank',
+                                onChanged: (value) {
+                                  model.onSearchBank(value);
+                                },
+                              ),
+                              //const SizedBox(height: 20),
+                              Expanded(
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: model.filteredBanks.length,
+                                  itemBuilder: (context, index) {
+                                    final bank = model.filteredBanks[index];
+                                    return ListTile(
+                                      //I want a circularavatar here
+                                      leading: bank.logo.isNotEmpty
+                                          ? const CircleAvatar(
+                                              child: Icon(Icons.food_bank),
+                                            )
+                                          : const CircleAvatar(
+                                              child: Icon(Icons.food_bank),
+                                            ),
+                                      title: AppText(bank.name),
+                                      onTap: () {
+                                        onSelectBank(bank);
+                                      },
+                                    );
                                   },
                                 ),
-                                //const SizedBox(height: 20),
-                                Expanded(
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: model.filteredBanks.length,
-                                    itemBuilder: (context, index) {
-                                      final bank = model.filteredBanks[index];
-                                      return ListTile(
-                                        //I want a circularavatar here
-                                        leading: bank.logo.isNotEmpty
-                                            ? const CircleAvatar(
-                                                child: Icon(Icons.food_bank),
-                                              )
-                                            : const CircleAvatar(
-                                                child: Icon(Icons.food_bank),
-                                              ),
-                                        title: AppText(bank.name),
-                                        onTap: () {
-                                          onSelectBank(bank);
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-              ],
-            )),
+                        ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pay_me_mobile/data/datasources/local/base/hive_boxes.dart';
+import 'package:pay_me_mobile/data/model/response/transaction_response/beneficiary_detail_response.dart';
 
 class LocalStorageService {
   LocalStorageService(this.box);
@@ -41,6 +42,21 @@ class LocalStorageService {
     final res = box.get(key, defaultValue: null);
     if (res == null) return null;
     return (res as List).map((e) => jsonDecode(e)).toList();
+  }
+
+  // Save List of Beneficiaries
+  void saveBeneficiaries(
+      String key, List<BeneficiaryDetailResponse> beneficiaries) {
+    box.put(key, beneficiaries.map((e) => jsonEncode(e.toJson())).toList());
+  }
+
+  // Get List of Beneficiaries
+  List<BeneficiaryDetailResponse>? getBeneficiaries(String key) {
+    final res = box.get(key, defaultValue: null);
+    if (res == null) return null;
+    return (res as List)
+        .map((e) => BeneficiaryDetailResponse.fromJson(jsonDecode(e)))
+        .toList();
   }
 
   String? getString(String key) {

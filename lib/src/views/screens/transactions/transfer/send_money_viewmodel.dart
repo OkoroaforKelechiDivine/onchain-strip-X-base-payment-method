@@ -77,6 +77,7 @@ class SendMoneyViewModel extends BaseViewModel {
         snackbarService.success(message: "Success Transfer");
         isSendingMoney = false;
         notifyListeners();
+        updateBeneficiaries(beneficiary);
         navigationService.pushAndRemoveUntil(TransferSuccessPage(
           message: amountController.text,
         ));
@@ -102,6 +103,15 @@ class SendMoneyViewModel extends BaseViewModel {
       snackbarService.error(message: res.message!);
       return false;
     }
+  }
+
+  // Update beneficiaries
+  void updateBeneficiaries(BeneficiaryDetailResponse newBeneficiary) {
+    var currentBeneficiaries = appGlobals.beneficiaries ?? [];
+    currentBeneficiaries.add(newBeneficiary);
+    appGlobals.beneficiaries = currentBeneficiaries;
+    appLocalStorage.saveBeneficiaries(currentBeneficiaries);
+    notifyListeners();
   }
 
   Future<void> processTransfer(

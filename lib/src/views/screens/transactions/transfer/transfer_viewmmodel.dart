@@ -22,11 +22,15 @@ class TransferViewModel extends BaseViewModel {
   int currentIndex = 0;
   final List<BankResponse> bankList = [];
   List<BankResponse> filteredBanks = [];
+  var currentBeneficiaries = appGlobals.beneficiaries ?? [];
 
   void init() async {
     if (appGlobals.banks == null) {
+      log("banks is null");
       await getBankList();
     } else {
+      log("banks is not null");
+      log(appGlobals.banks!.length.toString());
       bankList.addAll(appGlobals.banks!);
       filteredBanks = bankList;
       isLoadingBankList = false;

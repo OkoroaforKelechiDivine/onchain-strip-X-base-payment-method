@@ -136,7 +136,47 @@ class _CableTvScreenState extends State<CableTvScreen> {
                     maxLength: 10,
                     padding: const EdgeInsets.all(18),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 16),
+                  const Text(
+                    "Subscription Type",
+                    style: TextStyle(
+                      color: AppColors.lightBlack,
+                      fontWeight: AppFontWeight.bold,
+                      fontSize: AppFontSize.size16,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  const SizedBox(height: 8.0),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ListTile(
+                          title: const AppText("Renew"),
+                          leading: Radio(
+                            activeColor: AppColors.lightGreen,
+                            value: 'renew',
+                            groupValue: viewModel.type,
+                            onChanged: (String? value) {
+                              viewModel.setRequestType(value!);
+                            },
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          title: const AppText("Change"),
+                          leading: Radio(
+                            activeColor: AppColors.lightGreen,
+                            value: 'change',
+                            groupValue: viewModel.type,
+                            onChanged: (String? value) {
+                              viewModel.setRequestType(value!);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/widgets/user_icon.dart';
 import 'package:pay_me_mobile/data/datasources/local/base/local_storage_service.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/login_screen.dart';
+import 'package:pay_me_mobile/src/views/screens/request_pos_account/request_pos_account.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/change_password/change_password.dart';
-import 'package:pay_me_mobile/src/views/screens/settings_page/request_pos/request_for_pos_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/set_transaction_pin/set_transaction_pin_page.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/settings_viewmodel.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/update_passcode/update_passcode_page.dart';
@@ -33,12 +33,12 @@ class SettingsPage extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 28.0),
-                UserIcon.image(
-                  url:
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPfO37MK81JIyR1ptwqr_vYO3w4VR-iC2wqQ&usqp=CAU',
-                  height: 150,
-                  width: 150,
-                ),
+                // UserIcon.image(
+                //   url:
+                //       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPfO37MK81JIyR1ptwqr_vYO3w4VR-iC2wqQ&usqp=CAU',
+                //   height: 150,
+                //   width: 150,
+                // ),
                 // const UserAvatar(
                 //   url:
                 //       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPfO37MK81JIyR1ptwqr_vYO3w4VR-iC2wqQ&usqp=CAU',
@@ -105,7 +105,8 @@ class SettingsPage extends StatelessWidget {
                         icon: Icons.device_hub,
                         text: 'Request for POS Device',
                         onTap: () async {
-                          navigationService.push(const RequestForPOSPage());
+                          navigationService
+                              .push(const RequestPOSOrAccountView());
                         },
                       ),
                     ],

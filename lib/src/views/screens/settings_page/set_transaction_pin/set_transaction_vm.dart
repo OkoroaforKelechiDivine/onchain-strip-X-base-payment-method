@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/data/datasources/local/base/local_storage_service.dart';
+import 'package:pay_me_mobile/src/views/screens/auth/login_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 import 'package:pay_me_mobile/src/views/screens/passcode/enter_passcode.dart';
 import 'package:stacked/stacked.dart';
@@ -13,7 +15,6 @@ class SetTransactionPinVM extends BaseViewModel {
   bool isError = false;
 
   Future<void> onSetTransactionPin() async {
-    final firstLogin = appGlobals.user?.isFirstLogin ?? false;
     isProcessing = true;
     notifyListeners();
 
@@ -21,10 +22,9 @@ class SetTransactionPinVM extends BaseViewModel {
       code: pinController.text,
     );
     if (res.success) {
+      await LocalStorageService.clear();
       navigationService.pushAndRemoveUntil(
-        const PassCodeScreen(
-          page: BottomNav(),
-        ),
+        const LoginScreen(),
       );
       isProcessing = false;
       notifyListeners();

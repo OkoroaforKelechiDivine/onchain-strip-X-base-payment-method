@@ -428,10 +428,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              log(Permissions()
-                                  .canUserViewPosDevices()
-                                  .toString());
-                              if (Permissions().canUserViewPosDevices()) {
+                              log(Permissions().canUserTransfer().toString());
+                              if (Permissions().canUserTransfer()) {
                                 navigationService.push(const CableTvScreen());
                               } else {
                                 snackbarService.error(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
+import 'package:pay_me_mobile/data/datasources/local/base/local_storage_service.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/login_screen.dart';
 import 'package:stacked/stacked.dart';
 
@@ -40,6 +41,7 @@ class ChangePassowrdViewmodel extends BaseViewModel {
       );
       if (res.success) {
         if (updatePass) {
+          await LocalStorageService.clear();
           navigationService.pushAndRemoveUntil(const LoginScreen());
         } else {
           navigationService.pop();

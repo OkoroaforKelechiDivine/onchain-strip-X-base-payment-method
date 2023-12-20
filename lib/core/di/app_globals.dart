@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/bank_response.dart';
+import 'package:pay_me_mobile/data/model/response/transaction_response/beneficiary_detail_response.dart';
 
 import '../../data/model/model.dart';
 import '../cores.dart';
@@ -10,6 +11,7 @@ class AppGlobals extends ChangeNotifier {
 
   String? _token;
   User? _user;
+  List<BeneficiaryDetailResponse>? _beneficiaries;
   List<BankResponse>? _banks;
 
   Future<void> init() async {
@@ -20,6 +22,11 @@ class AppGlobals extends ChangeNotifier {
 
   set token(String? value) {
     _token = value;
+    notifyListeners();
+  }
+
+  set beneficiaries(List<BeneficiaryDetailResponse>? value) {
+    _beneficiaries = value;
     notifyListeners();
   }
 
@@ -36,4 +43,5 @@ class AppGlobals extends ChangeNotifier {
   String? get token => _token;
   User? get user => _user;
   List<BankResponse>? get banks => _banks;
+  List<BeneficiaryDetailResponse>? get beneficiaries => _beneficiaries;
 }

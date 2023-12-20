@@ -128,12 +128,13 @@ class RequestPOSOrAccountView extends StatelessWidget {
                     color: AppColors.lightGreen,
                     loading: model.isLoading,
                     child: const AppText(
-                      'Reset Password',
+                      'Submit Request',
                       fontSize: 16.0,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
-                  )
+                  ),
+                  const SizedBox(height: 35.0),
                 ],
               ),
             ),
