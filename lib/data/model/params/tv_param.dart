@@ -2,7 +2,7 @@ class TvCableParam {
   final String serviceId;
   final String billersCode;
   final int amount;
-  final int phone;
+  final String phone;
   final String subscriptionType;
   final String variationCode;
 

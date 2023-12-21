@@ -77,69 +77,68 @@ class BuildRecentCard extends StatelessWidget {
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
-                      children: model.currentBeneficiaries
-                          .asMap()
-                          .entries
-                          .map((entry) {
-                        return Card(
-                          elevation: 0,
-                          child: GestureDetector(
-                            onTap: () {
-                              model.fromBeneficiary(entry.value);
-                            },
-                            child: Container(
-                              color: AppColors.pureWhite,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        'assets/png/appIcon.png',
-                                        width: 40,
-                                        height: 40,
-                                        fit: BoxFit.contain,
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            entry.value.name,
-                                            style: TextStyle(
-                                              fontWeight: AppFontWeight.bold,
-                                              fontSize: AppFontSize.size14,
-                                              fontFamily:
-                                                  GoogleFonts.alegreyaSans()
-                                                      .fontFamily,
-                                              color: AppColors.lightBlack,
+                      children: model.currentBeneficiaries.asMap().entries.map(
+                        (entry) {
+                          return Card(
+                            elevation: 0,
+                            child: GestureDetector(
+                              onTap: () {
+                                model.fromBeneficiary(entry.value);
+                              },
+                              child: Container(
+                                color: AppColors.pureWhite,
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          'assets/png/appIcon.png',
+                                          width: 40,
+                                          height: 40,
+                                          fit: BoxFit.contain,
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              entry.value.name,
+                                              style: TextStyle(
+                                                fontWeight: AppFontWeight.bold,
+                                                fontSize: AppFontSize.size14,
+                                                fontFamily:
+                                                    GoogleFonts.alegreyaSans()
+                                                        .fontFamily,
+                                                color: AppColors.lightBlack,
+                                              ),
                                             ),
-                                          ),
-                                          Text(
-                                            entry.value.bank,
-                                            style: TextStyle(
-                                              fontWeight: AppFontWeight.light,
-                                              fontSize: AppFontSize.size14,
-                                              fontFamily:
-                                                  GoogleFonts.alegreyaSans()
-                                                      .fontFamily,
-                                              color: AppColors.lightBlack,
+                                            Text(
+                                              entry.value.bank,
+                                              style: TextStyle(
+                                                fontWeight: AppFontWeight.light,
+                                                fontSize: AppFontSize.size14,
+                                                fontFamily:
+                                                    GoogleFonts.alegreyaSans()
+                                                        .fontFamily,
+                                                color: AppColors.lightBlack,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  const Divider(
-                                    height: 30,
-                                    thickness: 1,
-                                  ),
-                                ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    const Divider(
+                                      height: 30,
+                                      thickness: 1,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      }).toList(),
+                          );
+                        },
+                      ).toList(),
                     ),
                   ),
           ],

@@ -125,7 +125,7 @@ class InflowScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "#${formatBalance(bank.amount.toDouble())}",
+                              "₦${formatBalance(bank.amount.toDouble())}",
                               style: const TextStyle(
                                 color: AppColors.lightGreen,
                                 fontWeight: AppFontWeight.bold,

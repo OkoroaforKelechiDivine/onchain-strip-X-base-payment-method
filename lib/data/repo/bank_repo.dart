@@ -54,7 +54,7 @@ class BankRepo {
   Future<ApiResponse<BuyAirtimeResponse>> buyAirtime(
       {required int amount,
       required String network,
-      required int number}) async {
+      required String number}) async {
     return await _bankApi.buyAirtime(
         amount: amount, network: network, number: number);
   }

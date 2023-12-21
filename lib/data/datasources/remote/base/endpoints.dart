@@ -1,5 +1,5 @@
 class Endpoints {
-  static const baseUrl = 'https://dzbilqfc4qszv.cloudfront.net';
+  static const baseUrl = 'https://payme-api-dev.systemshift.africa';
   //LiVE ENDPOINT
-  //static const baseUrl = 'https://d216tse86yqz4.cloudfront.net';
+  //static const baseUrl = 'https://payme-api.systemshift.africa';
 }

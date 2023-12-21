@@ -91,7 +91,7 @@ class BankApi {
   Future<ApiResponse<BuyAirtimeResponse>> buyAirtime(
       {required int amount,
       required String network,
-      required int number}) async {
+      required String number}) async {
     try {
       final res = await _apiService.post(
         "/buy_airtime",

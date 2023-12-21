@@ -105,7 +105,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
                               viewModel.verifySmartCardResponse != null
                                   ? viewModel
                                       .verifySmartCardResponse!.customerName
-                                  : "Checking account number..",
+                                  : "Checking decoder number..",
                               style: const TextStyle(
                                 color: AppColors.lightGreen,
                                 fontWeight: AppFontWeight.bold,
@@ -133,7 +133,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
                     textEditingController: viewModel.phoneNumberController,
                     hintText: 'Enter Phone Number',
                     textInputType: TextInputType.number,
-                    maxLength: 10,
+                    maxLength: 11,
                     padding: const EdgeInsets.all(18),
                   ),
                   const SizedBox(height: 16),
@@ -185,7 +185,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            'Amount: ${viewModel.selectedPackageResponse == null ? "N/A" : formatBalance(double.parse(viewModel.selectedPackageResponse!.variationAmount))}',
+                            'Amount: ${viewModel.selectedPackageResponse == null ? "N/A" : "₦${formatBalance(double.parse(viewModel.selectedPackageResponse!.variationAmount))}"}',
                             style: TextStyle(
                               fontSize: AppFontSize.size16,
                               color: AppColors.lightBlack,

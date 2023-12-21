@@ -64,7 +64,7 @@ class TransactionDetailsScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      "#${formatBalance(transactionResponse.amount!.toDouble())}",
+                      "₦${formatBalance(transactionResponse.amount!.toDouble())}",
                       style: const TextStyle(
                         fontSize: 30,
                         fontWeight: AppFontWeight.bold,

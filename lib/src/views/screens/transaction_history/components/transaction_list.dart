@@ -47,15 +47,15 @@ class BuildTransactionList extends StatelessWidget {
                               : AppColors.lightGreen,
                           borderRadius: BorderRadius.circular(100),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.money,
                           color: Colors.white,
                         )),
                     title: Text(
                       bank.transactionType! == "Outflow" ||
                               bank.transactionType! == "Airtime"
-                          ? "Sent"
-                          : "Received",
+                          ? bank.beneficiaryAccountName!
+                          : bank.originatorAccountName!,
                       style: TextStyle(
                         fontFamily: GoogleFonts.alegreyaSans().fontFamily,
                         fontWeight: AppFontWeight.bold,

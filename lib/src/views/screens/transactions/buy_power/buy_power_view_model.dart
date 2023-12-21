@@ -146,7 +146,7 @@ class BuyPowerViewModel extends BaseViewModel {
           billersCode: meterNumberController.text,
           variationCode: selectedPackage!,
           amount: int.parse(decomposeAmount(amountController.text)),
-          phone: int.parse(phoneNumberController.text),
+          phone: phoneNumberController.text,
         ),
       );
       if (res.success) {

@@ -3,7 +3,7 @@ class BuyPowerParam {
   final String billersCode;
   final String variationCode;
   final int amount;
-  final int phone;
+  final String phone;
 
   BuyPowerParam({
     required this.serviceId,

@@ -83,7 +83,7 @@ class BankList extends StatelessWidget {
                                       //I want a circularavatar here
                                       leading: bank.logo.isNotEmpty
                                           ? Image.asset(
-                                              'assets/png/appIcon.png',
+                                              'assets/png/bank.png',
                                               width: 40,
                                               height: 40,
                                               fit: BoxFit.contain,
@@ -93,7 +93,7 @@ class BankList extends StatelessWidget {
                                           //     child: Icon(Icons.food_bank),
                                           //   )
                                           : Image.asset(
-                                              'assets/png/appIcon.png',
+                                              'assets/png/bank.png',
                                               width: 40,
                                               height: 40,
                                               fit: BoxFit.contain,

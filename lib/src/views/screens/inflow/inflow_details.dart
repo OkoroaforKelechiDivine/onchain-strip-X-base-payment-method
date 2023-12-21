@@ -21,20 +21,21 @@ class InflowDetails extends StatelessWidget {
               value: transactionResponse.originatorAccountName),
           const SizedBox(height: 10),
           buildDivider(),
-          // const SizedBox(height: 10),
-          // BuildInfoRow(
-          //     label: 'From', value: transactionResponse.originatorBank),
-          // buildDivider(),
+          const SizedBox(height: 10),
+          BuildInfoRow(
+              label: 'From', value: transactionResponse.originatorBank),
+          const SizedBox(height: 10),
+          buildDivider(),
           const SizedBox(height: 15),
           BuildInfoRow(
-              label: 'Description',
-              value: transactionResponse.statusDescription),
+              label: 'Narration',
+              value: transactionResponse.transactionNarration),
           const SizedBox(height: 15),
           buildDivider(),
           const SizedBox(height: 15),
           BuildInfoRow(
             label: 'Inward Transfer',
-            value: "#${formatBalance(transactionResponse.amount.toDouble())}",
+            value: "₦${formatBalance(transactionResponse.amount.toDouble())}",
           ),
           const SizedBox(height: 15),
           buildDivider(),

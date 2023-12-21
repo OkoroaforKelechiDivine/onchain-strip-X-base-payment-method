@@ -97,7 +97,7 @@ class BuyAirtimeViewModel extends BaseViewModel {
   Future<void> onBuyAirtime() async {
     final res = await bankRepo.buyAirtime(
       amount: int.parse(decomposeAmount(amountController.text)),
-      number: int.parse(phoneNumberController.text),
+      number: phoneNumberController.text,
       network: selectedValue.toLowerCase(),
     );
     if (res.success) {

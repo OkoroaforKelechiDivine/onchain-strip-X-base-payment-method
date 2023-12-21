@@ -82,14 +82,20 @@ class BuildRecipientCard extends StatelessWidget {
                       padding: const EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          selectedBank != null && selectedBank!.logo.isNotEmpty
-                              ? const CircleAvatar(
-                                  child: Icon(Icons.food_bank),
-                                )
-                              // ? Image.memory(processImage(selectedBank!.logo),
-                              //     width: 30, height: 30)
-                              : Container(),
-                          const SizedBox(width: 8),
+                          // Image.asset(
+                          //                     'assets/png/bank.png',
+                          //                     width: 40,
+                          //                     height: 40,
+                          //                     fit: BoxFit.contain,
+                          //                   )
+                          // selectedBank != null && selectedBank!.logo.isNotEmpty
+                          //     ? const CircleAvatar(
+                          //         child: Icon(Icons.food_bank),
+                          //       )
+                          //     // ? Image.memory(processImage(selectedBank!.logo),
+                          //     //     width: 30, height: 30)
+                          //     : Container(),
+                          // const SizedBox(width: 8),
                           Expanded(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

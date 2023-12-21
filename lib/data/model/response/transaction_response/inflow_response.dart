@@ -8,6 +8,7 @@ class InflowResponse {
   final String transactionStatus;
   final String statusDescription;
   final String transactionId;
+  final String transactionNarration;
 
   InflowResponse({
     required this.statusCode,
@@ -19,6 +20,7 @@ class InflowResponse {
     required this.transactionStatus,
     required this.statusDescription,
     required this.transactionId,
+    required this.transactionNarration,
   });
 
   factory InflowResponse.fromJson(Map<String, dynamic> json) => InflowResponse(
@@ -31,6 +33,7 @@ class InflowResponse {
         transactionStatus: json["transaction_status"],
         statusDescription: json["status_description"],
         transactionId: json["transaction_id"],
+        transactionNarration: json["transaction_narration"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,5 +46,6 @@ class InflowResponse {
         "transaction_status": transactionStatus,
         "status_description": statusDescription,
         "transaction_id": transactionId,
+        "transaction_narration": transactionNarration,
       };
 }

@@ -130,7 +130,7 @@ class TvCableViewModel extends BaseViewModel {
         serviceId: selectedTvCableProvider!,
         billersCode: decoderNumberController.text,
         amount: amount,
-        phone: int.parse(phoneNumberController.text),
+        phone: phoneNumberController.text,
         subscriptionType: type,
         variationCode: selectedPackageResponse!.variationCode,
       ),
