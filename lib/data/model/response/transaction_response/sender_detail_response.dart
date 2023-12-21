@@ -7,11 +7,11 @@ class SenderDetailsResponse {
   final String savingsProductName;
 
   SenderDetailsResponse({
-    this.accountNo = "1001593981",
+    this.accountNo = "1001589285",
     this.accountBalance = "1000000.000000",
-    this.accountId = "159398",
-    this.client = "PayMe-Jamey Jules Combs",
-    this.clientId = "143614",
+    this.accountId = "158928",
+    this.client = "PayMe",
+    this.clientId = "142713",
     this.savingsProductName = "Corporate Current Account",
   });
 

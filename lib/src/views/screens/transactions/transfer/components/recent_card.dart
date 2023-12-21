@@ -18,8 +18,6 @@ class BuildRecentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<DummyBank> firstFourBanks = dummyBanks.take(4).toList();
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6.0),
       child: Card(
@@ -29,10 +27,10 @@ class BuildRecentCard extends StatelessWidget {
         ),
         child: Column(
           children: [
-            ListTile(
+            const ListTile(
               title: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Text(
                       'Recents',
                       style: TextStyle(
@@ -42,37 +40,37 @@ class BuildRecentCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      //navigationService.push(
-                      //  ShowAllRecentTransactionsScreen(banks: dummyBanks));
-                    },
-                    child: const Row(
-                      children: [
-                        Text(
-                          'View All',
-                          style: TextStyle(
-                            color: AppColors.lightGrey,
-                            fontWeight: AppFontWeight.bold,
-                            fontSize: AppFontSize.size14,
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: AppColors.darkWhite,
-                          size: AppFontSize.size12,
-                        ),
-                      ],
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     //navigationService.push(
+                  //     //  ShowAllRecentTransactionsScreen(banks: dummyBanks));
+                  //   },
+                  //   child: const Row(
+                  //     children: [
+                  //       Text(
+                  //         'View All',
+                  //         style: TextStyle(
+                  //           color: AppColors.lightGrey,
+                  //           fontWeight: AppFontWeight.bold,
+                  //           fontSize: AppFontSize.size14,
+                  //         ),
+                  //       ),
+                  //       SizedBox(width: 10),
+                  //       Icon(
+                  //         Icons.arrow_forward_ios,
+                  //         color: AppColors.darkWhite,
+                  //         size: AppFontSize.size12,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),
             model.currentBeneficiaries.isEmpty
-                ? Center(
+                ? const Center(
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
+                      padding: EdgeInsets.only(bottom: 16.0),
                       child: AppText("No Recent Transaction"),
                     ),
                   )
@@ -87,7 +85,7 @@ class BuildRecentCard extends StatelessWidget {
                           elevation: 0,
                           child: GestureDetector(
                             onTap: () {
-                              //TODO: Navigate to transfer to bank screen
+                              model.fromBeneficiary(entry.value);
                             },
                             child: Container(
                               color: AppColors.pureWhite,
@@ -99,7 +97,7 @@ class BuildRecentCard extends StatelessWidget {
                                         'assets/png/appIcon.png',
                                         width: 40,
                                         height: 40,
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.contain,
                                       ),
                                       const SizedBox(width: 10),
                                       Column(

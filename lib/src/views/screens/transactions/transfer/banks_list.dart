@@ -82,11 +82,21 @@ class BankList extends StatelessWidget {
                                     return ListTile(
                                       //I want a circularavatar here
                                       leading: bank.logo.isNotEmpty
-                                          ? const CircleAvatar(
-                                              child: Icon(Icons.food_bank),
+                                          ? Image.asset(
+                                              'assets/png/appIcon.png',
+                                              width: 40,
+                                              height: 40,
+                                              fit: BoxFit.contain,
                                             )
-                                          : const CircleAvatar(
-                                              child: Icon(Icons.food_bank),
+
+                                          // const CircleAvatar(
+                                          //     child: Icon(Icons.food_bank),
+                                          //   )
+                                          : Image.asset(
+                                              'assets/png/appIcon.png',
+                                              width: 40,
+                                              height: 40,
+                                              fit: BoxFit.contain,
                                             ),
                                       title: AppText(bank.name),
                                       onTap: () {

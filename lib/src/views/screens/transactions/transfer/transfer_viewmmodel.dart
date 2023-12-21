@@ -90,4 +90,16 @@ class TransferViewModel extends BaseViewModel {
         .toList();
     notifyListeners();
   }
+
+  Future<void> fromBeneficiary(BeneficiaryDetailResponse beneficiary) async {
+    accountNumberController.text = beneficiary.account.number;
+    selectedBank = BankResponse(
+        id: 11,
+        code: beneficiary.account.id,
+        name: beneficiary.bank,
+        logo: "",
+        created: DateTime.now());
+    await getBeneficiaryDetails();
+    notifyListeners();
+  }
 }

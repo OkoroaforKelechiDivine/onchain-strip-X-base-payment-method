@@ -76,8 +76,8 @@ class BuildTransactionList extends StatelessWidget {
                         Text(
                           bank.transactionType! == "Outflow" ||
                                   bank.transactionType! == "Airtime"
-                              ? "- #${formatBalance(bank.amount!.toDouble())}"
-                              : "+ #${formatBalance(bank.amount!.toDouble())}",
+                              ? "- ₦${formatBalance(bank.amount!.toDouble())}"
+                              : "+ ₦${formatBalance(bank.amount!.toDouble())}",
                           style: TextStyle(
                             color: bank.transactionType! == "Outflow" ||
                                     bank.transactionType! == "Airtime"
