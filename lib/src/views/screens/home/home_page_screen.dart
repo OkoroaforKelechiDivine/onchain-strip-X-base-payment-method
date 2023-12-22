@@ -184,8 +184,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                         .canUserViewPosDevices()
                                         .toString());
                                     if (Permissions().canUserViewPosDevices()) {
-                                      navigationService
-                                          .push(const PosDeviceScreen());
+                                      snackbarService.success(
+                                          message: "Coming Soon");
+                                      // navigationService
+                                      //     .push(const PosDeviceScreen());
                                     } else {
                                       snackbarService.error(
                                           message:
@@ -406,7 +408,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   .canUserViewPosDevices()
                                   .toString());
                               if (Permissions().canUserViewPosDevices()) {
-                                navigationService.push(const PosDeviceScreen());
+                                snackbarService.success(message: "Coming Soon");
+                                //navigationService.push(const PosDeviceScreen());
                               } else {
                                 snackbarService.error(
                                     message: "Can't Perform this Operation");

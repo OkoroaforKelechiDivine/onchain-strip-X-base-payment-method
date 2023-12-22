@@ -12,10 +12,10 @@ class AirtimeRecept extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BuildInfoRow(label: 'Phone Number', value: "08141208203"),
-        const SizedBox(height: 10),
-        buildDivider(),
-        const SizedBox(height: 10),
+        //BuildInfoRow(label: 'Phone Number', value: "08141208203"),
+        //  const SizedBox(height: 10),
+        //buildDivider(),
+        // const SizedBox(height: 10),
         // BuildInfoRow(label: 'To', value: transactionResponse.originatorBank!),
         // buildDivider(),
         // const SizedBox(height: 10),
@@ -31,7 +31,7 @@ class AirtimeRecept extends StatelessWidget {
         const SizedBox(height: 15),
         BuildInfoRow(
           label: 'Outward Transfer',
-          value: "#${formatBalance(transactionResponse.amount!.toDouble())}",
+          value: "₦${formatBalance(transactionResponse.amount!.toDouble())}",
         ),
         const SizedBox(height: 15),
         buildDivider(),
@@ -64,10 +64,10 @@ class PowerRecept extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BuildInfoRow(label: 'Meter Number', value: "08141208203"),
-        const SizedBox(height: 10),
-        buildDivider(),
-        const SizedBox(height: 10),
+        //BuildInfoRow(label: 'Meter Number', value: "08141208203"),
+        //const SizedBox(height: 10),
+        //buildDivider(),
+        //const SizedBox(height: 10),
         // BuildInfoRow(label: 'To', value: transactionResponse.originatorBank!),
         // buildDivider(),
         // const SizedBox(height: 10),
@@ -83,7 +83,7 @@ class PowerRecept extends StatelessWidget {
         const SizedBox(height: 15),
         BuildInfoRow(
           label: 'Outward Transfer',
-          value: "#${formatBalance(transactionResponse.amount!.toDouble())}",
+          value: "₦${formatBalance(transactionResponse.amount!.toDouble())}",
         ),
         const SizedBox(height: 15),
         buildDivider(),
@@ -116,10 +116,10 @@ class TvCableRecept extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BuildInfoRow(label: 'Meter Number', value: "08141208203"),
-        const SizedBox(height: 10),
-        buildDivider(),
-        const SizedBox(height: 10),
+        //BuildInfoRow(label: 'Meter Number', value: "08141208203"),
+        //const SizedBox(height: 10),
+        //buildDivider(),
+        //const SizedBox(height: 10),
         // BuildInfoRow(label: 'To', value: transactionResponse.originatorBank!),
         // buildDivider(),
         // const SizedBox(height: 10),
@@ -135,7 +135,7 @@ class TvCableRecept extends StatelessWidget {
         const SizedBox(height: 15),
         BuildInfoRow(
           label: 'Outward Transfer',
-          value: "#${formatBalance(transactionResponse.amount!.toDouble())}",
+          value: "₦${formatBalance(transactionResponse.amount!.toDouble())}",
         ),
         const SizedBox(height: 15),
         buildDivider(),
@@ -175,6 +175,13 @@ class InflowRecept extends StatelessWidget {
         buildDivider(),
         const SizedBox(height: 10),
         BuildInfoRow(label: 'From', value: transactionResponse.originatorBank!),
+        const SizedBox(height: 10),
+        buildDivider(),
+        const SizedBox(height: 15),
+        BuildInfoRow(
+            label: 'Sender Account number',
+            value: transactionResponse.originatorAccountNumber!),
+        const SizedBox(height: 15),
         buildDivider(),
         const SizedBox(height: 10),
         BuildInfoRow(
@@ -183,23 +190,21 @@ class InflowRecept extends StatelessWidget {
         const SizedBox(height: 10),
         buildDivider(),
         const SizedBox(height: 15),
-        const BuildInfoRow(label: 'Description', value: 'Garri'),
+        BuildInfoRow(
+            label: 'Narration',
+            value: transactionResponse.transactionNarration!),
         const SizedBox(height: 15),
         buildDivider(),
         const SizedBox(height: 15),
         BuildInfoRow(
-          label: 'Outward Transfer',
-          value: "#${formatBalance(transactionResponse.amount!.toDouble())}",
+          label: 'Inflow Transfer',
+          value: "₦${formatBalance(transactionResponse.amount!.toDouble())}",
         ),
         const SizedBox(height: 15),
         buildDivider(),
-        // const SizedBox(height: 15),
-        // const BuildInfoRow(
-        //     label: 'Payment Method', value: 'Fees'),
-        // const SizedBox(height: 15),
-        // buildDivider(),
         const SizedBox(height: 15),
-        const BuildInfoRow(label: 'Status', value: 'Successful'),
+        BuildInfoRow(
+            label: 'Status', value: transactionResponse.statusDescription!),
         const SizedBox(height: 15),
         buildDivider(),
         const SizedBox(height: 15),
@@ -223,11 +228,19 @@ class OutflowReceipt extends StatelessWidget {
       children: [
         BuildInfoRow(
             label: 'Account Name',
-            value: transactionResponse.originatorAccountName!),
+            value: transactionResponse.beneficiaryAccountName!),
         const SizedBox(height: 10),
         buildDivider(),
+        const SizedBox(height: 15),
+        BuildInfoRow(
+            label: 'To', value: transactionResponse.beneficiaryAccountNumber!),
         const SizedBox(height: 10),
-        BuildInfoRow(label: 'To', value: transactionResponse.originatorBank!),
+        buildDivider(),
+        const SizedBox(height: 15),
+        BuildInfoRow(
+            label: 'Beneficiary Bank',
+            value: transactionResponse.beneficiaryBank!),
+        const SizedBox(height: 15),
         buildDivider(),
         const SizedBox(height: 10),
         BuildInfoRow(
@@ -236,23 +249,21 @@ class OutflowReceipt extends StatelessWidget {
         const SizedBox(height: 10),
         buildDivider(),
         const SizedBox(height: 15),
-        const BuildInfoRow(label: 'Description', value: 'Garri'),
+        BuildInfoRow(
+            label: 'Description',
+            value: transactionResponse.transactionNarration!),
         const SizedBox(height: 15),
         buildDivider(),
         const SizedBox(height: 15),
         BuildInfoRow(
           label: 'Outward Transfer',
-          value: "#${formatBalance(transactionResponse.amount!.toDouble())}",
+          value: "₦${formatBalance(transactionResponse.amount!.toDouble())}",
         ),
         const SizedBox(height: 15),
         buildDivider(),
-        // const SizedBox(height: 15),
-        // const BuildInfoRow(
-        //     label: 'Payment Method', value: 'Fees'),
-        // const SizedBox(height: 15),
-        // buildDivider(),
         const SizedBox(height: 15),
-        const BuildInfoRow(label: 'Status', value: 'Successful'),
+        BuildInfoRow(
+            label: 'Status', value: transactionResponse.statusDescription!),
         const SizedBox(height: 15),
         buildDivider(),
         const SizedBox(height: 15),

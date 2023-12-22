@@ -26,8 +26,8 @@ class TransactionDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedTimestamp =
-        DateFormat('MMMM dd, yyyy \'at\' hh:mm a').format(DateTime.now());
+    String formattedTimestamp = DateFormat('MMMM dd, yyyy \'at\' hh:mm a')
+        .format(transactionResponse.timeStamp ?? DateTime.now());
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => TransactionDetailViewModel(),
       builder: (context, model, child) {

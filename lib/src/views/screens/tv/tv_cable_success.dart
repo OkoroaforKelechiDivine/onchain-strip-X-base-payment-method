@@ -45,15 +45,16 @@ class TVCableSuccessPage extends StatelessWidget {
                 },
                 title: "Done",
               ),
-              const SizedBox(width: 20),
-              AppCustomButton(
-                borderWidth: 1,
-                width: 150,
-                onPressed: () {
-                  //navigationService.pop();
-                },
-                title: "Share Receipt",
-              ),
+              // const SizedBox(width: 20),
+              // const SizedBox(width: 20),
+              // AppCustomButton(
+              //   borderWidth: 1,
+              //   width: 150,
+              //   onPressed: () {
+              //     //navigationService.pop();
+              //   },
+              //   title: "Share Receipt",
+              // ),
             ],
           ),
         ],

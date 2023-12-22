@@ -27,16 +27,16 @@ bottomNavItems(BuildContext context, int currentIndex) {
           )),
       label: '',
     ),
-    BottomNavigationBarItem(
-      icon: Opacity(
-          opacity: currentIndex == 2 ? 1.0 : 0.5,
-          child: Image.asset(
-            buyAirtimeImage,
-            height: 20,
-            width: 20,
-          )),
-      label: '',
-    ),
+    // BottomNavigationBarItem(
+    //   icon: Opacity(
+    //       opacity: currentIndex == 2 ? 1.0 : 0.5,
+    //       child: Image.asset(
+    //         buyAirtimeImage,
+    //         height: 20,
+    //         width: 20,
+    //       )),
+    //   label: '',
+    // ),
     BottomNavigationBarItem(
       icon: Opacity(
         opacity: currentIndex == 3 ? 1.0 : 0.5,

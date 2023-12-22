@@ -15,7 +15,7 @@ class BuildTransactionList extends StatelessWidget {
   const BuildTransactionList({super.key, required this.model});
 
   String formatTimestamp(DateTime timestamp) {
-    return DateFormat('HH:mm a').format(timestamp);
+    return DateFormat('dd-MM-yyyy HH:mm a').format(timestamp);
   }
 
   @override
@@ -52,10 +52,15 @@ class BuildTransactionList extends StatelessWidget {
                           color: Colors.white,
                         )),
                     title: Text(
-                      bank.transactionType! == "Outflow" ||
-                              bank.transactionType! == "Airtime"
+                      bank.transactionType! == "Outflow"
                           ? bank.beneficiaryAccountName!
-                          : bank.originatorAccountName!,
+                          : bank.transactionType! == "Inflow"
+                              ? bank.originatorAccountName!
+                              : bank.transactionType! == "Airtime"
+                                  ? "Airtime"
+                                  : bank.transactionType! == "Power"
+                                      ? "Power"
+                                      : "Tv Cable",
                       style: TextStyle(
                         fontFamily: GoogleFonts.alegreyaSans().fontFamily,
                         fontWeight: AppFontWeight.bold,
@@ -66,7 +71,7 @@ class BuildTransactionList extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          formatTimestamp(DateTime.now()),
+                          formatTimestamp(bank.timeStamp ?? DateTime.now()),
                           style: const TextStyle(
                             color: AppColors.lightBlack,
                             fontWeight: AppFontWeight.light,

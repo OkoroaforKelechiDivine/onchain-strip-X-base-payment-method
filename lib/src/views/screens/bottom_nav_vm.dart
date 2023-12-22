@@ -16,7 +16,7 @@ class BottomNavViewModel extends BaseViewModel {
   final List<Widget> _children = [
     HomePageScreen(),
     TransactionHistoryScreen(),
-    BuyAirtimeScreen(),
+    //BuyAirtimeScreen(),
     SettingsPage(),
   ];
   List<Widget> get children => _children;
