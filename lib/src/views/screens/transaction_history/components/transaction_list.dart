@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
+import 'package:pay_me_mobile/core/utilities/general_util.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history_viewmodel.dart';
 
@@ -24,7 +25,7 @@ class BuildTransactionList extends StatelessWidget {
       padding: const EdgeInsets.only(left: 15.0, right: 10.0),
       child: ListView.separated(
         itemBuilder: (context, index) {
-          final bank = model.transactionList[index];
+          final bank = model.transactionList![index];
           final isDebit = bank.transactionType! == "Outflow" ||
               bank.transactionType! == "Airtime";
           return GestureDetector(
@@ -71,7 +72,7 @@ class BuildTransactionList extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          formatTimestamp(bank.timeStamp ?? DateTime.now()),
+                          formatTimestamp(bank.timeStamp!),
                           style: const TextStyle(
                             color: AppColors.lightBlack,
                             fontWeight: AppFontWeight.light,
@@ -103,7 +104,7 @@ class BuildTransactionList extends StatelessWidget {
         separatorBuilder: (context, index) {
           return const SizedBox(height: 10);
         },
-        itemCount: model.transactionList.length,
+        itemCount: model.transactionList!.length,
       ),
     );
   }
