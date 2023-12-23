@@ -1,3 +1,5 @@
+import 'package:pay_me_mobile/core/utilities/general_util.dart';
+
 class TransactionResponse {
   final String? statusCode;
   final int? amount;
@@ -57,7 +59,7 @@ class TransactionResponse {
         beneficiaryAccountNumber: json["beneficiary_account_number"],
         beneficiaryAccountName: json["beneficiary_account_name"],
         beneficiaryBank: json["beneficiary_bank"],
-        timeStamp: DateTime.parse(json["time_stamp"]),
+        timeStamp: parseDateTime(json["time_stamp"].toString()),
         transactionNarration: json["transaction_narration"],
         transactionStatus: json["transaction_status"],
         cardType: json["card_type"],

@@ -32,7 +32,7 @@ class SettingsPage extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 28.0),
+                //const SizedBox(height: 28.0),
                 // UserIcon.image(
                 //   url:
                 //       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPfO37MK81JIyR1ptwqr_vYO3w4VR-iC2wqQ&usqp=CAU',
