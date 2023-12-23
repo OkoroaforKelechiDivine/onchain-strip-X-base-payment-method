@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/core/utilities/general_util.dart';
 import 'package:pay_me_mobile/core/widgets/user_icon.dart';
 import 'package:pay_me_mobile/data/datasources/local/base/local_storage_service.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/login_screen.dart';
@@ -9,6 +10,7 @@ import 'package:pay_me_mobile/src/views/screens/settings_page/set_transaction_pi
 import 'package:pay_me_mobile/src/views/screens/settings_page/settings_viewmodel.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/update_passcode/update_passcode_page.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/update_transaction_pin/update_transaction_pin_page.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../../core/cores.dart';
@@ -124,29 +126,48 @@ class SettingsPage extends StatelessWidget {
                       singleItem(
                         icon: Icons.star,
                         text: 'Recommend this app',
-                        onTap: () {},
+                        onTap: () {
+                          Share.share(
+                              'Check out PayMe on Playstore https://play.google.com/store/apps/details?id=com.systemShift.pay_me_mobile');
+                        },
                       ),
                       singleItem(
                         icon: Icons.chat,
                         text: 'Feedbacks',
                         subtitle: 'Report bugs, feedback or suggestion',
-                        onTap: () async {},
+                        onTap: () async {
+                          launchUrlStart(
+                              url:
+                                  "mailto:tech@systemshift.africa?subject=Reporting%Bug&body=Hi%SystemShift");
+                        },
                       ),
                       singleItem(
                         icon: Icons.star,
                         text: 'Rate this app',
                         subtitle: '5 star would mean a lot :)',
-                        onTap: () {},
+                        onTap: () {
+                          launchUrlStart(
+                              url:
+                                  "https://play.google.com/store/apps/details?id=com.systemShift.pay_me_mobile");
+                        },
                       ),
                       singleItem(
                         icon: Icons.play_arrow,
                         text: 'Other apps from us',
-                        onTap: () async {},
+                        onTap: () async {
+                          launchUrlStart(
+                              url:
+                                  "https://play.google.com/store/apps/developer?id=kxSplash");
+                        },
                       ),
                       singleItem(
                         icon: CupertinoIcons.lock_shield_fill,
                         text: 'Privacy Policy',
-                        onTap: () {},
+                        onTap: () {
+                          launchUrlStart(
+                              url:
+                                  "https://systemshift.africa/privacy-policy/");
+                        },
                       ),
                       singleItem(
                         icon: Icons.logout,

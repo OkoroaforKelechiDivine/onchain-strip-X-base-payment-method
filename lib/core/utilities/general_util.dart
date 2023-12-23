@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 bool compareAmounts(
     {required double accountBalance, required String inputAmount}) {
@@ -23,5 +24,12 @@ DateTime parseDateTime(String dateTimeString) {
       // You can return a default DateTime, null, or handle it as you see fit
       return DateTime.now(); // Example: using current time as default
     }
+  }
+}
+
+///Lunching URl
+Future<void> launchUrlStart({required String url}) async {
+  if (!await launchUrl(Uri.parse(url))) {
+    throw 'Could not launch $url';
   }
 }
