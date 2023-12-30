@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart' as Foundation;
+
 class SenderDetailsResponse {
   final String accountNo;
   final String accountBalance;
@@ -7,11 +9,11 @@ class SenderDetailsResponse {
   final String savingsProductName;
 
   SenderDetailsResponse({
-    this.accountNo = "1001589285",
+    this.accountNo = Foundation.kDebugMode ? "1001589285" : "1028912299",
     this.accountBalance = "1000000.000000",
-    this.accountId = "158928",
-    this.client = "PayMe",
-    this.clientId = "142713",
+    this.accountId = Foundation.kDebugMode ? "158928" : "2891229",
+    this.client = Foundation.kDebugMode ? "PayMe" : "SYSTEMSHIFT LIMITED",
+    this.clientId = Foundation.kDebugMode ? "142713" : "2751911",
     this.savingsProductName = "Corporate Current Account",
   });
 

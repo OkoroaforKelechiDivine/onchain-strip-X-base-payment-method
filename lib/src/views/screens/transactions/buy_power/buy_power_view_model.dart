@@ -60,7 +60,7 @@ class BuyPowerViewModel extends BaseViewModel {
       child: Text("Ikeja Electric"),
     ),
     const DropdownMenuItem<String>(
-      value: "eko-electric2",
+      value: "eko-electric",
       child: AppText("Eko Electric"),
     ),
     const DropdownMenuItem<String>(
