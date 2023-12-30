@@ -74,7 +74,12 @@ class TransactionPinView extends StatelessWidget {
                 onChanged: (value) async {
                   debugPrint('onChanged: $value');
                   if (value.length == 4) {
-                    onPinComplete(value);
+                    if (appGlobals.user!.isTransactionPinSet!) {
+                      onPinComplete(value);
+                    } else {
+                      snackbarService.error(
+                          message: "Please Set Transaction Pin");
+                    }
                     //await model.onPassCode();
                   }
                 },
