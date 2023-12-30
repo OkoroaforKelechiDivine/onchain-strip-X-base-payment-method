@@ -3,7 +3,7 @@ description: Payme Mobile Application
 
 publish_to: 'none'
 
-version: 1.0.2+3
+version: 1.0.3+4
 
 environment:
   sdk: '>=2.18.4 <3.0.0'
@@ -35,6 +35,7 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   url_launcher: ^6.2.2
   share_plus: ^7.2.1
+  restart_app: ^1.2.1
   
 
 dev_dependencies:

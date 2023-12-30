@@ -30,7 +30,7 @@ class ApiService {
       return res.data;
     } on DioError catch (e) {
       String errorMessage = e.response?.data["error"] ?? e.message;
-      throw ApiFailure(errorMessage);
+      throw ApiFailure(_handleError(e));
     }
   }
 
@@ -40,7 +40,7 @@ class ApiService {
       return res.data;
     } on DioError catch (e) {
       String errorMessage = e.response?.data["error"] ?? e.message;
-      throw ApiFailure(errorMessage);
+      throw ApiFailure(_handleError(e));
     }
   }
 
@@ -50,7 +50,7 @@ class ApiService {
       return res.data;
     } on DioError catch (e) {
       String errorMessage = e.response?.data["error"] ?? e.message;
-      throw ApiFailure(errorMessage);
+      throw ApiFailure(_handleError(e));
     }
   }
 
@@ -60,7 +60,7 @@ class ApiService {
       return res.data;
     } on DioError catch (e) {
       String errorMessage = e.response?.data["error"] ?? e.message;
-      throw ApiFailure(errorMessage);
+      throw ApiFailure(_handleError(e));
     }
   }
 
@@ -93,6 +93,9 @@ class ApiService {
         break;
       case DioErrorType.sendTimeout:
         errorDescription = "Send timeout in connection with server";
+        break;
+      case DioErrorType.connectionError:
+        errorDescription = "Connection to server failed due to internet";
         break;
       case DioErrorType.badCertificate:
         errorDescription = "Bad certificate";
