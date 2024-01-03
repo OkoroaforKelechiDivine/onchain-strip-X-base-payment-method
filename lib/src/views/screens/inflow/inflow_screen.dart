@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/inflow_response.dart';
 import 'package:pay_me_mobile/src/views/screens/inflow/inflow_details.dart';
@@ -27,24 +28,27 @@ class InflowScreen extends StatelessWidget {
             await model.init();
           },
           child: GestureDetector(
-            onVerticalDragDown: (details) {
-              // Check if the refresh indicator is currently active
-              if (model.refreshKey.currentState != null) {
-                // Show the refresh indicator
-                model.refreshKey.currentState!.show();
+            onVerticalDragStart: (dragDetails) {
+              model.startVerticalDragDetailsY = dragDetails.globalPosition.dy;
+            },
+            onVerticalDragUpdate: (dragDetails) {
+              model.updateVerticalDragDetailsY = dragDetails.globalPosition.dy;
+            },
+            onVerticalDragEnd: (endDetails) {
+              if (model.startVerticalDragDetailsY <
+                  model.updateVerticalDragDetailsY) {
+                // User dragged down
+                model.refreshKey.currentState?.show();
               }
             },
             child: Scaffold(
               appBar: AppBar(
                 elevation: 0,
-                backgroundColor: Colors.white10,
+                backgroundColor: Colors.white,
                 leading: const BackButton(),
-                title: const Text(
+                title: Text(
                   "Inflow",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color.fromRGBO(23, 171, 144, 1),
-                  ),
+                  style: sans(color: AppColors.lightGreen),
                 ),
               ),
               body: Builder(

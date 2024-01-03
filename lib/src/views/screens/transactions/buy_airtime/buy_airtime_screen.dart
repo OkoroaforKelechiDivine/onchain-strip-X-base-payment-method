@@ -36,7 +36,7 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.white,
             title: Text(
               'Buy Airtime',
               style: sans(color: AppColors.lightGreen),

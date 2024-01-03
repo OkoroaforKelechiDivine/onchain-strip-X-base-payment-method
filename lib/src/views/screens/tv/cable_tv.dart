@@ -29,7 +29,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Colors.white10,
+            backgroundColor: Colors.white,
             title: Text(
               'Cable TV',
               style: sans(

@@ -42,17 +42,24 @@ class HomePageScreen extends StatelessWidget {
             return await model.init();
           },
           child: GestureDetector(
-            onVerticalDragDown: (details) {
-              // Check if the refresh indicator is currently active
-              if (model.refreshKey.currentState != null) {
-                // Show the refresh indicator
-                model.refreshKey.currentState!.show();
+            onVerticalDragStart: (dragDetails) {
+              model.startVerticalDragDetailsY = dragDetails.globalPosition.dy;
+            },
+            onVerticalDragUpdate: (dragDetails) {
+              model.updateVerticalDragDetailsY = dragDetails.globalPosition.dy;
+            },
+            onVerticalDragEnd: (endDetails) {
+              if (model.startVerticalDragDetailsY <
+                  model.updateVerticalDragDetailsY) {
+                // User dragged down
+                model.refreshKey.currentState?.show();
               }
             },
             child: Scaffold(
               appBar: AppBar(
                 elevation: 0,
-                backgroundColor: Colors.transparent,
+                backgroundColor: AppColors.white,
+                centerTitle: false,
                 title: AppText(
                   'Hi, ${appGlobals.user?.business}',
                   fontSize: 20,
@@ -243,7 +250,7 @@ class HomePageScreen extends StatelessWidget {
                         height: 16.h,
                       ),
                       SizedBox(
-                        height: 95,
+                        height: 100,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -331,7 +338,7 @@ class HomePageScreen extends StatelessWidget {
                       ),
 
                       SizedBox(
-                        height: 95,
+                        height: 100,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

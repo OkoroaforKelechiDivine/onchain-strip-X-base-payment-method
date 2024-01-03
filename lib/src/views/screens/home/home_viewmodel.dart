@@ -12,6 +12,8 @@ class HomeViewModel extends BaseViewModel {
   bool isVisible = false;
   bool isLoadingWalletBalance = false;
   String walletBalance = "0.00";
+  double startVerticalDragDetailsY = 0.0;
+  double updateVerticalDragDetailsY = 0.0;
   void onToggleVisibility() {
     isVisible = !isVisible;
     notifyListeners();

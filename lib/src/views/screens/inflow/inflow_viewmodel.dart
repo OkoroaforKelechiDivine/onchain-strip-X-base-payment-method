@@ -7,6 +7,8 @@ import 'package:stacked/stacked.dart';
 class InflowViewmodel extends BaseViewModel {
   GlobalKey<RefreshIndicatorState> refreshKey =
       GlobalKey<RefreshIndicatorState>();
+  double startVerticalDragDetailsY = 0.0;
+  double updateVerticalDragDetailsY = 0.0;
   bool isProcessing = false;
   List<InflowResponse> inflowList = [];
 
