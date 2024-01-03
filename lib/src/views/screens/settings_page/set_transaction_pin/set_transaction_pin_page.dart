@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/core/widgets/app_text.dart';
@@ -22,12 +24,14 @@ class SetTransactionPinPage extends StatelessWidget {
     final defaultPinTheme = PinTheme(
       width: 46,
       height: 46,
-      textStyle: const TextStyle(
-        fontSize: 40,
+      textStyle: TextStyle(
+        //fontSize: 40,
+        fontSize: Platform.isIOS ? 30 : 40,
+        fontWeight: Platform.isIOS ? FontWeight.w700 : FontWeight.normal,
         color: Color.fromRGBO(30, 60, 87, 1),
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(19),
+        borderRadius: BorderRadius.circular(100),
         border: Border.all(color: borderColor),
       ),
     );
@@ -110,7 +114,7 @@ class SetTransactionPinPage extends StatelessWidget {
                           submittedPinTheme: defaultPinTheme.copyWith(
                             decoration: defaultPinTheme.decoration!.copyWith(
                               color: fillColor,
-                              borderRadius: BorderRadius.circular(19),
+                              borderRadius: BorderRadius.circular(100),
                               border: Border.all(color: focusedBorderColor),
                             ),
                           ),

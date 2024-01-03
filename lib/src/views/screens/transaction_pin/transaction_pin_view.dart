@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/widgets/screen_button.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_pin/transaction_pin_viewmodel.dart';
@@ -17,14 +19,15 @@ class TransactionPinView extends StatelessWidget {
     const borderColor = Color.fromRGBO(23, 171, 144, 0.4);
 
     final defaultPinTheme = PinTheme(
-      width: 46,
-      height: 46,
-      textStyle: const TextStyle(
-        fontSize: 40,
+      width: 45,
+      height: 45,
+      textStyle: TextStyle(
+        fontSize: Platform.isIOS ? 35 : 40,
+        fontWeight: Platform.isIOS ? FontWeight.w700 : FontWeight.normal,
         color: Color.fromRGBO(30, 60, 87, 1),
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(19),
+        borderRadius: BorderRadius.circular(100),
         border: Border.all(color: borderColor),
       ),
     );
@@ -103,7 +106,7 @@ class TransactionPinView extends StatelessWidget {
                 submittedPinTheme: defaultPinTheme.copyWith(
                   decoration: defaultPinTheme.decoration!.copyWith(
                     color: fillColor,
-                    borderRadius: BorderRadius.circular(19),
+                    borderRadius: BorderRadius.circular(100),
                     border: Border.all(color: focusedBorderColor),
                   ),
                 ),

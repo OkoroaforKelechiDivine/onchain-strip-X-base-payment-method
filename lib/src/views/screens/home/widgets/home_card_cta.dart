@@ -15,33 +15,35 @@ class HomeCardCTA extends StatelessWidget {
       this.onPressed,
       required this.asset,
       required this.title,
-      this.textColor, this.fontSize});
+      this.textColor,
+      this.fontSize});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 40,
-          decoration: BoxDecoration(
-            color: AppColors.deepWhite,
-            borderRadius: BorderRadius.circular(8.0),
+    return GestureDetector(
+      onTap: onPressed ?? () {},
+      child: Column(
+        children: [
+          Container(
+            height: 40,
+            decoration: BoxDecoration(
+              color: AppColors.deepWhite,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: IconButton(
+              icon: Image.asset(asset),
+              onPressed: onPressed ?? () {},
+            ),
           ),
-          child: IconButton(
-            icon: Image.asset(asset),
-            onPressed: onPressed ?? () {},
+          const SizedBox(height: 8),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: sans(
+                color: textColor ?? Colors.white, fontSize: fontSize ?? 14.sp),
           ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: sans(
-              color: textColor ?? Colors.white,
-            fontSize: fontSize ?? 14.sp
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

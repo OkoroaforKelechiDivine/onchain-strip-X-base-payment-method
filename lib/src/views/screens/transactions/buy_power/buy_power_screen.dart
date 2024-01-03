@@ -31,7 +31,7 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.white,
             title: Text(
               'Buy Power',
               style: sans(color: AppColors.lightGreen),

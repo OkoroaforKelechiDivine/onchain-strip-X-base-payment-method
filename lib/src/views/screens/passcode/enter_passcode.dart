@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/widgets/loader.dart';
@@ -28,12 +30,14 @@ class PassCodeScreen extends StatelessWidget {
     final defaultPinTheme = PinTheme(
       width: 46,
       height: 46,
-      textStyle: const TextStyle(
-        fontSize: 40,
+      //padding: //EdgeInsets.only(bottom: 16),
+      textStyle: TextStyle(
+        fontSize: Platform.isIOS ? 30 : 40,
+        fontWeight: Platform.isIOS ? FontWeight.w700 : FontWeight.normal,
         color: Color.fromRGBO(30, 60, 87, 1),
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(19),
+        borderRadius: BorderRadius.circular(100),
         border: Border.all(color: borderColor),
       ),
     );
@@ -119,7 +123,7 @@ class PassCodeScreen extends StatelessWidget {
                           submittedPinTheme: defaultPinTheme.copyWith(
                             decoration: defaultPinTheme.decoration!.copyWith(
                               color: fillColor,
-                              borderRadius: BorderRadius.circular(19),
+                              borderRadius: BorderRadius.circular(100),
                               border: Border.all(color: focusedBorderColor),
                             ),
                           ),
