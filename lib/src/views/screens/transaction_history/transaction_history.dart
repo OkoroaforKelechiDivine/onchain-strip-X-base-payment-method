@@ -18,44 +18,49 @@ class TransactionHistoryScreen extends StatelessWidget {
         await viewModel.init();
       },
       builder: (context, model, child) {
-        return Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            title: Text(
-              'Transaction History',
-              style: sans(color: AppColors.lightGreen),
+        return RefreshIndicator(
+          onRefresh: () async {
+            await model.init();
+          },
+          child: Scaffold(
+            appBar: AppBar(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              title: Text(
+                'Transaction History',
+                style: sans(color: AppColors.lightGreen),
+              ),
             ),
-          ),
-          body: Builder(
-            builder: (context) {
-              if (model.isLoadingTransaction) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.lightGreen,
-                  ),
+            body: Builder(
+              builder: (context) {
+                if (model.isLoadingTransaction) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.lightGreen,
+                    ),
+                  );
+                }
+                if (model.isTransactionError) {
+                  return Center(
+                    child: Text(
+                      "An error occured while fetching transactions",
+                      style: sans(color: AppColors.lightGreen),
+                    ),
+                  );
+                }
+                if (model.transactionList.isEmpty) {
+                  return Center(
+                    child: Text(
+                      "No Transaction Found",
+                      style: sans(color: AppColors.lightGreen),
+                    ),
+                  );
+                }
+                return BuildTransactionList(
+                  model: model,
                 );
-              }
-              if (model.isTransactionError) {
-                return Center(
-                  child: Text(
-                    "An error occured while fetching transactions",
-                    style: sans(color: AppColors.lightGreen),
-                  ),
-                );
-              }
-              if (model.transactionList.isEmpty) {
-                return Center(
-                  child: Text(
-                    "No Transaction Found",
-                    style: sans(color: AppColors.lightGreen),
-                  ),
-                );
-              }
-              return BuildTransactionList(
-                model: model,
-              );
-            },
+              },
+            ),
           ),
         );
       },

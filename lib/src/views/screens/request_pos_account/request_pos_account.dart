@@ -53,7 +53,7 @@ class RequestPOSOrAccountView extends StatelessWidget {
                   AppCustomTextField(
                     textEditingController: model.lastnameController,
                     hintText: 'Enter Last Name ',
-                    textInputType: TextInputType.number,
+                    textInputType: TextInputType.name,
                   ),
                   const SizedBox(height: 16.0),
                   const AppText("Enter Email"),
@@ -61,7 +61,7 @@ class RequestPOSOrAccountView extends StatelessWidget {
                   AppCustomTextField(
                     textEditingController: model.emailnameController,
                     hintText: 'Enter Email Address',
-                    textInputType: TextInputType.name,
+                    textInputType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 16.0),
                   const AppText("Enter Phone Number"),
@@ -77,7 +77,7 @@ class RequestPOSOrAccountView extends StatelessWidget {
                   AppCustomTextField(
                     textEditingController: model.businessAddressController,
                     hintText: 'Enter Business Address',
-                    textInputType: TextInputType.number,
+                    textInputType: TextInputType.name,
                   ),
                   const SizedBox(height: 16.0),
                   const AppText("Enter State"),
@@ -85,7 +85,7 @@ class RequestPOSOrAccountView extends StatelessWidget {
                   AppCustomTextField(
                     textEditingController: model.stateController,
                     hintText: 'Enter State',
-                    textInputType: TextInputType.number,
+                    textInputType: TextInputType.name,
                   ),
                   const SizedBox(height: 16.0),
                   const AppText("Request Type"),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,45 +9,61 @@ import 'package:stacked/stacked.dart';
 import 'bottom_nav_vm.dart';
 import '../widgets/bottom_nav_items.dart';
 
-class BottomNav extends StatefulWidget {
+class BottomNav extends StatelessWidget {
   const BottomNav({super.key});
 
-  @override
-  State<BottomNav> createState() => _BottomNavState();
-}
-
-class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => BottomNavViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  spreadRadius: 2,
-                  blurRadius: 2,
-                  offset: Offset(0, 0.75), // changes position of shadow
-                ),
-              ],
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            iconSize: 20.0,
+            selectedFontSize: 14.0,
+            unselectedFontSize: 14.0,
+            enableFeedback: true,
+            unselectedItemColor: Colors.grey,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            selectedIconTheme: IconThemeData(
+              color: AppColors.lightGreen,
             ),
-            child: BottomNavigationBar(
-                onTap: (index) => model.updateIndex(index),
-                type: BottomNavigationBarType.fixed,
-                unselectedFontSize: 10.sp,
-                selectedFontSize: 10.sp,
-                selectedItemColor: AppColors.lightGreen,
-                elevation: 10,
-                backgroundColor: Colors.white,
-                currentIndex: model.currentIndex,
-                showSelectedLabels: false, // Disable labels for selected items
-                showUnselectedLabels: false,
-                items: bottomNavItems(context, model.currentIndex)),
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Opacity(
+                    opacity: model.currentIndex == 0 ? 1.0 : 0.5,
+                    child: Image.asset(
+                      homeImage,
+                      height: 20,
+                      width: 20,
+                    )),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Opacity(
+                    opacity: model.currentIndex == 1 ? 1.0 : 0.5,
+                    child: Image.asset(
+                      transactionHistoryImage,
+                      height: 20,
+                      width: 20,
+                    )),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Opacity(
+                  opacity: model.currentIndex == 2 ? 1.0 : 0.5,
+                  child: const Icon(Icons.person),
+                ),
+                label: '',
+              )
+            ],
+            currentIndex: model.currentIndex,
+            selectedItemColor: AppColors.lightGreen,
+            onTap: model.updateIndex,
           ),
-          body: SafeArea(top: true, child: model.children[model.currentIndex]),
+          body: model.children[model.currentIndex],
         );
       },
     );
