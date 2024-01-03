@@ -21,125 +21,141 @@ class InflowScreen extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.init(),
       viewModelBuilder: () => InflowViewmodel(),
       builder: (context, model, child) {
-        return Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.white10,
-            leading: const BackButton(),
-            title: const Text(
-              "Inflow",
-              style: TextStyle(
-                fontSize: 20,
-                color: Color.fromRGBO(23, 171, 144, 1),
+        return RefreshIndicator(
+          key: model.refreshKey,
+          onRefresh: () async {
+            await model.init();
+          },
+          child: GestureDetector(
+            onVerticalDragDown: (details) {
+              // Check if the refresh indicator is currently active
+              if (model.refreshKey.currentState != null) {
+                // Show the refresh indicator
+                model.refreshKey.currentState!.show();
+              }
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                elevation: 0,
+                backgroundColor: Colors.white10,
+                leading: const BackButton(),
+                title: const Text(
+                  "Inflow",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color.fromRGBO(23, 171, 144, 1),
+                  ),
+                ),
               ),
-            ),
-          ),
-          body: Builder(
-            builder: (context) {
-              if (model.isProcessing) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (model.inflowList.isEmpty) {
-                return const Center(
-                  child: Text('No inflow yet'),
-                );
-              }
-              return GroupedListView<InflowResponse, String>(
-                elements: model.inflowList,
-                groupBy: (element) {
-                  final DateTime date =
-                      DateTime.parse(element.timeStamp).toLocal();
-                  return DateFormat('yyyy-MM-dd').format(date);
-                },
-                groupSeparatorBuilder: (String value) {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                    child: Container(
-                      color: AppColors.deepWhite,
-                      height: 20,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Text(
-                          DateFormat('dd MMMM, yyyy')
-                              .format(DateTime.parse(value)),
-                          style: const TextStyle(
-                            fontWeight: AppFontWeight.bold,
-                            fontSize: AppFontSize.size12,
-                            color: AppColors.lightBlack,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                itemComparator: (item1, item2) {
-                  final DateTime item1Date =
-                      DateTime.parse(item1.timeStamp).toLocal();
-                  final DateTime item2Date =
-                      DateTime.parse(item2.timeStamp).toLocal();
-                  return item2Date.compareTo(item1Date);
-                },
-                indexedItemBuilder: (context, element, index) {
-                  final bank = element;
-                  return GestureDetector(
-                    onTap: () {
-                      bottomSheetService
-                          .show(InflowDetails(transactionResponse: bank));
-                      //navigationService.push();
+              body: Builder(
+                builder: (context) {
+                  if (model.isProcessing) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (model.inflowList.isEmpty) {
+                    return const Center(
+                      child: Text('No inflow yet'),
+                    );
+                  }
+                  return GroupedListView<InflowResponse, String>(
+                    elements: model.inflowList,
+                    groupBy: (element) {
+                      final DateTime date =
+                          DateTime.parse(element.timeStamp).toLocal();
+                      return DateFormat('yyyy-MM-dd').format(date);
                     },
-                    child: Container(
-                      color: AppColors.lightBlue,
-                      child: ListTile(
-                        leading: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: AppColors.lightGreen,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: const Icon(
-                            Icons.money,
-                            color: Colors.white,
-                          ),
-                        ),
-                        title: Text(
-                          bank.originatorAccountName,
-                          style: TextStyle(
-                            fontFamily: GoogleFonts.alegreyaSans().fontFamily,
-                            fontWeight: AppFontWeight.bold,
-                            fontSize: AppFontSize.size14,
-                          ),
-                        ),
-                        subtitle: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              model.formatTimestamp(
-                                  DateTime.tryParse(bank.timeStamp) ??
-                                      DateTime.now()),
+                    groupSeparatorBuilder: (String value) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                        child: Container(
+                          color: AppColors.deepWhite,
+                          height: 20,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              DateFormat('dd MMMM, yyyy')
+                                  .format(DateTime.parse(value)),
                               style: const TextStyle(
+                                fontWeight: AppFontWeight.bold,
+                                fontSize: AppFontSize.size12,
                                 color: AppColors.lightBlack,
-                                fontWeight: AppFontWeight.light,
-                                fontSize: AppFontSize.size14,
                               ),
                             ),
-                            Text(
-                              "₦${formatBalance(bank.amount.toDouble())}",
-                              style: const TextStyle(
+                          ),
+                        ),
+                      );
+                    },
+                    itemComparator: (item1, item2) {
+                      final DateTime item1Date =
+                          DateTime.parse(item1.timeStamp).toLocal();
+                      final DateTime item2Date =
+                          DateTime.parse(item2.timeStamp).toLocal();
+                      return item2Date.compareTo(item1Date);
+                    },
+                    indexedItemBuilder: (context, element, index) {
+                      final bank = element;
+                      return GestureDetector(
+                        onTap: () {
+                          bottomSheetService
+                              .show(InflowDetails(transactionResponse: bank));
+                          //navigationService.push();
+                        },
+                        child: Container(
+                          color: AppColors.lightBlue,
+                          child: ListTile(
+                            leading: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
                                 color: AppColors.lightGreen,
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              child: const Icon(
+                                Icons.money,
+                                color: Colors.white,
+                              ),
+                            ),
+                            title: Text(
+                              bank.originatorAccountName,
+                              style: TextStyle(
+                                fontFamily:
+                                    GoogleFonts.alegreyaSans().fontFamily,
                                 fontWeight: AppFontWeight.bold,
                                 fontSize: AppFontSize.size14,
                               ),
                             ),
-                          ],
+                            subtitle: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  model.formatTimestamp(
+                                      DateTime.tryParse(bank.timeStamp) ??
+                                          DateTime.now()),
+                                  style: const TextStyle(
+                                    color: AppColors.lightBlack,
+                                    fontWeight: AppFontWeight.light,
+                                    fontSize: AppFontSize.size14,
+                                  ),
+                                ),
+                                Text(
+                                  "₦${formatBalance(bank.amount.toDouble())}",
+                                  style: const TextStyle(
+                                    color: AppColors.lightGreen,
+                                    fontWeight: AppFontWeight.bold,
+                                    fontSize: AppFontSize.size14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   );
                 },
-              );
-            },
+              ),
+            ),
           ),
         );
       },

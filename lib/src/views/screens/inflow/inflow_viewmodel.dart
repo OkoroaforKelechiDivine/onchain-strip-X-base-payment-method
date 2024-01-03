@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/inflow_response.dart';
 import 'package:stacked/stacked.dart';
 
 class InflowViewmodel extends BaseViewModel {
+  GlobalKey<RefreshIndicatorState> refreshKey =
+      GlobalKey<RefreshIndicatorState>();
   bool isProcessing = false;
   List<InflowResponse> inflowList = [];
 
