@@ -25,7 +25,7 @@ class BuildTransactionList extends StatelessWidget {
       padding: const EdgeInsets.only(left: 15.0, right: 10.0),
       child: ListView.separated(
         itemBuilder: (context, index) {
-          final bank = model.transactionList![index];
+          final bank = model.transactionList[index];
           final isDebit = bank.transactionType! == "Outflow" ||
               bank.transactionType! == "Airtime";
           return GestureDetector(
