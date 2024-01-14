@@ -72,6 +72,14 @@ class RequestPOSOrAccountView extends StatelessWidget {
                     textInputType: TextInputType.number,
                   ),
                   const SizedBox(height: 16.0),
+                  const AppText("Enter Business Name"),
+                  const SizedBox(height: 8.0),
+                  AppCustomTextField(
+                    textEditingController: model.businessNameController,
+                    hintText: 'Enter Business Name',
+                    textInputType: TextInputType.name,
+                  ),
+                  const SizedBox(height: 16.0),
                   const AppText("Enter Business Address"),
                   const SizedBox(height: 8.0),
                   AppCustomTextField(
@@ -88,38 +96,90 @@ class RequestPOSOrAccountView extends StatelessWidget {
                     textInputType: TextInputType.name,
                   ),
                   const SizedBox(height: 16.0),
-                  const AppText("Request Type"),
+                  const AppText("Enter BVN"),
                   const SizedBox(height: 8.0),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: const AppText("Account"),
-                          leading: Radio(
-                            activeColor: AppColors.lightGreen,
-                            value: 'account',
-                            groupValue: model.requestType,
-                            onChanged: (String? value) {
-                              model.setRequestType(value!);
-                            },
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListTile(
-                          title: const AppText("POS"),
-                          leading: Radio(
-                            activeColor: AppColors.lightGreen,
-                            value: 'pos',
-                            groupValue: model.requestType,
-                            onChanged: (String? value) {
-                              model.setRequestType(value!);
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
+                  AppCustomTextField(
+                    textEditingController: model.bvnController,
+                    hintText: 'Enter BVN',
+                    textInputType: TextInputType.number,
                   ),
+                  const SizedBox(height: 16.0),
+
+                  const AppText("Enter RC Number"),
+                  const SizedBox(height: 8.0),
+                  AppCustomTextField(
+                    textEditingController: model.rcNumberController,
+                    hintText: 'Enter RC Number',
+                    textInputType: TextInputType.number,
+                  ),
+                  const SizedBox(height: 16.0),
+                  const AppText("Enter Incorporation Date"),
+                  const SizedBox(height: 8.0),
+                  GestureDetector(
+                    onTap: () {
+                      model.selectDate(context);
+                    },
+                    child: Container(
+                      height: 50.0,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.lightGreen,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            AppText(
+                              "${model.selectedDate.toLocal()}".split(' ')[0],
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            const Icon(
+                              Icons.calendar_today,
+                              color: AppColors.lightGreen,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: ListTile(
+                  //         title: const AppText("Account"),
+                  //         leading: Radio(
+                  //           activeColor: AppColors.lightGreen,
+                  //           value: 'account',
+                  //           groupValue: model.requestType,
+                  //           onChanged: (String? value) {
+                  //             model.setRequestType(value!);
+                  //           },
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //       child: ListTile(
+                  //         title: const AppText("POS"),
+                  //         leading: Radio(
+                  //           activeColor: AppColors.lightGreen,
+                  //           value: 'pos',
+                  //           groupValue: model.requestType,
+                  //           onChanged: (String? value) {
+                  //             model.setRequestType(value!);
+                  //           },
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   const SizedBox(height: 35.0),
                   AppCustomButton(
                     onPressed: () {

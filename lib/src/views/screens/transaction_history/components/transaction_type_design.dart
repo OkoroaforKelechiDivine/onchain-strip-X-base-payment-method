@@ -87,11 +87,11 @@ class PowerRecept extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         buildDivider(),
-        // const SizedBox(height: 15),
-        // const BuildInfoRow(
-        //     label: 'Payment Method', value: 'Fees'),
-        // const SizedBox(height: 15),
-        // buildDivider(),
+        const SizedBox(height: 15),
+        BuildInfoRow(
+            label: "Token", value: transactionResponse.purchaseCode ?? ""),
+        const SizedBox(height: 15),
+        buildDivider(),
         const SizedBox(height: 15),
         BuildInfoRow(
             label: 'Status', value: transactionResponse.statusDescription!),

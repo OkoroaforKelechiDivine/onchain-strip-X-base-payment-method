@@ -70,7 +70,6 @@ class Transactions {
   final int convinienceFee;
   final int commission;
   final int amount;
-  final double totalAmount;
   final int quantity;
   final int unitPrice;
   final String updatedAt;
@@ -92,7 +91,6 @@ class Transactions {
     required this.convinienceFee,
     required this.commission,
     required this.amount,
-    required this.totalAmount,
     required this.quantity,
     required this.unitPrice,
     required this.updatedAt,
@@ -115,7 +113,6 @@ class Transactions {
         convinienceFee: json["convinience_fee"],
         commission: json["commission"],
         amount: json["amount"],
-        totalAmount: json["total_amount"].toDouble(),
         quantity: json["quantity"],
         unitPrice: json["unit_price"],
         updatedAt: json["updated_at"],
@@ -138,7 +135,6 @@ class Transactions {
         "convinience_fee": convinienceFee,
         "commission": commission,
         "amount": amount,
-        "total_amount": totalAmount,
         "quantity": quantity,
         "unit_price": unitPrice,
         "updated_at": updatedAt,

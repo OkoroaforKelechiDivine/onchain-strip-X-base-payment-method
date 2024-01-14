@@ -126,7 +126,6 @@ class Transactions {
   final String createdAt;
   final String discount;
   final String giftcardId;
-  final int totalAmount;
   final int commission;
   final String channel;
   final String platform;
@@ -147,7 +146,6 @@ class Transactions {
     required this.createdAt,
     required this.discount,
     required this.giftcardId,
-    required this.totalAmount,
     required this.commission,
     required this.channel,
     required this.platform,
@@ -169,7 +167,6 @@ class Transactions {
         createdAt: json["created_at"],
         discount: json["discount"],
         giftcardId: json["giftcard_id"],
-        totalAmount: json["total_amount"],
         commission: json["commission"],
         channel: json["channel"],
         platform: json["platform"],
@@ -191,7 +188,6 @@ class Transactions {
         "created_at": createdAt,
         "discount": discount,
         "giftcard_id": giftcardId,
-        "total_amount": totalAmount,
         "commission": commission,
         "channel": channel,
         "platform": platform,
