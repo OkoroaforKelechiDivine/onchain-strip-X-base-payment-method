@@ -64,6 +64,7 @@ class InflowScreen extends StatelessWidget {
                     );
                   }
                   return GroupedListView<InflowResponse, String>(
+                    //reverse: true,
                     elements: model.inflowList,
                     groupBy: (element) {
                       final DateTime date =
@@ -91,6 +92,7 @@ class InflowScreen extends StatelessWidget {
                         ),
                       );
                     },
+                    order: GroupedListOrder.DESC,
                     itemComparator: (item1, item2) {
                       final DateTime item1Date =
                           DateTime.parse(item1.timeStamp).toLocal();

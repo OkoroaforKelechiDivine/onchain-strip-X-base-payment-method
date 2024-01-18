@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pay_me_mobile/src/views/app_nav/app_nav.dart';
 import 'package:pay_me_mobile/src/views/screens/passcode/enter_passcode.dart';
 import 'package:provider/provider.dart';
@@ -21,40 +24,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // Timer? _timer;
-  // final _inactiveDuration = const Duration(minutes: 3);
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance.addObserver(this as WidgetsBindingObserver);
-  // }
-
-  // @override
-  // void dispose() {
-  //   _timer?.cancel();
-  //   WidgetsBinding.instance.removeObserver(this);
-  //   super.dispose();
-  // }
-
-  // @override
-  // void didChangeAppLifecycleState(AppLifecycleState state) {
-  //   if (state == AppLifecycleState.paused) {
-  //     // App in background
-  //     log("In background");
-  //     _timer = Timer(_inactiveDuration, _restartApp);
-  //   } else if (state == AppLifecycleState.resumed) {
-  //     // App in foreground
-  //     _timer?.cancel();
-  //   }
-  // }
-
-  // void _restartApp() {
-  //   Navigator.of(context).pushAndRemoveUntil(
-  //     MaterialPageRoute(builder: (context) => const MyApp()),
-  //     (Route<dynamic> route) => false,
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return OverlaySupport.global(

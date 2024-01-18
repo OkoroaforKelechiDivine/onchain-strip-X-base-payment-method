@@ -255,17 +255,15 @@ class HomePageScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  navigationService.push(const InflowScreen());
-                                  //pushNavigation(context: context, widget: OutletScreen());
-                                },
-                                child: const ShadowWrapper(
-                                  child: HomeCardCTA(
-                                    asset: "assets/jpg/outlet.jpg",
-                                    title: 'Inflow',
-                                    textColor: AppColors.lightGreen,
-                                  ),
+                              child: ShadowWrapper(
+                                child: HomeCardCTA(
+                                  asset: "assets/jpg/outlet.jpg",
+                                  title: 'Inflow',
+                                  textColor: AppColors.lightGreen,
+                                  onPressed: () {
+                                    navigationService
+                                        .push(const InflowScreen());
+                                  },
                                 ),
                               ),
                             ),
@@ -273,28 +271,26 @@ class HomePageScreen extends StatelessWidget {
                               width: 12.w,
                             ),
                             Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  log(Permissions()
-                                      .canUserViewAllTransactions()
-                                      .toString());
-                                  if (Permissions()
-                                      .canUserViewAllTransactions()) {
-                                    navigationService
-                                        .push(const TransactionHistoryScreen());
-                                  } else {
-                                    snackbarService.error(
-                                        message:
-                                            "Can't Perform this Operation");
-                                  }
-                                },
-                                child: const ShadowWrapper(
-                                  child: HomeCardCTA(
-                                    asset: "assets/jpg/history.jpg",
-                                    title: 'Transaction\nHistory',
-                                    textColor: AppColors.lightGreen,
-                                    fontSize: 13,
-                                  ),
+                              child: ShadowWrapper(
+                                child: HomeCardCTA(
+                                  asset: "assets/jpg/history.jpg",
+                                  title: 'Transaction\nHistory',
+                                  textColor: AppColors.lightGreen,
+                                  fontSize: 13,
+                                  onPressed: () {
+                                    log(Permissions()
+                                        .canUserViewAllTransactions()
+                                        .toString());
+                                    if (Permissions()
+                                        .canUserViewAllTransactions()) {
+                                      navigationService.push(
+                                          const TransactionHistoryScreen());
+                                    } else {
+                                      snackbarService.error(
+                                          message:
+                                              "Can't Perform this Operation");
+                                    }
+                                  },
                                 ),
                               ),
                             ),
@@ -302,67 +298,57 @@ class HomePageScreen extends StatelessWidget {
                               width: 12.w,
                             ),
                             Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  log(Permissions()
-                                      .canUserTransfer()
-                                      .toString());
-                                  if (Permissions().canUserTransfer()) {
-                                    navigationService
-                                        .push(const BuyAirtimeScreen());
-                                  } else {
-                                    snackbarService.error(
-                                        message:
-                                            "Can't Perform this Operation");
-                                  }
-                                },
-                                child: ShadowWrapper(
-                                  child: HomeCardCTA(
-                                    asset: "assets/jpg/mobile.jpg",
-                                    title: 'Buy Airtime',
-                                    textColor: AppColors.lightGreen,
-                                    onPressed: () {
+                              child: ShadowWrapper(
+                                child: HomeCardCTA(
+                                  asset: "assets/jpg/mobile.jpg",
+                                  title: 'Buy Airtime',
+                                  textColor: AppColors.lightGreen,
+                                  onPressed: () {
+                                    log(Permissions()
+                                        .canUserTransfer()
+                                        .toString());
+                                    if (Permissions().canUserTransfer()) {
                                       navigationService
                                           .push(const BuyAirtimeScreen());
-                                    },
-                                  ),
+                                    } else {
+                                      snackbarService.error(
+                                          message:
+                                              "Can't Perform this Operation");
+                                    }
+                                  },
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-
                       SizedBox(
                         height: 16.h,
                       ),
-
                       SizedBox(
                         height: 100,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  log(Permissions()
-                                      .canUserTransfer()
-                                      .toString());
-                                  if (Permissions().canUserTransfer()) {
-                                    navigationService
-                                        .push(const BuyPowerScreen());
-                                  } else {
-                                    snackbarService.error(
-                                        message:
-                                            "Can't Perform this Operation");
-                                  }
-                                },
-                                child: const ShadowWrapper(
-                                  child: HomeCardCTA(
-                                    asset: "assets/jpg/buy_power.jpg",
-                                    title: 'Buy Power',
-                                    textColor: AppColors.lightGreen,
-                                  ),
+                              child: ShadowWrapper(
+                                child: HomeCardCTA(
+                                  asset: "assets/jpg/buy_power.jpg",
+                                  title: 'Buy Power',
+                                  textColor: AppColors.lightGreen,
+                                  onPressed: () {
+                                    log(Permissions()
+                                        .canUserTransfer()
+                                        .toString());
+                                    if (Permissions().canUserTransfer()) {
+                                      navigationService
+                                          .push(const BuyPowerScreen());
+                                    } else {
+                                      snackbarService.error(
+                                          message:
+                                              "Can't Perform this Operation");
+                                    }
+                                  },
                                 ),
                               ),
                             ),
@@ -370,28 +356,26 @@ class HomePageScreen extends StatelessWidget {
                               width: 12.w,
                             ),
                             Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  log(Permissions()
-                                      .canUserViewPosDevices()
-                                      .toString());
-                                  if (Permissions().canUserViewPosDevices()) {
-                                    snackbarService.success(
-                                        message: "Coming Soon");
-                                    //navigationService.push(const PosDeviceScreen());
-                                  } else {
-                                    snackbarService.error(
-                                        message:
-                                            "Can't Perform this Operation");
-                                  }
-                                },
-                                child: const ShadowWrapper(
-                                  child: HomeCardCTA(
-                                    asset: "assets/jpg/pos_device.jpg",
-                                    title: 'POS Device',
-                                    textColor: AppColors.lightGreen,
-                                    fontSize: 13,
-                                  ),
+                              child: ShadowWrapper(
+                                child: HomeCardCTA(
+                                  asset: "assets/jpg/pos_device.jpg",
+                                  title: 'POS Device',
+                                  textColor: AppColors.lightGreen,
+                                  fontSize: 13,
+                                  onPressed: () {
+                                    log(Permissions()
+                                        .canUserViewPosDevices()
+                                        .toString());
+                                    if (Permissions().canUserViewPosDevices()) {
+                                      snackbarService.success(
+                                          message: "Coming Soon");
+                                      //navigationService.push(const PosDeviceScreen());
+                                    } else {
+                                      snackbarService.error(
+                                          message:
+                                              "Can't Perform this Operation");
+                                    }
+                                  },
                                 ),
                               ),
                             ),
@@ -399,28 +383,24 @@ class HomePageScreen extends StatelessWidget {
                               width: 12.w,
                             ),
                             Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  log(Permissions()
-                                      .canUserTransfer()
-                                      .toString());
-                                  if (Permissions().canUserTransfer()) {
-                                    navigationService
-                                        .push(const CableTvScreen());
-                                  } else {
-                                    snackbarService.error(
-                                        message:
-                                            "Can't Perform this Operation");
-                                  }
-
-                                  //pushNavigation(context: context, widget: CableTvScreen());
-                                },
-                                child: const ShadowWrapper(
-                                  child: HomeCardCTA(
-                                    asset: "assets/jpg/more.jpg",
-                                    title: 'Tv Cable',
-                                    textColor: AppColors.lightGreen,
-                                  ),
+                              child: ShadowWrapper(
+                                child: HomeCardCTA(
+                                  asset: "assets/jpg/more.jpg",
+                                  title: 'Tv Cable',
+                                  textColor: AppColors.lightGreen,
+                                  onPressed: () {
+                                    log(Permissions()
+                                        .canUserTransfer()
+                                        .toString());
+                                    if (Permissions().canUserTransfer()) {
+                                      navigationService
+                                          .push(const CableTvScreen());
+                                    } else {
+                                      snackbarService.error(
+                                          message:
+                                              "Can't Perform this Operation");
+                                    }
+                                  },
                                 ),
                               ),
                             ),

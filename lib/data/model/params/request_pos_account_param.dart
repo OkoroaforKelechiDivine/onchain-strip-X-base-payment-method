@@ -1,11 +1,14 @@
 class RequestPosAccountParam {
-  String firstName;
-  String lastName;
-  String email;
-  String phone;
-  String businessAddress;
-  String state;
-  String requestType;
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String phone;
+  final String businessAddress;
+  final String state;
+  final String bvn;
+  final String businessName;
+  final String rcNumber;
+  final String incorporationDate;
 
   RequestPosAccountParam({
     required this.firstName,
@@ -14,7 +17,10 @@ class RequestPosAccountParam {
     required this.phone,
     required this.businessAddress,
     required this.state,
-    required this.requestType,
+    required this.bvn,
+    required this.businessName,
+    required this.rcNumber,
+    required this.incorporationDate,
   });
 
   factory RequestPosAccountParam.fromJson(Map<String, dynamic> json) =>
@@ -25,7 +31,10 @@ class RequestPosAccountParam {
         phone: json["phone"],
         businessAddress: json["businessAddress"],
         state: json["state"],
-        requestType: json["requestType"],
+        bvn: json["bvn"],
+        businessName: json["businessName"],
+        rcNumber: json["rcNumber"],
+        incorporationDate: json["incorporationDate"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -35,6 +44,9 @@ class RequestPosAccountParam {
         "phone": phone,
         "businessAddress": businessAddress,
         "state": state,
-        "requestType": requestType,
+        "bvn": bvn,
+        "businessName": businessName,
+        "rcNumber": rcNumber,
+        "incorporationDate": incorporationDate,
       };
 }

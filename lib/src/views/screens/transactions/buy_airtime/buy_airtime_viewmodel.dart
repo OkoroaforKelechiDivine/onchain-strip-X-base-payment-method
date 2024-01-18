@@ -38,7 +38,7 @@ class BuyAirtimeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  List<String> dropdownItems = ['Airtel', 'MTN', 'Glo', '9Mobile'];
+  List<String> dropdownItems = ['Airtel', 'MTN', 'Glo', 'Etisalat'];
 
   void onSelelectNetwork(String val) {
     selectedValue = val;

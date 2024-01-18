@@ -1,25 +1,23 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
+import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 
-import '../../../../../core/cores.dart';
-
-class TransferSuccessPage extends StatelessWidget {
-  final String message;
-  const TransferSuccessPage({super.key, required this.message});
+class RequestSucessPage extends StatelessWidget {
+  const RequestSucessPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 26),
+          padding: const EdgeInsets.symmetric(horizontal: 26),
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(),
+              const Spacer(),
               SvgPicture.asset(
                 AppAssets.complete,
                 height: 200.0,
@@ -27,7 +25,7 @@ class TransferSuccessPage extends StatelessWidget {
               ),
               const SizedBox(height: 20.0),
               const Text(
-                'Transaction Successful',
+                'Request Successful',
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.w600,
@@ -35,14 +33,14 @@ class TransferSuccessPage extends StatelessWidget {
               ),
               const SizedBox(height: 8.0),
               const Text(
-                '',
+                'Your request has been received and is being processed',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               AppCustomButton(
                 onPressed: () {
                   navigationService.pushAndRemoveUntil(const BottomNav());

@@ -24,6 +24,7 @@ class InflowViewmodel extends BaseViewModel {
       isProcessing = false;
       notifyListeners();
       inflowList = res.data!;
+
       notifyListeners();
     } else {
       isProcessing = false;

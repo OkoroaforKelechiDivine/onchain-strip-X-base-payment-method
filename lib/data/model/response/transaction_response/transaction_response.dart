@@ -18,6 +18,7 @@ class TransactionResponse {
   final String? transactionType;
   final String? pan;
   final String? statusDescription;
+  final String? purchaseCode;
   final String? stan;
   final String? transactionDate;
   final String? cardExpiry;
@@ -27,6 +28,7 @@ class TransactionResponse {
   TransactionResponse({
     this.statusCode,
     this.amount,
+    this.purchaseCode,
     this.originatorAccountNumber,
     this.originatorAccountName,
     this.originatorBank,
@@ -73,6 +75,7 @@ class TransactionResponse {
         cardExpiry: json["card_expiry"],
         transactionId: json["transaction_id"],
         businessName: json["business_name"],
+        purchaseCode: json["purchase_code"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -91,6 +94,7 @@ class TransactionResponse {
         "terminal_id": terminalId,
         "rrn": rrn,
         "transaction_type": transactionType,
+        "purchase_code": purchaseCode,
         "pan": pan,
         "status_description": statusDescription,
         "stan": stan,

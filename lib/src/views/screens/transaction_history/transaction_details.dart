@@ -42,6 +42,17 @@ class TransactionDetailsScreen extends StatelessWidget {
                 fontSize: AppFontSize.size20,
               ),
             ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  model.createPdfAndSave(transactionResponse);
+                },
+                icon: const Icon(
+                  Icons.share,
+                  color: AppColors.lightGreen,
+                ),
+              )
+            ],
           ),
           body: SingleChildScrollView(
             child: Column(
