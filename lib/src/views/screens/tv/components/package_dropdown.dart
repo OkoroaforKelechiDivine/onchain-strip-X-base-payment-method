@@ -30,7 +30,7 @@ class TvServiceProviderDropdown extends StatelessWidget {
       ),
       child: DropdownButtonFormField<String>(
         decoration: InputDecoration(
-          hintText: "Choose Electricity Provider",
+          hintText: "Choose Service Provider",
           hintStyle: const TextStyle(
             color: AppColors.lightGrey,
             fontSize: AppFontSize.size14,

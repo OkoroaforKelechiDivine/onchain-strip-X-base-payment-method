@@ -17,7 +17,7 @@ class BuildRequestForPOS extends StatelessWidget {
       },
       child: Center(
         child: Text(
-          "Register",
+          "Doesn't have an account? Register",
           style: GoogleFonts.alegreyaSans(
             textStyle: const TextStyle(
               color: AppColors.lightGrey,

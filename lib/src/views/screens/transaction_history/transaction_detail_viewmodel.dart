@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pay_me_mobile/core/constants/colors.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/transaction_response.dart';
@@ -28,13 +27,29 @@ class TransactionDetailViewModel extends BaseViewModel {
           return pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
-              pw.Image(imageProvider, width: 100, height: 50), // Your logo
+              pw.Row(
+                mainAxisAlignment: pw.MainAxisAlignment.end,
+                children: [
+                  pw.Image(imageProvider, width: 150),
+                ],
+              ),
+
               pw.SizedBox(height: 20),
+              pw.Text('Online Banking',
+                  style: pw.TextStyle(
+                      fontSize: 24, fontWeight: pw.FontWeight.bold)),
+              pw.SizedBox(height: 8),
               pw.Text('Transaction Receipt',
-                  style: const pw.TextStyle(fontSize: 24)),
+                  style: const pw.TextStyle(fontSize: 18)),
               pw.SizedBox(height: 20),
               _buildPdfReceiptContent(
                   transactionResponse), // Dynamic content based on transaction type
+              pw.SizedBox(height: 8),
+              pw.Text(
+                  '''This is an electronic receipt of a transaction and does not require any signature.
+The authenticity of transaction can be confirmed with the Bank.
+For any other assistance, kindly call True Serve on 08104581100 or email request@systemshift.africa''',
+                  style: const pw.TextStyle(fontSize: 16)),
             ],
           );
         },
@@ -76,7 +91,7 @@ class TransactionDetailViewModel extends BaseViewModel {
             'Transaction Type', transactionResponse.transactionType!),
         spacer(),
         _buildInfoRowPdf('Outward Transfer',
-            "₦${formatBalance(transactionResponse.amount!.toDouble())}"),
+            "NGN ${formatBalance(transactionResponse.amount!.toDouble())}"),
         spacer(),
         _buildInfoRowPdf('Status', transactionResponse.statusDescription!),
         spacer(),
@@ -95,7 +110,7 @@ class TransactionDetailViewModel extends BaseViewModel {
             'Transaction Type', transactionResponse.transactionType!),
         spacer(),
         _buildInfoRowPdf('Outward Transfer',
-            "₦${formatBalance(transactionResponse.amount!.toDouble())}"),
+            "NGN ${formatBalance(transactionResponse.amount!.toDouble())}"),
         spacer(),
         _buildInfoRowPdf('Token', transactionResponse.purchaseCode ?? ""),
         spacer(),
@@ -116,7 +131,7 @@ class TransactionDetailViewModel extends BaseViewModel {
             'Transaction Type', transactionResponse.transactionType!),
         spacer(),
         _buildInfoRowPdf('Outward Transfer',
-            "₦${formatBalance(transactionResponse.amount!.toDouble())}"),
+            "NGN ${formatBalance(transactionResponse.amount!.toDouble())}"),
         spacer(),
         _buildInfoRowPdf('Status', transactionResponse.statusDescription!),
         spacer(),
@@ -146,7 +161,7 @@ class TransactionDetailViewModel extends BaseViewModel {
             'Narration', transactionResponse.transactionNarration!),
         spacer(),
         _buildInfoRowPdf('Inflow Transfer',
-            "₦${formatBalance(transactionResponse.amount!.toDouble())}"),
+            "NGN ${formatBalance(transactionResponse.amount!.toDouble())}"),
         spacer(),
         _buildInfoRowPdf('Status', transactionResponse.statusDescription!),
         spacer(),
@@ -176,7 +191,7 @@ class TransactionDetailViewModel extends BaseViewModel {
             'Description', transactionResponse.transactionNarration!),
         spacer(),
         _buildInfoRowPdf('Outward Transfer',
-            "₦${formatBalance(transactionResponse.amount!.toDouble())}"),
+            "NGN ${formatBalance(transactionResponse.amount!.toDouble())}"),
         spacer(),
         _buildInfoRowPdf('Status', transactionResponse.statusDescription!),
         spacer(),
@@ -220,7 +235,7 @@ class TransactionDetailViewModel extends BaseViewModel {
     // Fetch your logo image from assets or network
     // For example, to load an image from assets:
     return pw.MemoryImage(
-        (await rootBundle.load("assets/png/appIcon.png")).buffer.asUint8List());
+        (await rootBundle.load("assets/png/payme.png")).buffer.asUint8List());
   }
 
   pw.Widget buildDivider() {
