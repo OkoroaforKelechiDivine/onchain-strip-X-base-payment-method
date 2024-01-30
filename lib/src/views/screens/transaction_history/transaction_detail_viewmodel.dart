@@ -46,10 +46,11 @@ class TransactionDetailViewModel extends BaseViewModel {
                   transactionResponse), // Dynamic content based on transaction type
               pw.SizedBox(height: 8),
               pw.Text(
-                  '''This is an electronic receipt of a transaction and does not require any signature.
+                '''This is an electronic receipt of a transaction and does not require any signature.
 The authenticity of transaction can be confirmed with the Bank.
-For any other assistance, kindly call True Serve on 08104581100 or email request@systemshift.africa''',
-                  style: const pw.TextStyle(fontSize: 16)),
+For any other assistance, kindly call on 08104581100 or email request@systemshift.africa''',
+                style: const pw.TextStyle(fontSize: 16),
+              ),
             ],
           );
         },
