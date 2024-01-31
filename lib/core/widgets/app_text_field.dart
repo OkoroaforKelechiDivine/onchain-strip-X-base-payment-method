@@ -41,6 +41,7 @@ class AppCustomTextField extends StatelessWidget {
       hintTextColor,
       textColor;
   final TextAlignVertical? textAlignVertical;
+  final bool? readOnly;
   final TextStyle? suffixStyle;
   final TextCapitalization? textCapitalization;
   final Widget? counter;
@@ -109,7 +110,8 @@ class AppCustomTextField extends StatelessWidget {
       this.isDense,
       this.hintTextColor,
       this.hintMaxLines,
-      this.suffixStyle})
+      this.suffixStyle,
+      this.readOnly})
       : super(key: key);
 
   @override
@@ -123,6 +125,7 @@ class AppCustomTextField extends StatelessWidget {
       margin: margin,
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: TextFormField(
+        readOnly: readOnly ?? false,
         autofillHints: autofillHints,
         focusNode: focusNode,
         autofocus: autofocus ?? false,
@@ -202,8 +205,8 @@ class AppCustomTextField extends StatelessWidget {
                     color: errorBorderColor ?? Colors.red,
                     width: borderWidth ?? 1),
               ),
-          filled: false,
-          fillColor: backgroundColor ?? Colors.white,
+          filled: true,
+          fillColor: backgroundColor ?? Colors.transparent,
           hintText: hintText,
           hintMaxLines: hintMaxLines,
           hintStyle: GoogleFonts.outfit(
