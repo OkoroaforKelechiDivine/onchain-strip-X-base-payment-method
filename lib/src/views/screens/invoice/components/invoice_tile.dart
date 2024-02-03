@@ -57,7 +57,7 @@ class InvoiceTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               AppText(
-                amount,
+                "N ${double.parse(amount).toStringAsFixed(2)}",
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
                 color: const Color(0xFF4E5B70),

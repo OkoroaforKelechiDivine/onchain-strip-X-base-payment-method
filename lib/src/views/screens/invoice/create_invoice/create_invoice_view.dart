@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/data/model/response/invoice/get_customer_res.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/components/discount_widget.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/components/invoice_custom_header.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/components/invoice_entry_item.dart';
@@ -9,7 +10,8 @@ import 'package:stacked/stacked.dart';
 import '../../../../../core/cores.dart';
 
 class CreateInvoiceView extends StatelessWidget {
-  const CreateInvoiceView({super.key});
+  final List<GetCustomerRes> customers;
+  const CreateInvoiceView({super.key, required this.customers});
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +48,59 @@ class CreateInvoiceView extends StatelessWidget {
                     fontSize: 14,
                   ),
                   const SizedBox(height: 8),
-                  AppCustomTextField(
-                    hintText: "Enter Customer Name",
-                    textEditingController: viewModel.customerNameTEC,
-                    backgroundColor: Colors.white,
-                    borderColor: Colors.transparent,
+
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: AppColors.white),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<GetCustomerRes>(
+                        // The current value of the dropdown.
+                        value: viewModel.selectedCustomer,
+                        // Called when the user selects an item.
+                        onChanged: (GetCustomerRes? newValue) {
+                          //viewModel.selectedDropdownItem = newValue;
+                          viewModel.selectCustomer(newValue);
+                        },
+                        // The list of items the user can select.
+                        items: customers.map<DropdownMenuItem<GetCustomerRes>>(
+                            (GetCustomerRes value) {
+                          return DropdownMenuItem<GetCustomerRes>(
+                            value: value,
+                            child: Text(value.name),
+                          );
+                        }).toList(),
+                        // Customization for the dropdown button.
+                        isExpanded: true,
+                        hint: const Text('Select an item'),
+                        icon: const Icon(Icons.arrow_drop_down),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                    ),
                   ),
+                  // GestureDetector(
+                  //   onTap: () {},
+                  //   child: Container(
+                  //     padding: const EdgeInsets.all(16.0),
+                  //     decoration: BoxDecoration(
+                  //       color: AppColors.white,
+                  //       borderRadius: BorderRadius.circular(10),
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //       crossAxisAlignment: CrossAxisAlignment.center,
+                  //       children: [
+                  //         AppText(viewModel.selectedCustomer),
+                  //         const Icon(Icons.arrow_drop_down,
+                  //             color: Colors.black),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(height: 24),
                   const AppText(
                     "Customer’s Email Addres",
@@ -135,7 +184,7 @@ class CreateInvoiceView extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return InvoiceItem(
+                        return InvoiceSingleDetail(
                           entry: viewModel.items[index],
                           index: index + 1,
                           onItemUpdated: viewModel.onItemUpdated,
@@ -167,7 +216,7 @@ class CreateInvoiceView extends StatelessWidget {
                         fontSize: 16,
                       ),
                       AppText(
-                        'N ${viewModel.subtotal.toStringAsFixed(2)}',
+                        'N ${viewModel.subtotal().toStringAsFixed(2)}',
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
                       ),
@@ -185,7 +234,14 @@ class CreateInvoiceView extends StatelessWidget {
                   const SizedBox(height: 22),
                   DiscounttWidget(
                     discount: viewModel.discount,
-                    price: 11.55,
+                    price: viewModel.discountAmount(),
+                    onChanged: (p0) {
+                      viewModel.updateTotal(p0);
+                    },
+                    selectedValue: viewModel.selectedDiscountType,
+                    onSelected: () {
+                      viewModel.selectDiscount();
+                    },
                   ),
                   const SizedBox(height: 22),
                   AppText(
@@ -196,8 +252,15 @@ class CreateInvoiceView extends StatelessWidget {
                   ),
                   const SizedBox(height: 22),
                   TaxWidget(
-                    tax: viewModel.discount,
-                    price: 11.55,
+                    tax: viewModel.tax,
+                    price: viewModel.taxAmount(),
+                    onChanged: (p0) {
+                      viewModel.updateTotal(p0);
+                    },
+                    selectedValue: viewModel.selectedTaxType,
+                    onSelected: () {
+                      viewModel.selectTaxType();
+                    },
                   ),
                   const SizedBox(height: 32),
                   const Divider(),
@@ -211,7 +274,7 @@ class CreateInvoiceView extends StatelessWidget {
                         fontSize: 16,
                       ),
                       AppText(
-                        'N ${viewModel.subtotal.toStringAsFixed(2)}',
+                        'N ${viewModel.total().toStringAsFixed(2)}',
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
                       ),
@@ -227,7 +290,7 @@ class CreateInvoiceView extends StatelessWidget {
                   const SizedBox(height: 8),
                   AppCustomTextField(
                     hintText: "Enter some additional notes here ...",
-                    textEditingController: viewModel.customerEmailAddressTEC,
+                    textEditingController: viewModel.additionalNoteTEC,
                     minLines: 8,
                     //backgroundColor: Colors.white,
                     //borderColor: Colors.transparent,
@@ -235,15 +298,18 @@ class CreateInvoiceView extends StatelessWidget {
                   const SizedBox(height: 32),
                   AppCustomButton(
                     title: "Proceed to Preview",
-                    onPressed: () {},
+                    onPressed: () {
+                      viewModel.generateInvoicePdf();
+                    },
                     color: AppColors.black,
                   ),
                   const SizedBox(height: 18),
                   AppCustomButton(
+                    loading: viewModel.isSavingInvoice,
                     elevation: 0,
                     // title: "Save",
                     onPressed: () {
-                      navigationService.pop();
+                      viewModel.saveInvoice();
                     },
                     borderColor: AppColors.black,
                     color: Colors.transparent,

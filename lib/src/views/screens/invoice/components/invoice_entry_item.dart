@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
-import 'package:pay_me_mobile/data/model/params/invoice_entry.dart';
+import 'package:pay_me_mobile/data/model/params/create_invoice_param.dart';
 
-class InvoiceItem extends StatelessWidget {
-  final InvoiceItemEntry entry;
+class InvoiceSingleDetail extends StatelessWidget {
+  final InvoiceItem entry;
   final Function onItemUpdated;
   final int index;
 
-  const InvoiceItem(
+  const InvoiceSingleDetail(
       {Key? key,
       required this.entry,
       required this.onItemUpdated,
@@ -50,7 +50,7 @@ class InvoiceItem extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   AppCustomTextField(
                     onChanged: (value) {
-                      entry.quantity = double.tryParse(value) ?? 0;
+                      entry.quantity = int.tryParse(value) ?? 0;
                       onItemUpdated();
                     },
                     hintText: '0',
@@ -75,7 +75,7 @@ class InvoiceItem extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   AppCustomTextField(
                     onChanged: (value) {
-                      entry.price = double.tryParse(value) ?? 0;
+                      entry.pricePerUnit = double.tryParse(value) ?? 0;
                       onItemUpdated();
                     },
                     hintText: '0',
@@ -102,9 +102,9 @@ class InvoiceItem extends StatelessWidget {
                   AppCustomTextField(
                     readOnly: true,
                     textEditingController: TextEditingController(
-                        text: entry.price.toStringAsFixed(2)),
+                        text: entry.pricePerUnit.toStringAsFixed(2)),
                     onChanged: (value) {
-                      entry.price = double.tryParse(value) ?? 0;
+                      entry.pricePerUnit = double.tryParse(value) ?? 0;
                       onItemUpdated();
                     },
                     hintText: '0',

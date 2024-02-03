@@ -4,6 +4,8 @@ import 'package:pay_me_mobile/data/datasources/remote/base/api_service.dart';
 import 'package:pay_me_mobile/data/model/params/create_customer_param.dart';
 import 'package:pay_me_mobile/data/model/params/create_invoice_param.dart';
 import 'package:pay_me_mobile/data/model/response/invoice/create_invoice_response.dart';
+import 'package:pay_me_mobile/data/model/response/invoice/get_all_invoice_list_response.dart';
+import 'package:pay_me_mobile/data/model/response/invoice/get_customer_res.dart';
 import 'package:pay_me_mobile/data/model/response/invoice/single_customer_response.dart';
 import 'package:pay_me_mobile/data/model/response/invoice/single_invoice_response.dart';
 
@@ -63,6 +65,36 @@ class InvoiceApi {
       return ApiResponse.fromJson(res)
         ..success = true
         ..data = SingleCustomerResponse.fromJson(res);
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
+  Future<ApiResponse<List<GetInvoiceListRes>>> getAllInvoice() async {
+    try {
+      final res = await _apiService.get(
+        "/fetch_all",
+      );
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..data = (res['invoices'] as List)
+            .map((e) => GetInvoiceListRes.fromJson(e))
+            .toList();
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
+  Future<ApiResponse<List<GetCustomerRes>>> getAllCustomer() async {
+    try {
+      final res = await _apiService.get(
+        "/customer/fetch",
+      );
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..data = (res['customers'] as List)
+            .map((e) => GetCustomerRes.fromJson(e))
+            .toList();
     } on ApiFailure catch (e) {
       return ApiResponse(success: false, message: e.message);
     }

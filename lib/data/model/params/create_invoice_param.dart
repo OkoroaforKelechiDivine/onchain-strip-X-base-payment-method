@@ -1,7 +1,7 @@
 class CreateInvoiceParam {
   final String title;
   final String additionalNote;
-  final List<Item> items;
+  final List<InvoiceItem> items;
   final int customer;
   final DateTime dueDate;
 
@@ -17,7 +17,8 @@ class CreateInvoiceParam {
       CreateInvoiceParam(
         title: json["title"],
         additionalNote: json["additionalNote"],
-        items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
+        items: List<InvoiceItem>.from(
+            json["items"].map((x) => InvoiceItem.fromJson(x))),
         customer: json["customer"],
         dueDate: DateTime.parse(json["dueDate"]),
       );
@@ -32,18 +33,19 @@ class CreateInvoiceParam {
       };
 }
 
-class Item {
-  final String description;
-  final int quantity;
-  final double pricePerUnit;
+class InvoiceItem {
+  String description;
+  int quantity;
+  double pricePerUnit;
+  double get amount => quantity * pricePerUnit;
 
-  Item({
+  InvoiceItem({
     required this.description,
     required this.quantity,
     required this.pricePerUnit,
   });
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
+  factory InvoiceItem.fromJson(Map<String, dynamic> json) => InvoiceItem(
         description: json["description"],
         quantity: json["quantity"],
         pricePerUnit: json["price_per_unit"].toDouble(),

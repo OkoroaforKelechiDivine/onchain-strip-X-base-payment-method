@@ -18,6 +18,7 @@ class InvoiceHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => InvoiceHomeViewModel(),
+      onModelReady: (model) => model.init(),
       builder: (context, model, child) {
         return DefaultTabController(
           length: 2,
@@ -43,7 +44,9 @@ class InvoiceHomeScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           if (model.currentIndex == 0) {
-                            navigationService.push(const CreateInvoiceView());
+                            navigationService.push(CreateInvoiceView(
+                              customers: model.cusstomerList,
+                            ));
                           } else {
                             navigationService.push(const AddCustomerView());
                           }
@@ -102,11 +105,15 @@ class InvoiceHomeScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             child: TabBarView(
                               children: [
-                                InvoiceTab(),
-                                CustomerTab(),
+                                InvoiceTab(
+                                  model: model,
+                                ),
+                                CustomerTab(
+                                  model: model,
+                                ),
                               ],
                             ),
                           ),
