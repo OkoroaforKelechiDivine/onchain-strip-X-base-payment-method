@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/components/invoice_tile.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/invoice_details/invoice_details_view.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/invoice_home_viewmodel.dart';
@@ -30,11 +31,11 @@ class InvoiceTab extends StatelessWidget {
               final invoice = model.invoiceList[index];
               return GestureDetector(
                 onTap: () {
-                  navigationService.push(const InvoiceDetailsView());
+                  navigationService.push(InvoiceDetailsView(id: invoice.id));
                 },
                 child: InvoiceTile(
                   title: invoice.title,
-                  subtitle: "Due ${invoice.dueDate}",
+                  subtitle: "Due ${formartDate(invoice.dueDate.toString())}",
                   amount: "${invoice.totalAmount}",
                   status: invoice.paid ? "Paid" : "Pending",
                 ),

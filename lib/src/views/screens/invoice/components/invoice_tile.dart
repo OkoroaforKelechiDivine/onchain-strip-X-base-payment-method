@@ -35,24 +35,32 @@ class InvoiceTile extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppText(
-                title,
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: AppColors.black,
-              ),
-              const SizedBox(height: 5),
-              AppText(
-                subtitle,
-                fontSize: 12,
-                color: AppColors.grey,
-              )
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText(
+                  title,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.black,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                const SizedBox(height: 5),
+                AppText(
+                  subtitle,
+                  fontSize: 12,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  color: AppColors.grey,
+                )
+              ],
+            ),
           ),
-          const Spacer(),
+          SizedBox(
+            width: 8,
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -60,6 +68,7 @@ class InvoiceTile extends StatelessWidget {
                 "N ${double.parse(amount).toStringAsFixed(2)}",
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
+                overflow: TextOverflow.ellipsis,
                 color: const Color(0xFF4E5B70),
               ),
               const SizedBox(height: 5),
