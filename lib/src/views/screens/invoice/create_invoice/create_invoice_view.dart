@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/response/invoice/get_customer_res.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/components/discount_widget.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/components/invoice_custom_header.dart';
@@ -11,7 +12,9 @@ import '../../../../../core/cores.dart';
 
 class CreateInvoiceView extends StatelessWidget {
   final List<GetCustomerRes> customers;
-  const CreateInvoiceView({super.key, required this.customers});
+  final int invoiceNumber;
+  const CreateInvoiceView(
+      {super.key, required this.customers, required this.invoiceNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -201,8 +204,14 @@ class CreateInvoiceView extends StatelessWidget {
                   Center(
                     child: TextButton.icon(
                       onPressed: viewModel.addItem,
-                      icon: const Icon(Icons.add),
-                      label: const Text('Add additional item'),
+                      icon: const Icon(
+                        Icons.add,
+                        color: Color(0xFFFFB703),
+                      ),
+                      label: const Text(
+                        'Add additional item',
+                        style: TextStyle(color: Color(0xFFFFB703)),
+                      ),
                     ),
                   ),
                   const Divider(),
@@ -216,7 +225,7 @@ class CreateInvoiceView extends StatelessWidget {
                         fontSize: 16,
                       ),
                       AppText(
-                        'N ${viewModel.subtotal().toStringAsFixed(2)}',
+                        'N ${formatBalance(double.parse(viewModel.subtotal().toStringAsFixed(2)))}',
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
                       ),
@@ -274,7 +283,7 @@ class CreateInvoiceView extends StatelessWidget {
                         fontSize: 16,
                       ),
                       AppText(
-                        'N ${viewModel.total().toStringAsFixed(2)}',
+                        'N ${formatBalance(double.parse(viewModel.total().toStringAsFixed(2)))}',
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
                       ),
@@ -296,27 +305,27 @@ class CreateInvoiceView extends StatelessWidget {
                     //borderColor: Colors.transparent,
                   ),
                   const SizedBox(height: 32),
-                  AppCustomButton(
-                    title: "Proceed to Preview",
-                    onPressed: () {
-                      viewModel.generateInvoicePdf();
-                    },
-                    color: AppColors.black,
-                  ),
-                  const SizedBox(height: 18),
+                  // AppCustomButton(
+                  //   title: "Proceed to Preview",
+                  //   onPressed: () {
+                  //     viewModel.generateInvoicePdf();
+                  //   },
+                  //   color: AppColors.black,
+                  // ),
+                  // const SizedBox(height: 18),
                   AppCustomButton(
                     loading: viewModel.isSavingInvoice,
                     elevation: 0,
                     // title: "Save",
                     onPressed: () {
-                      viewModel.saveInvoice();
+                      viewModel.saveInvoice(invoiceNumber);
                     },
                     borderColor: AppColors.black,
-                    color: Colors.transparent,
+                    color: Colors.black,
                     borderWidth: 1,
                     child: const AppText(
-                      "Save as Draft",
-                      color: AppColors.black,
+                      "Save to Draft",
+                      color: AppColors.white,
                     ),
                   ),
                   const SizedBox(height: 38),

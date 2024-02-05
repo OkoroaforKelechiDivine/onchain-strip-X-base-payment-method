@@ -3,6 +3,10 @@ class CreateInvoiceParam {
   final String additionalNote;
   final List<InvoiceItem> items;
   final int customer;
+  final double? tax;
+  final double? discount;
+  final double totalAmount;
+  final String invoiceNumber;
   final DateTime dueDate;
 
   CreateInvoiceParam({
@@ -11,23 +15,34 @@ class CreateInvoiceParam {
     required this.items,
     required this.customer,
     required this.dueDate,
+    required this.totalAmount,
+    required this.invoiceNumber,
+    this.tax,
+    this.discount,
   });
 
   factory CreateInvoiceParam.fromJson(Map<String, dynamic> json) =>
       CreateInvoiceParam(
-        title: json["title"],
-        additionalNote: json["additionalNote"],
-        items: List<InvoiceItem>.from(
-            json["items"].map((x) => InvoiceItem.fromJson(x))),
-        customer: json["customer"],
-        dueDate: DateTime.parse(json["dueDate"]),
-      );
+          title: json["title"],
+          additionalNote: json["additionalNote"],
+          invoiceNumber: json["invoiceNumber"],
+          items: List<InvoiceItem>.from(
+              json["items"].map((x) => InvoiceItem.fromJson(x))),
+          customer: json["customer"],
+          dueDate: DateTime.parse(json["dueDate"]),
+          discount: json["discount"],
+          totalAmount: json["totalAmount"],
+          tax: json["tax"]);
 
   Map<String, dynamic> toJson() => {
         "title": title,
         "additionalNote": additionalNote,
         "items": List<dynamic>.from(items.map((x) => x.toJson())),
         "customer": customer,
+        "tax": tax,
+        "invoiceNumber": invoiceNumber,
+        "discount": discount,
+        "totalAmount": totalAmount,
         "dueDate":
             "${dueDate.year.toString().padLeft(4, '0')}-${dueDate.month.toString().padLeft(2, '0')}-${dueDate.day.toString().padLeft(2, '0')}",
       };

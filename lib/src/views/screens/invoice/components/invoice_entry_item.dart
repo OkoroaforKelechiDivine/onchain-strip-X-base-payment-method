@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/params/create_invoice_param.dart';
 
 class InvoiceSingleDetail extends StatelessWidget {
@@ -68,7 +69,7 @@ class InvoiceSingleDetail extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const AppText(
-                    'Qty',
+                    'Price',
                     fontSize: 16.0,
                     fontWeight: FontWeight.w600,
                   ),
@@ -94,7 +95,7 @@ class InvoiceSingleDetail extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const AppText(
-                    'Price',
+                    'Amount',
                     fontSize: 16.0,
                     fontWeight: FontWeight.w600,
                   ),
@@ -102,11 +103,9 @@ class InvoiceSingleDetail extends StatelessWidget {
                   AppCustomTextField(
                     readOnly: true,
                     textEditingController: TextEditingController(
-                        text: entry.pricePerUnit.toStringAsFixed(2)),
-                    onChanged: (value) {
-                      entry.pricePerUnit = double.tryParse(value) ?? 0;
-                      onItemUpdated();
-                    },
+                        text: formatBalance(
+                            double.parse(entry.amount.toStringAsFixed(2)))),
+                    onChanged: (value) {},
                     hintText: '0',
                     backgroundColor: Colors.white,
                     borderColor: Colors.transparent,

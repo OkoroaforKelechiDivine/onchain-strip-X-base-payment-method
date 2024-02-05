@@ -16,10 +16,16 @@ class CustomerTab extends StatelessWidget {
       child: Builder(
         builder: (context) {
           if (model.isLoadingInvoice) {
-            return const SizedBox(
-              height: 200,
-              width: 200,
-              child: CircularProgressIndicator(),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: CircularProgressIndicator(),
+                ),
+              ],
             );
           }
           if (model.cusstomerList.isEmpty) {

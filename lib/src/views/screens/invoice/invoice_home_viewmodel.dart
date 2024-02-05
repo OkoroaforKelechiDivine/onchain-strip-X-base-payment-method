@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/data/model/response/invoice/get_all_invoice_list_response.dart';
 import 'package:pay_me_mobile/data/model/response/invoice/get_customer_res.dart';
@@ -10,6 +11,10 @@ class InvoiceHomeViewModel extends BaseViewModel {
   bool isLoadingCustomer = false;
   List<GetInvoiceListRes> invoiceList = [];
   List<GetCustomerRes> cusstomerList = [];
+  GlobalKey<RefreshIndicatorState> refreshKey =
+      GlobalKey<RefreshIndicatorState>();
+  double startVerticalDragDetailsY = 0.0;
+  double updateVerticalDragDetailsY = 0.0;
 
   Future<void> init() async {
     await getInvoice();
@@ -28,7 +33,7 @@ class InvoiceHomeViewModel extends BaseViewModel {
     if (res.success) {
       isLoadingInvoice = false;
       notifyListeners();
-      invoiceList = res.data!;
+      invoiceList = res.data!.reversed.toList();
       notifyListeners();
     } else {
       isLoadingInvoice = false;

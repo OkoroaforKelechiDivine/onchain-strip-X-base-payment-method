@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/core/utilities/string_util.dart';
 
 class InvoiceTile extends StatelessWidget {
   final String title;
@@ -65,7 +66,7 @@ class InvoiceTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               AppText(
-                "N ${double.parse(amount).toStringAsFixed(2)}",
+                "N ${formatBalance(double.parse(amount))}",
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
                 overflow: TextOverflow.ellipsis,

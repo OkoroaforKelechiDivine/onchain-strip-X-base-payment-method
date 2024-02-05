@@ -190,7 +190,7 @@ class HomePageScreen extends StatelessWidget {
                                       },
                                     ),
                                     HomeCardCTA(
-                                      title: 'POS Device',
+                                      title: 'Invoice',
                                       asset: 'assets/jpg/pos_device.jpg',
                                       onPressed: () {
                                         navigationService

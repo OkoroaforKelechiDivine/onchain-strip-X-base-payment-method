@@ -10,6 +10,7 @@ class SingleInvoiceResponse {
   final dynamic tax;
   final String title;
   final double totalAmount;
+  final String invoiceNumber;
 
   SingleInvoiceResponse({
     required this.additionalNote,
@@ -23,6 +24,7 @@ class SingleInvoiceResponse {
     required this.tax,
     required this.title,
     required this.totalAmount,
+    required this.invoiceNumber,
   });
 
   factory SingleInvoiceResponse.fromJson(Map<String, dynamic> json) =>
@@ -38,6 +40,7 @@ class SingleInvoiceResponse {
         tax: json["Tax"],
         title: json["Title"],
         totalAmount: json["TotalAmount"].toDouble(),
+        invoiceNumber: json["InvoiceNumber"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -52,6 +55,7 @@ class SingleInvoiceResponse {
         "Tax": tax,
         "Title": title,
         "TotalAmount": totalAmount,
+        "InvoiceNumber": invoiceNumber,
       };
 }
 

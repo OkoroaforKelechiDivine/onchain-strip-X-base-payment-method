@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/core/utilities/string_util.dart';
 
 import '../../../../../core/cores.dart';
 
@@ -83,8 +84,9 @@ class TaxWidget extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   AppCustomTextField(
                     readOnly: true,
-                    textEditingController:
-                        TextEditingController(text: price.toStringAsFixed(2)),
+                    textEditingController: TextEditingController(
+                        text: formatBalance(
+                            double.parse(price.toStringAsFixed(2)))),
                     onChanged: (value) {},
                     hintText: '0',
                     suffixText: "₦",

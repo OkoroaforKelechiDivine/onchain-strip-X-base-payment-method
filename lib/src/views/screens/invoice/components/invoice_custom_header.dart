@@ -21,7 +21,7 @@ class InvoiceCustomHeader extends StatelessWidget {
             AppAssets.arrowBack,
           ),
         ),
-        SvgPicture.asset(AppAssets.magicStar),
+        //SvgPicture.asset(AppAssets.magicStar),
       ],
     );
   }

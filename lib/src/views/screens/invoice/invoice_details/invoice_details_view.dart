@@ -69,7 +69,7 @@ class InvoiceDetailsView extends StatelessWidget {
                               ),
                               const SizedBox(height: 10),
                               AppText(
-                                "N ${model.invoice?.totalAmount ?? ""}",
+                                "N ${formatBalance(model.invoice!.totalAmount)}",
                                 fontSize: 30,
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.black,
@@ -235,7 +235,7 @@ class InvoiceDetailsView extends StatelessWidget {
                                           ),
                                           const Spacer(),
                                           AppText(
-                                            "N ${item?.amount}",
+                                            "N ${formatBalance(item!.amount)}",
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
                                             color: AppColors.black,
@@ -261,7 +261,7 @@ class InvoiceDetailsView extends StatelessWidget {
                                     fontSize: 16,
                                   ),
                                   AppText(
-                                    'N ${model.invoice?.totalAmount}',
+                                    'N ${formatBalance((model.invoice!.totalAmount + (model.invoice?.discount ?? 0.0) + (model.invoice?.tax ?? 0.0)))}',
                                     fontSize: 18,
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -289,17 +289,11 @@ class InvoiceDetailsView extends StatelessWidget {
                                           fontWeight: FontWeight.w400,
                                           color: AppColors.black,
                                         ),
-                                        const SizedBox(height: 5),
-                                        AppText(
-                                          "8.0 % off",
-                                          fontSize: 14,
-                                          color: AppColors.invoiceGreyText,
-                                        ),
                                       ],
                                     ),
                                     const Spacer(),
                                     AppText(
-                                      "- N 2,500.00",
+                                      "- N ${formatBalance(double.parse(model.invoice!.discount.toString()))}",
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
                                       color: AppColors.invoiceGreyText,
@@ -325,17 +319,11 @@ class InvoiceDetailsView extends StatelessWidget {
                                           fontWeight: FontWeight.w400,
                                           color: AppColors.black,
                                         ),
-                                        const SizedBox(height: 5),
-                                        AppText(
-                                          "Additional 7.50%",
-                                          fontSize: 14,
-                                          color: AppColors.invoiceGreyText,
-                                        ),
                                       ],
                                     ),
                                     const Spacer(),
                                     AppText(
-                                      "+N 2,500.00",
+                                      "+N ${formatBalance(double.parse(model.invoice!.tax.toString()))}",
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
                                       color: AppColors.invoiceGreyText,
@@ -358,7 +346,7 @@ class InvoiceDetailsView extends StatelessWidget {
                                     fontSize: 16,
                                   ),
                                   AppText(
-                                    'N ${model.invoice?.totalAmount}',
+                                    'N ${formatBalance(model.invoice!.totalAmount)}',
                                     fontSize: 18,
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -411,14 +399,14 @@ class InvoiceDetailsView extends StatelessWidget {
                                   const AppText(
                                     "Account Name:",
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color(0xFFADBBBB),
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.black,
                                   ),
                                   AppText(
                                     appGlobals.user!.accountName!,
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: const Color(0xFFADBBBB),
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.black,
                                   ),
                                 ],
                               ),
@@ -431,14 +419,14 @@ class InvoiceDetailsView extends StatelessWidget {
                                   const AppText(
                                     "Account Number:",
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color(0xFFADBBBB),
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.black,
                                   ),
                                   AppText(
                                     appGlobals.user!.accountNumber!,
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: const Color(0xFFADBBBB),
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.black,
                                   ),
                                 ],
                               ),
@@ -451,14 +439,14 @@ class InvoiceDetailsView extends StatelessWidget {
                                   AppText(
                                     "Bank Name:",
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color(0xFFADBBBB),
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.black,
                                   ),
                                   AppText(
-                                    "VFD Bank",
+                                    "VFD MFB",
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color(0xFFADBBBB),
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.black,
                                   ),
                                 ],
                               )
@@ -468,7 +456,9 @@ class InvoiceDetailsView extends StatelessWidget {
                         const SizedBox(height: 45),
                         AppCustomButton(
                           title: "Proceed to Preview",
-                          onPressed: () {},
+                          onPressed: () {
+                            model.previewPDF();
+                          },
                           color: AppColors.lightGreen,
                         ),
                         const SizedBox(height: 18),
@@ -476,7 +466,7 @@ class InvoiceDetailsView extends StatelessWidget {
                           elevation: 0,
                           // title: "Save",
                           onPressed: () {
-                            model.generateInvoicePdf();
+                            model.sendPDF();
                           },
                           borderColor: AppColors.black,
                           color: Colors.transparent,

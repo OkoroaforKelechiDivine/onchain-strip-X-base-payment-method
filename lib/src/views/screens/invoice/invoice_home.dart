@@ -20,108 +20,130 @@ class InvoiceHomeScreen extends StatelessWidget {
       viewModelBuilder: () => InvoiceHomeViewModel(),
       onModelReady: (model) => model.init(),
       builder: (context, model, child) {
-        return DefaultTabController(
-          length: 2,
-          child: Scaffold(
-            backgroundColor: AppColors.invoiceBg,
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Column(
-                children: [
-                  const SizedBox(height: 30 + 56),
-                  const InvoiceCustomHeader(),
-                  const SizedBox(height: 18),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        return RefreshIndicator(
+          key: model.refreshKey,
+          onRefresh: () async {
+            await model.init();
+          },
+          child: GestureDetector(
+            onVerticalDragStart: (dragDetails) {
+              model.startVerticalDragDetailsY = dragDetails.globalPosition.dy;
+            },
+            onVerticalDragUpdate: (dragDetails) {
+              model.updateVerticalDragDetailsY = dragDetails.globalPosition.dy;
+            },
+            onVerticalDragEnd: (endDetails) {
+              if (model.startVerticalDragDetailsY <
+                  model.updateVerticalDragDetailsY) {
+                // User dragged down
+                model.refreshKey.currentState?.show();
+              }
+            },
+            child: DefaultTabController(
+              length: 2,
+              child: Scaffold(
+                backgroundColor: AppColors.invoiceBg,
+                body: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Column(
                     children: [
-                      AppText(
-                        model.currentIndex == 0 ? 'Invoices' : "Customers",
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.black,
+                      const SizedBox(height: 30 + 56),
+                      const InvoiceCustomHeader(),
+                      const SizedBox(height: 18),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          AppText(
+                            model.currentIndex == 0 ? 'Invoices' : "Customers",
+                            fontSize: 32,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.black,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              if (model.currentIndex == 0) {
+                                navigationService.push(CreateInvoiceView(
+                                  invoiceNumber: model.invoiceList.length + 1,
+                                  customers: model.cusstomerList,
+                                ));
+                              } else {
+                                navigationService.push(const AddCustomerView());
+                              }
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: AppColors.lightGreen,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  AppText(
+                                    model.currentIndex == 0
+                                        ? "Create Invoice"
+                                        : "Add Customer",
+                                    fontSize: 16,
+                                    color: AppColors.white,
+                                  ),
+                                  const SizedBox(width: 10),
+                                  SvgPicture.asset(AppAssets.add),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          if (model.currentIndex == 0) {
-                            navigationService.push(CreateInvoiceView(
-                              customers: model.cusstomerList,
-                            ));
-                          } else {
-                            navigationService.push(const AddCustomerView());
-                          }
-                        },
+                      const SizedBox(height: 33),
+                      Expanded(
                         child: Container(
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 22),
                           decoration: BoxDecoration(
-                            color: AppColors.lightGreen,
+                            color: AppColors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Row(
-                            children: [
-                              AppText(
-                                model.currentIndex == 0
-                                    ? "Create Invoice"
-                                    : "Add Customer",
-                                fontSize: 16,
-                                color: AppColors.white,
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFF9FAFC),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: TabBar(
+                                  onTap: model.setIndex,
+                                  indicator: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white,
+                                  ),
+                                  labelColor: Colors.black,
+                                  unselectedLabelColor: Colors.grey,
+                                  tabs: const [
+                                    Tab(text: 'Invoices'),
+                                    Tab(text: 'Customers'),
+                                  ],
+                                ),
                               ),
-                              const SizedBox(width: 10),
-                              SvgPicture.asset(AppAssets.add),
+                              Expanded(
+                                child: TabBarView(
+                                  children: [
+                                    InvoiceTab(
+                                      model: model,
+                                    ),
+                                    CustomerTab(
+                                      model: model,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
                       )
                     ],
                   ),
-                  const SizedBox(height: 33),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 22),
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF9FAFC),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: TabBar(
-                              onTap: model.setIndex,
-                              indicator: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                              ),
-                              labelColor: Colors.black,
-                              unselectedLabelColor: Colors.grey,
-                              tabs: const [
-                                Tab(text: 'Invoices'),
-                                Tab(text: 'Customers'),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: TabBarView(
-                              children: [
-                                InvoiceTab(
-                                  model: model,
-                                ),
-                                CustomerTab(
-                                  model: model,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
+                ),
               ),
             ),
           ),

@@ -68,6 +68,7 @@ class CreateInvoiceViewModel extends BaseViewModel {
 
   void selectCustomer(GetCustomerRes? val) {
     selectedCustomer = val;
+    customerEmailAddressTEC.text = val?.email ?? "";
     notifyListeners();
   }
 
@@ -174,19 +175,27 @@ class CreateInvoiceViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> saveInvoice() async {
+  Future<void> saveInvoice(int inVoiceNumber) async {
     isSavingInvoice = true;
     notifyListeners();
     final param = CreateInvoiceParam(
       additionalNote: additionalNoteTEC.text,
+      invoiceNumber: inVoiceNumber.toString(),
       customer: selectedCustomer!.id,
       dueDate: DateTime.parse("${selectedDate.toLocal()}".split(' ')[0]),
       title: invoiceTitleTEC.text,
       items: _items,
+      tax: taxAmount(),
+      discount: discountAmount(),
+      totalAmount: total(),
     );
     final res = await invoiceRepo.createInvoice(param: param);
     if (res.success) {
-      //navigationService.pushAndRemoveUntil(InvoiceSuccessPage());
+      isSavingInvoice = false;
+      notifyListeners();
+      snackbarService.success(
+          message: res.data ?? "Invoice created successfully");
+      navigationService.pop();
     } else {
       snackbarService.error(message: res.message ?? "Something went wrong");
     }
