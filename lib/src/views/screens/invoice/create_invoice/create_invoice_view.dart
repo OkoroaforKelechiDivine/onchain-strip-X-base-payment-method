@@ -13,8 +13,13 @@ import '../../../../../core/cores.dart';
 class CreateInvoiceView extends StatelessWidget {
   final List<GetCustomerRes> customers;
   final int invoiceNumber;
-  const CreateInvoiceView(
-      {super.key, required this.customers, required this.invoiceNumber});
+  final Function onPop;
+  const CreateInvoiceView({
+    super.key,
+    required this.customers,
+    required this.invoiceNumber,
+    required this.onPop,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -248,8 +253,8 @@ class CreateInvoiceView extends StatelessWidget {
                       viewModel.updateTotal(p0);
                     },
                     selectedValue: viewModel.selectedDiscountType,
-                    onSelected: () {
-                      viewModel.selectDiscount();
+                    onSelected: (val) {
+                      viewModel.selectedDiscount(val!);
                     },
                   ),
                   const SizedBox(height: 22),
@@ -267,8 +272,8 @@ class CreateInvoiceView extends StatelessWidget {
                       viewModel.updateTotal(p0);
                     },
                     selectedValue: viewModel.selectedTaxType,
-                    onSelected: () {
-                      viewModel.selectTaxType();
+                    onSelected: (val) {
+                      viewModel.selectedTax(val!);
                     },
                   ),
                   const SizedBox(height: 32),
@@ -318,7 +323,7 @@ class CreateInvoiceView extends StatelessWidget {
                     elevation: 0,
                     // title: "Save",
                     onPressed: () {
-                      viewModel.saveInvoice(invoiceNumber);
+                      viewModel.saveInvoice(invoiceNumber, onPop);
                     },
                     borderColor: AppColors.black,
                     color: Colors.black,

@@ -64,11 +64,15 @@ class InvoiceHomeScreen extends StatelessWidget {
                             onTap: () {
                               if (model.currentIndex == 0) {
                                 navigationService.push(CreateInvoiceView(
+                                  onPop: () {
+                                    model.init();
+                                  },
                                   invoiceNumber: model.invoiceList.length + 1,
                                   customers: model.cusstomerList,
                                 ));
                               } else {
-                                navigationService.push(const AddCustomerView());
+                                navigationService
+                                    .push(AddCustomerView(onPop: model.init));
                               }
                             },
                             child: Container(

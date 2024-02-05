@@ -6,7 +6,8 @@ import 'package:stacked/stacked.dart';
 import '../../../../../core/cores.dart';
 
 class AddCustomerView extends StatelessWidget {
-  const AddCustomerView({super.key});
+  final Function()? onPop;
+  const AddCustomerView({super.key, required this.onPop});
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +66,7 @@ class AddCustomerView extends StatelessWidget {
                     hintText: "Enter Customer Phone Numver",
                     textEditingController: viewModel.customerPhoneNumberTEC,
                     backgroundColor: Colors.white,
+                    textInputType: TextInputType.number,
                     borderColor: Colors.transparent,
                   ),
                   const SizedBox(height: 24),
@@ -96,7 +98,7 @@ class AddCustomerView extends StatelessWidget {
                     loading: viewModel.isLoading,
                     title: "Save",
                     onPressed: () {
-                      viewModel.addCustomer();
+                      viewModel.addCustomer(onPop);
                     },
                     color: AppColors.black,
                   ),

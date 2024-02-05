@@ -99,8 +99,8 @@ class InvoiceDetailsViewModel extends BaseViewModel {
                     pw.Text('Issued By:',
                         style: pw.TextStyle(
                             fontSize: 16, fontWeight: pw.FontWeight.bold)),
-                    pw.Text('Company Name: ${appGlobals.user!.business}',
-                        style: pw.TextStyle(fontSize: 14)),
+                    pw.Text('${appGlobals.user!.business}',
+                        style: const pw.TextStyle(fontSize: 14)),
                   ]),
             ]),
         pw.SizedBox(height: 20),
@@ -112,9 +112,9 @@ class InvoiceDetailsViewModel extends BaseViewModel {
                   style: pw.TextStyle(
                       fontSize: 16, fontWeight: pw.FontWeight.bold)),
               pw.Text('Customer Name: ${invoice!.customerName}',
-                  style: pw.TextStyle(fontSize: 14)),
-              pw.Text('Invoice Number: ${invoice!.customerPhone}',
-                  style: pw.TextStyle(fontSize: 14)),
+                  style: const pw.TextStyle(fontSize: 14)),
+              pw.Text('Customer Number: ${invoice!.customerPhone}',
+                  style: const pw.TextStyle(fontSize: 14)),
             ]),
 
         pw.SizedBox(height: 20),
@@ -124,7 +124,8 @@ class InvoiceDetailsViewModel extends BaseViewModel {
           border: pw.TableBorder.all(color: PdfColors.grey, width: 0.5),
           children: [
             pw.TableRow(
-              decoration: pw.BoxDecoration(color: customHeaderBackgroundColor),
+              decoration:
+                  const pw.BoxDecoration(color: customHeaderBackgroundColor),
               children: headers
                   .map((header) => pw.Container(
                         padding: const pw.EdgeInsets.symmetric(
@@ -153,7 +154,7 @@ class InvoiceDetailsViewModel extends BaseViewModel {
         pw.SizedBox(height: 20),
 
         pw.Text('Note: ${invoice!.additionalNote}',
-            style: pw.TextStyle(fontSize: 16)),
+            style: const pw.TextStyle(fontSize: 16)),
 
         pw.SizedBox(height: 20),
 
@@ -165,15 +166,15 @@ class InvoiceDetailsViewModel extends BaseViewModel {
               children: [
                 pw.Text(
                     'Subtotal: NGN ${formatBalance(double.parse(subTotal.toStringAsFixed(2)))}',
-                    style: pw.TextStyle(fontSize: 16)),
+                    style: const pw.TextStyle(fontSize: 16)),
                 pw.SizedBox(height: 5),
                 pw.Text(
                     'Tax: NGN ${formatBalance(double.parse(tax.toString()))}',
-                    style: pw.TextStyle(fontSize: 16)),
+                    style: const pw.TextStyle(fontSize: 16)),
                 pw.SizedBox(height: 5),
                 pw.Text(
                     'Discount: NGN ${formatBalance(double.parse(discount.toString()))}',
-                    style: pw.TextStyle(fontSize: 16)),
+                    style: const pw.TextStyle(fontSize: 16)),
                 pw.SizedBox(height: 10),
                 pw.Text(
                     'Total: NGN ${formatBalance(double.parse(invoice!.totalAmount.toStringAsFixed(2)))}',
@@ -185,17 +186,16 @@ class InvoiceDetailsViewModel extends BaseViewModel {
 
         // Account Details
         pw.Container(
-          padding: pw.EdgeInsets.all(16),
+          padding: const pw.EdgeInsets.all(16),
           decoration: pw.BoxDecoration(
               borderRadius: pw.BorderRadius.circular(10),
-              color: PdfColor.fromInt(0xFFE6F9F9)),
+              color: const PdfColor.fromInt(0xFFE6F9F9)),
           child: pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
               pw.Text("Payment should be made to:",
-                  style: pw.TextStyle(
+                  style: const pw.TextStyle(
                     fontSize: 16,
-                    fontWeight: pw.FontWeight.bold,
                     color: PdfColors.black,
                   )),
               pw.SizedBox(height: 20),
@@ -204,16 +204,14 @@ class InvoiceDetailsViewModel extends BaseViewModel {
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
                   pw.Text("Acc. Name:",
-                      style: pw.TextStyle(
+                      style: const pw.TextStyle(
                         fontSize: 16,
-                        fontWeight: pw.FontWeight.bold,
-                        color: greyTextColor,
+                        color: PdfColors.black,
                       )),
                   pw.Text(appGlobals.user!.accountName!,
-                      style: pw.TextStyle(
+                      style: const pw.TextStyle(
                         fontSize: 16,
-                        fontWeight: pw.FontWeight.bold,
-                        color: greyTextColor,
+                        color: PdfColors.black,
                       )),
                 ],
               ),
@@ -223,16 +221,14 @@ class InvoiceDetailsViewModel extends BaseViewModel {
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
                   pw.Text("Acc. Number:",
-                      style: pw.TextStyle(
+                      style: const pw.TextStyle(
                         fontSize: 16,
-                        fontWeight: pw.FontWeight.bold,
-                        color: greyTextColor,
+                        color: PdfColors.black,
                       )),
                   pw.Text(appGlobals.user!.accountNumber!,
-                      style: pw.TextStyle(
+                      style: const pw.TextStyle(
                         fontSize: 16,
-                        fontWeight: pw.FontWeight.bold,
-                        color: greyTextColor,
+                        color: PdfColors.black,
                       )),
                 ],
               ),
@@ -242,16 +238,14 @@ class InvoiceDetailsViewModel extends BaseViewModel {
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
                   pw.Text("Bank Name",
-                      style: pw.TextStyle(
+                      style: const pw.TextStyle(
                         fontSize: 16,
-                        fontWeight: pw.FontWeight.bold,
-                        color: greyTextColor,
+                        color: PdfColors.black,
                       )),
                   pw.Text("VFD Bank",
-                      style: pw.TextStyle(
+                      style: const pw.TextStyle(
                         fontSize: 16,
-                        fontWeight: pw.FontWeight.bold,
-                        color: greyTextColor,
+                        color: PdfColors.black,
                       )),
                 ],
               ),
@@ -280,7 +274,7 @@ class InvoiceDetailsViewModel extends BaseViewModel {
               ? 3
               : 1, // Giving more space to Description
           child: pw.Container(
-            padding: pw.EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             decoration: tableHeaderDecoration,
             child: pw.Text(header,
                 style: pw.TextStyle(
@@ -304,7 +298,7 @@ class InvoiceDetailsViewModel extends BaseViewModel {
               : 1, // Giving more space to the first column, Description
           child: pw.Container(
             alignment: cellAlignment,
-            padding: pw.EdgeInsets.all(4),
+            padding: const pw.EdgeInsets.all(4),
             child: pw.Text(cell.toString(), style: cellStyle),
           ),
         );

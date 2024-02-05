@@ -12,7 +12,7 @@ class AddCustomerViewModel extends BaseViewModel {
   TextEditingController customerStateTEC = TextEditingController();
   bool isLoading = false;
 
-  Future<void> addCustomer() async {
+  Future<void> addCustomer(Function()? onPop) async {
     isLoading = true;
     notifyListeners();
     final res = await invoiceRepo.createCustomer(
@@ -28,6 +28,7 @@ class AddCustomerViewModel extends BaseViewModel {
       isLoading = false;
       notifyListeners();
       snackbarService.success(message: res.data!.message);
+      onPop?.call();
       navigationService.pop();
       notifyListeners();
     } else {
