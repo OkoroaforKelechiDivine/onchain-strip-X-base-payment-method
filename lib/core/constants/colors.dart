@@ -15,4 +15,8 @@ class AppColors {
   static const Color grey = Colors.grey;
   static const Color black = Colors.black;
   static const Color white = Colors.white;
+  static const Color invoiceStatus = Color(0xFF00CFAF);
+  static const Color invoiceIconBg = Color(0xFFBCF9F3);
+  static const Color invoiceBg = Color(0xFFF9FAFC);
+  static Color invoiceGreyText = const Color(0xFFBFBFBF);
 }

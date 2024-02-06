@@ -2,11 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/utilities/permission.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/views/screens/home/add_money_view.dart';
 import 'package:pay_me_mobile/src/views/screens/home/home_viewmodel.dart';
 import 'package:pay_me_mobile/src/views/screens/inflow/inflow_screen.dart';
+import 'package:pay_me_mobile/src/views/screens/invoice/invoice_home.dart';
 import 'package:pay_me_mobile/src/views/screens/pos/set_pos_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/raise_payment/raise_payment.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history.dart';
@@ -73,7 +75,7 @@ class HomePageScreen extends StatelessWidget {
                 ],
               ),
               body: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Builder(builder: (context) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,23 +191,25 @@ class HomePageScreen extends StatelessWidget {
                                       },
                                     ),
                                     HomeCardCTA(
-                                      title: 'POS Device',
-                                      asset: 'assets/jpg/pos_device.jpg',
+                                      title: 'Invoice',
+                                      asset: AppAssets.invoice,
                                       onPressed: () {
-                                        log(Permissions()
-                                            .canUserViewPosDevices()
-                                            .toString());
-                                        if (Permissions()
-                                            .canUserViewPosDevices()) {
-                                          snackbarService.success(
-                                              message: "Coming Soon");
-                                          // navigationService
-                                          //     .push(const PosDeviceScreen());
-                                        } else {
-                                          snackbarService.error(
-                                              message:
-                                                  "Can't Perform this Operation");
-                                        }
+                                        navigationService
+                                            .push(const InvoiceHomeScreen());
+                                        // log(Permissions()
+                                        //     .canUserViewPosDevices()
+                                        //     .toString());
+                                        // if (Permissions()
+                                        //     .canUserViewPosDevices()) {
+                                        //   snackbarService.success(
+                                        //       message: "Coming Soon");
+                                        //   // navigationService
+                                        //   //     .push(const PosDeviceScreen());
+                                        // } else {
+                                        //   snackbarService.error(
+                                        //       message:
+                                        //           "Can't Perform this Operation");
+                                        // }
 
                                         //pushNavigation(context: context, widget: const PosDeviceScreen());
                                       },
@@ -433,8 +437,8 @@ class HomePage extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {},
-                  child: Center(
-                    child: const AppText("Home"),
+                  child: const Center(
+                    child: AppText("Home"),
                   ),
                 ),
               ),

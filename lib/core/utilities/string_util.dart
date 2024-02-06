@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 String formatBalance(double balance) {
   String formattedBalance = balance.toStringAsFixed(2);
   List<String> parts = formattedBalance.split('.');
@@ -20,4 +22,13 @@ String formatBalance(double balance) {
 String decomposeAmount(String amount) {
   String cleanValue = amount.replaceAll(RegExp(r'[^\d]'), '');
   return cleanValue;
+}
+
+String formartDate(String dateStr) {
+  DateTime dateTime = DateTime.parse(dateStr);
+
+  // Using DateFormat from the intl package to format the date
+  String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
+
+  return formattedDate; // Output: 2006-01-02
 }
