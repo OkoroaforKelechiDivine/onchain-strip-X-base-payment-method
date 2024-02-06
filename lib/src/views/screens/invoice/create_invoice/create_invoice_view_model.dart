@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
+import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/params/create_invoice_param.dart';
-import 'package:pay_me_mobile/data/model/params/invoice_entry.dart';
 import 'package:pay_me_mobile/data/model/response/invoice/get_customer_res.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:stacked/stacked.dart';
-import 'dart:io';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
 
 class CreateInvoiceViewModel extends BaseViewModel {
   TextEditingController customerNameTEC = TextEditingController();
   TextEditingController customerEmailAddressTEC = TextEditingController();
   TextEditingController invoiceTitleTEC = TextEditingController();
-  TextEditingController discount = TextEditingController(text: "0");
-  TextEditingController tax = TextEditingController(text: "0");
+  TextEditingController discount = TextEditingController();
+  TextEditingController tax = TextEditingController();
   TextEditingController additionalNoteTEC = TextEditingController();
+
   DateTime selectedDate = DateTime.now();
   List<InvoiceItem> _items = [
     InvoiceItem(description: "", pricePerUnit: 0, quantity: 0)
@@ -34,8 +29,6 @@ class CreateInvoiceViewModel extends BaseViewModel {
     "Fixed",
     "Percentage",
   ];
-  final List<String> dropdownItems = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
-  // The item that is currently selected, this should be one of the items from the list or null to start with no selection.
   GetCustomerRes? selectedCustomer;
 
   List<InvoiceItem> get items => _items;
@@ -49,7 +42,8 @@ class CreateInvoiceViewModel extends BaseViewModel {
   }
 
   double discountAmount() {
-    double discountValue = double.tryParse(discount.text) ?? 0;
+    double discountValue =
+        double.tryParse(discount.text.replaceAll(RegExp(r'[^\d.]'), '')) ?? 0;
     if (selectedDiscountType == "Fixed") {
       return discountValue;
     } else {
@@ -58,7 +52,8 @@ class CreateInvoiceViewModel extends BaseViewModel {
   }
 
   double taxAmount() {
-    double taxValue = double.tryParse(tax.text) ?? 0;
+    double taxValue =
+        double.tryParse(tax.text.replaceAll(RegExp(r'[^\d.]'), '')) ?? 0;
     if (selectedTaxType == "Fixed") {
       return taxValue;
     } else {
@@ -84,7 +79,6 @@ class CreateInvoiceViewModel extends BaseViewModel {
   void updateTax(String value) {
     // Parse and set the new tax value, if needed
     // ...
-
     // Call this after updating the tax value
     notifyListeners();
   }

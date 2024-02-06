@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/core/utilities/number_formater.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 
 import '../../../../../core/cores.dart';
@@ -70,6 +71,7 @@ class TaxWidget extends StatelessWidget {
                   AppText(selectedValue == "Fixed" ? "Rate" : "Percent"),
                   const SizedBox(height: 8.0),
                   AppCustomTextField(
+                    inputFormatters: [NumericTextFormatter()],
                     textEditingController: tax,
                     onChanged: (value) {
                       onChanged(value);

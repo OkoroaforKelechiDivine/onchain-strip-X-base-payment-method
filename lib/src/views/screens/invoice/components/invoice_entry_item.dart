@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/core/utilities/number_formater.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/params/create_invoice_param.dart';
 
@@ -8,12 +9,12 @@ class InvoiceSingleDetail extends StatelessWidget {
   final Function onItemUpdated;
   final int index;
 
-  const InvoiceSingleDetail(
-      {Key? key,
-      required this.entry,
-      required this.onItemUpdated,
-      required this.index})
-      : super(key: key);
+  const InvoiceSingleDetail({
+    Key? key,
+    required this.entry,
+    required this.onItemUpdated,
+    required this.index,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +66,7 @@ class InvoiceSingleDetail extends StatelessWidget {
             ),
             const SizedBox(width: 8.0),
             Expanded(
+              flex: 2,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -75,8 +77,10 @@ class InvoiceSingleDetail extends StatelessWidget {
                   ),
                   const SizedBox(height: 8.0),
                   AppCustomTextField(
+                    inputFormatters: [NumericTextFormatter()],
                     onChanged: (value) {
-                      entry.pricePerUnit = double.tryParse(value) ?? 0;
+                      entry.pricePerUnit =
+                          double.tryParse(value.replaceAll(',', '')) ?? 0;
                       onItemUpdated();
                     },
                     hintText: '0',

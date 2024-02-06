@@ -9,4 +9,5 @@ class AppAssets {
   static const String magicStar = 'assets/svgs/magic-star.svg';
   static const String percent = 'assets/svgs/percent.svg';
   static const String receipt = 'assets/svgs/receipt.svg';
+  static const String invoice = 'assets/png/invoice.png';
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/core/utilities/number_formater.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 
 import '../../../../../core/cores.dart';
@@ -91,6 +92,7 @@ class DiscounttWidget extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   AppCustomTextField(
                     textEditingController: discount,
+                    inputFormatters: [NumericTextFormatter()],
                     onChanged: (value) {
                       onChanged(value);
                     },

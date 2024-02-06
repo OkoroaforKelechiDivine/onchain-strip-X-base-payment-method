@@ -28,7 +28,7 @@ class CreateInvoiceParam {
           invoiceNumber: json["invoiceNumber"],
           items: List<InvoiceItem>.from(
               json["items"].map((x) => InvoiceItem.fromJson(x))),
-          customer: json["customer"],
+          customer: json["customerID"],
           dueDate: DateTime.parse(json["dueDate"]),
           discount: json["discount"],
           totalAmount: json["totalAmount"],
@@ -38,7 +38,7 @@ class CreateInvoiceParam {
         "title": title,
         "additionalNote": additionalNote,
         "items": List<dynamic>.from(items.map((x) => x.toJson())),
-        "customer": customer,
+        "customerID": customer,
         "tax": tax,
         "invoiceNumber": invoiceNumber,
         "discount": discount,

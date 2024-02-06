@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/utilities/permission.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/views/screens/home/add_money_view.dart';
@@ -191,7 +192,7 @@ class HomePageScreen extends StatelessWidget {
                                     ),
                                     HomeCardCTA(
                                       title: 'Invoice',
-                                      asset: 'assets/jpg/pos_device.jpg',
+                                      asset: AppAssets.invoice,
                                       onPressed: () {
                                         navigationService
                                             .push(const InvoiceHomeScreen());
