@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
-import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/params/create_invoice_param.dart';
 import 'package:pay_me_mobile/data/model/response/invoice/get_customer_res.dart';
 import 'package:stacked/stacked.dart';
