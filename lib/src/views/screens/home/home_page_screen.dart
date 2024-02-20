@@ -20,6 +20,7 @@ import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/src/views/screens/home/widgets/home_card_cta.dart';
 import 'package:pay_me_mobile/src/views/screens/home/widgets/shadow_wrapper.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/src/views/screens/user_management/user_management_home_view.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../app_config/manager/font_manager.dart';
 
@@ -363,22 +364,24 @@ class HomePageScreen extends StatelessWidget {
                               child: ShadowWrapper(
                                 child: HomeCardCTA(
                                   asset: "assets/jpg/pos_device.jpg",
-                                  title: 'POS Device',
+                                  title: 'Manage User',
                                   textColor: AppColors.lightGreen,
                                   fontSize: 13,
                                   onPressed: () {
-                                    log(Permissions()
-                                        .canUserViewPosDevices()
-                                        .toString());
-                                    if (Permissions().canUserViewPosDevices()) {
-                                      snackbarService.success(
-                                          message: "Coming Soon");
-                                      //navigationService.push(const PosDeviceScreen());
-                                    } else {
-                                      snackbarService.error(
-                                          message:
-                                              "Can't Perform this Operation");
-                                    }
+                                    navigationService
+                                        .push(const UserManagementHome());
+                                    // log(Permissions()
+                                    //     .canUserViewPosDevices()
+                                    //     .toString());
+                                    // if (Permissions().canUserViewPosDevices()) {
+                                    //   snackbarService.success(
+                                    //       message: "Coming Soon");
+
+                                    // } else {
+                                    //   snackbarService.error(
+                                    //       message:
+                                    //           "Can't Perform this Operation");
+                                    // }
                                   },
                                 ),
                               ),
