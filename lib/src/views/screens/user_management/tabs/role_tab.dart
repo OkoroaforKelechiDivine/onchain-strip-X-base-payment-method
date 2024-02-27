@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/widgets/app_text.dart';
 import 'package:pay_me_mobile/src/views/screens/user_management/component/role_time.dart';
+import 'package:pay_me_mobile/src/views/screens/user_management/create_roles/create_role.dart';
 import 'package:pay_me_mobile/src/views/screens/user_management/user_mangement_view_model.dart';
+
+import '../../../../../core/di/locator.dart';
 
 class RolesTab extends StatelessWidget {
   final UserManagementHomeVM model;
@@ -39,7 +42,14 @@ class RolesTab extends StatelessWidget {
               final role = model.roleList[index];
               return GestureDetector(
                 onTap: () {
-                  //navigationService.push(const InvoiceDetailsView());
+                  navigationService.push(
+                    CreateRoleView(
+                      role: role,
+                      onPop: () {
+                        model.init();
+                      },
+                    ),
+                  );
                 },
                 child: RoleTile(
                   title: role.label,

@@ -21,7 +21,7 @@ class LoginViewModel extends BaseViewModel {
     isLoading = true;
     notifyListeners();
     final res = await authRepo.login(
-        username: userNameController.text.trim(),
+        username: userNameController.text.trim().toLowerCase(),
         password: passwordController.text.trim());
     if (res.success) {
       LoginResponse(

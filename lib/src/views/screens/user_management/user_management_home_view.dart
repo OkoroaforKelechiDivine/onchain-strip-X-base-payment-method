@@ -73,8 +73,9 @@ class UserManagementHome extends StatelessWidget {
                                   customers: model.roleList,
                                 ));
                               } else {
-                                navigationService
-                                    .push(CreateRoleView(onPop: model.init));
+                                navigationService.push(CreateRoleView(
+                                  onPop: model.init,
+                                ));
                               }
                             },
                             child: Container(

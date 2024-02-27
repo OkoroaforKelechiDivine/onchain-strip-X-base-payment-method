@@ -363,7 +363,32 @@ class HomePageScreen extends StatelessWidget {
                             Expanded(
                               child: ShadowWrapper(
                                 child: HomeCardCTA(
-                                  asset: "assets/jpg/pos_device.jpg",
+                                  asset: "assets/jpg/more.jpg",
+                                  title: 'Tv Cable',
+                                  textColor: AppColors.lightGreen,
+                                  onPressed: () {
+                                    log(Permissions()
+                                        .canUserTransfer()
+                                        .toString());
+                                    if (Permissions().canUserTransfer()) {
+                                      navigationService
+                                          .push(const CableTvScreen());
+                                    } else {
+                                      snackbarService.error(
+                                        message: "Can't Perform this Operation",
+                                      );
+                                    }
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 12.w,
+                            ),
+                            Expanded(
+                              child: ShadowWrapper(
+                                child: HomeCardCTA(
+                                  asset: "assets/png/user-management.png",
                                   title: 'Manage User',
                                   textColor: AppColors.lightGreen,
                                   fontSize: 13,
@@ -382,31 +407,6 @@ class HomePageScreen extends StatelessWidget {
                                     //       message:
                                     //           "Can't Perform this Operation");
                                     // }
-                                  },
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 12.w,
-                            ),
-                            Expanded(
-                              child: ShadowWrapper(
-                                child: HomeCardCTA(
-                                  asset: "assets/jpg/more.jpg",
-                                  title: 'Tv Cable',
-                                  textColor: AppColors.lightGreen,
-                                  onPressed: () {
-                                    log(Permissions()
-                                        .canUserTransfer()
-                                        .toString());
-                                    if (Permissions().canUserTransfer()) {
-                                      navigationService
-                                          .push(const CableTvScreen());
-                                    } else {
-                                      snackbarService.error(
-                                          message:
-                                              "Can't Perform this Operation");
-                                    }
                                   },
                                 ),
                               ),

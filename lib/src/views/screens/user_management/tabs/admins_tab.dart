@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/core/widgets/app_text.dart';
 import 'package:pay_me_mobile/src/views/screens/user_management/component/user_tile.dart';
+import 'package:pay_me_mobile/src/views/screens/user_management/update_admin/update_admin_view.dart';
 import 'package:pay_me_mobile/src/views/screens/user_management/user_mangement_view_model.dart';
 
 class AdminTab extends StatelessWidget {
@@ -36,7 +38,13 @@ class AdminTab extends StatelessWidget {
               final admin = model.adminList[index];
               return GestureDetector(
                 onTap: () {
-                  //navigationService.push(InvoiceDetailsView(id: invoice.id));
+                  navigationService.push(UpdateAdminView(
+                    admin: admin,
+                    customers: model.roleList,
+                    onPop: () {
+                      model.init();
+                    },
+                  ));
                 },
                 child: UserTile(
                   title: "${admin.firstName} ${admin.lastName}",

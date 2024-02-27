@@ -8,7 +8,6 @@ import 'package:pay_me_mobile/core/utilities/string_util.dart';
 class UserTile extends StatelessWidget {
   final String title;
   final String subtitle;
-
   final String status;
 
   const UserTile({
@@ -65,17 +64,11 @@ class UserTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               AppText(
-                "Nothing",
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                overflow: TextOverflow.ellipsis,
-                color: const Color(0xFF4E5B70),
-              ),
-              const SizedBox(height: 5),
-              AppText(
                 status,
-                fontSize: 12,
-                color: AppColors.invoiceStatus,
+                fontSize: 14,
+                color: status == "Active"
+                    ? AppColors.invoiceStatus
+                    : AppColors.transRed,
               )
             ],
           )
