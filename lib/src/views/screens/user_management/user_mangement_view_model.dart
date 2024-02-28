@@ -44,6 +44,23 @@ class UserManagementHomeVM extends BaseViewModel {
     }
   }
 
+  Future<void> deleteAdmin(String id) async {
+    isLoadingRoles = true;
+    notifyListeners();
+    final res = await adminRepo.deleteAdmin(name: id);
+    if (res.success) {
+      isLoadingRoles = false;
+      notifyListeners();
+      snackbarService.success(message: "User Deleted Successfully");
+      getAllAdmin();
+      notifyListeners();
+    } else {
+      isLoadingRoles = false;
+      notifyListeners();
+      snackbarService.error(message: res.message!);
+    }
+  }
+
   Future<void> getAllRoles() async {
     isLoadingRoles = true;
     notifyListeners();

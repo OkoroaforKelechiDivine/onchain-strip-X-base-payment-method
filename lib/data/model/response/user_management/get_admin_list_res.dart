@@ -9,6 +9,7 @@ class GetAdminListRes {
   final String role;
   final int businessId;
   final bool active;
+  final String username;
 
   GetAdminListRes({
     required this.id,
@@ -21,6 +22,7 @@ class GetAdminListRes {
     required this.role,
     required this.businessId,
     required this.active,
+    required this.username,
   });
 
   factory GetAdminListRes.fromJson(Map<String, dynamic> json) =>
@@ -35,6 +37,7 @@ class GetAdminListRes {
         role: json["Role"],
         businessId: json["BusinessID"],
         active: json["Active"],
+        username: json["Username"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -48,5 +51,6 @@ class GetAdminListRes {
         "Role": role,
         "BusinessID": businessId,
         "Active": active,
+        "Username": username,
       };
 }
