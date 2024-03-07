@@ -11,6 +11,8 @@ class CreateAdminViewModel extends BaseViewModel {
   TextEditingController usernameTEC = TextEditingController();
   GetRoleListRes? selectedRole;
   bool isLoading = false;
+  bool checkingUsername = false;
+  bool? isUsernameAvailable;
 
   Future<void> createAdmin(Function()? onPop) async {
     isLoading = true;
@@ -42,5 +44,20 @@ class CreateAdminViewModel extends BaseViewModel {
     selectedRole = val;
 
     notifyListeners();
+  }
+
+  void checkUsername() async {
+    checkingUsername = true;
+    notifyListeners();
+    final res = await authRepo.checkUsername(username: usernameTEC.text);
+    if (res.success == true) {
+      isUsernameAvailable = res.data;
+      checkingUsername = false;
+      notifyListeners();
+    } else {
+      snackbarService.error(message: "Unable to check Username");
+      checkingUsername = false;
+      notifyListeners();
+    }
   }
 }

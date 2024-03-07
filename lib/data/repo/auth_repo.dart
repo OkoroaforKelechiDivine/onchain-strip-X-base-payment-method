@@ -103,4 +103,10 @@ class AuthRepo {
     return _authApi.updatePassword(
         username: username, token: token, password: password);
   }
+
+  Future<ApiResponse<bool>> checkUsername({
+    required String username,
+  }) async {
+    return _authApi.checkUsername(username: username);
+  }
 }

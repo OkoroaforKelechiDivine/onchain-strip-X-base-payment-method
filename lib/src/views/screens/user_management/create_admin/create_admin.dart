@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/core/widgets/app_button.dart';
@@ -126,6 +127,52 @@ class CreateAdminView extends StatelessWidget {
                     textEditingController: viewModel.usernameTEC,
                     backgroundColor: Colors.white,
                     borderColor: Colors.transparent,
+                  ),
+                  const SizedBox(height: 15),
+                  Visibility(
+                    visible: (viewModel.isUsernameAvailable != null ||
+                        viewModel.checkingUsername == true),
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        color: AppColors.lightGreen.withOpacity(0.1),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          viewModel.checkingUsername
+                              ? const SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    color: AppColors.lightGreen,
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                              : const Icon(
+                                  Icons.check_circle_rounded,
+                                  color: AppColors.lightGreen,
+                                ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              viewModel.checkingUsername == true
+                                  ? "Checking account number.."
+                                  : viewModel.isUsernameAvailable == false
+                                      ? "Username is available"
+                                      : "Username is not available",
+                              style: const TextStyle(
+                                color: AppColors.lightGreen,
+                                fontWeight: AppFontWeight.bold,
+                                fontSize: AppFontSize.size14,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 38),
                   AppCustomButton(

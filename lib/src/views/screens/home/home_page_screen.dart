@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/utilities/permission.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
+import 'package:pay_me_mobile/src/views/screens/business_onboarding/business_onboarding_home_view.dart';
 import 'package:pay_me_mobile/src/views/screens/home/add_money_view.dart';
 import 'package:pay_me_mobile/src/views/screens/home/home_viewmodel.dart';
 import 'package:pay_me_mobile/src/views/screens/inflow/inflow_screen.dart';
@@ -386,28 +387,40 @@ class HomePageScreen extends StatelessWidget {
                               width: 12.w,
                             ),
                             Expanded(
-                              child: ShadowWrapper(
-                                child: HomeCardCTA(
-                                  asset: "assets/png/user-management.png",
-                                  title: 'Manage User',
-                                  textColor: AppColors.lightGreen,
-                                  fontSize: 13,
-                                  onPressed: () {
-                                    navigationService
-                                        .push(const UserManagementHome());
-                                    // log(Permissions()
-                                    //     .canUserViewPosDevices()
-                                    //     .toString());
-                                    // if (Permissions().canUserViewPosDevices()) {
-                                    //   snackbarService.success(
-                                    //       message: "Coming Soon");
-
-                                    // } else {
-                                    //   snackbarService.error(
-                                    //       message:
-                                    //           "Can't Perform this Operation");
-                                    // }
-                                  },
+                              child: Visibility(
+                                visible: (appGlobals.user?.business == "PayMe"),
+                                replacement: ShadowWrapper(
+                                  child: HomeCardCTA(
+                                    asset: "assets/png/user-management.png",
+                                    title: 'Manage User',
+                                    textColor: AppColors.lightGreen,
+                                    fontSize: 13,
+                                    onPressed: () {
+                                      log(Permissions()
+                                          .canUserViewPosDevices()
+                                          .toString());
+                                      if (Permissions().canUserCreateRole()) {
+                                        navigationService
+                                            .push(const UserManagementHome());
+                                      } else {
+                                        snackbarService.error(
+                                            message:
+                                                "Can't Perform this Operation");
+                                      }
+                                    },
+                                  ),
+                                ),
+                                child: ShadowWrapper(
+                                  child: HomeCardCTA(
+                                    asset: "assets/png/user-management.png",
+                                    title: 'Onboarding',
+                                    textColor: AppColors.lightGreen,
+                                    fontSize: 13,
+                                    onPressed: () {
+                                      navigationService.push(
+                                          const BusinessOnboardingHomeView());
+                                    },
+                                  ),
                                 ),
                               ),
                             ),

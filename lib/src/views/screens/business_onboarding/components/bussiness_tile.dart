@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
-import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/core/constants/colors.dart';
+import 'package:pay_me_mobile/core/widgets/app_text.dart';
 
-class UserTile extends StatelessWidget {
+class BusinessTile extends StatelessWidget {
   final String title;
   final String subtitle;
-  final String status;
+  final bool status;
 
-  const UserTile({
+  const BusinessTile({
     super.key,
     required this.title,
     required this.subtitle,
@@ -66,11 +67,9 @@ class UserTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               AppText(
-                status,
+                status == true ? 'Active' : 'Inactive',
                 fontSize: 14,
-                color: status == "Active"
-                    ? AppColors.invoiceStatus
-                    : AppColors.transRed,
+                color: status ? AppColors.invoiceStatus : AppColors.transRed,
               )
             ],
           )
