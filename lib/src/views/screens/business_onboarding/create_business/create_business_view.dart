@@ -466,9 +466,12 @@ class CreateBusinessView extends StatelessWidget {
                                       strokeWidth: 2,
                                     ),
                                   )
-                                : const Icon(
+                                : Icon(
                                     Icons.check_circle_rounded,
-                                    color: AppColors.lightGreen,
+                                    color: model.isUsernameAvailable == false ||
+                                            model.checkingUsername == true
+                                        ? AppColors.lightGreen
+                                        : AppColors.errorRed,
                                   ),
                             const SizedBox(width: 8),
                             Expanded(
@@ -478,8 +481,11 @@ class CreateBusinessView extends StatelessWidget {
                                     : model.isUsernameAvailable == false
                                         ? "Username is available"
                                         : "Username is not available",
-                                style: const TextStyle(
-                                  color: AppColors.lightGreen,
+                                style: TextStyle(
+                                  color: model.isUsernameAvailable == false ||
+                                          model.checkingUsername == true
+                                      ? AppColors.lightGreen
+                                      : AppColors.errorRed,
                                   fontWeight: AppFontWeight.bold,
                                   fontSize: AppFontSize.size14,
                                 ),

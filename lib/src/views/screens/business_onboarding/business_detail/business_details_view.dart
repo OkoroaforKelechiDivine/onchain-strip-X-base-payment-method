@@ -48,7 +48,7 @@ class BusinessDetailsView extends StatelessWidget {
                         color: AppColors.black,
                       ),
                       const SizedBox(width: 10),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           if (!business.accredited) {
                             if (business.consentUrl.isNotEmpty) {
@@ -56,24 +56,39 @@ class BusinessDetailsView extends StatelessWidget {
                             }
                           }
                         },
-                        child: Row(
-                          children: [
-                            Icon(
-                              business.accredited
-                                  ? Icons.check_circle
-                                  : Icons.cancel_rounded,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
                               color: business.accredited
-                                  ? Colors.green
-                                  : Colors.red,
-                              size: 25,
-                            ),
-                            const SizedBox(width: 5),
-                            AppText(
-                              business.accredited ? 'Verified' : 'Not Verified',
-                              fontSize: 18,
-                              color: AppColors.black,
-                            ),
-                          ],
+                                  ? Colors.transparent
+                                  : AppColors.errorRed,
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Row(
+                            children: [
+                              Icon(
+                                business.accredited
+                                    ? Icons.check_circle
+                                    : Icons.cancel_rounded,
+                                color: business.accredited
+                                    ? Colors.green
+                                    : Colors.white,
+                                size: 25,
+                              ),
+                              const SizedBox(width: 5),
+                              AppText(
+                                business.accredited
+                                    ? 'Verified'
+                                    : 'Not Verified',
+                                fontSize: 18,
+                                color: business.accredited
+                                    ? AppColors.black
+                                    : AppColors.white,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

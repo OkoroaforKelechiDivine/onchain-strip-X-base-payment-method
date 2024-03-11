@@ -16,8 +16,11 @@ class CreateRolesViewModel extends BaseViewModel {
     "CAN_APPROVE_PAYMENT": "can approve payment",
     "CAN_INITIATE_PAYMENT": "can initiate payment",
     "CAN_SET_TRANSACTION_PIN": "can set transaction pin",
+    "CAN_SET_TRANSFER_LIMIT": "can set transfer limit",
     "CAN_TRANSFER": "can transfer",
-    "CAN_VIEW_OUTLETS": "can view outlet",
+    "CAN_VIEW_BALANCE": "can view wallet balance",
+    "CAN_VIEW_INFLOW": "can view inflow",
+    "CAN_VIEW_OUTLETS": "can view outlets",
     "CREATE_ROLE": "create roles",
     "DEACTIVATE_DEVICE": "deactivate device",
     "VIEW_ALL_TRANSACTIONS": "view all transactions",
@@ -25,7 +28,7 @@ class CreateRolesViewModel extends BaseViewModel {
     "VIEW_REPORTS": "view reports"
   };
 
-  List<String> selectedActions = [];
+  List<String> selectedActions = ["CAN_VIEW_INFLOW"];
   void handleCheckboxChange(bool? value, String key) {
     if (value == true && !selectedActions.contains(key)) {
       selectedActions.add(key);
