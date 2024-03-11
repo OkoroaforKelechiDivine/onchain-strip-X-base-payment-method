@@ -10,6 +10,7 @@ import 'package:pay_me_mobile/src/views/screens/invoice/components/invoice_custo
 import 'package:stacked/stacked.dart';
 
 import '../../../../core/cores.dart';
+import 'business_detail/business_details_view.dart';
 
 class BusinessOnboardingHomeView extends StatelessWidget {
   const BusinessOnboardingHomeView({super.key});
@@ -136,14 +137,10 @@ class BusinessOnboardingHomeView extends StatelessWidget {
                                   final business = model.businessList[index];
                                   return GestureDetector(
                                     onTap: () {
-                                      // navigationService.push(
-                                      //   BusinessTile(
-                                      //     role: role,
-                                      //     onPop: () {
-                                      //       model.init();
-                                      //     },
-                                      //   ),
-                                      // );
+                                      navigationService
+                                          .push(BusinessDetailsView(
+                                        business: business,
+                                      ));
                                     },
                                     child: BusinessTile(
                                       title: business.businessName,

@@ -1,23 +1,23 @@
 class CreateBusinessRes {
-  final int id;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final int? id;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
   final dynamic deletedAt;
-  final String businessName;
-  final String businessAddress;
-  final String businessEmail;
-  final String businessPhone;
-  final bool registered;
+  final String? businessName;
+  final String? businessAddress;
+  final String? businessEmail;
+  final String? businessPhone;
+  final bool? registered;
   final String? registrationNumber;
-  final bool accredited;
-  final bool active;
-  final int brmId;
-  final int aggregatorId;
-  final String businessType;
-  final String accountNumber;
-  final String accountName;
-  final ContactPerson contactPerson;
-  final TransactionFee transactionFee;
+  final bool? accredited;
+  final bool? active;
+  final int? brmId;
+  final int? aggregatorId;
+  final String? businessType;
+  final String? accountNumber;
+  final String? accountName;
+  final ContactPerson? contactPerson;
+  final TransactionFee? transactionFee;
   final dynamic role;
   final dynamic outlet;
 
@@ -72,8 +72,8 @@ class CreateBusinessRes {
 
   Map<String, dynamic> toJson() => {
         "ID": id,
-        "CreatedAt": createdAt.toIso8601String(),
-        "UpdatedAt": updatedAt.toIso8601String(),
+        "CreatedAt": createdAt?.toIso8601String(),
+        "UpdatedAt": updatedAt?.toIso8601String(),
         "DeletedAt": deletedAt,
         "BusinessName": businessName,
         "BusinessAddress": businessAddress,
@@ -88,22 +88,22 @@ class CreateBusinessRes {
         "BusinessType": businessType,
         "AccountNumber": accountNumber,
         "AccountName": accountName,
-        "ContactPerson": contactPerson.toJson(),
-        "TransactionFee": transactionFee.toJson(),
+        "ContactPerson": contactPerson?.toJson(),
+        "TransactionFee": transactionFee?.toJson(),
         "Role": role,
         "Outlet": outlet,
       };
 }
 
 class ContactPerson {
-  final String firstName;
-  final String lastName;
-  final String middleName;
-  final String gender;
-  final String dob;
-  final String idType;
-  final String bvn;
-  final String idNumber;
+  final String? firstName;
+  final String? lastName;
+  final String? middleName;
+  final String? gender;
+  final String? dob;
+  final String? idType;
+  final String? bvn;
+  final String? idNumber;
 
   ContactPerson({
     required this.firstName,
@@ -140,17 +140,17 @@ class ContactPerson {
 }
 
 class TransactionFee {
-  final int id;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final int? id;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
   final dynamic deletedAt;
-  final int transfer;
-  final int withdrawal;
-  final int vat;
-  final int transferCap;
-  final int withdrawalCap;
-  final bool isSet;
-  final int businessId;
+  final int? transfer;
+  final int? withdrawal;
+  final int? vat;
+  final int? transferCap;
+  final int? withdrawalCap;
+  final bool? isSet;
+  final int? businessId;
 
   TransactionFee({
     required this.id,
@@ -182,8 +182,8 @@ class TransactionFee {
 
   Map<String, dynamic> toJson() => {
         "ID": id,
-        "CreatedAt": createdAt.toIso8601String(),
-        "UpdatedAt": updatedAt.toIso8601String(),
+        "CreatedAt": createdAt?.toIso8601String(),
+        "UpdatedAt": updatedAt?.toIso8601String(),
         "DeletedAt": deletedAt,
         "Transfer": transfer,
         "Withdrawal": withdrawal,

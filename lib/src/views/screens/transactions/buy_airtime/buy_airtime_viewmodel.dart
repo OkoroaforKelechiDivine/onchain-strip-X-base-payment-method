@@ -14,6 +14,7 @@ class BuyAirtimeViewModel extends BaseViewModel {
   String selectedAmount = "";
   TextEditingController amountController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String selectedValue = 'Airtel';
   int selectedAmountIndex = 7;
   bool buyingAirtime = false;
@@ -63,6 +64,15 @@ class BuyAirtimeViewModel extends BaseViewModel {
     } else {
       snackbarService.error(message: res.message!);
       return false;
+    }
+  }
+
+  //Write a code that will validate that the fields are not empty
+  void validateForm() {
+    if (formKey.currentState!.validate()) {
+      buyAirtime();
+    } else {
+      snackbarService.error(message: "All fields are required");
     }
   }
 

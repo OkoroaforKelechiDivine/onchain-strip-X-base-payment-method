@@ -117,21 +117,25 @@ class SendMoneyViewModel extends BaseViewModel {
   Future<void> processTransfer(
       {required BankResponse selectedbank,
       required BeneficiaryDetailResponse beneficiary}) async {
-    bottomSheetService.show(
-      TransactionPinView(
-        onPinComplete: (val) async {
-          navigationService.pop();
-          isSendingMoney = true;
-          notifyListeners();
-          final res = await confirmPin(val!);
-          if (res) {
-            await sendMoney(
-                beneficiary: beneficiary, selectedbank: selectedbank);
-          }
-          isSendingMoney = false;
-          notifyListeners();
-        },
-      ),
-    );
+    if (amountController.text.isEmpty || narrationController.text.isEmpty) {
+      snackbarService.error(message: "Inputs cannot be empty");
+    } else {
+      bottomSheetService.show(
+        TransactionPinView(
+          onPinComplete: (val) async {
+            navigationService.pop();
+            isSendingMoney = true;
+            notifyListeners();
+            final res = await confirmPin(val!);
+            if (res) {
+              await sendMoney(
+                  beneficiary: beneficiary, selectedbank: selectedbank);
+            }
+            isSendingMoney = false;
+            notifyListeners();
+          },
+        ),
+      );
+    }
   }
 }

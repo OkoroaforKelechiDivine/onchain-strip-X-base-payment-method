@@ -37,67 +37,70 @@ class _BuyPowerScreenState extends State<BuyPowerScreen> {
               style: sans(color: AppColors.lightGreen),
             ),
           ),
-          body: Stack(
-            children: [
-              SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20),
-                      BuildServiceProviders(model: model),
-                      const SizedBox(height: 16),
-                      BuildPackage(model: model),
-                      const SizedBox(height: 16),
-                      const Text(
-                        "Phone Number",
-                        style: TextStyle(
-                          color: AppColors.lightBlack,
-                          fontWeight: AppFontWeight.bold,
-                          fontSize: AppFontSize.size16,
+          body: Form(
+            key: model.formKey,
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 20),
+                        BuildServiceProviders(model: model),
+                        const SizedBox(height: 16),
+                        BuildPackage(model: model),
+                        const SizedBox(height: 16),
+                        const Text(
+                          "Phone Number",
+                          style: TextStyle(
+                            color: AppColors.lightBlack,
+                            fontWeight: AppFontWeight.bold,
+                            fontSize: AppFontSize.size16,
+                          ),
+                          textAlign: TextAlign.left,
                         ),
-                        textAlign: TextAlign.left,
-                      ),
-                      const SizedBox(height: 10),
-                      AppCustomTextField(
-                        textEditingController: model.phoneNumberController,
-                        hintText: 'Enter Phone Number',
-                        textInputType: TextInputType.number,
-                        maxLength: 10,
-                        padding: const EdgeInsets.all(18),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter phone number';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 12),
-                      BuildMeterName(
-                        viewModel: model,
-                      ),
-                      const SizedBox(height: 16),
-                      AppCustomButton(
-                        loading: model.buyingPower,
-                        onPressed: () {
-                          model.processPower();
-                        },
-                        title: 'Buy Power',
-                        color: AppColors.lightGreen,
-                        padding: const EdgeInsets.all(18),
-                      ),
-                    ],
+                        const SizedBox(height: 10),
+                        AppCustomTextField(
+                          textEditingController: model.phoneNumberController,
+                          hintText: 'Enter Phone Number',
+                          textInputType: TextInputType.number,
+                          maxLength: 10,
+                          padding: const EdgeInsets.all(18),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter phone number';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 12),
+                        BuildMeterName(
+                          viewModel: model,
+                        ),
+                        const SizedBox(height: 16),
+                        AppCustomButton(
+                          loading: model.buyingPower,
+                          onPressed: () {
+                            model.validateForm();
+                          },
+                          title: 'Buy Power',
+                          color: AppColors.lightGreen,
+                          padding: const EdgeInsets.all(18),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Visibility(
-                visible: model.buyingPower,
-                child: const Positioned(
-                  child: AppLoader(),
+                Visibility(
+                  visible: model.buyingPower,
+                  child: const Positioned(
+                    child: AppLoader(),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

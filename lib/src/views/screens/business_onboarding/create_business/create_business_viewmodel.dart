@@ -107,17 +107,18 @@ class CreateBusinessVm extends BaseViewModel {
     isLoading = true;
     notifyListeners();
     final business = CreateBusinessParam(
-      businessName: businessNameController.text,
-      businessEmail: businessEmailController.text,
-      businessPhone: businessPhoneController.text,
-      businessAddress: businessAddressController.text,
-      registrationNumber:
-          registrationStatus == "Registered" ? rcNumberController.text : "",
-      bvn: bvnController.text,
-      firstname: firstnameController.text,
-      lastname: lastnameController.text,
-      middlename: middleNameController.text,
-      username: usernameController.text,
+      businessName: businessNameController.text.trim(),
+      businessEmail: businessEmailController.text.trim(),
+      businessPhone: businessPhoneController.text.trim(),
+      businessAddress: businessAddressController.text.trim(),
+      registrationNumber: registrationStatus == "Registered"
+          ? rcNumberController.text.trim()
+          : "",
+      bvn: bvnController.text.trim(),
+      firstname: firstnameController.text.trim(),
+      lastname: lastnameController.text.trim(),
+      middlename: middleNameController.text.trim(),
+      username: usernameController.text.trim(),
       businessType: selectedBusinessType!,
       registered: registrationStatus == "Registered" ? true : false,
       dob: "${selectedDOB.toLocal()}".split(' ')[0],
@@ -134,8 +135,9 @@ class CreateBusinessVm extends BaseViewModel {
       isLoading = false;
       notifyListeners();
       onPop?.call();
+      navigationService.pop();
     } else {
-      snackbarService.error(message: "Unable to Create Business");
+      snackbarService.error(message: res.message ?? "Something went wrong");
       isLoading = false;
       notifyListeners();
     }

@@ -17,6 +17,7 @@ class BuyPowerViewModel extends BaseViewModel {
   TextEditingController amountController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController meterNumberController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String? selectedElectricityProvider;
   String? selectedPackage;
   VerifyMeterResponse? verifyMeterResponse;
@@ -174,6 +175,15 @@ class BuyPowerViewModel extends BaseViewModel {
     } else {
       snackbarService.error(message: res.message!);
       return false;
+    }
+  }
+
+  //Write a code that will validate that the fields are not empty
+  void validateForm() {
+    if (formKey.currentState!.validate()) {
+      processPower();
+    } else {
+      snackbarService.error(message: "All fields are required");
     }
   }
 

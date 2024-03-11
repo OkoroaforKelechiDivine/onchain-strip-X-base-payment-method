@@ -107,6 +107,8 @@ class CreateBusinessView extends StatelessWidget {
                       hintText: "Business Phone Number",
                       textEditingController: model.businessPhoneController,
                       backgroundColor: Colors.white,
+                      textInputType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Business Phone Number is required";
@@ -125,6 +127,8 @@ class CreateBusinessView extends StatelessWidget {
                       hintText: "Email Address",
                       textEditingController: model.businessEmailController,
                       backgroundColor: Colors.white,
+                      textInputType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Email Address is required";
@@ -187,6 +191,8 @@ class CreateBusinessView extends StatelessWidget {
                             hintText: "RC Number",
                             textEditingController: model.rcNumberController,
                             backgroundColor: Colors.white,
+                            textInputType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
                             borderColor: Colors.transparent,
                           ),
                           const SizedBox(height: 28),
@@ -402,6 +408,8 @@ class CreateBusinessView extends StatelessWidget {
                       textEditingController: model.bvnController,
                       backgroundColor: Colors.white,
                       textInputType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
+                      maxLength: 11,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "BVN Number is required";

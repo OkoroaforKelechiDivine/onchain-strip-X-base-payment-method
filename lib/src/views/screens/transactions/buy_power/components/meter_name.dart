@@ -33,6 +33,12 @@ class BuildMeterName extends StatelessWidget {
           hintText: 'Enter Meter Number',
           textInputType: TextInputType.number,
           padding: const EdgeInsets.all(18),
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'Please enter Meter Number';
+            }
+            return null;
+          },
           onChanged: (val) {
             if (val.length == 13) {
               viewModel.verifyMeterDetails();
@@ -114,6 +120,12 @@ class BuildMeterName extends StatelessWidget {
           hintText: 'Enter amount here',
           textInputType: TextInputType.number,
           padding: const EdgeInsets.all(18),
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'Please enter amount';
+            }
+            return null;
+          },
           onChanged: (text) {
             String formattedAmount = AmountFormatter.formatAmount(text);
             if (viewModel.amountController.text != formattedAmount) {

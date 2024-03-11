@@ -16,6 +16,7 @@ class TvCableViewModel extends BaseViewModel {
   TextEditingController amountController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController decoderNumberController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   VerifySmartCardResponse? verifySmartCardResponse;
   TvCableResponse? tvCableResponse;
   String? selectedTvCableProvider;
@@ -77,6 +78,15 @@ class TvCableViewModel extends BaseViewModel {
   void onSelectPackage(TvCablePackageResponse? newVal) {
     selectedPackageResponse = newVal;
     notifyListeners();
+  }
+
+  //Write a code that will validate that the fields are not empty
+  void validateForm() {
+    if (formKey.currentState!.validate()) {
+      buyCable();
+    } else {
+      snackbarService.error(message: "All fields are required");
+    }
   }
 
   Future<void> onGetPackages(String packageNmae) async {
