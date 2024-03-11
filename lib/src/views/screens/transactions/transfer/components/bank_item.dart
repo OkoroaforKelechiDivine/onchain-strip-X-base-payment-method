@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_to_bank_screen.dart';
 
 import '../../../../../../core/constants/colors.dart';
-import '../../../../../../core/di/locator.dart';
-import '../send_money.dart';
 import 'dummy_bank.dart';
 
 class BuildBankItem extends StatefulWidget {

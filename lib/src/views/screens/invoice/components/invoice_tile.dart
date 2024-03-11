@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
-import 'package:pay_me_mobile/core/constants/colors.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 
@@ -59,7 +58,7 @@ class InvoiceTile extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 8,
           ),
           Column(

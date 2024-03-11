@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/src/views/screens/reset_passowrd/reset_email_password/reset_email_password_viewmodel.dart';
-import 'package:pay_me_mobile/src/views/screens/reset_passowrd/update_password/update_password.dart';
 import 'package:stacked/stacked.dart';
 
 class ResetEmailPassword extends StatelessWidget {

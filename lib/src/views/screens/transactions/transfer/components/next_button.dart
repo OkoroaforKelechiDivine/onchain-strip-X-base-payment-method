@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../app_config/manager/font_manager.dart';
 import '../../../../../../core/constants/colors.dart';
-import '../../../../../../core/di/locator.dart';
-import '../send_money.dart';
-import '../transfer_to_bank_screen.dart';
 
 class BuildNextTextButton extends StatefulWidget {
   const BuildNextTextButton({super.key});

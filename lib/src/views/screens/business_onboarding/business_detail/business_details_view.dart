@@ -209,7 +209,7 @@ class BusinessDetailsView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 25),
-                  AppText(
+                  const AppText(
                     "Business Infomation",
                     fontSize: 25,
                     fontWeight: FontWeight.w700,

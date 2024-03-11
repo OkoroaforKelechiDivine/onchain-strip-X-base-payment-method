@@ -38,7 +38,7 @@ class CreateRolesViewModel extends BaseViewModel {
 
   void setRoles(GetRoleListRes role) {
     roleNameTEC.text = role.label;
-    selectedActions = List<String>.from(jsonDecode(role!.actions));
+    selectedActions = List<String>.from(jsonDecode(role.actions));
   }
 
   Future<void> createRole(Function()? onPop, GetRoleListRes? role) async {

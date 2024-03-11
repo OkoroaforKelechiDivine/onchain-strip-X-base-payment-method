@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/core/widgets/loader.dart';
 import 'package:pay_me_mobile/src/custom/custom_amount_input_field.dart';

@@ -7,7 +7,6 @@ import 'package:pay_me_mobile/data/model/params/bank_transfer_param.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/bank_response.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/beneficiary_detail_response.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/sender_detail_response.dart';
-import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_pin/transaction_pin_view.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_success_screen.dart';
 import 'package:stacked/stacked.dart';

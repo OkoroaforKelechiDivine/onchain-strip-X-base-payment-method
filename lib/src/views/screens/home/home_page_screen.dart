@@ -10,8 +10,6 @@ import 'package:pay_me_mobile/src/views/screens/home/add_money_view.dart';
 import 'package:pay_me_mobile/src/views/screens/home/home_viewmodel.dart';
 import 'package:pay_me_mobile/src/views/screens/inflow/inflow_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/invoice_home.dart';
-import 'package:pay_me_mobile/src/views/screens/pos/set_pos_screen.dart';
-import 'package:pay_me_mobile/src/views/screens/raise_payment/raise_payment.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/buy_airtime_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/buy_power_screen.dart';
@@ -25,7 +23,6 @@ import 'package:pay_me_mobile/src/views/screens/user_management/user_management_
 import 'package:stacked/stacked.dart';
 import '../../../../app_config/manager/font_manager.dart';
 
-import '../outlet/outlet_screen.dart';
 
 import '../tv/cable_tv.dart';
 

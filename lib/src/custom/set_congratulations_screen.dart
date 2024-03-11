@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import '../../app_config/manager/font_manager.dart';
 import '../../core/cores.dart';
 class CongratulationsDialog extends StatelessWidget {

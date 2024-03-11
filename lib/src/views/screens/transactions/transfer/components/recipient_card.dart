@@ -1,23 +1,13 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'dart:typed_data';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/bank_response.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/beneficiary_detail_response.dart';
-import 'package:pay_me_mobile/core/utilities/file_util.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/components/account_number.dart';
-import 'package:pay_me_mobile/src/views/screens/transactions/transfer/components/account_number_error.dart';
-import 'package:pay_me_mobile/src/views/screens/transactions/transfer/components/next_button.dart';
-import 'package:pay_me_mobile/src/views/screens/transactions/transfer/components/username_text.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/send_money.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_viewmmodel.dart';
-import 'package:stacked/stacked.dart';
 
 import '../../../../../../app_config/manager/font_manager.dart';
-import '../../../../../../core/constants/colors.dart';
 
 class BuildRecipientCard extends StatelessWidget {
   final TransferViewModel model;

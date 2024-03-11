@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
-import 'package:pay_me_mobile/data/model/params/create_admin_param.dart';
 import 'package:pay_me_mobile/data/model/params/update_admin_param.dart';
 import 'package:pay_me_mobile/data/model/response/user_management/get_admin_list_res.dart';
 import 'package:pay_me_mobile/data/model/response/user_management/get_role_list_res.dart';

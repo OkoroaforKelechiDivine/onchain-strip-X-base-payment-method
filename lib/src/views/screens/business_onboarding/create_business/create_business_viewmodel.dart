@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/data/model/params/create_business_param.dart';
-import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 class CreateBusinessVm extends BaseViewModel {

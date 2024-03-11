@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
-import 'package:pay_me_mobile/core/constants/colors.dart';
-import 'package:pay_me_mobile/core/widgets/app_text.dart';
 import 'package:pay_me_mobile/src/views/screens/business_onboarding/business_onboarding_home_viewmodel.dart';
 import 'package:pay_me_mobile/src/views/screens/business_onboarding/components/bussiness_tile.dart';
 import 'package:pay_me_mobile/src/views/screens/business_onboarding/create_business/create_business_view.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/src/views/screens/transaction_history/components/card.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/components/transaction_list.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/core/cores.dart';

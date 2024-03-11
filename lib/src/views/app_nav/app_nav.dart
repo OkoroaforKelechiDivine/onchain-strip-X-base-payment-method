@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/src/views/screens/auth/login_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 import 'package:pay_me_mobile/src/views/screens/splash/splash_screen.dart';
 

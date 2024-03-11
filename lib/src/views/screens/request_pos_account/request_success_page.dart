@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/cores.dart';
-import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 
 class RequestSucessPage extends StatelessWidget {

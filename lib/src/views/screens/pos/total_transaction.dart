@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
-import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 

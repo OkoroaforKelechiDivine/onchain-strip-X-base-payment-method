@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
@@ -11,9 +10,7 @@ import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_viewmmodel.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../../custom/custom_bottom_bar_navigation.dart';
 import '../../../../custom/process/processing_bar.dart';
-import 'components/beneficiary.dart';
 import 'components/dummy_bank.dart';
 import 'components/recent_card.dart';
 

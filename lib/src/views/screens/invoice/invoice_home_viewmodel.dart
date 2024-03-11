@@ -50,7 +50,6 @@ class InvoiceHomeViewModel extends BaseViewModel {
       isLoadingCustomer = false;
       notifyListeners();
       cusstomerList = res.data!.reversed.toList();
-      ;
       notifyListeners();
     } else {
       isLoadingCustomer = false;

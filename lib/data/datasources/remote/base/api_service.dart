@@ -110,10 +110,6 @@ class ApiService {
           errorDescription = dioError.response?.data['message'];
         }
         break;
-      case DioErrorType.connectionError:
-        errorDescription =
-            "Connection to server failed due to internet connection";
-        break;
     }
 
     return errorDescription;

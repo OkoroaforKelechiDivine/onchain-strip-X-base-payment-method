@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/data/model/response/transaction_response/transaction_response.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../../core/di/locator.dart';

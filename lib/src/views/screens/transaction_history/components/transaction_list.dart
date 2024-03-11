@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
-import 'package:pay_me_mobile/core/utilities/general_util.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history_viewmodel.dart';
 
@@ -104,7 +102,7 @@ class BuildTransactionList extends StatelessWidget {
         separatorBuilder: (context, index) {
           return const SizedBox(height: 10);
         },
-        itemCount: model.transactionList!.length,
+        itemCount: model.transactionList.length,
       ),
     );
   }

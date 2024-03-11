@@ -4,7 +4,6 @@ import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/core/cores.dart';
-import 'package:pay_me_mobile/src/custom/custom_bottom_bar_navigation.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_to_bank_screen.dart';
 
 import 'components/transaction_list.dart';
@@ -23,7 +22,7 @@ class _RaisePaymentScreenState extends State<RaisePaymentScreen> {
     return DateFormat('HH:mm a').format(timestamp);
   }
 
-  int _currentIndex = 0;
+  final int _currentIndex = 0;
 
   PreferredSizeWidget buildAppBar() {
     return AppBar(

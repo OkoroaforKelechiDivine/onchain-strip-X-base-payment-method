@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
-import 'package:pay_me_mobile/src/custom/custom_amount_input_field.dart';
 import 'package:pay_me_mobile/src/views/screens/tv/components/package.dart';
 import 'package:pay_me_mobile/src/views/screens/tv/components/service_providers.dart';
 import 'package:pay_me_mobile/src/views/screens/tv/tv_cable_viewModel.dart';
@@ -200,7 +199,7 @@ class _CableTvScreenState extends State<CableTvScreen> {
                           children: [
                             Text(
                               'Amount: ${viewModel.selectedPackageResponse == null ? "N/A" : "₦${formatBalance(double.parse(viewModel.selectedPackageResponse!.variationAmount))}"}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: AppFontSize.size16,
                                 color: AppColors.lightBlack,
                                 fontWeight: AppFontWeight.bold,

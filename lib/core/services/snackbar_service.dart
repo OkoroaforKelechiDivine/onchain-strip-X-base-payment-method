@@ -6,7 +6,7 @@ import '../cores.dart';
 
 
 class SnackbarService {
-  final NavigationService _navigationService = navigationService as NavigationService ;
+  final NavigationService _navigationService = navigationService ;
   final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
   void error({

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
@@ -19,7 +18,7 @@ class BuyPowerSuccess extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 26.0),
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             SvgPicture.asset(
               buyPowerResponse.responseDescription == "TRANSACTION FAILED"
                   ? AppAssets.cancel
@@ -38,7 +37,7 @@ class BuyPowerSuccess extends StatelessWidget {
               buyPowerResponse.responseDescription,
               fontSize: 20,
             ),
-            Spacer(),
+            const Spacer(),
             AppCustomButton(
               onPressed: () {
                 navigationService.pushAndRemoveUntil(const BottomNav());

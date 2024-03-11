@@ -3,7 +3,6 @@ import 'package:pay_me_mobile/data/datasources/remote/base/api_response.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_service.dart';
 import 'package:pay_me_mobile/data/model/params/create_admin_param.dart';
 import 'package:pay_me_mobile/data/model/params/update_admin_param.dart';
-import 'package:pay_me_mobile/data/model/response/ticket/create_ticket_response.dart';
 import 'package:pay_me_mobile/data/model/response/user_management/create_admin_res.dart';
 import 'package:pay_me_mobile/data/model/response/user_management/get_admin_list_res.dart';
 import 'package:pay_me_mobile/data/model/response/user_management/get_single_admin.dart';

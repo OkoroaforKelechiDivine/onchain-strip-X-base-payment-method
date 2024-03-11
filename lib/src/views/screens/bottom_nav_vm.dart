@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/settings_page.dart';
-import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/buy_airtime_screen.dart';
-import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/buy_power_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/home/home_page_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history.dart';
 import 'package:stacked/stacked.dart';
@@ -14,10 +12,10 @@ class BottomNavViewModel extends BaseViewModel {
   }
 
   final List<Widget> _children = [
-    HomePageScreen(),
-    TransactionHistoryScreen(),
+    const HomePageScreen(),
+    const TransactionHistoryScreen(),
     //BuyAirtimeScreen(),
-    SettingsPage(),
+    const SettingsPage(),
   ];
   List<Widget> get children => _children;
 

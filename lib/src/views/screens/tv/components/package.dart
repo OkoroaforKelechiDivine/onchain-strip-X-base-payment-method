@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/components/package_dropdown.dart';
 import 'package:pay_me_mobile/src/views/screens/tv/components/tv_provider_dropdown.dart';
 import 'package:pay_me_mobile/src/views/screens/tv/tv_cable_viewModel.dart';
 

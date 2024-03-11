@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
-import 'package:pay_me_mobile/core/constants/colors.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';

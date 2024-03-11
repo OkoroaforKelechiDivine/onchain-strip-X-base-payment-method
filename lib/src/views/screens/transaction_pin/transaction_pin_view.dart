@@ -24,7 +24,7 @@ class TransactionPinView extends StatelessWidget {
       textStyle: TextStyle(
         fontSize: Platform.isIOS ? 35 : 40,
         fontWeight: Platform.isIOS ? FontWeight.w700 : FontWeight.normal,
-        color: Color.fromRGBO(30, 60, 87, 1),
+        color: const Color.fromRGBO(30, 60, 87, 1),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),

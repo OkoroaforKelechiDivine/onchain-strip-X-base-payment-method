@@ -1,13 +1,6 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:developer';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:pay_me_mobile/src/views/app_nav/app_nav.dart';
-import 'package:pay_me_mobile/src/views/screens/passcode/enter_passcode.dart';
 import 'package:provider/provider.dart';
 import 'package:overlay_support/overlay_support.dart';
 

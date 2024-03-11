@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/widgets/loader.dart';
@@ -10,7 +9,6 @@ import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/component
 import 'package:stacked/stacked.dart';
 
 import '../../../../../core/utilities/app_fonts.dart';
-import '../../../widgets/app_button.dart';
 
 class BuyPowerScreen extends StatefulWidget {
   const BuyPowerScreen({super.key});
