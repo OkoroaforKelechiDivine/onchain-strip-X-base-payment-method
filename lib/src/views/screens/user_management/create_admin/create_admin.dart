@@ -109,7 +109,7 @@ class CreateAdminView extends StatelessWidget {
                     hintText: "Enter Email Address",
                     textEditingController: viewModel.emailAddressTEC,
                     backgroundColor: Colors.white,
-                    textInputType: TextInputType.number,
+                    textInputType: TextInputType.emailAddress,
                     borderColor: Colors.transparent,
                   ),
                   const SizedBox(height: 24),
@@ -120,56 +120,71 @@ class CreateAdminView extends StatelessWidget {
                   const SizedBox(height: 8),
                   AppCustomTextField(
                     hintText: "Enter Username",
+                    onChanged: (value) {
+                      viewModel.checkUsername();
+                    },
                     textEditingController: viewModel.usernameTEC,
                     backgroundColor: Colors.white,
                     borderColor: Colors.transparent,
                   ),
                   const SizedBox(height: 15),
-                  Visibility(
-                    visible: (viewModel.isUsernameAvailable != null ||
-                        viewModel.checkingUsername == true),
-                    child: Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.0),
-                        color: AppColors.lightGreen.withOpacity(0.1),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          viewModel.checkingUsername
-                              ? const SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator(
-                                    color: AppColors.lightGreen,
-                                    strokeWidth: 2,
+                  if (viewModel.usernameTEC.text.isNotEmpty)
+                    Visibility(
+                      visible: (viewModel.isUsernameAvailable != null ||
+                          viewModel.checkingUsername == true),
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.0),
+                          color: AppColors.lightGreen.withOpacity(0.1),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            viewModel.checkingUsername
+                                ? const SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      color: AppColors.lightGreen,
+                                      strokeWidth: 2,
+                                    ),
+                                  )
+                                : Icon(
+                                    viewModel.isUsernameAvailable == false ||
+                                            viewModel.checkingUsername == true
+                                        ? Icons.check_circle_rounded
+                                        : Icons.cancel_rounded,
+                                    color: viewModel.isUsernameAvailable ==
+                                                false ||
+                                            viewModel.checkingUsername == true
+                                        ? AppColors.lightGreen
+                                        : AppColors.errorRed,
                                   ),
-                                )
-                              : const Icon(
-                                  Icons.check_circle_rounded,
-                                  color: AppColors.lightGreen,
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                viewModel.checkingUsername == true
+                                    ? "Checking account number.."
+                                    : viewModel.isUsernameAvailable == false
+                                        ? "Username is available"
+                                        : "Username is not available",
+                                style: TextStyle(
+                                  color:
+                                      viewModel.isUsernameAvailable == false ||
+                                              viewModel.checkingUsername == true
+                                          ? AppColors.lightGreen
+                                          : AppColors.errorRed,
+                                  fontWeight: AppFontWeight.bold,
+                                  fontSize: AppFontSize.size14,
                                 ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              viewModel.checkingUsername == true
-                                  ? "Checking account number.."
-                                  : viewModel.isUsernameAvailable == false
-                                      ? "Username is available"
-                                      : "Username is not available",
-                              style: const TextStyle(
-                                color: AppColors.lightGreen,
-                                fontWeight: AppFontWeight.bold,
-                                fontSize: AppFontSize.size14,
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
                   const SizedBox(height: 38),
                   AppCustomButton(
                     loading: viewModel.isLoading,

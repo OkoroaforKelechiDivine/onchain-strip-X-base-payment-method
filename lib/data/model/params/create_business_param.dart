@@ -9,7 +9,7 @@ class CreateBusinessParam {
   final String businessType;
   final String firstname;
   final String lastname;
-  final String middlename;
+  final String? middlename;
   final String username;
   final String dob;
   final String gender;
@@ -26,7 +26,7 @@ class CreateBusinessParam {
     required this.businessType,
     required this.firstname,
     required this.lastname,
-    required this.middlename,
+    this.middlename,
     required this.username,
     required this.dob,
     required this.gender,

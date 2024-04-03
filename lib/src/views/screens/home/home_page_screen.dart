@@ -23,7 +23,6 @@ import 'package:pay_me_mobile/src/views/screens/user_management/user_management_
 import 'package:stacked/stacked.dart';
 import '../../../../app_config/manager/font_manager.dart';
 
-
 import '../tv/cable_tv.dart';
 
 class HomePageScreen extends StatelessWidget {
@@ -409,7 +408,7 @@ class HomePageScreen extends StatelessWidget {
                                 ),
                                 child: ShadowWrapper(
                                   child: HomeCardCTA(
-                                    asset: "assets/png/user-management.png",
+                                    asset: "assets/png/deal.png",
                                     title: 'Onboarding',
                                     textColor: AppColors.lightGreen,
                                     fontSize: 13,

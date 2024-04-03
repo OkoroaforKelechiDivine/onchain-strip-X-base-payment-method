@@ -59,7 +59,9 @@ class BuildTransactionList extends StatelessWidget {
                                   ? "Airtime"
                                   : bank.transactionType! == "Power"
                                       ? "Power"
-                                      : "Tv Cable",
+                                      : bank.transactionType! == "card"
+                                          ? "Card"
+                                          : "Tv Cable",
                       style: TextStyle(
                         fontFamily: GoogleFonts.alegreyaSans().fontFamily,
                         fontWeight: AppFontWeight.bold,
@@ -78,15 +80,15 @@ class BuildTransactionList extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          bank.transactionType! == "Outflow" ||
-                                  bank.transactionType! == "Airtime"
-                              ? "- ₦${formatBalance(bank.amount!.toDouble())}"
-                              : "+ ₦${formatBalance(bank.amount!.toDouble())}",
+                          bank.transactionType! == "Inflow" ||
+                                  bank.transactionType! == "card"
+                              ? "+ ₦${formatBalance(bank.amount!.toDouble())}"
+                              : "- ₦${formatBalance(bank.amount!.toDouble())}",
                           style: TextStyle(
-                            color: bank.transactionType! == "Outflow" ||
-                                    bank.transactionType! == "Airtime"
-                                ? AppColors.transRed
-                                : AppColors.lightGreen,
+                            color: bank.transactionType! == "Inflow" ||
+                                    bank.transactionType! == "card"
+                                ? AppColors.lightGreen
+                                : AppColors.transRed,
                             fontWeight: AppFontWeight.bold,
                             fontSize: AppFontSize.size14,
                           ),

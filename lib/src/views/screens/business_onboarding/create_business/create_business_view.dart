@@ -89,6 +89,7 @@ class CreateBusinessView extends StatelessWidget {
                       hintText: "Business Name",
                       textEditingController: model.businessNameController,
                       backgroundColor: Colors.white,
+                      textCapitalization: TextCapitalization.sentences,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Business Name is required";
@@ -109,6 +110,7 @@ class CreateBusinessView extends StatelessWidget {
                       backgroundColor: Colors.white,
                       textInputType: TextInputType.number,
                       textInputAction: TextInputAction.next,
+                      maxLength: 11,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Business Phone Number is required";
@@ -249,6 +251,7 @@ class CreateBusinessView extends StatelessWidget {
                     AppCustomTextField(
                       hintText: "Business Address",
                       textEditingController: model.businessAddressController,
+                      textCapitalization: TextCapitalization.sentences,
                       backgroundColor: Colors.white,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -275,6 +278,7 @@ class CreateBusinessView extends StatelessWidget {
                       hintText: "First Name",
                       textEditingController: model.firstnameController,
                       backgroundColor: Colors.white,
+                      textCapitalization: TextCapitalization.sentences,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "First Name is required";
@@ -293,6 +297,7 @@ class CreateBusinessView extends StatelessWidget {
                       hintText: "Last Name",
                       textEditingController: model.lastnameController,
                       backgroundColor: Colors.white,
+                      textCapitalization: TextCapitalization.sentences,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Last Name is required";
@@ -311,13 +316,8 @@ class CreateBusinessView extends StatelessWidget {
                       hintText: "Middle Name",
                       textEditingController: model.middleNameController,
                       backgroundColor: Colors.white,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Middle Name is required";
-                        }
-                        return null;
-                      },
                       borderColor: Colors.transparent,
+                      textCapitalization: TextCapitalization.sentences,
                     ),
                     const SizedBox(height: 28),
                     const AppText(
@@ -444,57 +444,62 @@ class CreateBusinessView extends StatelessWidget {
                       borderColor: Colors.transparent,
                     ),
                     const SizedBox(height: 15),
-                    Visibility(
-                      visible: (model.isUsernameAvailable != null ||
-                          model.checkingUsername == true),
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          color: AppColors.lightGreen.withOpacity(0.1),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            model.checkingUsername
-                                ? const SizedBox(
-                                    width: 20,
-                                    height: 20,
-                                    child: CircularProgressIndicator(
-                                      color: AppColors.lightGreen,
-                                      strokeWidth: 2,
+                    if (model.usernameController.text.isNotEmpty)
+                      Visibility(
+                        visible: (model.isUsernameAvailable != null ||
+                            model.checkingUsername == true),
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16.0),
+                            color: AppColors.lightGreen.withOpacity(0.1),
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              model.checkingUsername
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        color: AppColors.lightGreen,
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                  : Icon(
+                                      model.isUsernameAvailable == false ||
+                                              model.checkingUsername == true
+                                          ? Icons.check_circle_rounded
+                                          : Icons.cancel_rounded,
+                                      color:
+                                          model.isUsernameAvailable == false ||
+                                                  model.checkingUsername == true
+                                              ? AppColors.lightGreen
+                                              : AppColors.errorRed,
                                     ),
-                                  )
-                                : Icon(
-                                    Icons.check_circle_rounded,
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  model.checkingUsername == true
+                                      ? "Checking account number.."
+                                      : model.isUsernameAvailable == false
+                                          ? "Username is available"
+                                          : "Username is not available",
+                                  style: TextStyle(
                                     color: model.isUsernameAvailable == false ||
                                             model.checkingUsername == true
                                         ? AppColors.lightGreen
                                         : AppColors.errorRed,
+                                    fontWeight: AppFontWeight.bold,
+                                    fontSize: AppFontSize.size14,
                                   ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                model.checkingUsername == true
-                                    ? "Checking account number.."
-                                    : model.isUsernameAvailable == false
-                                        ? "Username is available"
-                                        : "Username is not available",
-                                style: TextStyle(
-                                  color: model.isUsernameAvailable == false ||
-                                          model.checkingUsername == true
-                                      ? AppColors.lightGreen
-                                      : AppColors.errorRed,
-                                  fontWeight: AppFontWeight.bold,
-                                  fontSize: AppFontSize.size14,
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
                     const SizedBox(height: 38),
                     AppCustomButton(
                       loading: model.isLoading,

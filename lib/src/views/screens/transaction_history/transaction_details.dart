@@ -119,6 +119,11 @@ class TransactionDetailsScreen extends StatelessWidget {
                               transactionResponse: transactionResponse,
                             );
                           }
+                          if (transactionResponse.transactionType == "card") {
+                            return CardTransactionRecept(
+                              transactionResponse: transactionResponse,
+                            );
+                          }
                           return TvCableRecept(
                             transactionResponse: transactionResponse,
                           );

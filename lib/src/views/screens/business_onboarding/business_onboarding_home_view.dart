@@ -108,7 +108,7 @@ class BusinessOnboardingHomeView extends StatelessWidget {
                           removeTop: true,
                           child: Builder(
                             builder: (context) {
-                              if (model.isLoadingRoles) {
+                              if (model.isLoadingBusiness) {
                                 return const Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,

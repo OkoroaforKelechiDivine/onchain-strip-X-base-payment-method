@@ -88,17 +88,24 @@ class CreateBusinessVm extends BaseViewModel {
   }
 
   void checkUsername() async {
-    checkingUsername = true;
-    notifyListeners();
-    final res = await authRepo.checkUsername(username: usernameController.text);
-    if (res.success == true) {
-      isUsernameAvailable = res.data;
+    if (usernameController.text.isEmpty) {
+      isUsernameAvailable = null;
       checkingUsername = false;
       notifyListeners();
     } else {
-      snackbarService.error(message: "Unable to check Username");
-      checkingUsername = false;
+      checkingUsername = true;
       notifyListeners();
+      final res =
+          await authRepo.checkUsername(username: usernameController.text);
+      if (res.success == true) {
+        isUsernameAvailable = res.data;
+        checkingUsername = false;
+        notifyListeners();
+      } else {
+        snackbarService.error(message: "Unable to check Username");
+        checkingUsername = false;
+        notifyListeners();
+      }
     }
   }
 
@@ -130,7 +137,7 @@ class CreateBusinessVm extends BaseViewModel {
       param: business,
     );
     if (res.success == true) {
-      snackbarService.error(message: "Business Created Successfully");
+      snackbarService.success(message: "Business Created Successfully");
       isLoading = false;
       notifyListeners();
       onPop?.call();

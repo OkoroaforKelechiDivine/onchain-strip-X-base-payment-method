@@ -19,4 +19,9 @@ class BusinessRepo {
       {required CreateBusinessParam param}) async {
     return _businessApi.createBusiness(param: param);
   }
+
+  Future<ApiResponse<String>> getConsent(
+      {required String bvn, required String id}) async {
+    return _businessApi.getConsent(bvn: bvn, id: id);
+  }
 }

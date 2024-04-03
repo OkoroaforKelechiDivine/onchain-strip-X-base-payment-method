@@ -45,32 +45,37 @@ class CreateRolesViewModel extends BaseViewModel {
   }
 
   Future<void> createRole(Function()? onPop, GetRoleListRes? role) async {
-    isLoading = true;
-    notifyListeners();
-    final res = role != null
-        ? await roleRepo.updateROle(
-            id: role.id.toString(),
-            param: UpdateRoleParam(
-                label: roleNameTEC.text.trim(), actions: selectedActions),
-          )
-        : await roleRepo.createRole(
-            param: CreateRoleParam(
-                label: roleNameTEC.text.trim(), actions: selectedActions),
-          );
-    if (res.success) {
-      isLoading = false;
-      notifyListeners();
-      snackbarService.success(
-          message: role != null
-              ? "Role Updated Successfully"
-              : "Role created successfully");
-      onPop?.call();
-      navigationService.pop();
-      notifyListeners();
+    if (roleNameTEC.text.isEmpty) {
+      snackbarService.error(message: "Role name is required");
+      return;
     } else {
-      isLoading = false;
+      isLoading = true;
       notifyListeners();
-      snackbarService.error(message: res.message!);
+      final res = role != null
+          ? await roleRepo.updateROle(
+              id: role.id.toString(),
+              param: UpdateRoleParam(
+                  label: roleNameTEC.text.trim(), actions: selectedActions),
+            )
+          : await roleRepo.createRole(
+              param: CreateRoleParam(
+                  label: roleNameTEC.text.trim(), actions: selectedActions),
+            );
+      if (res.success) {
+        isLoading = false;
+        notifyListeners();
+        snackbarService.success(
+            message: role != null
+                ? "Role Updated Successfully"
+                : "Role created successfully");
+        onPop?.call();
+        navigationService.pop();
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+        snackbarService.error(message: res.message!);
+      }
     }
   }
 }

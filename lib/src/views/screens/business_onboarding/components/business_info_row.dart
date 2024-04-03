@@ -10,31 +10,33 @@ class BusinessInfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           AppText(
             title,
             color: AppColors.black,
-            fontSize: 18,
+            fontSize: 12,
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: AppText(
-                    subtitle, // "gggggggggggggggggggbjhgguj hbiugjyh",
-                    color: AppColors.black,
-                    fontSize: 18,
-                  ),
+          const SizedBox(height: 8),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: AppText(
+                  subtitle, // "gggggggggggggggggggbjhgguj hbiugjyh",
+                  color: AppColors.black,
+                  fontSize: 18,
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
+          const Divider(
+            color: AppColors.lightGrey,
+            thickness: 1,
           ),
         ],
       ),

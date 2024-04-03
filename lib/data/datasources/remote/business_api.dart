@@ -50,4 +50,24 @@ class BusinessApi {
       return ApiResponse(success: false, message: e.message);
     }
   }
+
+  Future<ApiResponse<String>> getConsent(
+      {required String bvn, required String id}) async {
+    try {
+      final res = await _apiService.get(
+        '/get_consent',
+        queryParams: {
+          "bvn": bvn,
+          "id": id,
+          "user_type": "business",
+        },
+      );
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = res["message"];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
 }

@@ -7,8 +7,7 @@ import '../../../../core/cores.dart';
 class BusinessOnboardingHomeVM extends BaseViewModel {
   int _currentIndex = 0;
   int get currentIndex => _currentIndex;
-  bool isLoadingRoles = false;
-  bool isLoadingAdmin = false;
+  bool isLoadingBusiness = false;
   List<GetBusinessLisRes> businessList = [];
 
   GlobalKey<RefreshIndicatorState> refreshKey =
@@ -26,16 +25,16 @@ class BusinessOnboardingHomeVM extends BaseViewModel {
   }
 
   Future<void> getAllBusiness() async {
-    isLoadingAdmin = true;
+    isLoadingBusiness = true;
     notifyListeners();
     final res = await businessRepo.getAllBusiness();
     if (res.success) {
-      isLoadingAdmin = false;
+      isLoadingBusiness = false;
       notifyListeners();
       businessList = res.data!.reversed.toList();
       notifyListeners();
     } else {
-      isLoadingAdmin = false;
+      isLoadingBusiness = false;
       notifyListeners();
       snackbarService.error(message: res.message!);
     }
