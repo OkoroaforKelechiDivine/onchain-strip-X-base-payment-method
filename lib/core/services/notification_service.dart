@@ -25,7 +25,5 @@ class NotificationService {
   void getToken() async {
     String? token = await _firebaseMessaging.getToken();
     print("FirebaseMessaging token: $token");
-
-    // Optionally, you might want to send this token to your server for centralized management of devices.
   }
 }

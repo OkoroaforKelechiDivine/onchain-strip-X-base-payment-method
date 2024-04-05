@@ -14,23 +14,7 @@ import 'src/app.dart';
 import 'core/di/locator.dart';
 
 Future<void> main() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  setupLocator();
-  await LocalStorageService.init();
-  await AppGlobals.instance.init();
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  EnvironmentInitializer.setEnvironment(Environment.DEV);
-
-  final notificationService = NotificationService();
-  //final messaging = Messaging();
-  notificationService.requestPermission();
-  Messaging.registerNotification();
-  Messaging.setupInteractedMessage();
-  notificationService.getToken();
-
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       //statusBarColor: AppColors.sdp25, // status bar color
@@ -39,6 +23,23 @@ Future<void> main() async {
       statusBarBrightness: Brightness.light,
     ),
   );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  setupLocator();
+  await LocalStorageService.init();
+  await AppGlobals.instance.init();
+
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  EnvironmentInitializer.setEnvironment(Environment.DEV);
+
+  final notificationService = NotificationService();
+  //final messaging = Messaging();
+  notificationService.requestPermission();
+  Messaging.registerNotification();
+  Messaging.setupInteractedMessage();
+  Messaging.checkForInitialMessage();
+  notificationService.getToken();
 
   runApp(
     const MyApp(),
