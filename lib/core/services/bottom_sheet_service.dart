@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/core/constants/colors.dart';
 import '../cores.dart';
 
 class BottomSheetService {

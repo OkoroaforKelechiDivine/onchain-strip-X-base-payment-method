@@ -14,10 +14,10 @@ class TVCableSuccessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 26),
+        padding: const EdgeInsets.symmetric(horizontal: 26),
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             SvgPicture.asset(
               res.responseDescription == "TRANSACTION FAILED"
                   ? AppAssets.cancel
@@ -36,7 +36,7 @@ class TVCableSuccessPage extends StatelessWidget {
               res.responseDescription,
               fontSize: 20,
             ),
-            Spacer(),
+            const Spacer(),
             AppCustomButton(
               onPressed: () {
                 navigationService.pushAndRemoveUntil(const BottomNav());

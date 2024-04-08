@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pay_me_mobile/src/views/screens/tv/components/package_dropdown.dart';
-import 'package:pay_me_mobile/src/views/screens/tv/components/tv_provider_dropdown.dart';
 import 'package:pay_me_mobile/src/views/screens/tv/tv_cable_viewModel.dart';
 
 import '../../../../../app_config/manager/font_manager.dart';
@@ -14,7 +13,7 @@ class BuildTVServiceProviders extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           width: double.infinity,
           child: Text(
             "Service provider",

@@ -3,10 +3,8 @@ import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/custom/custom_amount_input_field.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/buy_power_view_model.dart';
-import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/components/provider_text_field.dart';
 
 import '../../../../../../app_config/manager/font_manager.dart';
-import '../../../../../../core/constants/colors.dart';
 
 class BuildMeterName extends StatelessWidget {
   final BuyPowerViewModel viewModel;
@@ -33,6 +31,12 @@ class BuildMeterName extends StatelessWidget {
           hintText: 'Enter Meter Number',
           textInputType: TextInputType.number,
           padding: const EdgeInsets.all(18),
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'Please enter Meter Number';
+            }
+            return null;
+          },
           onChanged: (val) {
             if (val.length == 13) {
               viewModel.verifyMeterDetails();
@@ -89,7 +93,7 @@ class BuildMeterName extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Amount',
               style: TextStyle(
                 fontSize: AppFontSize.size16,
@@ -100,7 +104,7 @@ class BuildMeterName extends StatelessWidget {
             Text(
               "Balance: ₦ ${viewModel.isLoadingWalletBalance ? "N/A" : formatBalance(double.parse(viewModel.walletBalance))}",
               //'Balance: NGN7,361.87',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: AppFontSize.size12,
                 color: AppColors.lightBlack,
                 fontWeight: AppFontWeight.bold,
@@ -114,6 +118,12 @@ class BuildMeterName extends StatelessWidget {
           hintText: 'Enter amount here',
           textInputType: TextInputType.number,
           padding: const EdgeInsets.all(18),
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'Please enter amount';
+            }
+            return null;
+          },
           onChanged: (text) {
             String formattedAmount = AmountFormatter.formatAmount(text);
             if (viewModel.amountController.text != formattedAmount) {

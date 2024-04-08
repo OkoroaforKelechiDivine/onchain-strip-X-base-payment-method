@@ -46,8 +46,8 @@ class InvoiceDetailsViewModel extends BaseViewModel {
         .map((item) => [
               item.description,
               '${item.quantity}',
-              '${formatBalance(item.pricePerUnit)}',
-              '${formatBalance(item.amount)}',
+              (formatBalance(item.pricePerUnit)),
+              (formatBalance(item.amount)),
             ])
         .toList();
 

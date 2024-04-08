@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/src/views/screens/request_pos_account/request_pos_account_viewmodel.dart';
 import 'package:stacked/stacked.dart';

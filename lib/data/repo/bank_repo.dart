@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/data/datasources/remote/bank_api.dart';
-import 'package:pay_me_mobile/data/datasources/remote/base/api_failure.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_response.dart';
 import 'package:pay_me_mobile/data/model/params/buy_power_param.dart';
 import 'package:pay_me_mobile/data/model/params/tv_param.dart';

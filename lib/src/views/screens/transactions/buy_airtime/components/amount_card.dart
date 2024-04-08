@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/constants/colors.dart';
-import '../../../../../custom/custom_amount_input_field.dart';
 
 class BuildAmountCard extends StatefulWidget {
   final String title;
@@ -63,7 +62,7 @@ class _BuildAmountCardState extends State<BuildAmountCard> {
                       color: widget.style.color,
                       //isSelected ? AppColors.pureWhite :
                       fontSize: widget.style.fontSize,
-                      fontWeight: widget.style?.fontWeight,
+                      fontWeight: widget.style.fontWeight,
                     ),
                   ),
                 ),

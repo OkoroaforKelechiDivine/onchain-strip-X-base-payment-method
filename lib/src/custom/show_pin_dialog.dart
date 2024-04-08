@@ -4,7 +4,6 @@ import 'package:pay_me_mobile/src/custom/show_processing_screen.dart';
 import 'dart:ui';
 
 import '../../app_config/manager/font_manager.dart';
-import '../../app_config/manager/theme_manager.dart';
 
 import '../../core/cores.dart';
 class PinDialog extends StatefulWidget {

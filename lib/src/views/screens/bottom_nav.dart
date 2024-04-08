@@ -1,8 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:provider/provider.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:stacked/stacked.dart';
 
@@ -18,6 +14,7 @@ class BottomNav extends StatelessWidget {
       viewModelBuilder: () => BottomNavViewModel(),
       builder: (context, model, child) {
         return Scaffold(
+          resizeToAvoidBottomInset: true,
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             iconSize: 20.0,
@@ -27,7 +24,7 @@ class BottomNav extends StatelessWidget {
             unselectedItemColor: Colors.grey,
             showSelectedLabels: false,
             showUnselectedLabels: false,
-            selectedIconTheme: IconThemeData(
+            selectedIconTheme: const IconThemeData(
               color: AppColors.lightGreen,
             ),
             items: <BottomNavigationBarItem>[

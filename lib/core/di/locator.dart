@@ -1,11 +1,13 @@
 import 'package:get_it/get_it.dart';
 import 'package:pay_me_mobile/data/datasources/local/app_local_storage.dart';
 import 'package:pay_me_mobile/data/datasources/local/auth_local_storage.dart';
+import 'package:pay_me_mobile/data/repo/admin_repo.dart';
 import 'package:pay_me_mobile/data/repo/auth_repo.dart';
 import 'package:pay_me_mobile/data/repo/bank_repo.dart';
 import 'package:pay_me_mobile/data/repo/business_repo.dart';
 import 'package:pay_me_mobile/data/repo/invoice_repo.dart';
 import 'package:pay_me_mobile/data/repo/pos_repo.dart';
+import 'package:pay_me_mobile/data/repo/role_repo.dart';
 import 'package:pay_me_mobile/data/repo/ticket_repo.dart';
 import 'package:pay_me_mobile/data/repo/transaction_repo.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav_vm.dart';
@@ -40,6 +42,8 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => TicketRepo());
   locator.registerLazySingleton(() => POSRepo());
   locator.registerLazySingleton(() => InvoiceRepo());
+  locator.registerLazySingleton(() => RoleRepo());
+  locator.registerLazySingleton(() => AdminRepo());
 }
 
 //GLOBALS
@@ -61,6 +65,8 @@ TransactionRepo transactionRepo = locator.get<TransactionRepo>();
 TicketRepo ticketRepo = locator.get<TicketRepo>();
 POSRepo posRepo = locator.get<POSRepo>();
 InvoiceRepo invoiceRepo = locator.get<InvoiceRepo>();
+RoleRepo roleRepo = locator.get<RoleRepo>();
+AdminRepo adminRepo = locator.get<AdminRepo>();
 
 final allProviders = <SingleChildWidget>[
   ///authentication view models

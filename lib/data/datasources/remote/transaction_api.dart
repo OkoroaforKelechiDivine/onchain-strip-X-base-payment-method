@@ -2,6 +2,7 @@ import 'package:pay_me_mobile/data/datasources/remote/base/api_failure.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_response.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_service.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/inflow_response.dart';
+import 'package:pay_me_mobile/data/model/response/transaction_response/transaction_count_res.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/transaction_response.dart';
 
 class TransactionApi {
@@ -30,6 +31,19 @@ class TransactionApi {
         ..data = (res['inflow'] as List)
             .map((e) => InflowResponse.fromJson(e))
             .toList();
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
+  Future<ApiResponse<TransactionCountResponse>> getTransactionCount(
+      String businessID) async {
+    try {
+      final res = await _apiService.get(
+        "/single_transaction_count/$businessID",
+      );
+      return ApiResponse.fromJson(res)
+        ..data = TransactionCountResponse.fromJson(res);
     } on ApiFailure catch (e) {
       return ApiResponse(success: false, message: e.message);
     }

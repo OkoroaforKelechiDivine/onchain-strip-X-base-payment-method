@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
 import 'package:pay_me_mobile/core/widgets/loader.dart';
 import 'package:pay_me_mobile/src/custom/custom_amount_input_field.dart';
@@ -42,81 +41,97 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
               style: sans(color: AppColors.lightGreen),
             ),
           ),
-          body: Stack(
-            children: [
-              SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Choose an amount',
-                        style: TextStyle(
-                          fontSize: AppFontSize.size16,
-                          color: AppColors.lightBlack,
-                          fontWeight: AppFontWeight.bold,
+          body: Form(
+            key: model.formKey,
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Choose an amount',
+                          style: TextStyle(
+                            fontSize: AppFontSize.size16,
+                            color: AppColors.lightBlack,
+                            fontWeight: AppFontWeight.bold,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      BuildAmountCards(model: model),
-                      const SizedBox(height: 24),
-                      BuildAmountInfo(
-                        viewModel: model,
-                      ),
-                      const SizedBox(height: 24),
-                      AppCustomTextField(
-                        textEditingController: model.amountController,
-                        onChanged: (text) {
-                          String formattedAmount =
-                              AmountFormatter.formatAmount(text);
-                          if (model.amountController.text != formattedAmount) {
-                            model.amountController.value =
-                                model.amountController.value.copyWith(
-                              text: formattedAmount,
-                              selection: TextSelection.collapsed(
-                                  offset: formattedAmount.length),
-                            );
-                          }
-                        },
-                        hintText: "Enter amount here",
-                        textInputType: TextInputType.number,
-                      ),
-                      const SizedBox(height: 24),
-                      BuildNetworkDropDown(
-                        model: model,
-                      ),
-                      const SizedBox(height: 24),
-                      AppCustomTextField(
-                        textEditingController: model.phoneNumberController,
-                        hintText: "Enter Phone number",
-                        textInputType: TextInputType.number,
-                        maxLength: 11,
-                      ),
-                      const SizedBox(height: 24),
-                      Center(
-                        child: AppCustomButton(
-                          width: 200,
-                          onPressed: () {
-                            model.buyAirtime();
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        BuildAmountCards(model: model),
+                        const SizedBox(height: 24),
+                        BuildAmountInfo(
+                          viewModel: model,
+                        ),
+                        const SizedBox(height: 24),
+                        AppCustomTextField(
+                          textEditingController: model.amountController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter amount';
+                            }
+                            return null;
                           },
-                          title: "Buy Airtime",
-                          loading: model.buyingAirtime,
+                          onChanged: (text) {
+                            String formattedAmount =
+                                AmountFormatter.formatAmount(text);
+                            if (model.amountController.text !=
+                                formattedAmount) {
+                              model.amountController.value =
+                                  model.amountController.value.copyWith(
+                                text: formattedAmount,
+                                selection: TextSelection.collapsed(
+                                    offset: formattedAmount.length),
+                              );
+                            }
+                          },
+                          hintText: "Enter amount here",
+                          textInputType: TextInputType.number,
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 24),
+                        BuildNetworkDropDown(
+                          model: model,
+                        ),
+                        const SizedBox(height: 24),
+                        AppCustomTextField(
+                          textEditingController: model.phoneNumberController,
+                          hintText: "Enter Phone number",
+                          textInputType: TextInputType.number,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter phone number';
+                            }
+                            return null;
+                          },
+                          maxLength: 11,
+                        ),
+                        const SizedBox(height: 24),
+                        Center(
+                          child: AppCustomButton(
+                            width: 200,
+                            onPressed: () {
+                              model.validateForm();
+                            },
+                            title: "Buy Airtime",
+                            loading: model.buyingAirtime,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Visibility(
-                visible: model.buyingAirtime,
-                child: const Positioned(
-                  child: AppLoader(),
+                Visibility(
+                  visible: model.buyingAirtime,
+                  child: const Positioned(
+                    child: AppLoader(),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

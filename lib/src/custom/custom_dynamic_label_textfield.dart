@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
-import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import '../../core/cores.dart';
 import 'custom_amount_input_field.dart';
 

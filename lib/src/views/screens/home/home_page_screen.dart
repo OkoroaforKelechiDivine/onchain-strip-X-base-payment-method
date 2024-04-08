@@ -5,12 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/utilities/permission.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
+import 'package:pay_me_mobile/src/views/screens/business_onboarding/business_onboarding_home_view.dart';
 import 'package:pay_me_mobile/src/views/screens/home/add_money_view.dart';
 import 'package:pay_me_mobile/src/views/screens/home/home_viewmodel.dart';
 import 'package:pay_me_mobile/src/views/screens/inflow/inflow_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/invoice_home.dart';
-import 'package:pay_me_mobile/src/views/screens/pos/set_pos_screen.dart';
-import 'package:pay_me_mobile/src/views/screens/raise_payment/raise_payment.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/buy_airtime_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_power/buy_power_screen.dart';
@@ -20,10 +19,9 @@ import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/src/views/screens/home/widgets/home_card_cta.dart';
 import 'package:pay_me_mobile/src/views/screens/home/widgets/shadow_wrapper.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/src/views/screens/user_management/user_management_home_view.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../app_config/manager/font_manager.dart';
-
-import '../outlet/outlet_screen.dart';
 
 import '../tv/cable_tv.dart';
 
@@ -362,33 +360,6 @@ class HomePageScreen extends StatelessWidget {
                             Expanded(
                               child: ShadowWrapper(
                                 child: HomeCardCTA(
-                                  asset: "assets/jpg/pos_device.jpg",
-                                  title: 'POS Device',
-                                  textColor: AppColors.lightGreen,
-                                  fontSize: 13,
-                                  onPressed: () {
-                                    log(Permissions()
-                                        .canUserViewPosDevices()
-                                        .toString());
-                                    if (Permissions().canUserViewPosDevices()) {
-                                      snackbarService.success(
-                                          message: "Coming Soon");
-                                      //navigationService.push(const PosDeviceScreen());
-                                    } else {
-                                      snackbarService.error(
-                                          message:
-                                              "Can't Perform this Operation");
-                                    }
-                                  },
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 12.w,
-                            ),
-                            Expanded(
-                              child: ShadowWrapper(
-                                child: HomeCardCTA(
                                   asset: "assets/jpg/more.jpg",
                                   title: 'Tv Cable',
                                   textColor: AppColors.lightGreen,
@@ -401,10 +372,51 @@ class HomePageScreen extends StatelessWidget {
                                           .push(const CableTvScreen());
                                     } else {
                                       snackbarService.error(
-                                          message:
-                                              "Can't Perform this Operation");
+                                        message: "Can't Perform this Operation",
+                                      );
                                     }
                                   },
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 12.w,
+                            ),
+                            Expanded(
+                              child: Visibility(
+                                visible: (appGlobals.user?.business == "PayMe"),
+                                replacement: ShadowWrapper(
+                                  child: HomeCardCTA(
+                                    asset: "assets/png/user-management.png",
+                                    title: 'Manage User',
+                                    textColor: AppColors.lightGreen,
+                                    fontSize: 13,
+                                    onPressed: () {
+                                      log(Permissions()
+                                          .canUserViewPosDevices()
+                                          .toString());
+                                      if (Permissions().canUserCreateRole()) {
+                                        navigationService
+                                            .push(const UserManagementHome());
+                                      } else {
+                                        snackbarService.error(
+                                            message:
+                                                "Can't Perform this Operation");
+                                      }
+                                    },
+                                  ),
+                                ),
+                                child: ShadowWrapper(
+                                  child: HomeCardCTA(
+                                    asset: "assets/png/deal.png",
+                                    title: 'Onboarding',
+                                    textColor: AppColors.lightGreen,
+                                    fontSize: 13,
+                                    onPressed: () {
+                                      navigationService.push(
+                                          const BusinessOnboardingHomeView());
+                                    },
+                                  ),
                                 ),
                               ),
                             ),

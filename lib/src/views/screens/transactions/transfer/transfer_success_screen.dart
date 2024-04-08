@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
@@ -15,11 +14,11 @@ class TransferSuccessPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 26),
+          padding: const EdgeInsets.symmetric(horizontal: 26),
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(),
+              const Spacer(),
               SvgPicture.asset(
                 AppAssets.complete,
                 height: 200.0,
@@ -42,7 +41,7 @@ class TransferSuccessPage extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               AppCustomButton(
                 onPressed: () {
                   navigationService.pushAndRemoveUntil(const BottomNav());

@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/bank_response.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/beneficiary_detail_response.dart';
-import 'package:pay_me_mobile/src/views/screens/transactions/transfer/components/dummy_bank.dart';
 import 'package:stacked/stacked.dart';
 
 class TransferViewModel extends BaseViewModel {

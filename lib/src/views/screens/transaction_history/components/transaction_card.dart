@@ -3,8 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
 
 import '../../../../../app_config/manager/font_manager.dart';
-import '../../../../../core/di/locator.dart';
-import '../transaction_details.dart';
 
 class BuildTransactionCard extends StatelessWidget {
   final bool isSent;

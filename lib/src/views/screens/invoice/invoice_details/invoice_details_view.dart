@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
-import 'package:pay_me_mobile/data/model/params/create_invoice_param.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/components/invoice_custom_header.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/invoice_details/invoice_details_viewmodel.dart';
 import 'package:stacked/stacked.dart';
@@ -279,11 +278,11 @@ class InvoiceDetailsView extends StatelessWidget {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Column(
+                                    const Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const AppText(
+                                        AppText(
                                           "Discount",
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
@@ -309,11 +308,11 @@ class InvoiceDetailsView extends StatelessWidget {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Column(
+                                    const Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const AppText(
+                                        AppText(
                                           "Tax",
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,

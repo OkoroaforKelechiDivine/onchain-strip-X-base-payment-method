@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/cores.dart';
-import 'package:pay_me_mobile/core/widgets/app_text.dart';
 import 'package:pay_me_mobile/src/views/screens/settings_page/change_password/change_password_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 

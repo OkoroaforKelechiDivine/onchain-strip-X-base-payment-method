@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/buy_airtime/buy_airtime_viewmodel.dart';
 
-import '../../../../../../app_config/manager/font_manager.dart';
 import '../../../../../../core/constants/colors.dart';
 
 class BuildNetworkDropDown extends StatefulWidget {

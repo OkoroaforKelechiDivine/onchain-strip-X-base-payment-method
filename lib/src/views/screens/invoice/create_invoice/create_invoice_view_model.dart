@@ -14,7 +14,7 @@ class CreateInvoiceViewModel extends BaseViewModel {
   TextEditingController additionalNoteTEC = TextEditingController();
 
   DateTime selectedDate = DateTime.now();
-  List<InvoiceItem> _items = [
+  final List<InvoiceItem> _items = [
     InvoiceItem(description: "", pricePerUnit: 0, quantity: 0)
   ];
   String selectedDiscountType = "Fixed";

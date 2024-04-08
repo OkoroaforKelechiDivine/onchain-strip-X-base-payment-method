@@ -1,11 +1,7 @@
-import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pay_me_mobile/core/widgets/app_text.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/bank_response.dart';
-import 'package:pay_me_mobile/core/utilities/file_util.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_viewmmodel.dart';
 
 import '../../../../../core/cores.dart';

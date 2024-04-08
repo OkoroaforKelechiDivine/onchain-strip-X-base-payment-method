@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
-import 'package:pay_me_mobile/core/constants/enum/view_state.dart';
-import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/components/logo.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/components/request_pos.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/components/welcome_text.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/login_viewmodel.dart';
-import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 import 'package:pay_me_mobile/src/views/screens/reset_passowrd/reset_email_password/reset_email_password.dart';
-import 'package:pay_me_mobile/src/views/screens/reset_passowrd/update_password/update_password.dart';
-import 'package:pay_me_mobile/src/views/widgets/app_button.dart';
 import 'package:pay_me_mobile/src/views/widgets/app_textfield.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 
-import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 import 'components/lock_image.dart';

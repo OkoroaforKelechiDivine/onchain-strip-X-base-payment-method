@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/data/model/params/request_pos_account_param.dart';
-import 'package:pay_me_mobile/src/views/screens/auth/login_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/request_pos_account/request_success_page.dart';
 import 'package:stacked/stacked.dart';
 

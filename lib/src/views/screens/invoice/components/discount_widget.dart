@@ -113,7 +113,7 @@ class DiscounttWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppText("Amount(-)"),
+                  const AppText("Amount(-)"),
                   const SizedBox(height: 8.0),
                   AppCustomTextField(
                     readOnly: true,

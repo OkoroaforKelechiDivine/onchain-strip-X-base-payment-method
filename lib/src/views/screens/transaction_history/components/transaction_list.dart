@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
-import 'package:pay_me_mobile/core/utilities/general_util.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history_viewmodel.dart';
 
@@ -61,7 +59,9 @@ class BuildTransactionList extends StatelessWidget {
                                   ? "Airtime"
                                   : bank.transactionType! == "Power"
                                       ? "Power"
-                                      : "Tv Cable",
+                                      : bank.transactionType! == "card"
+                                          ? "Card"
+                                          : "Tv Cable",
                       style: TextStyle(
                         fontFamily: GoogleFonts.alegreyaSans().fontFamily,
                         fontWeight: AppFontWeight.bold,
@@ -80,15 +80,15 @@ class BuildTransactionList extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          bank.transactionType! == "Outflow" ||
-                                  bank.transactionType! == "Airtime"
-                              ? "- ₦${formatBalance(bank.amount!.toDouble())}"
-                              : "+ ₦${formatBalance(bank.amount!.toDouble())}",
+                          bank.transactionType! == "Inflow" ||
+                                  bank.transactionType! == "card"
+                              ? "+ ₦${formatBalance(bank.amount!.toDouble())}"
+                              : "- ₦${formatBalance(bank.amount!.toDouble())}",
                           style: TextStyle(
-                            color: bank.transactionType! == "Outflow" ||
-                                    bank.transactionType! == "Airtime"
-                                ? AppColors.transRed
-                                : AppColors.lightGreen,
+                            color: bank.transactionType! == "Inflow" ||
+                                    bank.transactionType! == "card"
+                                ? AppColors.lightGreen
+                                : AppColors.transRed,
                             fontWeight: AppFontWeight.bold,
                             fontSize: AppFontSize.size14,
                           ),
@@ -104,7 +104,7 @@ class BuildTransactionList extends StatelessWidget {
         separatorBuilder: (context, index) {
           return const SizedBox(height: 10);
         },
-        itemCount: model.transactionList!.length,
+        itemCount: model.transactionList.length,
       ),
     );
   }

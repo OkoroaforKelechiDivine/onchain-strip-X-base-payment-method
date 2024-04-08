@@ -16,11 +16,11 @@ class CustomerTab extends StatelessWidget {
       child: Builder(
         builder: (context) {
           if (model.isLoadingInvoice) {
-            return Column(
+            return const Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
+                SizedBox(
                   height: 50,
                   width: 50,
                   child: CircularProgressIndicator(),

@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pay_me_mobile/app_config/manager/theme_manager.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/transaction_response.dart';
-import 'package:pay_me_mobile/src/views/screens/raise_payment/components/info_row.dart';
 import 'package:pay_me_mobile/src/views/screens/report_transaction/report_transaction_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/components/transaction_type_design.dart';
-import 'package:pay_me_mobile/src/views/screens/transaction_history/repeat_transaction.dart';
 import 'package:pay_me_mobile/core/utilities/app_fonts.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_detail_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../../app_config/manager/font_manager.dart';
-import '../../../../data/model/params/create_ticket_param.dart';
-import '../../../custom/custom_bottom_bar_navigation.dart';
 
 class TransactionDetailsScreen extends StatelessWidget {
   final TransactionResponse transactionResponse;
@@ -121,6 +116,11 @@ class TransactionDetailsScreen extends StatelessWidget {
                           }
                           if (transactionResponse.transactionType == "Inflow") {
                             return InflowRecept(
+                              transactionResponse: transactionResponse,
+                            );
+                          }
+                          if (transactionResponse.transactionType == "card") {
+                            return CardTransactionRecept(
                               transactionResponse: transactionResponse,
                             );
                           }

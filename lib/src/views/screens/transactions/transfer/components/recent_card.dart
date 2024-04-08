@@ -4,12 +4,6 @@ import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/src/views/screens/transactions/transfer/transfer_viewmmodel.dart';
 
 import '../../../../../../app_config/manager/font_manager.dart';
-import '../../../../../../core/constants/colors.dart';
-import '../../../../../../core/di/locator.dart';
-import '../../../transaction_history/repeat_transaction.dart';
-import '../show_all_recent_transaction.dart';
-import '../transfer_to_bank_screen.dart';
-import 'dummy_bank.dart';
 
 class BuildRecentCard extends StatelessWidget {
   final TransferViewModel model;

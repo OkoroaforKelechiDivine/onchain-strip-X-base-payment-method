@@ -218,6 +218,59 @@ class InflowRecept extends StatelessWidget {
   }
 }
 
+class CardTransactionRecept extends StatelessWidget {
+  final TransactionResponse transactionResponse;
+  const CardTransactionRecept({super.key, required this.transactionResponse});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        BuildInfoRow(label: 'Pan', value: transactionResponse.pan!),
+        const SizedBox(height: 10),
+        buildDivider(),
+        const SizedBox(height: 10),
+        BuildInfoRow(label: 'Rrn', value: transactionResponse.rrn!),
+        const SizedBox(height: 10),
+        buildDivider(),
+        const SizedBox(height: 15),
+        BuildInfoRow(label: 'Stan', value: transactionResponse.stan!),
+        const SizedBox(height: 15),
+        buildDivider(),
+        const SizedBox(height: 10),
+        BuildInfoRow(
+            label: 'Transaction Type',
+            value: transactionResponse.transactionType!),
+        const SizedBox(height: 10),
+        buildDivider(),
+        const SizedBox(height: 15),
+        BuildInfoRow(
+            label: 'Status Code', value: transactionResponse.statusCode!),
+        const SizedBox(height: 15),
+        buildDivider(),
+        const SizedBox(height: 15),
+        BuildInfoRow(
+          label: 'Amount',
+          value: "₦${formatBalance(transactionResponse.amount!.toDouble())}",
+        ),
+        const SizedBox(height: 15),
+        buildDivider(),
+        const SizedBox(height: 15),
+        BuildInfoRow(
+            label: 'Status', value: transactionResponse.statusDescription!),
+        const SizedBox(height: 15),
+        buildDivider(),
+        const SizedBox(height: 15),
+        BuildInfoRow(
+            label: 'Transaction Id',
+            value: transactionResponse.transactionId ?? ""),
+        const SizedBox(height: 15),
+        buildDivider(),
+      ],
+    );
+  }
+}
+
 class OutflowReceipt extends StatelessWidget {
   final TransactionResponse transactionResponse;
   const OutflowReceipt({super.key, required this.transactionResponse});

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/utilities/general_util.dart';
-import 'package:pay_me_mobile/core/widgets/user_icon.dart';
 import 'package:pay_me_mobile/data/datasources/local/base/local_storage_service.dart';
 import 'package:pay_me_mobile/src/views/screens/auth/login_screen.dart';
 import 'package:pay_me_mobile/src/views/screens/request_pos_account/request_pos_account.dart';

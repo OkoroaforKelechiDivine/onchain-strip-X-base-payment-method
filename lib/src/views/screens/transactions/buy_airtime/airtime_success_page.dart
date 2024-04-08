@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
@@ -15,10 +14,10 @@ class AirtimeSuccessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 26),
+        padding: const EdgeInsets.symmetric(horizontal: 26),
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             SvgPicture.asset(
               res.responseDescription == "TRANSACTION FAILED"
                   ? AppAssets.cancel
@@ -37,7 +36,7 @@ class AirtimeSuccessPage extends StatelessWidget {
               res.responseDescription,
               fontSize: 20,
             ),
-            Spacer(),
+            const Spacer(),
             AppCustomButton(
               onPressed: () {
                 navigationService.pushAndRemoveUntil(const BottomNav());

@@ -18,37 +18,37 @@ class TransactionResponse {
   final String? transactionType;
   final String? pan;
   final String? statusDescription;
-  final String? purchaseCode;
   final String? stan;
   final String? transactionDate;
   final String? cardExpiry;
   final String? transactionId;
+  final String? purchaseCode;
   final String? businessName;
 
   TransactionResponse({
-    this.statusCode,
-    this.amount,
-    this.purchaseCode,
-    this.originatorAccountNumber,
-    this.originatorAccountName,
-    this.originatorBank,
-    this.beneficiaryAccountNumber,
-    this.beneficiaryAccountName,
-    this.beneficiaryBank,
-    this.timeStamp,
-    this.transactionNarration,
-    this.transactionStatus,
-    this.cardType,
-    this.terminalId,
-    this.rrn,
-    this.transactionType,
-    this.pan,
-    this.statusDescription,
-    this.stan,
-    this.transactionDate,
-    this.cardExpiry,
-    this.transactionId,
-    this.businessName,
+    required this.statusCode,
+    required this.amount,
+    required this.originatorAccountNumber,
+    required this.originatorAccountName,
+    required this.originatorBank,
+    required this.beneficiaryAccountNumber,
+    required this.beneficiaryAccountName,
+    required this.beneficiaryBank,
+    required this.timeStamp,
+    required this.transactionNarration,
+    required this.transactionStatus,
+    required this.cardType,
+    required this.terminalId,
+    required this.rrn,
+    required this.transactionType,
+    required this.pan,
+    required this.statusDescription,
+    required this.stan,
+    required this.transactionDate,
+    required this.cardExpiry,
+    required this.transactionId,
+    required this.purchaseCode,
+    required this.businessName,
   });
 
   factory TransactionResponse.fromJson(Map<String, dynamic> json) =>
@@ -74,8 +74,8 @@ class TransactionResponse {
         transactionDate: json["transaction_date"],
         cardExpiry: json["card_expiry"],
         transactionId: json["transaction_id"],
-        businessName: json["business_name"],
         purchaseCode: json["purchase_code"],
+        businessName: json["business_name"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -94,13 +94,13 @@ class TransactionResponse {
         "terminal_id": terminalId,
         "rrn": rrn,
         "transaction_type": transactionType,
-        "purchase_code": purchaseCode,
         "pan": pan,
         "status_description": statusDescription,
         "stan": stan,
         "transaction_date": transactionDate,
         "card_expiry": cardExpiry,
         "transaction_id": transactionId,
+        "purchase_code": purchaseCode,
         "business_name": businessName,
       };
 }

@@ -1,9 +1,6 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/widgets/loader.dart';
 import 'package:pay_me_mobile/core/widgets/screen_button.dart';
@@ -34,7 +31,7 @@ class PassCodeScreen extends StatelessWidget {
       textStyle: TextStyle(
         fontSize: Platform.isIOS ? 30 : 40,
         fontWeight: Platform.isIOS ? FontWeight.w700 : FontWeight.normal,
-        color: Color.fromRGBO(30, 60, 87, 1),
+        color: const Color.fromRGBO(30, 60, 87, 1),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
