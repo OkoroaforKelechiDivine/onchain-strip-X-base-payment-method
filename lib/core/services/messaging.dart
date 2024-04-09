@@ -1,32 +1,36 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
+import 'package:pay_me_mobile/core/di/locator.dart';
+import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history.dart';
 
 class Messaging {
   static void setupInteractedMessage() {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print("Message clicked!");
-      // Navigate to specific page based on `message.data`
+      //navigationService.push(const TransactionHistoryScreen());
     });
   }
 
   static void registerNotification() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print("Received a message in the foreground!");
-      print("Message data: ${message.data}");
+      log("Received a message in the foreground!");
+      log("Message data: ${message.data}");
 
       if (message.notification != null) {
         showSimpleNotification(
           Text(message.notification?.title ?? ""),
           subtitle: Text(message.notification?.body ?? ""),
-          background: AppColors.lightGreen,
+          background: AppColors.lightGreen.withOpacity(0.9),
           foreground: Colors.white,
-          duration: const Duration(seconds: 2),
+          slideDismissDirection: DismissDirection.startToEnd,
+          duration: const Duration(seconds: 10),
         );
-        print("Notification body: ${message.notification?.body}");
-        print("Notification title: ${message.notification?.title}");
+        log("Notification body: ${message.notification?.body}");
+        log("Notification title: ${message.notification?.title}");
       }
     });
 
@@ -42,18 +46,19 @@ class Messaging {
       showSimpleNotification(
         Text(initialMessage.notification?.title ?? ""),
         subtitle: Text(initialMessage.notification?.body ?? ""),
-        background: AppColors.lightGreen,
+        background: AppColors.lightGreen.withOpacity(0.9),
         foreground: Colors.white,
-        duration: const Duration(seconds: 2),
+        slideDismissDirection: DismissDirection.startToEnd,
+        duration: const Duration(seconds: 10),
       );
-      print("Notification body: ${initialMessage.notification?.body}");
-      print("Notification title: ${initialMessage.notification?.title}");
+      log("Notification body: ${initialMessage.notification?.body}");
+      log("Notification title: ${initialMessage.notification?.title}");
     }
   }
 
   static Future<void> _firebaseMessagingBackgroundHandler(
       RemoteMessage message) async {
     await Firebase.initializeApp();
-    print("Handling a background message: ${message.messageId}");
+    log("Handling a background message: ${message.messageId}");
   }
 }

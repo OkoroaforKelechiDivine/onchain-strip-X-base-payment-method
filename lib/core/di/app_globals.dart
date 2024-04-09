@@ -10,6 +10,7 @@ class AppGlobals extends ChangeNotifier {
   AppGlobals._();
 
   String? _token;
+  String? _notificationToken;
   User? _user;
   List<BeneficiaryDetailResponse>? _beneficiaries;
   List<BankResponse>? _banks;
@@ -18,6 +19,8 @@ class AppGlobals extends ChangeNotifier {
     _token = authLocalStorage.getToken();
     _user = appLocalStorage.getUser();
     _banks = appLocalStorage.getBanks();
+    _beneficiaries = appLocalStorage.getBeneficiaries();
+    _notificationToken = appLocalStorage.getNotificationToken();
   }
 
   set token(String? value) {
@@ -40,8 +43,14 @@ class AppGlobals extends ChangeNotifier {
     notifyListeners();
   }
 
+  set notificationToken(String? value) {
+    _notificationToken = value;
+    notifyListeners();
+  }
+
   String? get token => _token;
   User? get user => _user;
   List<BankResponse>? get banks => _banks;
   List<BeneficiaryDetailResponse>? get beneficiaries => _beneficiaries;
+  String? get notificationToken => _notificationToken;
 }

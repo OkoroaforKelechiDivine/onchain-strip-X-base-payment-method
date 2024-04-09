@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
+import 'package:pay_me_mobile/core/services/notification_service.dart';
 import 'package:pay_me_mobile/data/model/response/auth/login_response.dart';
 import 'package:pay_me_mobile/src/views/screens/bottom_nav.dart';
 import 'package:pay_me_mobile/src/views/screens/passcode/enter_passcode.dart';
@@ -11,6 +12,7 @@ class LoginViewModel extends BaseViewModel {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String message = "";
+  final notificationService = NotificationService();
 
   void toggleVisibility() {
     obscurePassword = !obscurePassword;
@@ -27,6 +29,7 @@ class LoginViewModel extends BaseViewModel {
       LoginResponse(
         token: res.data?.token,
       );
+      authRepo.setNotificationToken(code: appGlobals.notificationToken!);
       navigationService.pushReplacement(const PassCodeScreen(
         page: BottomNav(),
       ));

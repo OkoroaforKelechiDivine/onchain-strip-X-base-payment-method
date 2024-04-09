@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:pay_me_mobile/core/di/locator.dart';
 
 class NotificationService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
@@ -24,6 +27,8 @@ class NotificationService {
 
   void getToken() async {
     String? token = await _firebaseMessaging.getToken();
-    print("FirebaseMessaging token: $token");
+    appLocalStorage.saveNotificationToken(token);
+    appGlobals.notificationToken = token;
+    log("FirebaseMessaging token: $token");
   }
 }

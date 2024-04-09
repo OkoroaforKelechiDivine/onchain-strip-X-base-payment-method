@@ -24,10 +24,18 @@ class AppLocalStorage {
     _localStorageService.saveMap(StorageKeys.appUser, user?.toJson());
   }
 
+  void saveNotificationToken(String? value) {
+    _localStorageService.save(StorageKeys.notificationToken, value);
+  }
+
   //Save Banks
   void saveBanks(List<BankResponse> banks) {
     _localStorageService.saveMapList(
         StorageKeys.banks, banks.map((e) => e.toJson()).toList());
+  }
+
+  String? getNotificationToken() {
+    return _localStorageService.getString(StorageKeys.notificationToken);
   }
 
   //Get Banks
