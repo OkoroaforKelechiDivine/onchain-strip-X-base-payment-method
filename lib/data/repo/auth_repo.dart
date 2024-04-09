@@ -53,6 +53,12 @@ class AuthRepo {
     return _authApi.validatePin(code: pin);
   }
 
+  Future<ApiResponse<String>> setNotificationToken({
+    required String code,
+  }) async {
+    return _authApi.setNotificationToken(code: code);
+  }
+
   Future<ApiResponse<String>> resetPassword({
     required String oldPassword,
     required String newPassword,

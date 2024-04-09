@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -20,6 +21,15 @@ class HomeViewModel extends BaseViewModel {
 
   Future<void> init() async {
     await getWalletBalance();
+    notificationListener();
+  }
+
+  void notificationListener() async {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      if (message.notification != null) {
+        await getWalletBalance();
+      }
+    });
   }
 
   Future<void> getWalletBalance() async {

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "317686877352",
+    "project_id": "payme-by-systemshift",
+    "storage_bucket": "payme-by-systemshift.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317686877352:android:0b9ff9992ed93c2a55469d",
+        "android_client_info": {
+          "package_name": "com.systemShift.pay_me_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBytEJlSsdN0kEEe9Q7kYOYEG3Rw8HmVoQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

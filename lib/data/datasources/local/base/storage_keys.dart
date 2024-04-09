@@ -4,4 +4,5 @@ class StorageKeys {
   static const appUser = 'app_user';
   static const banks = 'banks';
   static const beneficiaries = 'beneficiaries';
+  static const notificationToken = 'notificationToken';
 }

@@ -71,6 +71,21 @@ class AuthenticationDataProvider {
     }
   }
 
+  Future<ApiResponse<String>> setNotificationToken({
+    required String code,
+  }) async {
+    try {
+      final res =
+          await _apiService.post("/add_device_id", data: {"deviceID": code});
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = res["message"];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
   Future<ApiResponse<String>> sendResetPassordEmail({
     required String username,
   }) async {
