@@ -27,7 +27,7 @@ class Messaging {
           background: AppColors.lightGreen.withOpacity(0.9),
           foreground: Colors.white,
           slideDismissDirection: DismissDirection.startToEnd,
-          duration: const Duration(seconds: 10),
+          duration: const Duration(seconds: 5),
         );
         log("Notification body: ${message.notification?.body}");
         log("Notification title: ${message.notification?.title}");
@@ -49,7 +49,7 @@ class Messaging {
         background: AppColors.lightGreen.withOpacity(0.9),
         foreground: Colors.white,
         slideDismissDirection: DismissDirection.startToEnd,
-        duration: const Duration(seconds: 10),
+        duration: const Duration(seconds: 5),
       );
       log("Notification body: ${initialMessage.notification?.body}");
       log("Notification title: ${initialMessage.notification?.title}");
