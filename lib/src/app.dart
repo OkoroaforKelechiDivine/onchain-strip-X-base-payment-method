@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
+import 'package:pay_me_mobile/core/services/user_activity_timer.dart';
 import 'package:provider/provider.dart';
 import 'package:overlay_support/overlay_support.dart';
 
@@ -18,6 +19,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+    UserActivityTimer().startTimer(() {
+      navigationService.pushAndRemoveUntil(const SplashScreen());
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return OverlaySupport.global(
       toastTheme: ToastThemeData(
@@ -26,13 +35,19 @@ class _MyAppState extends State<MyApp> {
       ),
       child: ScreenUtilInit(
         builder: (context, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            navigatorKey: navigationService.navigatorKey,
-            title: 'PayMe',
-            theme: appTheme,
-            // home: PassCodeScreen(),
-            home: const SplashScreen(),
+          return GestureDetector(
+            onTap: UserActivityTimer().resetTimer,
+            onPanUpdate: (_) => UserActivityTimer().resetTimer(),
+            onPanDown: (_) => UserActivityTimer().resetTimer(),
+            behavior: HitTestBehavior.translucent,
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              navigatorKey: navigationService.navigatorKey,
+              title: 'PayMe',
+              theme: appTheme,
+              // home: PassCodeScreen(),
+              home: const SplashScreen(),
+            ),
           );
         },
       ),

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/transaction_response.dart';
-import 'package:pdf/pdf.dart';
+import 'package:pdf/pdf.dart' as pd;
+//import 'package:pdf/pdf.dart';
+import 'package:pdfx/pdfx.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:stacked/stacked.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
@@ -16,10 +21,13 @@ class TransactionDetailViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> createPdfAndSave(TransactionResponse transactionResponse) async {
+  Future<String> createPdfAndSave(
+      TransactionResponse transactionResponse) async {
     final pdf = pw.Document();
     final imageProvider =
         await _fetchImageProvider(); // Function to fetch your logo image
+    String formattedTimestamp = DateFormat('MMMM dd, yyyy \'at\' hh:mm a')
+        .format(transactionResponse.timeStamp ?? DateTime.now());
 
     pdf.addPage(
       pw.Page(
@@ -44,6 +52,8 @@ class TransactionDetailViewModel extends BaseViewModel {
               pw.SizedBox(height: 20),
               _buildPdfReceiptContent(
                   transactionResponse), // Dynamic content based on transaction type
+              _buildInfoRowPdf('Date-Time', formattedTimestamp),
+              spacer(),
               pw.SizedBox(height: 8),
               pw.Text(
                 '''This is an electronic receipt of a transaction and does not require any signature.
@@ -63,8 +73,50 @@ For any other assistance, kindly call on 08104581100 or email request@systemshif
     final File file = File(path);
     await file.writeAsBytes(await pdf.save());
 
+    return path;
+  }
+
+  void sharefile(String path) {
     // Share the document
     Share.shareFiles([path], text: 'Your Transaction Receipt');
+  }
+
+  Future<void> convertPdfToImage(String pdfFile) async {
+    try {
+      // Request storage permission
+      var status = await Permission.manageExternalStorage.request();
+      if (!status.isGranted) {
+        print("Storage permission not granted. Cannot save image.");
+        openAppSettings();
+        return;
+      }
+
+      // Load PDF document
+      final pdfController = await PdfDocument.openFile(pdfFile);
+
+      // Render a specific page as an image (first page in this example)
+      final page = await pdfController.getPage(1);
+      final image = await page.render(
+        width: page.width * 2,
+        height: page.height * 2,
+        format: PdfPageImageFormat.jpeg,
+        backgroundColor: '#ffffff',
+      );
+      await page.close();
+
+      // Get the directory to save the image
+      final directory = await getTemporaryDirectory();
+      final imagePath = File('${directory.path}/output.png');
+
+      // Save the rendered image to a file
+      await imagePath.writeAsBytes(image!.bytes);
+
+      sharefile(imagePath.path);
+
+      print('Image saved to ${imagePath.path}');
+    } catch (e) {
+      print("Error converting PDF to image: $e");
+    } finally {}
   }
 
   pw.Widget _buildPdfReceiptContent(TransactionResponse transactionResponse) {
@@ -224,12 +276,53 @@ For any other assistance, kindly call on 08104581100 or email request@systemshif
       children: [
         pw.SizedBox(height: 8),
         pw.Divider(
-          color: PdfColor.fromHex("#2B606E"),
+          color: pd.PdfColor.fromHex("#2B606E"),
           height: 0.5,
         ),
         pw.SizedBox(height: 8),
       ],
     );
+  }
+
+  Future<void> openSheet(TransactionResponse transactionResponse) async {
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.manageExternalStorage.request();
+    }
+    final path = await createPdfAndSave(transactionResponse);
+    bottomSheetService.showSheet(
+        child: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          GestureDetector(
+            onTap: () {
+              sharefile(path);
+            },
+            child: const AppText(
+              "PDF",
+              fontSize: 18,
+            ),
+          ),
+          const SizedBox(
+            height: 34,
+          ),
+          GestureDetector(
+            onTap: () {
+              convertPdfToImage(path);
+            },
+            child: const AppText(
+              "Image",
+              fontSize: 18,
+            ),
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+        ],
+      ),
+    ));
   }
 
   Future<pw.ImageProvider> _fetchImageProvider() async {
@@ -241,7 +334,7 @@ For any other assistance, kindly call on 08104581100 or email request@systemshif
 
   pw.Widget buildDivider() {
     return pw.Container(
-      color: PdfColor.fromHex("#2B606E"),
+      color: pd.PdfColor.fromHex("#2B606E"),
       height: 0.5,
     );
   }

@@ -465,7 +465,7 @@ class InvoiceDetailsView extends StatelessWidget {
                           elevation: 0,
                           // title: "Save",
                           onPressed: () {
-                            model.sendPDF();
+                            model.openSheet();
                           },
                           borderColor: AppColors.black,
                           color: Colors.transparent,

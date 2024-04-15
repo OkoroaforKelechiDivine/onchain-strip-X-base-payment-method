@@ -40,7 +40,7 @@ class TransactionDetailsScreen extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  model.createPdfAndSave(transactionResponse);
+                  model.openSheet(transactionResponse);
                 },
                 icon: const Icon(
                   Icons.share,
