@@ -5,7 +5,9 @@ import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_failure.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_response.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_service.dart';
+import 'package:pay_me_mobile/data/model/params/save_beneficiary_param.dart';
 import 'package:pay_me_mobile/data/model/params/signup_param.dart';
+import 'package:pay_me_mobile/data/model/response/auth/beneficiary.dart';
 import 'package:pay_me_mobile/data/model/response/auth/passcode_response.dart';
 
 import '../../model/response/auth/login_response.dart';
@@ -36,6 +38,20 @@ class AuthenticationDataProvider {
     }
   }
 
+  Future<ApiResponse<List<BankBeneficiaryListRes>?>>
+      getBeneficiaryList() async {
+    try {
+      final res =
+          await _apiService.get('/get_beneficiaries/${appGlobals.user?.sub}');
+      return ApiResponse.fromJson(res)
+        ..data = (res['message'] as List)
+            .map((e) => BankBeneficiaryListRes.fromJson(e))
+            .toList();
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
   Future<ApiResponse<PasscodeResponse>> validatePascode({
     required String code,
   }) async {
@@ -56,12 +72,45 @@ class AuthenticationDataProvider {
     }
   }
 
+  Future<ApiResponse<String>> saveBeneficiary({
+    required SaveBeneficiaryParam beneficiary,
+  }) async {
+    try {
+      final res = await _apiService.post(
+        "/save_beneficiary",
+        data: beneficiary.toJson(),
+      );
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = res["message"];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
   Future<ApiResponse<String>> setPascode({
     required String code,
   }) async {
     try {
       final res =
           await _apiService.post("/set_passcode", data: {"passcode": code});
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..message = "Success"
+        ..data = res["message"];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
+  Future<ApiResponse<String>> deleteBeneficiary(
+      {required String accountNumber, required String bankName}) async {
+    try {
+      final res = await _apiService.delete("/delete_beneficiary", queryParams: {
+        "accountNumber": accountNumber,
+        "bank": bankName,
+      });
       return ApiResponse.fromJson(res)
         ..success = true
         ..message = "Success"

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/params/bank_transfer_param.dart';
+import 'package:pay_me_mobile/data/model/params/save_beneficiary_param.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/bank_response.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/beneficiary_detail_response.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/sender_detail_response.dart';
@@ -79,6 +80,13 @@ class SendMoneyViewModel extends BaseViewModel {
         updateBeneficiaries(beneficiary);
         navigationService.pushAndRemoveUntil(TransferSuccessPage(
           message: amountController.text,
+          beneficiary: SaveBeneficiaryParam(
+            fullname: beneficiary.name,
+            bank: selectedbank.name,
+            bankCode: selectedbank.code,
+            accountNumber: beneficiary.account.number,
+            userId: appGlobals.user!.sub!,
+          ),
         ));
       } else {
         snackbarService.error(message: res.message ?? "Something went wrong");

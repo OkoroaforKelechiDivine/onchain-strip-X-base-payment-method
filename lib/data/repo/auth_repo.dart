@@ -4,7 +4,9 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pay_me_mobile/core/states/app_state.dart';
 import 'package:pay_me_mobile/data/datasources/remote/authentication_data_provider.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_response.dart';
+import 'package:pay_me_mobile/data/model/params/save_beneficiary_param.dart';
 import 'package:pay_me_mobile/data/model/params/signup_param.dart';
+import 'package:pay_me_mobile/data/model/response/auth/beneficiary.dart';
 import 'package:pay_me_mobile/data/model/user_model.dart';
 
 import '../../core/cores.dart';
@@ -33,6 +35,25 @@ class AuthRepo {
 
   Future<ApiResponse> register({required SignUpParam param}) {
     return _authApi.register(param: param);
+  }
+
+  Future<ApiResponse<List<BankBeneficiaryListRes>?>>
+      getBeneficiaryList() async {
+    return _authApi.getBeneficiaryList();
+  }
+
+  Future<ApiResponse<String>> deleteBeneficiary({
+    required String accountNumber,
+    required String bankName,
+  }) async {
+    return _authApi.deleteBeneficiary(
+        accountNumber: accountNumber, bankName: bankName);
+  }
+
+  Future<ApiResponse<String>> saveBeneficiary({
+    required SaveBeneficiaryParam beneficiary,
+  }) async {
+    return _authApi.saveBeneficiary(beneficiary: beneficiary);
   }
 
   Future<ApiResponse<String>> setPascode({

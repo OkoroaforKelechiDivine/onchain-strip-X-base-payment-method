@@ -34,9 +34,10 @@ class ApiService {
     }
   }
 
-  Future<dynamic> delete(String path) async {
+  Future<dynamic> delete(String path,
+      {Map<String, dynamic>? queryParams}) async {
     try {
-      final res = await _dio.delete(path);
+      final res = await _dio.delete(path, queryParameters: queryParams);
       return res.data;
     } on DioError catch (e) {
       String errorMessage = e.response?.data["error"] ?? e.message;
