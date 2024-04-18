@@ -230,12 +230,14 @@ For any other assistance, kindly call on 08104581100 or email request@systemshif
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
         _buildInfoRowPdf(
-            'Account Name', transactionResponse.beneficiaryAccountName!),
+            'Beneficiary Name', transactionResponse.beneficiaryAccountName!),
         spacer(),
         _buildInfoRowPdf('To', transactionResponse.beneficiaryAccountNumber!),
         spacer(),
         _buildInfoRowPdf(
             'Beneficiary Bank', transactionResponse.beneficiaryBank!),
+        spacer(),
+        _buildInfoRowPdf('Sender Name', appGlobals.user!.accountName!),
         spacer(),
         _buildInfoRowPdf(
             'Transaction Type', transactionResponse.transactionType!),

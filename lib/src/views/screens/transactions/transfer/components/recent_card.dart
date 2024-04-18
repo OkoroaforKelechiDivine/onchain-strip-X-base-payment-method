@@ -63,113 +63,123 @@ class BuildRecentCard extends StatelessWidget {
                 ],
               ),
             ),
-            model.currentBeneficiaries!.isEmpty
-                ? const Center(
+            Builder(
+              builder: (context) {
+                if (model.loadingBeneficiaries) {
+                  return const Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 16.0),
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                if (model.currentBeneficiaries == null ||
+                    model.currentBeneficiaries == []) {
+                  return const Center(
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 16.0),
                       child: AppText("No Beneficiary Found"),
                     ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: model.currentBeneficiaries!.asMap().entries.map(
-                        (entry) {
-                          return Card(
-                            elevation: 0,
-                            child: GestureDetector(
-                              onTap: () {
-                                model.fromBeneficiary(entry.value);
-                              },
-                              child: Container(
-                                color: AppColors.pureWhite,
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Image.asset(
-                                          'assets/png/appIcon.png',
-                                          width: 40,
-                                          height: 40,
-                                          fit: BoxFit.contain,
+                  );
+                }
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: model.currentBeneficiaries!.asMap().entries.map(
+                      (entry) {
+                        return Card(
+                          elevation: 0,
+                          child: GestureDetector(
+                            onTap: () {
+                              model.fromBeneficiary(entry.value);
+                            },
+                            child: Container(
+                              color: AppColors.pureWhite,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        'assets/png/appIcon.png',
+                                        width: 40,
+                                        height: 40,
+                                        fit: BoxFit.contain,
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              entry.value.fullName,
+                                              style: TextStyle(
+                                                fontWeight: AppFontWeight.bold,
+                                                fontSize: AppFontSize.size14,
+                                                fontFamily:
+                                                    GoogleFonts.alegreyaSans()
+                                                        .fontFamily,
+                                                color: AppColors.lightBlack,
+                                              ),
+                                            ),
+                                            Text(
+                                              entry.value.bank,
+                                              style: TextStyle(
+                                                fontWeight: AppFontWeight.light,
+                                                fontSize: AppFontSize.size14,
+                                                fontFamily:
+                                                    GoogleFonts.alegreyaSans()
+                                                        .fontFamily,
+                                                color: AppColors.lightBlack,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        const SizedBox(width: 10),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                entry.value.fullName,
-                                                style: TextStyle(
-                                                  fontWeight:
-                                                      AppFontWeight.bold,
-                                                  fontSize: AppFontSize.size14,
-                                                  fontFamily:
-                                                      GoogleFonts.alegreyaSans()
-                                                          .fontFamily,
-                                                  color: AppColors.lightBlack,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          model.deleteBeneficiary(
+                                            accountNumber:
+                                                entry.value.accountNumber,
+                                            bankName: entry.value.bank,
+                                          );
+                                        },
+                                        child: Visibility(
+                                            visible: !model.deletingBeneficiary,
+                                            replacement: const SizedBox(
+                                              height: 20,
+                                              width: 20,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 1,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(
+                                                  AppColors.lightGreen,
                                                 ),
                                               ),
-                                              Text(
-                                                entry.value.bank,
-                                                style: TextStyle(
-                                                  fontWeight:
-                                                      AppFontWeight.light,
-                                                  fontSize: AppFontSize.size14,
-                                                  fontFamily:
-                                                      GoogleFonts.alegreyaSans()
-                                                          .fontFamily,
-                                                  color: AppColors.lightBlack,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            model.deleteBeneficiary(
-                                              accountNumber:
-                                                  entry.value.accountNumber,
-                                              bankName: entry.value.bank,
-                                            );
-                                          },
-                                          child: Visibility(
-                                              visible:
-                                                  !model.deletingBeneficiary,
-                                              replacement: const SizedBox(
-                                                height: 20,
-                                                width: 20,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  strokeWidth: 1,
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation<
-                                                          Color>(
-                                                    AppColors.lightGreen,
-                                                  ),
-                                                ),
-                                              ),
-                                              child: const Icon(
-                                                Icons.delete,
-                                                color: AppColors.transRed,
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    const Divider(
-                                      height: 30,
-                                      thickness: 1,
-                                    ),
-                                  ],
-                                ),
+                                            ),
+                                            child: const Icon(
+                                              Icons.delete,
+                                              color: AppColors.transRed,
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                  const Divider(
+                                    height: 30,
+                                    thickness: 1,
+                                  ),
+                                ],
                               ),
                             ),
-                          );
-                        },
-                      ).toList(),
-                    ),
+                          ),
+                        );
+                      },
+                    ).toList(),
                   ),
+                );
+              },
+            ),
           ],
         ),
       ),

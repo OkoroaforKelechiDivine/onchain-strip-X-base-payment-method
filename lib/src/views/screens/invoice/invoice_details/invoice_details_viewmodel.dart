@@ -87,7 +87,6 @@ class InvoiceDetailsViewModel extends BaseViewModel {
               style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
             ),
             pw.Text(issuedDate),
-            pw.Text(dueDate),
           ]),
         ]),
         pw.SizedBox(height: 20),

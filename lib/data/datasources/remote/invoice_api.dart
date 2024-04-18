@@ -27,6 +27,19 @@ class InvoiceApi {
     }
   }
 
+  Future<ApiResponse<String>> deleteInvoice({required String id}) async {
+    try {
+      final res = await _apiService.delete(
+        "/delete_invoice/$id",
+      );
+      return ApiResponse.fromJson(res)
+        ..success = true
+        ..data = res['message'];
+    } on ApiFailure catch (e) {
+      return ApiResponse(success: false, message: e.message);
+    }
+  }
+
   Future<ApiResponse<String>> createInvoice(
       {required CreateInvoiceParam param}) async {
     try {

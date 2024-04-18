@@ -12,7 +12,7 @@ class TransferViewModel extends BaseViewModel {
   TextEditingController searchController = TextEditingController();
   BeneficiaryDetailResponse? beneficiaryDetailResponse;
   bool loadingBeneficiaries = false;
-  bool showBankList = true;
+  bool showBankList = false;
   bool isLoadingBankList = true;
   bool isLoadingbeneficiaryDetail = false;
   final String userName = '';
