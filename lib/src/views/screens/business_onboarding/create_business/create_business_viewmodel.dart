@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
+import 'package:pay_me_mobile/data/model/params/business_tyoe_model.dart';
 import 'package:pay_me_mobile/data/model/params/create_business_param.dart';
 import 'package:stacked/stacked.dart';
 
@@ -20,10 +21,10 @@ class CreateBusinessVm extends BaseViewModel {
   bool isLoading = false;
   bool checkingUsername = false;
   bool? isUsernameAvailable;
-  String? selectedBusinessType;
-  List<String> bussinessType = [
-    "Merchant",
-    "POS Agent",
+  BusinessType? selectedBusinessType;
+  List<BusinessType> bussinessTypes = [
+    BusinessType(name: "Merchant", value: "merchant"),
+    BusinessType(name: "POS Agent", value: "agent"),
   ];
   String registrationStatus = "Not Registered";
   List<String> registrationStatusType = [
@@ -63,7 +64,7 @@ class CreateBusinessVm extends BaseViewModel {
     }
   }
 
-  void selectBusinessType(String? val) {
+  void selectBusinessType(BusinessType? val) {
     selectedBusinessType = val;
     notifyListeners();
   }
@@ -125,7 +126,7 @@ class CreateBusinessVm extends BaseViewModel {
       lastname: lastnameController.text.trim(),
       middlename: middleNameController.text.trim(),
       username: usernameController.text.trim(),
-      businessType: selectedBusinessType!,
+      businessType: selectedBusinessType!.value,
       registered: registrationStatus == "Registered" ? true : false,
       dob: "${selectedDOB.toLocal()}".split(' ')[0],
       gender: gender,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/app_config/manager/font_manager.dart';
+import 'package:pay_me_mobile/data/model/params/business_tyoe_model.dart';
 import 'package:pay_me_mobile/src/views/screens/business_onboarding/create_business/create_business_viewmodel.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/components/invoice_custom_header.dart';
 import 'package:stacked/stacked.dart';
@@ -46,20 +47,21 @@ class CreateBusinessView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           color: AppColors.white),
                       child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
+                        child: DropdownButton<BusinessType>(
                           // The current value of the dropdown.
                           value: model.selectedBusinessType,
                           // Called when the user selects an item.
-                          onChanged: (String? newValue) {
+                          onChanged: (BusinessType? newValue) {
                             //model.selectedDropdownItem = newValue;
                             model.selectBusinessType(newValue);
                           },
                           // The list of items the user can select.
-                          items: model.bussinessType
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
+                          items: model.bussinessTypes
+                              .map<DropdownMenuItem<BusinessType>>(
+                                  (BusinessType value) {
+                            return DropdownMenuItem<BusinessType>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value.name),
                             );
                           }).toList(),
                           // Customization for the dropdown button.

@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/response/invoice/single_invoice_response.dart';
 import 'package:pay_me_mobile/src/views/screens/invoice/pdf_preview/pdf_preview_page.dart';
+import 'package:pdfx/pdfx.dart' as pd;
+import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:stacked/stacked.dart';
 import 'package:pdf/pdf.dart';
@@ -84,7 +87,6 @@ class InvoiceDetailsViewModel extends BaseViewModel {
               style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
             ),
             pw.Text(issuedDate),
-            pw.Text(dueDate),
           ]),
         ]),
         pw.SizedBox(height: 20),
@@ -318,9 +320,87 @@ class InvoiceDetailsViewModel extends BaseViewModel {
     // Share the document
   }
 
-  Future<void> sendPDF() async {
-    final path = await generateInvoicePdf();
+  Future<void> convertPdfToImage(String pdfFile) async {
+    try {
+      // Request storage permission
+      var status = await Permission.manageExternalStorage.request();
+      if (!status.isGranted) {
+        print("Storage permission not granted. Cannot save image.");
+        openAppSettings();
+        return;
+      }
+
+      // Load PDF document
+      final pdfController = await pd.PdfDocument.openFile(pdfFile);
+
+      // Render a specific page as an image (first page in this example)
+      final page = await pdfController.getPage(1);
+      final image = await page.render(
+        width: page.width * 2,
+        height: page.height * 2,
+        format: pd.PdfPageImageFormat.jpeg,
+        backgroundColor: '#ffffff',
+      );
+      await page.close();
+
+      // Get the directory to save the image
+      final directory = await getTemporaryDirectory();
+      final imagePath = File('${directory.path}/output.png');
+
+      // Save the rendered image to a file
+      await imagePath.writeAsBytes(image!.bytes);
+
+      Share.shareFiles([imagePath.path], text: 'Your Transaction Receipt');
+
+      print('Image saved to ${imagePath.path}');
+    } catch (e) {
+      print("Error converting PDF to image: $e");
+    } finally {}
+  }
+
+  Future<void> sendPDF(String path) async {
     Share.shareFiles([path], text: 'Your Transaction Receipt');
+  }
+
+  Future<void> openSheet() async {
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.manageExternalStorage.request();
+    }
+    final path = await generateInvoicePdf();
+    bottomSheetService.showSheet(
+        child: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          GestureDetector(
+            onTap: () {
+              sendPDF(path);
+            },
+            child: const AppText(
+              "PDF",
+              fontSize: 18,
+            ),
+          ),
+          const SizedBox(
+            height: 34,
+          ),
+          GestureDetector(
+            onTap: () {
+              convertPdfToImage(path);
+            },
+            child: const AppText(
+              "Image",
+              fontSize: 18,
+            ),
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+        ],
+      ),
+    ));
   }
 
   Future<void> previewPDF() async {

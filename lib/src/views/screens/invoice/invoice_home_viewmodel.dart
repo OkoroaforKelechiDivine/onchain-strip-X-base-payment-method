@@ -9,6 +9,7 @@ class InvoiceHomeViewModel extends BaseViewModel {
   int get currentIndex => _currentIndex;
   bool isLoadingInvoice = false;
   bool isLoadingCustomer = false;
+  bool deletingInvoice = false;
   List<GetInvoiceListRes> invoiceList = [];
   List<GetCustomerRes> cusstomerList = [];
   GlobalKey<RefreshIndicatorState> refreshKey =
@@ -53,6 +54,23 @@ class InvoiceHomeViewModel extends BaseViewModel {
       notifyListeners();
     } else {
       isLoadingCustomer = false;
+      notifyListeners();
+      snackbarService.error(message: res.message!);
+    }
+  }
+
+  Future<void> deleteInvoice(String id) async {
+    deletingInvoice = true;
+    notifyListeners();
+    final res = await invoiceRepo.deleteInvoice(id: id);
+    if (res.success) {
+      deletingInvoice = false;
+      notifyListeners();
+      snackbarService.success(message: "User Deleted Successfully");
+      getInvoice();
+      notifyListeners();
+    } else {
+      deletingInvoice = false;
       notifyListeners();
       snackbarService.error(message: res.message!);
     }

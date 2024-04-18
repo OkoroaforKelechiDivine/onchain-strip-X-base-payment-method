@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
+import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/transaction_response.dart';
 import 'package:pay_me_mobile/src/views/screens/raise_payment/components/info_row.dart';
@@ -280,7 +281,7 @@ class OutflowReceipt extends StatelessWidget {
     return Column(
       children: [
         BuildInfoRow(
-            label: 'Account Name',
+            label: 'Beneficiary Name',
             value: transactionResponse.beneficiaryAccountName!),
         const SizedBox(height: 10),
         buildDivider(),
@@ -293,6 +294,11 @@ class OutflowReceipt extends StatelessWidget {
         BuildInfoRow(
             label: 'Beneficiary Bank',
             value: transactionResponse.beneficiaryBank!),
+        const SizedBox(height: 15),
+        buildDivider(),
+        const SizedBox(height: 15),
+        BuildInfoRow(
+            label: 'Sender Name', value: appGlobals.user!.accountName!),
         const SizedBox(height: 15),
         buildDivider(),
         const SizedBox(height: 10),

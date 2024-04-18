@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/data/model/response/auth/beneficiary.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/bank_response.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/beneficiary_detail_response.dart';
 import 'package:stacked/stacked.dart';
@@ -10,20 +11,23 @@ class TransferViewModel extends BaseViewModel {
   TextEditingController accountNumberController = TextEditingController();
   TextEditingController searchController = TextEditingController();
   BeneficiaryDetailResponse? beneficiaryDetailResponse;
-  bool showBankList = true;
+  bool loadingBeneficiaries = false;
+  bool showBankList = false;
   bool isLoadingBankList = true;
   bool isLoadingbeneficiaryDetail = false;
   final String userName = '';
   final bool showLinearProcessing = false;
+  bool deletingBeneficiary = false;
   final String selectedBankLogo = '';
   BankResponse? selectedBank;
   final String? selectedBankController = null;
   int currentIndex = 0;
   final List<BankResponse> bankList = [];
   List<BankResponse> filteredBanks = [];
-  var currentBeneficiaries = appGlobals.beneficiaries ?? [];
+  List<BankBeneficiaryListRes>? currentBeneficiaries;
 
   void init() async {
+    await getBeneficiaries();
     if (appGlobals.banks == null) {
       log("banks is null");
       await getBankList();
@@ -33,6 +37,21 @@ class TransferViewModel extends BaseViewModel {
       bankList.addAll(appGlobals.banks!);
       filteredBanks = bankList;
       isLoadingBankList = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> getBeneficiaries() async {
+    loadingBeneficiaries = true;
+    notifyListeners();
+    final res = await authRepo.getBeneficiaryList();
+    if (res.success) {
+      currentBeneficiaries = res.data!;
+      loadingBeneficiaries = false;
+      notifyListeners();
+    } else {
+      currentBeneficiaries = [];
+      loadingBeneficiaries = false;
       notifyListeners();
     }
   }
@@ -90,15 +109,31 @@ class TransferViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> fromBeneficiary(BeneficiaryDetailResponse beneficiary) async {
-    accountNumberController.text = beneficiary.account.number;
+  Future<void> fromBeneficiary(BankBeneficiaryListRes beneficiary) async {
+    accountNumberController.text = beneficiary.accountNumber;
     selectedBank = BankResponse(
         id: 11,
-        code: beneficiary.account.id,
+        code: beneficiary.bankCode,
         name: beneficiary.bank,
         logo: "",
         created: DateTime.now());
     await getBeneficiaryDetails();
+    notifyListeners();
+  }
+
+  Future<void> deleteBeneficiary(
+      {required String accountNumber, required String bankName}) async {
+    deletingBeneficiary = true;
+    notifyListeners();
+    final res = await authRepo.deleteBeneficiary(
+        accountNumber: accountNumber, bankName: bankName);
+    if (res.success) {
+      await getBeneficiaries();
+      snackbarService.success(message: "Beneficiary deleted");
+    } else {
+      snackbarService.error(message: res.message ?? "Something went wrong");
+    }
+    deletingBeneficiary = false;
     notifyListeners();
   }
 }

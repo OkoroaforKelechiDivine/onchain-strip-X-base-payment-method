@@ -38,4 +38,8 @@ class InvoiceRepo {
   Future<ApiResponse<List<GetCustomerRes>>> getAllCustomer() async {
     return _invoiceApi.getAllCustomer();
   }
+
+  Future<ApiResponse<String>> deleteInvoice({required String id}) async {
+    return _invoiceApi.deleteInvoice(id: id);
+  }
 }
