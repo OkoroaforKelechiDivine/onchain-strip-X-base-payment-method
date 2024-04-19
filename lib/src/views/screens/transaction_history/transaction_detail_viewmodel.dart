@@ -83,13 +83,13 @@ For any other assistance, kindly call on 08104581100 or email request@systemshif
 
   Future<void> convertPdfToImage(String pdfFile) async {
     try {
-      // Request storage permission
-      var status = await Permission.manageExternalStorage.request();
-      if (!status.isGranted) {
-        print("Storage permission not granted. Cannot save image.");
-        openAppSettings();
-        return;
-      }
+      // // Request storage permission
+      // var status = await Permission.manageExternalStorage.request();
+      // if (!status.isGranted) {
+      //   print("Storage permission not granted. Cannot save image.");
+      //   openAppSettings();
+      //   return;
+      // }
 
       // Load PDF document
       final pdfController = await PdfDocument.openFile(pdfFile);
@@ -287,10 +287,10 @@ For any other assistance, kindly call on 08104581100 or email request@systemshif
   }
 
   Future<void> openSheet(TransactionResponse transactionResponse) async {
-    var status = await Permission.storage.status;
-    if (!status.isGranted) {
-      await Permission.manageExternalStorage.request();
-    }
+    // var status = await Permission.storage.status;
+    // if (!status.isGranted) {
+    //   await Permission.manageExternalStorage.request();
+    // }
     final path = await createPdfAndSave(transactionResponse);
     bottomSheetService.showSheet(
         child: Padding(

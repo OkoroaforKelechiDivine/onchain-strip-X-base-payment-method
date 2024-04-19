@@ -322,13 +322,13 @@ class InvoiceDetailsViewModel extends BaseViewModel {
 
   Future<void> convertPdfToImage(String pdfFile) async {
     try {
-      // Request storage permission
-      var status = await Permission.manageExternalStorage.request();
-      if (!status.isGranted) {
-        print("Storage permission not granted. Cannot save image.");
-        openAppSettings();
-        return;
-      }
+      // // Request storage permission
+      // var status = await Permission.manageExternalStorage.request();
+      // if (!status.isGranted) {
+      //   print("Storage permission not granted. Cannot save image.");
+      //   openAppSettings();
+      //   return;
+      // }
 
       // Load PDF document
       final pdfController = await pd.PdfDocument.openFile(pdfFile);
@@ -350,7 +350,7 @@ class InvoiceDetailsViewModel extends BaseViewModel {
       // Save the rendered image to a file
       await imagePath.writeAsBytes(image!.bytes);
 
-      Share.shareFiles([imagePath.path], text: 'Your Transaction Receipt');
+      Share.shareFiles([imagePath.path], text: 'Your Invoice');
 
       print('Image saved to ${imagePath.path}');
     } catch (e) {
@@ -363,10 +363,10 @@ class InvoiceDetailsViewModel extends BaseViewModel {
   }
 
   Future<void> openSheet() async {
-    var status = await Permission.storage.status;
-    if (!status.isGranted) {
-      await Permission.manageExternalStorage.request();
-    }
+    // var status = await Permission.storage.status;
+    // if (!status.isGranted) {
+    //   await Permission.manageExternalStorage.request();
+    // }
     final path = await generateInvoicePdf();
     bottomSheetService.showSheet(
         child: Padding(
