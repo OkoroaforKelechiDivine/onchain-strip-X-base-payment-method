@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/core/utilities/permission.dart';
 import 'package:stacked/stacked.dart';
 
 import 'bottom_nav_vm.dart';
@@ -38,19 +39,23 @@ class BottomNav extends StatelessWidget {
                     )),
                 label: '',
               ),
+              if (Permissions().canUserViewAllTransactions())
+                BottomNavigationBarItem(
+                  icon: Opacity(
+                      opacity: model.currentIndex == 1 ? 1.0 : 0.5,
+                      child: Image.asset(
+                        transactionHistoryImage,
+                        height: 20,
+                        width: 20,
+                      )),
+                  label: '',
+                ),
               BottomNavigationBarItem(
                 icon: Opacity(
-                    opacity: model.currentIndex == 1 ? 1.0 : 0.5,
-                    child: Image.asset(
-                      transactionHistoryImage,
-                      height: 20,
-                      width: 20,
-                    )),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Opacity(
-                  opacity: model.currentIndex == 2 ? 1.0 : 0.5,
+                  opacity: model.currentIndex ==
+                          (Permissions().canUserViewAllTransactions() ? 2 : 1)
+                      ? 1.0
+                      : 0.5,
                   child: const Icon(Icons.person),
                 ),
                 label: '',
