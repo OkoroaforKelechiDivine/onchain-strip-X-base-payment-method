@@ -2,7 +2,7 @@ import 'package:pay_me_mobile/core/utilities/general_util.dart';
 
 class TransactionResponse {
   final String? statusCode;
-  final int? amount;
+  final double? amount;
   final String? originatorAccountNumber;
   final String? originatorAccountName;
   final String? originatorBank;
@@ -54,7 +54,7 @@ class TransactionResponse {
   factory TransactionResponse.fromJson(Map<String, dynamic> json) =>
       TransactionResponse(
         statusCode: json["status_code"],
-        amount: json["amount"],
+        amount: json["amount"].toDouble(),
         originatorAccountNumber: json["originator_account_number"],
         originatorAccountName: json["originator_account_name"],
         originatorBank: json["originator_bank"],
