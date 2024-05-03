@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pay_me_mobile/core/constants/font_weights.dart';
 
-
-import '../../app_config/manager/font_manager.dart';
 import '../constants/colors.dart';
 import 'app_text.dart';
 

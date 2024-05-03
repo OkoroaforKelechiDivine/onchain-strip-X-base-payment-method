@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:pay_me_mobile/core/di/locator.dart';
-import 'package:pay_me_mobile/src/views/screens/splash/splash_screen.dart';
+import 'package:pay_me_mobile/presentation/splash/splash_screen.dart';
 
 class UserActivityTimer {
   static final UserActivityTimer _instance = UserActivityTimer._internal();
