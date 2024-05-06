@@ -19,9 +19,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    UserActivityTimer().startTimer(() {
-      navigationService.pushAndRemoveUntil(const SplashScreen());
-    });
+    // UserActivityTimer().startTimer(() {
+    //   navigationService.pushAndRemoveUntil(const SplashScreen());
+    // });
   }
 
   @override
@@ -34,10 +34,10 @@ class _MyAppState extends State<MyApp> {
       child: ScreenUtilInit(
         builder: (context, child) {
           return GestureDetector(
-            onTap: UserActivityTimer().resetTimer,
-            onPanUpdate: (_) => UserActivityTimer().resetTimer(),
-            onPanDown: (_) => UserActivityTimer().resetTimer(),
-            behavior: HitTestBehavior.translucent,
+            // onTap: UserActivityTimer().resetTimer,
+            // onPanUpdate: (_) => UserActivityTimer().resetTimer(),
+            // onPanDown: (_) => UserActivityTimer().resetTimer(),
+            // behavior: HitTestBehavior.translucent,
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               navigatorKey: navigationService.navigatorKey,

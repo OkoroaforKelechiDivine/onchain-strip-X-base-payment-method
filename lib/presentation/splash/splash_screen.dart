@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
@@ -21,8 +22,8 @@ class SplashScreen extends StatelessWidget {
           body: Center(
             child: Image.asset(
               AppAssets.newPaymepng,
-              height: 61,
-              width: 230,
+              height: 61.h,
+              width: 230.w,
               //   colorBlendMode: AppColors.black,
             ),
           ),
