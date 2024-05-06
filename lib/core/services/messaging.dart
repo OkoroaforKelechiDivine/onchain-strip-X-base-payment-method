@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
 import 'package:pay_me_mobile/core/di/locator.dart';
-import 'package:pay_me_mobile/src/views/screens/transaction_history/transaction_history.dart';
 
 class Messaging {
   static void setupInteractedMessage() {

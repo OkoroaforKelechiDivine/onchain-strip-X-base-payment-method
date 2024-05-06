@@ -10,7 +10,6 @@ import 'package:pay_me_mobile/data/repo/pos_repo.dart';
 import 'package:pay_me_mobile/data/repo/role_repo.dart';
 import 'package:pay_me_mobile/data/repo/ticket_repo.dart';
 import 'package:pay_me_mobile/data/repo/transaction_repo.dart';
-import 'package:pay_me_mobile/src/views/screens/bottom_nav_vm.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -67,9 +66,3 @@ POSRepo posRepo = locator.get<POSRepo>();
 InvoiceRepo invoiceRepo = locator.get<InvoiceRepo>();
 RoleRepo roleRepo = locator.get<RoleRepo>();
 AdminRepo adminRepo = locator.get<AdminRepo>();
-
-final allProviders = <SingleChildWidget>[
-  ///authentication view models
-  //ChangeNotifierProvider(create: (_) => LoginViewModel()),
-  ChangeNotifierProvider(create: (_) => BottomNavViewModel()),
-];

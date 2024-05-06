@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
 import 'package:pay_me_mobile/presentation/splash/splash_viewmodel.dart';
 import 'package:stacked/stacked.dart';
@@ -17,14 +19,11 @@ class SplashScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: AppColors.white,
           body: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // SvgPicture.asset(
-                //   AppAssets.,
-                //   //   colorBlendMode: AppColors.black,
-                // ),
-              ],
+            child: Image.asset(
+              AppAssets.newPaymepng,
+              height: 61,
+              width: 230,
+              //   colorBlendMode: AppColors.black,
             ),
           ),
         );
