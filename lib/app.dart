@@ -43,7 +43,6 @@ class _MyAppState extends State<MyApp> {
               navigatorKey: navigationService.navigatorKey,
               title: 'PayMe',
               theme: appTheme,
-              // home: PassCodeScreen(),
               home: const SplashScreen(),
             ),
           );
