@@ -83,7 +83,7 @@ class _IntroScreenState extends State<IntroScreen> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: index == _currentCarouselIndex ? AppColors.brightGreen : AppColors.white,
-                          border: index != _currentCarouselIndex ? Border.all(color: Colors.black) : null, // Apply border color only to inactive indicators
+                          border: index != _currentCarouselIndex ? Border.all(color: Colors.black) : null,
                         ),
                       ),
                     ),
