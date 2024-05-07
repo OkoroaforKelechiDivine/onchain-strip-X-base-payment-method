@@ -10,6 +10,8 @@ class AppAssets {
   static const String percent = 'assets/svgs/percent.svg';
   static const String receipt = 'assets/svgs/receipt.svg';
   static const String invoice = 'assets/png/invoice.png';
-  static const String newPayme = 'assets/svgs/new_payme.svg';
-  static const String newPaymepng = 'assets/png/new_payme.png';
+  static const String newPayme = 'assets/png/newPayme.png';
+  static const String firstCarouselImage = 'assets/png/first_carousel_image.png';
+  static const String secondCarouselImage = 'assets/png/second_carousel_image.png';
+  static const String thirdCarouselImage = 'assets/png/third_carousel_image.png';
 }
