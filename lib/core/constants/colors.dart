@@ -11,6 +11,7 @@ class AppColors {
   static const Color errorRed = Color(0xFFDF1414);
   static const Color transRed = Color.fromARGB(255, 152, 13, 13);
   static const Color brightGreen = Color.fromRGBO(19, 232, 79, 1);
+  static const Color demonicGreen = Color.fromRGBO(0, 186, 150, 1);
   static const Color deepGreen = Color.fromRGBO(5, 60, 66, 1);
   static const Color dullOrange = Color.fromRGBO(232, 211, 19, 1);
   static const Color grey = Colors.grey;

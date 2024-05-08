@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/constants/colors.dart';
@@ -18,28 +19,41 @@ class ImageWithTitleAndContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Stack(
       children: [
-        Image.asset(image),
-        Text(
-          title,
-          style: TextStyle(
-              fontSize: 30.sp,
-              fontWeight: AppFontWeight.bold,
-              color: AppColors.deepGreen
-          ),
-          textAlign: TextAlign.center,
+        Image.asset(
+          image,
+          width: MediaQuery.of(context).size.width,
         ),
-        SizedBox(height: 5.h),
-        Text(
-          content,
-          style: TextStyle(
-              fontSize: 15.sp,
-              color: AppColors.deepGreen
+        Center(
+          child: Container(
+            color: AppColors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 100.h),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 30.sp,
+                    fontWeight: AppFontWeight.bold,
+                    color: AppColors.deepGreen,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 5.h),
+                Text(
+                  content,
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                    color: AppColors.deepGreen,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
-          textAlign: TextAlign.center,
         ),
       ],
     );
