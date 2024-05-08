@@ -94,7 +94,7 @@ class AddCustomerView extends StatelessWidget {
                     borderColor: Colors.transparent,
                   ),
                   const SizedBox(height: 38),
-                  AppCustomButton(
+                  AppButton(
                     loading: viewModel.isLoading,
                     title: "Save",
                     onPressed: () {
@@ -103,7 +103,7 @@ class AddCustomerView extends StatelessWidget {
                     color: AppColors.black,
                   ),
                   const SizedBox(height: 18),
-                  AppCustomButton(
+                  AppButton(
                     elevation: 0,
                     // title: "Save",
                     onPressed: () {

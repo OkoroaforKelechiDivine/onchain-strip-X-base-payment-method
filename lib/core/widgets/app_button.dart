@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-
 import '../cores.dart';
 import 'app_circular_progress_indicator.dart';
 
-class AppCustomButton extends StatelessWidget {
+class AppButton extends StatelessWidget {
   final EdgeInsets? padding, margin;
   final String? title;
   final Function()? onPressed;
@@ -14,7 +13,7 @@ class AppCustomButton extends StatelessWidget {
   final Color? color, hoverColor, disableTextColor, disableColor, borderColor;
   final double? elevation, disableElevation, radius, borderWidth, height, width;
   final BorderStyle? borderStyle;
-  const AppCustomButton(
+  const AppButton(
       {Key? key,
       this.onPressed,
       this.child,
@@ -71,7 +70,6 @@ class AppCustomButton extends StatelessWidget {
                     title ?? '',
                     fontSize: 18,
                     color: AppColors.white,
-                    
                   ),
                   if (loading ?? false)
                     Container(

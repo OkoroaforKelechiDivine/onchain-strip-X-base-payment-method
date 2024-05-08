@@ -79,7 +79,7 @@ class CreateRoleView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 38),
-                  AppCustomButton(
+                  AppButton(
                     loading: model.isLoading,
                     title: "Save",
                     onPressed: () {
@@ -88,7 +88,7 @@ class CreateRoleView extends StatelessWidget {
                     color: AppColors.black,
                   ),
                   const SizedBox(height: 18),
-                  AppCustomButton(
+                  AppButton(
                     elevation: 0,
                     // title: "Save",
                     onPressed: () {

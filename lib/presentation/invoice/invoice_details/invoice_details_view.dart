@@ -453,7 +453,7 @@ class InvoiceDetailsView extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 45),
-                        AppCustomButton(
+                        AppButton(
                           title: "Proceed to Preview",
                           onPressed: () {
                             model.previewPDF();
@@ -461,7 +461,7 @@ class InvoiceDetailsView extends StatelessWidget {
                           color: AppColors.lightGreen,
                         ),
                         const SizedBox(height: 18),
-                        AppCustomButton(
+                        AppButton(
                           elevation: 0,
                           // title: "Save",
                           onPressed: () {

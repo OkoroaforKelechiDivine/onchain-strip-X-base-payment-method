@@ -318,7 +318,7 @@ class CreateInvoiceView extends StatelessWidget {
                   //   color: AppColors.black,
                   // ),
                   // const SizedBox(height: 18),
-                  AppCustomButton(
+                  AppButton(
                     loading: viewModel.isSavingInvoice,
                     elevation: 0,
                     // title: "Save",
