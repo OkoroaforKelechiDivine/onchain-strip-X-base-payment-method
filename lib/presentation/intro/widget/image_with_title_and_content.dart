@@ -25,9 +25,39 @@ class ImageWithTitleAndContent extends StatelessWidget {
           image,
           width: MediaQuery.of(context).size.width,
         ),
-        Center(
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
           child: Container(
-            color: AppColors.white,
+            height: 300.h,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                end: Alignment.topCenter,
+                begin: Alignment.bottomCenter,
+                colors: [
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white.withOpacity(0.8),
+                  Colors.white.withOpacity(0.7),
+                  Colors.white.withOpacity(0.5),
+                  Colors.white.withOpacity(0.4),
+                  Colors.white.withOpacity(0.3),
+                  Colors.white.withOpacity(0.2),
+                ], // White to transparent
+              ),
+              color: AppColors.white,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,6 +81,7 @@ class ImageWithTitleAndContent extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
+                SizedBox(height: 70.h),
               ],
             ),
           ),
