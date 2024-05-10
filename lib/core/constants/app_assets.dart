@@ -18,4 +18,5 @@ class AppAssets {
   static const String thirdCarouselImage =
       'assets/png/third_carousel_image.png';
   static const String lightOval = 'assets/svgs/light_oval.svg';
+  static const String back = 'assets/svgs/back.svg';
 }

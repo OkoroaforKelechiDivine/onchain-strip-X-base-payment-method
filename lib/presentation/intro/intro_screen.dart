@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/presentation/auth/sign_in/sign_in_view.dart';
 import 'package:pay_me_mobile/presentation/intro/intro_view_model.dart';
 import 'package:pay_me_mobile/presentation/intro/widget/image_with_title_and_content.dart';
 import 'package:stacked/stacked.dart';
@@ -92,7 +93,9 @@ class IntroScreen extends StatelessWidget {
                           AppButton(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
-                            onPressed: () {},
+                            onPressed: () {
+                              navigationService.push(SignInView());
+                            },
                             title: 'Next',
                             width: 150.w,
                             height: 35.h,
