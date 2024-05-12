@@ -142,6 +142,7 @@ class AppCustomTextField extends StatelessWidget {
         onEditingComplete: onEditingComplete,
         onChanged: onChanged,
         onTap: onTap,
+        cursorColor: AppColors.black,
         showCursor: showCursor ?? true,
         obscureText: obscureText == null ? false : obscureText!,
         obscuringCharacter: obscureChar != null ? obscureChar! : '*',
