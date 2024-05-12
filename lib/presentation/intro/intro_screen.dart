@@ -94,7 +94,7 @@ class IntroScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
                             onPressed: () {
-                              navigationService.push(SignInView());
+                              navigationService.push(const SignInView());
                             },
                             title: 'Next',
                             width: 150.w,
