@@ -11,24 +11,50 @@ class AppText extends StatelessWidget {
   final TextOverflow? overflow;
   final TextAlign? alignment;
   final TextDecoration? textDecoration;
-  const AppText(this.text,
-      {Key? key,
-      this.fontSize,
-      this.fontStyle,
-      this.fontWeight,
-      this.color,
-      this.maxLines,
-      this.overflow,
-      this.alignment,
-      this.fontFamily,
-      this.letterSpacing,
-      this.textDecoration,
-      this.height})
-      : super(key: key);
+  final VoidCallback? onPress;
+  final bool? isTextButton;
+  const AppText(
+      this.text, {
+        Key? key,
+        this.fontSize,
+        this.fontStyle,
+        this.fontWeight,
+        this.color,
+        this.maxLines,
+        this.overflow,
+        this.alignment,
+        this.fontFamily,
+        this.letterSpacing,
+        this.textDecoration,
+        this.height,
+        this.onPress,
+        this.isTextButton,
+      }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Text(text,
+    if (isTextButton == true) {
+      return GestureDetector(
+        onTap: onPress,
+        child: Text(
+          text,
+          maxLines: maxLines,
+          style: TextStyle(
+            color: color,
+            fontWeight: fontWeight,
+            fontStyle: fontStyle,
+            fontSize: fontSize,
+            overflow: overflow,
+            letterSpacing: letterSpacing,
+            decoration: textDecoration,
+            height: height,
+          ),
+          textAlign: alignment,
+        ),
+      );
+    } else {
+      return Text(
+        text,
         maxLines: maxLines,
         style: TextStyle(
           color: color,
@@ -40,7 +66,8 @@ class AppText extends StatelessWidget {
           decoration: textDecoration,
           height: height,
         ),
-        textAlign: alignment);
-    // return Text(text, maxLines: maxLine, style: TextStyle(color: color, fontWeight: fontWeight, fontStyle: fontStyle, fontSize: size, overflow: overflow), textAlign: alignment);
+        textAlign: alignment,
+      );
+    }
   }
 }
