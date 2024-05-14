@@ -19,7 +19,7 @@ class SignUpViewModel extends BaseViewModel {
   }
 
   void setIncorporateDate(String date) {
-    incorporateDateController.text = date.toString();
+    incorporateDateController.text = date;
   }
 
 }
