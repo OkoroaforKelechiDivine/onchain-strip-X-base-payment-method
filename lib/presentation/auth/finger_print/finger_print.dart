@@ -42,7 +42,7 @@ class FingerPrintView extends StatelessWidget {
                         AppAssets.fingerPrint
                       ),
                       SizedBox(height: 20.h),
-                      const AppText('Place your finger on the screen fingerprint', color: AppColors.grey,),
+                      const AppText('Place your finger on the screen fingerprint'),
                     ],
                   ),
                 ),
