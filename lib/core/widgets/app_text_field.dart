@@ -33,6 +33,8 @@ class AppCustomTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final TextInputAction? textInputAction;
   final FontWeight? fontWeight;
+  final bool? disableTyping;
+
   final OutlineInputBorder? disabledBorder,
       enabledBorder,
       focusedBorder,
@@ -59,7 +61,8 @@ class AppCustomTextField extends StatelessWidget {
       this.hintText,
       this.textInputType,
       this.icon,
-      this.suffixIcon,
+        this.disableTyping,
+        this.suffixIcon,
       this.obscureText,
       this.obscureChar,
       this.onTap,
@@ -76,7 +79,7 @@ class AppCustomTextField extends StatelessWidget {
       this.initialText,
       this.textEditingController,
       this.enabled,
-      this.suffixBoxConstraints,
+        this.suffixBoxConstraints,
       this.prefixBoxConstraints,
       this.errorText,
       this.errorStyle,
@@ -129,97 +132,101 @@ class AppCustomTextField extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: Padding(
         padding: EdgeInsets.only(top: 20.w, right: 15.w, left: 15.w),
-        child: TextFormField(
-          readOnly: readOnly ?? false,
-          autofillHints: autofillHints,
-          focusNode: focusNode,
-          autofocus: autofocus ?? false,
-          maxLength: maxLength,
-          textCapitalization: textCapitalization ?? TextCapitalization.none,
-          validator: validator,
-          textAlign: textAlign ?? TextAlign.start,
-          style: TextStyle(
-              fontSize: fontSize ?? 15.sp,
-              height: textHeight,
-              color: AppColors.grey,
-              fontWeight: fontWeight ?? AppFontWeight.medium),
-          initialValue: initialText == null ? null : initialText!,
-          onEditingComplete: onEditingComplete,
-          onChanged: onChanged,
-          onTap: onTap,
-          cursorColor: AppColors.black,
-          showCursor: showCursor ?? true,
-          obscureText: obscureText == null ? false : obscureText!,
-          obscuringCharacter: obscureChar != null ? obscureChar! : '*',
-          keyboardType: textInputType,
-          textInputAction: textInputAction,
-          onFieldSubmitted: onSubmitted,
-          maxLines: maxLines,
-          textAlignVertical: textAlignVertical,
-          minLines: minLines,
-          buildCounter: buildCounter,
-          controller: textEditingController,
-          enabled: enabled ?? true,
-          inputFormatters: inputFormatters,
-          decoration: InputDecoration(
-            suffixStyle: suffixStyle ??
-                const TextStyle(
-                  color: AppColors.black,
-                  fontSize: 16,
-                ),
-            counter: counter,
-            alignLabelWithHint: true,
-            labelText: labelText,
-            labelStyle: labelTextStyle,
-            prefixIcon: prefixIcon,
-            errorStyle: errorStyle,
-            errorText: errorText,
-            isDense: isDense ?? true,
-            contentPadding: padding,
-            suffixText: suffixText,
-            suffixIconConstraints: suffixBoxConstraints,
-            suffixIcon: suffixIcon == null ? null : suffixIcon!,
-            icon: icon == null
-                ? null
-                : Container(margin: const EdgeInsets.only(left: 16), child: icon),
-            constraints: constraints,
-            focusedBorder: focusedBorder ??
-                OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
-                  borderSide: BorderSide(
-                      color: focusBorderColor ?? AppColors.lightGreen,
-                      width: focusBorderWidth ?? 1),
-                ),
-            disabledBorder: disabledBorder,
-            enabledBorder: enabledBorder ??
-                OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
-                  borderSide: BorderSide(
-                      color: borderColor ?? AppColors.lightGreen,
-                      width: borderWidth ?? 1),
-                ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 8),
-              borderSide: BorderSide(
-                  color: borderColor ?? AppColors.lightGreen,
-                  width: borderWidth ?? 1),
+        child: IgnorePointer(
+          ignoring: disableTyping ?? false,
+          child: TextFormField(
+            readOnly: readOnly ?? false,
+            autofillHints: autofillHints,
+            focusNode: focusNode,
+            autofocus: autofocus ?? false,
+            // keyboardType: keyboardType, // Pass keyboardType to TextFormField
+            maxLength: maxLength,
+            textCapitalization: textCapitalization ?? TextCapitalization.none,
+            validator: validator,
+            textAlign: textAlign ?? TextAlign.start,
+            style: TextStyle(
+                fontSize: fontSize ?? 15.sp,
+                height: textHeight,
+                color: AppColors.grey,
+                fontWeight: fontWeight ?? AppFontWeight.medium),
+            initialValue: initialText == null ? null : initialText!,
+            onEditingComplete: onEditingComplete,
+            onChanged: onChanged,
+            onTap: onTap,
+            cursorColor: AppColors.black,
+            showCursor: showCursor ?? true,
+            obscureText: obscureText == null ? false : obscureText!,
+            obscuringCharacter: obscureChar != null ? obscureChar! : '*',
+            keyboardType: textInputType,
+            textInputAction: textInputAction,
+            onFieldSubmitted: onSubmitted,
+            maxLines: maxLines,
+            textAlignVertical: textAlignVertical,
+            minLines: minLines,
+            buildCounter: buildCounter,
+            controller: textEditingController,
+            enabled: enabled ?? true,
+            inputFormatters: inputFormatters,
+            decoration: InputDecoration(
+              suffixStyle: suffixStyle ??
+                  const TextStyle(
+                    color: AppColors.black,
+                    fontSize: 16,
+                  ),
+              counter: counter,
+              alignLabelWithHint: true,
+              labelText: labelText,
+              labelStyle: labelTextStyle,
+              prefixIcon: prefixIcon,
+              errorStyle: errorStyle,
+              errorText: errorText,
+              isDense: isDense ?? true,
+              contentPadding: padding,
+              suffixText: suffixText,
+              suffixIconConstraints: suffixBoxConstraints,
+              suffixIcon: suffixIcon == null ? null : suffixIcon!,
+              icon: icon == null
+                  ? null
+                  : Container(margin: const EdgeInsets.only(left: 16), child: icon),
+              constraints: constraints,
+              focusedBorder: focusedBorder ??
+                  OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                    borderSide: BorderSide(
+                        color: focusBorderColor ?? AppColors.lightGreen,
+                        width: focusBorderWidth ?? 1),
+                  ),
+              disabledBorder: disabledBorder,
+              enabledBorder: enabledBorder ??
+                  OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                    borderSide: BorderSide(
+                        color: borderColor ?? AppColors.lightGreen,
+                        width: borderWidth ?? 1),
+                  ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                borderSide: BorderSide(
+                    color: borderColor ?? AppColors.lightGreen,
+                    width: borderWidth ?? 1),
+              ),
+              errorBorder: errorBorder ??
+                  OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                    borderSide: BorderSide(
+                        color: errorBorderColor ?? Colors.red,
+                        width: borderWidth ?? 1),
+                  ),
+              filled: true,
+              fillColor: backgroundColor ?? Colors.transparent,
+              hintText: hintText,
+              hintMaxLines: hintMaxLines,
+              hintStyle: GoogleFonts.outfit(
+                  textStyle: TextStyle(
+                      color: AppColors.grey,
+                      fontSize: fontSize,
+                      fontWeight: fontWeight)),
             ),
-            errorBorder: errorBorder ??
-                OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
-                  borderSide: BorderSide(
-                      color: errorBorderColor ?? Colors.red,
-                      width: borderWidth ?? 1),
-                ),
-            filled: true,
-            fillColor: backgroundColor ?? Colors.transparent,
-            hintText: hintText,
-            hintMaxLines: hintMaxLines,
-            hintStyle: GoogleFonts.outfit(
-                textStyle: TextStyle(
-                    color: AppColors.grey,
-                    fontSize: fontSize,
-                    fontWeight: fontWeight)),
           ),
         ),
       ),

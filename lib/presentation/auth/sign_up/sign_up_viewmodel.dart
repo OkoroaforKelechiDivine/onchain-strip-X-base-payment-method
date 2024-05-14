@@ -18,7 +18,7 @@ class SignUpViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void setIncorporateDate(DateTime date) {
+  void setIncorporateDate(String date) {
     incorporateDateController.text = date.toString();
   }
 
