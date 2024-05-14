@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
+
+import '../constants/font_weights.dart';
 
 class AppCustomTextField extends StatelessWidget {
   final String? title, hintText, initialText, labelText;
@@ -124,97 +127,100 @@ class AppCustomTextField extends StatelessWidget {
       // ),
       margin: margin,
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-      child: TextFormField(
-        readOnly: readOnly ?? false,
-        autofillHints: autofillHints,
-        focusNode: focusNode,
-        autofocus: autofocus ?? false,
-        maxLength: maxLength,
-        textCapitalization: textCapitalization ?? TextCapitalization.none,
-        validator: validator,
-        textAlign: textAlign ?? TextAlign.start,
-        style: TextStyle(
-            fontSize: fontSize ?? 16,
-            height: textHeight,
-            color: textColor,
-            fontWeight: fontWeight),
-        initialValue: initialText == null ? null : initialText!,
-        onEditingComplete: onEditingComplete,
-        onChanged: onChanged,
-        onTap: onTap,
-        cursorColor: AppColors.black,
-        showCursor: showCursor ?? true,
-        obscureText: obscureText == null ? false : obscureText!,
-        obscuringCharacter: obscureChar != null ? obscureChar! : '*',
-        keyboardType: textInputType,
-        textInputAction: textInputAction,
-        onFieldSubmitted: onSubmitted,
-        maxLines: maxLines,
-        textAlignVertical: textAlignVertical,
-        minLines: minLines,
-        buildCounter: buildCounter,
-        controller: textEditingController,
-        enabled: enabled ?? true,
-        inputFormatters: inputFormatters,
-        decoration: InputDecoration(
-          suffixStyle: suffixStyle ??
-              const TextStyle(
-                color: AppColors.black,
-                fontSize: 16,
-              ),
-          counter: counter,
-          alignLabelWithHint: true,
-          labelText: labelText,
-          labelStyle: labelTextStyle,
-          prefixIcon: prefixIcon,
-          errorStyle: errorStyle,
-          errorText: errorText,
-          isDense: isDense ?? true,
-          contentPadding: padding,
-          suffixText: suffixText,
-          suffixIconConstraints: suffixBoxConstraints,
-          suffixIcon: suffixIcon == null ? null : suffixIcon!,
-          icon: icon == null
-              ? null
-              : Container(margin: const EdgeInsets.only(left: 16), child: icon),
-          constraints: constraints,
-          focusedBorder: focusedBorder ??
-              OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 8),
-                borderSide: BorderSide(
-                    color: focusBorderColor ?? AppColors.lightGreen,
-                    width: focusBorderWidth ?? 1),
-              ),
-          disabledBorder: disabledBorder,
-          enabledBorder: enabledBorder ??
-              OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 8),
-                borderSide: BorderSide(
-                    color: borderColor ?? AppColors.lightGreen,
-                    width: borderWidth ?? 1),
-              ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius ?? 8),
-            borderSide: BorderSide(
-                color: borderColor ?? AppColors.lightGreen,
-                width: borderWidth ?? 1),
+      child: Padding(
+        padding: EdgeInsets.only(top: 20.w, right: 15.w, left: 15.w),
+        child: TextFormField(
+          readOnly: readOnly ?? false,
+          autofillHints: autofillHints,
+          focusNode: focusNode,
+          autofocus: autofocus ?? false,
+          maxLength: maxLength,
+          textCapitalization: textCapitalization ?? TextCapitalization.none,
+          validator: validator,
+          textAlign: textAlign ?? TextAlign.start,
+          style: TextStyle(
+              fontSize: fontSize ?? 15.sp,
+              height: textHeight,
+              color: AppColors.grey,
+              fontWeight: fontWeight ?? AppFontWeight.medium),
+          initialValue: initialText == null ? null : initialText!,
+          onEditingComplete: onEditingComplete,
+          onChanged: onChanged,
+          onTap: onTap,
+          cursorColor: AppColors.black,
+          showCursor: showCursor ?? true,
+          obscureText: obscureText == null ? false : obscureText!,
+          obscuringCharacter: obscureChar != null ? obscureChar! : '*',
+          keyboardType: textInputType,
+          textInputAction: textInputAction,
+          onFieldSubmitted: onSubmitted,
+          maxLines: maxLines,
+          textAlignVertical: textAlignVertical,
+          minLines: minLines,
+          buildCounter: buildCounter,
+          controller: textEditingController,
+          enabled: enabled ?? true,
+          inputFormatters: inputFormatters,
+          decoration: InputDecoration(
+            suffixStyle: suffixStyle ??
+                const TextStyle(
+                  color: AppColors.black,
+                  fontSize: 16,
+                ),
+            counter: counter,
+            alignLabelWithHint: true,
+            labelText: labelText,
+            labelStyle: labelTextStyle,
+            prefixIcon: prefixIcon,
+            errorStyle: errorStyle,
+            errorText: errorText,
+            isDense: isDense ?? true,
+            contentPadding: padding,
+            suffixText: suffixText,
+            suffixIconConstraints: suffixBoxConstraints,
+            suffixIcon: suffixIcon == null ? null : suffixIcon!,
+            icon: icon == null
+                ? null
+                : Container(margin: const EdgeInsets.only(left: 16), child: icon),
+            constraints: constraints,
+            focusedBorder: focusedBorder ??
+                OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                  borderSide: BorderSide(
+                      color: focusBorderColor ?? AppColors.lightGreen,
+                      width: focusBorderWidth ?? 1),
+                ),
+            disabledBorder: disabledBorder,
+            enabledBorder: enabledBorder ??
+                OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                  borderSide: BorderSide(
+                      color: borderColor ?? AppColors.lightGreen,
+                      width: borderWidth ?? 1),
+                ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 8),
+              borderSide: BorderSide(
+                  color: borderColor ?? AppColors.lightGreen,
+                  width: borderWidth ?? 1),
+            ),
+            errorBorder: errorBorder ??
+                OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                  borderSide: BorderSide(
+                      color: errorBorderColor ?? Colors.red,
+                      width: borderWidth ?? 1),
+                ),
+            filled: true,
+            fillColor: backgroundColor ?? Colors.transparent,
+            hintText: hintText,
+            hintMaxLines: hintMaxLines,
+            hintStyle: GoogleFonts.outfit(
+                textStyle: TextStyle(
+                    color: AppColors.grey,
+                    fontSize: fontSize,
+                    fontWeight: fontWeight)),
           ),
-          errorBorder: errorBorder ??
-              OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 8),
-                borderSide: BorderSide(
-                    color: errorBorderColor ?? Colors.red,
-                    width: borderWidth ?? 1),
-              ),
-          filled: true,
-          fillColor: backgroundColor ?? Colors.transparent,
-          hintText: hintText,
-          hintMaxLines: hintMaxLines,
-          hintStyle: GoogleFonts.outfit(
-              textStyle: TextStyle(
-                  color: AppColors.grey,
-                  fontSize: fontSize,
-                  fontWeight: fontWeight)),
         ),
       ),
     );

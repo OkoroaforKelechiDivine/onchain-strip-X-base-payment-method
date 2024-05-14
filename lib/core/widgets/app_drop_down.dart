@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/constants/font_weights.dart';
 
 import '../constants/colors.dart';
@@ -49,38 +50,42 @@ class AppDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: margin,
-      padding: padding,
-      height: height ?? 36,
-      width: width ?? double.infinity,
-      decoration: BoxDecoration(
-        border: borderColor != null
-            ? Border.all(
-                color: borderColor!,
-                width: borderWidth ?? 1,
-              )
-            : null,
-        color: background ?? AppColors.grey,
-        borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 0)),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton(
-          isExpanded: true,
-          isDense: true,
-          icon: const Icon(Icons.keyboard_arrow_down),
-          hint: AppText(
-            hint ?? 'Select Option',
-            fontSize: 14,
-            fontWeight: textWeight ?? AppFontWeight.medium,
-            overflow: TextOverflow.ellipsis,
-            color: textColor ?? AppColors.grey,
+    return Padding(
+      padding: EdgeInsets.only(top: 20.w, right: 15.w, left: 15.w),
+      child: Container(
+        margin: margin,
+        padding: padding,
+        height: height ?? 36,
+        width: width ?? double.infinity,
+        decoration: BoxDecoration(
+          border: borderColor != null
+              ? Border.all(
+                  color: borderColor!,
+                  width: borderWidth ?? 1,
+                )
+              : null,
+          color: background ?? AppColors.grey,
+          borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 0)),
+        ),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+            padding: EdgeInsets.only(left: 8.w, right: 10.w),
+            isExpanded: true,
+            isDense: true,
+            icon: const Icon(Icons.keyboard_arrow_down),
+            hint: AppText(
+              hint ?? 'Select Option',
+              fontSize: 14,
+              fontWeight: textWeight ?? AppFontWeight.medium,
+              overflow: TextOverflow.ellipsis,
+              color: textColor ?? AppColors.grey,
+            ),
+            value: selected,
+            onChanged: onChangeValue,
+            iconEnabledColor: iconEnabledColor,
+            iconDisabledColor: iconDisabledColor,
+            items: buildDropDownMenuItems(list!),
           ),
-          value: selected,
-          onChanged: onChangeValue,
-          iconEnabledColor: iconEnabledColor,
-          iconDisabledColor: iconDisabledColor,
-          items: buildDropDownMenuItems(list!),
         ),
       ),
     );
@@ -96,7 +101,7 @@ class AppDropDown extends StatelessWidget {
           enabled: true,
           // enabled: i == 0 ? false : true,
           child: Padding(
-            padding: const EdgeInsets.all(2),
+            padding: const EdgeInsets.all(10),
             child: AppText(item,
                 maxLines: 1,
                 fontSize: dropDownTextSize ?? textSize,

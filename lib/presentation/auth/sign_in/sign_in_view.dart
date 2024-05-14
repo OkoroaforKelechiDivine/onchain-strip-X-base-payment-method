@@ -5,6 +5,8 @@ import 'package:pay_me_mobile/presentation/auth/sign_in/tabs/login_w_phone.dart'
 import 'package:pay_me_mobile/presentation/auth/sign_in/tabs/login_w_username.dart';
 import 'package:stacked/stacked.dart';
 
+import '../sign_up/sign_up_view.dart';
+
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
 
@@ -59,12 +61,14 @@ class SignInView extends StatelessWidget {
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 22),
+                        horizontal: 16, vertical: 22
+                    ),
                     child: Column(
                       children: <Widget>[
                         Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 19, vertical: 9),
+                              horizontal: 19, vertical: 9
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFFF9FAFC),
                             borderRadius: BorderRadius.circular(100),
@@ -108,21 +112,33 @@ class SignInView extends StatelessWidget {
                 const SizedBox(
                   height: 29,
                 ),
-                const Row(
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    AppText(
+                    const AppText(
                       "First time here? ",
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                     AppText(
                       "Create an Account",
+                      onPress: () {
+                        print("You just clicked me");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignUpView()),
+                        );
+                        // navigationService.pushReplacement(SignInView());
+                        // navigationService.push(const SignInView());
+                        print("I got here but I won't route");
+                      },
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: AppColors.lightGreen,
+                      isTextButton: true,
                     ),
+
                   ],
                 ),
                 const SizedBox(
