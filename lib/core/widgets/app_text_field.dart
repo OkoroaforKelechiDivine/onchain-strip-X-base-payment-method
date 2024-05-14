@@ -139,7 +139,6 @@ class AppCustomTextField extends StatelessWidget {
             autofillHints: autofillHints,
             focusNode: focusNode,
             autofocus: autofocus ?? false,
-            // keyboardType: keyboardType, // Pass keyboardType to TextFormField
             maxLength: maxLength,
             textCapitalization: textCapitalization ?? TextCapitalization.none,
             validator: validator,
