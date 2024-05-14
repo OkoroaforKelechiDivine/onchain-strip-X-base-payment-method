@@ -4,6 +4,7 @@ class AppAssets {
   static const String complete = 'assets/svgs/completed.svg';
   static const String cancel = 'assets/svgs/cancel.svg';
   static const String add = 'assets/svgs/add.svg';
+  static const String fingerPrint = 'assets/png/fingerprint.png';
   static const String naira = 'assets/svgs/naira.svg';
   static const String arrowBack = 'assets/svgs/arrow_back.svg';
   static const String customer = 'assets/svgs/customer.svg';

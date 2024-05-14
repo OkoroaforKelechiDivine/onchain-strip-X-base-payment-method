@@ -124,7 +124,7 @@ class SignUpView extends StatelessWidget {
                 Center(
                   child: AppButton(
                     onPressed: () {
-                      navigationService.push(const PersonalInformationScreen());
+                      navigationService.push(const PersonalInformationView());
                     },
                     color: AppColors.deepGreen,
                     title: "Continue",

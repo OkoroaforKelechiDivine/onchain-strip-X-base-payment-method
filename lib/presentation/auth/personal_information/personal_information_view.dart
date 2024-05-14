@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/presentation/auth/personal_information/personal_information_viewmodel.dart';
+import 'package:pay_me_mobile/presentation/auth/pin/create_pin.dart';
 import 'package:stacked/stacked.dart';
 
-class PersonalInformationScreen extends StatelessWidget {
-  const PersonalInformationScreen({super.key});
+class PersonalInformationView extends StatelessWidget {
+  const PersonalInformationView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +124,9 @@ class PersonalInformationScreen extends StatelessWidget {
                 SizedBox(height: 50.h),
                 Center(
                   child: AppButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      navigationService.push(const CreatePinView());
+                    },
                     color: AppColors.deepGreen,
                     title: "Continue",
                     radius: 100.r,
