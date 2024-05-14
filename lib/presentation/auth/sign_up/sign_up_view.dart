@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/presentation/auth/personal_information/personal_information_view.dart';
 import 'package:pay_me_mobile/presentation/auth/sign_up/sign_up_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -122,7 +123,9 @@ class SignUpView extends StatelessWidget {
                 SizedBox(height: 150.h),
                 Center(
                   child: AppButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      navigationService.push(const PersonalInformationScreen());
+                    },
                     color: AppColors.deepGreen,
                     title: "Continue",
                     radius: 100.r,
