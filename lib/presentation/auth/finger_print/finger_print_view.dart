@@ -5,6 +5,8 @@ import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/presentation/auth/finger_print/finger_print_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../homepage/home_page_view.dart';
+
 class FingerPrintView extends StatelessWidget {
   const FingerPrintView({super.key});
 
@@ -49,7 +51,10 @@ class FingerPrintView extends StatelessWidget {
                 SizedBox(height:250.h),
                 Center(
                   child: AppButton(
-                    onPressed: () {},
+                    //  Still waiting for the designer to get me the success image. But for now I will navigate to the home page
+                    onPressed: () {
+                      navigationService.push(const HomepageView());
+                      },
                     color: AppColors.deepGreen,
                     title: "Continue",
                     radius: 100.r,

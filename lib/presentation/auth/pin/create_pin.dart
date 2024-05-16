@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:stacked/stacked.dart';
 
-import '../finger_print/finger_print.dart';
+import '../finger_print/finger_print_view.dart';
 import 'create_pin_viewmodel.dart';
 
 class CreatePinView extends StatelessWidget {

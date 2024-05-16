@@ -1,5 +1,5 @@
 import 'package:pay_me_mobile/core/di/locator.dart';
-import 'package:pay_me_mobile/presentation/intro/intro_screen.dart';
+import 'package:pay_me_mobile/presentation/intro/intro_screen_view.dart';
 import 'package:stacked/stacked.dart';
 
 class SplashScreenViewModel extends BaseViewModel {

@@ -1,9 +1,8 @@
 class AppAssets {
   static const String backSpace = 'assets/svgs/backspace.svg';
-  // static const String arrowDropDown = 'assets/pgn/arrow_drop_down.png';
   static const String complete = 'assets/svgs/completed.svg';
   static const String cancel = 'assets/svgs/cancel.svg';
-  static const String add = 'assets/svgs/add.svg';
+  // static const String add = 'assets/svgs/add.svg';
   static const String fingerPrint = 'assets/png/fingerprint.png';
   static const String naira = 'assets/svgs/naira.svg';
   static const String arrowBack = 'assets/svgs/arrow_back.svg';
@@ -21,4 +20,8 @@ class AppAssets {
       'assets/png/third_carousel_image.png';
   static const String lightOval = 'assets/svgs/light_oval.svg';
   static const String back = 'assets/svgs/back.svg';
+  static const String userProfile = 'assets/png/userProfile.png';
+  static const String notification = 'assets/jpg/notifications.jpg';
+  static const String eye = 'assets/png/eye.png';
+  static const String add = 'assets/png/add.png';
 }
