@@ -8,6 +8,7 @@ import 'package:pay_me_mobile/presentation/homepage/widget/service.dart';
 import 'package:pay_me_mobile/presentation/homepage/widget/transaction_history.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../core/widgets/buttom_navigation.dart';
 import 'home_page_view_model.dart';
 
 class HomepageView extends StatelessWidget {
@@ -60,7 +61,7 @@ class HomepageView extends StatelessWidget {
               ],
             ),
           ),
-          // bottomNavigationBar: const BottomNavigationBarBuilder(),
+          bottomNavigationBar: const BottomNavigationBarBuilder(),
         );
       },
     );
