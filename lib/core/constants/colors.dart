@@ -8,6 +8,10 @@ class AppColors {
   static const Color lightBlue = Color.fromRGBO(240, 251, 254, 1);
   static const Color transparent = Color.fromRGBO(255, 255, 255, 0.1);
   static const Color skyGreen = Color.fromRGBO(227, 255, 250, 1);
+  static const Color skyRed = Color.fromRGBO(255, 106, 127, 0.2);
+  static const Color skyGrey = Color.fromRGBO(102, 23, 23, 0.2);
+  static const Color skyOrange = Color.fromRGBO(255, 124, 3, 0.2);
+  static const Color skyBlue = Color.fromRGBO(9, 185, 223, 0.2);
   static const Color pureWhite = Color(0xFFFFFFFF);
   static const Color darkWhite = Color.fromRGBO(231, 231, 231, 1);
   static const Color errorRed = Color(0xFFDF1414);
