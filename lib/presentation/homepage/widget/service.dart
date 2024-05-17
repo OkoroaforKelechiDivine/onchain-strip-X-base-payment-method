@@ -41,7 +41,7 @@ class ServiceSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText(
-            "Service",
+            "Services",
             fontWeight: AppFontWeight.bold,
             fontSize: 14.sp,
           ),
@@ -50,7 +50,7 @@ class ServiceSection extends StatelessWidget {
             children: [
               buildServiceContainer(AppColors.skyBlue, AppAssets.accounting, 'Accounting'),
               const Spacer(),
-              buildServiceContainer(AppColors.skyGrey, AppAssets.inventory, 'Inventory'),
+              buildServiceContainer(AppColors.transparentDeep, AppAssets.inventory, 'Inventory'),
               const Spacer(),
               buildServiceContainer(AppColors.brightGreen, AppAssets.loan, 'Loan'),
               const Spacer(),

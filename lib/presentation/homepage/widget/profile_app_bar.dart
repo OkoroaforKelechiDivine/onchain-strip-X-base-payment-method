@@ -19,6 +19,7 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: AppColors.scaffoldBg,
       automaticallyImplyLeading: false,
       title: Padding(
         padding: const EdgeInsets.only(top: 20),

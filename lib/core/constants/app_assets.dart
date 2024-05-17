@@ -33,4 +33,7 @@ class AppAssets {
   static const String loan = 'assets/png/loan.png';
   static const String more = 'assets/png/more.png';
   static const String utility = 'assets/png/utility.png';
+  static const String setting = 'assets/png/setting.png';
+  static const String home = 'assets/png/home.png';
+  static const String activity = 'assets/png/activities.png';
 }
