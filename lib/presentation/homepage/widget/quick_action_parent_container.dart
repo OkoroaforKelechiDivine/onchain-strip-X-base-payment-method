@@ -8,14 +8,16 @@ class QuickActionParentContainer extends StatelessWidget {
   final Widget child;
   final String text;
 
-  const QuickActionParentContainer({Key? key, required this.child, required this.text}) : super(key: key);
+  const QuickActionParentContainer(
+      {Key? key, required this.child, required this.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        height: 55.h,
-        width: 55.w,
+        height: 68.h,
+        width: 68.w,
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(8),
@@ -26,11 +28,11 @@ class QuickActionParentContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               child,
-              SizedBox(height: 3.sp),
+              SizedBox(height: 8.h),
               AppText(
                 text,
                 fontSize: 10.sp,
-                fontWeight: AppFontWeight.bold,
+                fontWeight: FontWeight.w500,
                 alignment: TextAlign.center,
               ),
             ],

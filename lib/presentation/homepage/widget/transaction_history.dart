@@ -14,47 +14,53 @@ class TransactionHistory extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppText("Transaction history", fontSize: 14.sp, fontWeight: AppFontWeight.bold),
+          AppText("Transaction history",
+              fontSize: 14.sp, fontWeight: AppFontWeight.bold),
           SizedBox(height: 10.h),
           Container(
-            height: MediaQuery.of(context).size.height / 5,
-            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: AppColors.deepWhite,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(25),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      AppText("Recent Transactions", fontSize: 12.sp, fontWeight: AppFontWeight.bold),
+                      AppText("Recent Transactions",
+                          fontSize: 12.sp, fontWeight: AppFontWeight.bold),
                       const Spacer(),
                       Icon(Icons.arrow_forward_ios, size: 12.sp),
                     ],
                   ),
                   SizedBox(height: 20.h),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const CircleAvatar(
-                        child: AppText("J", color: AppColors.skyOrange),
+                      CircleAvatar(
+                        backgroundColor: AppColors.initialCircleAvatar,
+                        child: AppText("J",
+                            color: AppColors.initialCircleAvatarText),
                       ),
                       SizedBox(width: 10.w),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppText("John Ogaga", fontSize: 14.sp, fontWeight: AppFontWeight.bold),
-                          Row (
-                            children: [
-                              AppText("Zenith Bank 12:03 AM", fontSize: 12.sp, color: AppColors.grey),
-                              SizedBox(width: 90.w),
-                              AppText("+N20,983", fontSize: 14.sp, fontWeight: AppFontWeight.bold),
-                            ],
-                          ),
-                        ],
-                      )
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppText("John Ogaga",
+                                fontSize: 14.sp,
+                                fontWeight: AppFontWeight.bold),
+                            SizedBox(height: 5.h),
+                            AppText("Zenith Bank 12:03 AM",
+                                fontSize: 12.sp, color: AppColors.grey),
+                          ],
+                        ),
+                      ),
+                      //SizedBox(width: 90.w),
+                      AppText("+N20,983",
+                          fontSize: 14.sp, fontWeight: AppFontWeight.bold),
                     ],
                   )
                 ],

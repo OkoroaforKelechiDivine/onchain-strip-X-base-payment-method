@@ -14,19 +14,25 @@ class QuickActions extends StatelessWidget {
       print('$action tapped');
     }
 
-    Widget buildQuickActionContainer(String text, String asset, Color backgroundColor) {
+    Widget buildQuickActionContainer(
+        String text, String asset, Color backgroundColor) {
       return InkWell(
         onTap: () => onQuickActionTap(text),
         child: QuickActionParentContainer(
           text: text,
           child: Container(
-            height: 25.h,
-            width: 30.w,
+            padding: EdgeInsets.all(8),
+            // height: 30.h,
+            // width: 28.w,
             decoration: BoxDecoration(
               color: backgroundColor,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Image.asset(asset),
+            child: Image.asset(
+              asset,
+              height: 13.h,
+              width: 13.w,
+            ),
           ),
         ),
       );
@@ -44,14 +50,21 @@ class QuickActions extends StatelessWidget {
           ),
           SizedBox(height: 15.h),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildQuickActionContainer('Inflow', AppAssets.inflow, AppColors.skyGreen),
-              const Spacer(),
-              buildQuickActionContainer('Transfer', AppAssets.transfer, AppColors.skyRed),
-              const Spacer(),
-              buildQuickActionContainer('Invoice', AppAssets.invoice, AppColors.skyBlue),
-              const Spacer(),
-              buildQuickActionContainer('Report', AppAssets.report, AppColors.skyGrey),
+              buildQuickActionContainer(
+                  'Inflow', AppAssets.inflow, AppColors.skyGreen),
+              //const Spacer(),
+              buildQuickActionContainer(
+                  'Transfer', AppAssets.transfer, AppColors.skyRed),
+              //const Spacer(),
+              buildQuickActionContainer(
+                  'Invoice', AppAssets.invoice, AppColors.skyBlue),
+
+              ///const Spacer(),
+              buildQuickActionContainer(
+                  'Report', AppAssets.report, AppColors.skyGrey),
             ],
           ),
         ],

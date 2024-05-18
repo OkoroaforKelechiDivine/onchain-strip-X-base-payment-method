@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/utilities/permission.dart';
 import 'package:stacked/stacked.dart';
@@ -27,29 +29,47 @@ class BottomNav extends StatelessWidget {
             selectedIconTheme: const IconThemeData(
               color: AppColors.lightGreen,
             ),
-            items: <BottomNavigationBarItem>[
+            items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Opacity(
-                  opacity: model.currentIndex ==
-                          (Permissions().canUserViewAllTransactions() ? 2 : 1)
-                      ? 1.0
-                      : 0.5,
-                  child: const Icon(Icons.person),
+                icon: Image.asset(
+                  AppAssets.home,
+                  width: 24.w,
+                  height: 24.h,
+                  // color: currentRoute == navigationService.push(TransactionHistory()) ? AppColors.skyBlue : null,
                 ),
                 label: '',
-              )
+                backgroundColor: AppColors.lightGrey,
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  AppAssets.activity,
+                  width: 24.w,
+                  height: 24.h,
+                  // color: currentRoute == navigationService.push(TransactionHistory()) ? AppColors.skyBlue : null,
+                ),
+                label: '',
+                backgroundColor: AppColors.lightGrey,
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  AppAssets.setting,
+                  width: 24.w,
+                  height: 24.h,
+                  // color: currentRoute == navigationService.push(TransactionHistory()) ? AppColors.skyBlue : null,
+                ),
+                label: '',
+                backgroundColor: AppColors.lightGrey,
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  AppAssets.userProfile,
+                  width: 24.w,
+                  height: 24.h,
+                  // color: currentRoute == navigationService.push(TransactionHistory()) ? AppColors.skyBlue : null,
+                ),
+                label: '',
+                backgroundColor: AppColors.lightGrey,
+              ),
             ],
             currentIndex: model.currentIndex,
             selectedItemColor: AppColors.lightGreen,

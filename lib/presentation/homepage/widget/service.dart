@@ -13,28 +13,32 @@ class ServiceSection extends StatelessWidget {
       print('$action tapped');
     }
 
-    Widget buildServiceContainer(Color backgroundColor, String asset, String text) {
+    Widget buildServiceContainer(
+        Color backgroundColor, String asset, String text) {
       return InkWell(
         onTap: () => onServiceTap('Service tapped'),
         child: Column(
           children: [
             Container(
-              height: 48.h,
-              width: 50.w,
-              decoration: BoxDecoration(
-                color: backgroundColor,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Image.asset(asset)
-            ),
+                // height: 48.h,
+                // width: 50.w,
+                padding: EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: backgroundColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Image.asset(asset, height: 22.h, width: 22.w)),
+            SizedBox(height: 8.h),
             AppText(
               text,
               fontSize: 10.sp,
+              color: AppColors.serviceTextColor,
             ),
           ],
         ),
       );
     }
+
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: Column(
@@ -48,13 +52,17 @@ class ServiceSection extends StatelessWidget {
           SizedBox(height: 15.h),
           Row(
             children: [
-              buildServiceContainer(AppColors.skyBlue, AppAssets.accounting, 'Accounting'),
+              buildServiceContainer(
+                  AppColors.skyBlue, AppAssets.accounting, 'Accounting'),
               const Spacer(),
-              buildServiceContainer(AppColors.transparentDeep, AppAssets.inventory, 'Inventory'),
+              buildServiceContainer(
+                  AppColors.transparentDeep, AppAssets.inventory, 'Inventory'),
               const Spacer(),
-              buildServiceContainer(AppColors.brightGreen, AppAssets.loan, 'Loan'),
+              buildServiceContainer(
+                  AppColors.brightGreen, AppAssets.loan, 'Loan'),
               const Spacer(),
-              buildServiceContainer(AppColors.skyOrange, AppAssets.utility, 'Utility'),
+              buildServiceContainer(
+                  AppColors.skyOrange, AppAssets.utility, 'Utility'),
               const Spacer(),
               buildServiceContainer(AppColors.skyGreen, AppAssets.more, 'More'),
             ],

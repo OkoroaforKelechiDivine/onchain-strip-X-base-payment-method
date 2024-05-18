@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/presentation/homepage/home_page_view.dart';
 import 'package:stacked/stacked.dart';
 
 class BottomNavViewModel extends BaseViewModel {
@@ -10,9 +11,7 @@ class BottomNavViewModel extends BaseViewModel {
   }
 
   final List<Widget> _children = [
-    const Center(
-      child: AppText("Home"),
-    ),
+    const HomepageView(),
     const Center(
       child: AppText("Manage User"),
     ),
