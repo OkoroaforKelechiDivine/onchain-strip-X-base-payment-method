@@ -33,6 +33,7 @@ class QuickActionParentContainer extends StatelessWidget {
                 text,
                 fontSize: 10.sp,
                 fontWeight: FontWeight.w500,
+                color: AppColors.black,
                 alignment: TextAlign.center,
               ),
             ],

@@ -14,8 +14,12 @@ class TransactionHistory extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppText("Transaction history",
-              fontSize: 14.sp, fontWeight: AppFontWeight.bold),
+          AppText(
+            "Transaction history",
+            fontSize: 14.sp,
+            fontWeight: AppFontWeight.bold,
+            color: AppColors.black,
+          ),
           SizedBox(height: 10.h),
           Container(
             decoration: BoxDecoration(
@@ -29,8 +33,12 @@ class TransactionHistory extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      AppText("Recent Transactions",
-                          fontSize: 12.sp, fontWeight: AppFontWeight.bold),
+                      AppText(
+                        "Recent Transactions",
+                        color: AppColors.black,
+                        fontSize: 12.sp,
+                        fontWeight: AppFontWeight.bold,
+                      ),
                       const Spacer(),
                       Icon(Icons.arrow_forward_ios, size: 12.sp),
                     ],
@@ -41,26 +49,38 @@ class TransactionHistory extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         backgroundColor: AppColors.initialCircleAvatar,
-                        child: AppText("J",
-                            color: AppColors.initialCircleAvatarText),
+                        child: AppText(
+                          "J",
+                          color: AppColors.initialCircleAvatarText,
+                        ),
                       ),
                       SizedBox(width: 10.w),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AppText("John Ogaga",
-                                fontSize: 14.sp,
-                                fontWeight: AppFontWeight.bold),
+                            AppText(
+                              "John Ogaga",
+                              fontSize: 14.sp,
+                              color: AppColors.black,
+                              fontWeight: AppFontWeight.bold,
+                            ),
                             SizedBox(height: 5.h),
-                            AppText("Zenith Bank 12:03 AM",
-                                fontSize: 12.sp, color: AppColors.grey),
+                            AppText(
+                              "Zenith Bank 12:03 AM",
+                              fontSize: 12.sp,
+                              color: AppColors.grey,
+                            ),
                           ],
                         ),
                       ),
                       //SizedBox(width: 90.w),
-                      AppText("+N20,983",
-                          fontSize: 14.sp, fontWeight: AppFontWeight.bold),
+                      AppText(
+                        "+N20,983",
+                        color: AppColors.black,
+                        fontSize: 14.sp,
+                        fontWeight: AppFontWeight.bold,
+                      ),
                     ],
                   )
                 ],

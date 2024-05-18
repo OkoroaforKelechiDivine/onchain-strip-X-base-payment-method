@@ -48,6 +48,7 @@ class ServiceSection extends StatelessWidget {
             "Services",
             fontWeight: AppFontWeight.bold,
             fontSize: 14.sp,
+            color: AppColors.black,
           ),
           SizedBox(height: 15.h),
           Row(

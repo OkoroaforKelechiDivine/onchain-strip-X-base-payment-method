@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/constants/colors.dart';
 import 'package:pay_me_mobile/core/services/user_activity_timer.dart';
+import 'package:pay_me_mobile/core/theme/theme.dart';
 import 'package:pay_me_mobile/presentation/splash/splash_screen.dart';
 import 'package:overlay_support/overlay_support.dart';
 
-import '../core/constants/app_theme.dart';
 import '../core/di/locator.dart';
 
 class MyApp extends StatefulWidget {
@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
               debugShowCheckedModeBanner: false,
               navigatorKey: navigationService.navigatorKey,
               title: 'PayMe',
-              theme: appTheme,
+              theme: AppTheme.lightTheme,
               home: const SplashScreen(),
             ),
           );

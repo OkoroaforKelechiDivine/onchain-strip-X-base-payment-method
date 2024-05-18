@@ -66,9 +66,14 @@ class HomepageView extends StatelessWidget {
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                AppText('Hello ', fontSize: 16.sp),
+                                AppText(
+                                  'Hello ',
+                                  fontSize: 16.sp,
+                                  color: AppColors.black,
+                                ),
                                 AppText(userName,
                                     fontSize: 16.sp,
+                                    color: AppColors.black,
                                     fontWeight: AppFontWeight.bold),
                               ],
                             ),
