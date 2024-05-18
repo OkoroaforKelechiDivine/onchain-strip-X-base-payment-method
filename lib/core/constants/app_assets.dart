@@ -10,7 +10,7 @@ class AppAssets {
   static const String magicStar = 'assets/svgs/magic-star.svg';
   static const String percent = 'assets/svgs/percent.svg';
   static const String receipt = 'assets/svgs/receipt.svg';
-  static const String invoice = 'assets/png/invoice.png';
+  // static const String invoice = 'assets/png/invoice.png';
   static const String newPayme = 'assets/png/newPayme.png';
   static const String firstCarouselImage =
       'assets/png/first_carousel_image.png';
@@ -24,4 +24,16 @@ class AppAssets {
   static const String notification = 'assets/jpg/notifications.jpg';
   static const String eye = 'assets/png/eye.png';
   static const String add = 'assets/png/add.png';
+  static const String inflow = 'assets/png/inflow.png';
+  static const String transfer = 'assets/png/sendmoney.png';
+  static const String report = 'assets/png/report.png';
+  static const String invoice = 'assets/png/invoice.png';
+  static const String accounting = 'assets/png/accounting.png';
+  static const String inventory = 'assets/png/inventory.png';
+  static const String loan = 'assets/png/loan.png';
+  static const String more = 'assets/png/more.png';
+  static const String utility = 'assets/png/utility.png';
+  static const String setting = 'assets/png/setting.png';
+  static const String home = 'assets/png/home.png';
+  static const String activity = 'assets/png/activities.png';
 }

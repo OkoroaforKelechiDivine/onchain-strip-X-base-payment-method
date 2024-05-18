@@ -24,7 +24,6 @@ class CarouselWidget extends StatelessWidget {
       child: CarouselSlider(
         options: CarouselOptions(
           enlargeCenterPage: true,
-          autoPlay: true,
           autoPlayInterval: const Duration(seconds: 3),
           autoPlayAnimationDuration: const Duration(milliseconds: 800),
           autoPlayCurve: Curves.fastOutSlowIn,
@@ -37,7 +36,7 @@ class CarouselWidget extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: AppColors.deepGreen,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -61,7 +60,8 @@ class CarouselWidget extends StatelessWidget {
                   fontWeight: AppFontWeight.bold,
                   fontFamily: GoogleFonts.inter().fontFamily,
                 ),
-                SizedBox(height: 3.h),
+                //SizedBox(height: 3.h),
+                Spacer(),
                 Container(
                   decoration: BoxDecoration(
                     color: AppColors.transparent,
@@ -75,7 +75,8 @@ class CarouselWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10.h),
+                Spacer(),
+                //SizedBox(height: 10.h),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -104,9 +105,8 @@ class CarouselWidget extends StatelessWidget {
                 height: 100.h,
                 width: 130.w,
                 decoration: BoxDecoration(
-                  color: AppColors.transparentDeep,
-                  borderRadius: BorderRadius.circular(15)
-                ),
+                    color: AppColors.transparentDeep,
+                    borderRadius: BorderRadius.circular(15)),
                 child: Padding(
                   padding: const EdgeInsets.all(20),
                   child: Column(
@@ -120,7 +120,8 @@ class CarouselWidget extends StatelessWidget {
                         fontSize: 16.sp,
                         fontWeight: AppFontWeight.bold,
                       ),
-                      AppText("Account",
+                      AppText(
+                        "Account",
                         color: AppColors.deepGreen,
                         fontSize: 16.sp,
                         fontWeight: AppFontWeight.bold,
