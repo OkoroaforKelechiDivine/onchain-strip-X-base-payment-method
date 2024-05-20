@@ -4,13 +4,11 @@ import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/constants/font_weights.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/presentation/homepage/widget/carousel.dart';
-import 'package:pay_me_mobile/presentation/homepage/widget/profile_app_bar.dart';
 import 'package:pay_me_mobile/presentation/homepage/widget/quick_action.dart';
 import 'package:pay_me_mobile/presentation/homepage/widget/service.dart';
 import 'package:pay_me_mobile/presentation/homepage/widget/transaction_history.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../core/widgets/buttom_navigation.dart';
 import 'home_page_view_model.dart';
 
 class HomepageView extends StatelessWidget {
@@ -39,10 +37,6 @@ class HomepageView extends StatelessWidget {
         );
         return Scaffold(
           backgroundColor: AppColors.scaffoldBg,
-          // appBar: ProfileAppBar(
-          //   userName: userName,
-          //   profilePictureUrl: userProfilePicture,
-          // ),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(
@@ -50,7 +44,7 @@ class HomepageView extends StatelessWidget {
                 children: [
                   SizedBox(height: 20.h),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Row(
                       children: [
                         SizedBox(
@@ -109,7 +103,7 @@ class HomepageView extends StatelessWidget {
               ),
             ),
           ),
-          //bottomNavigationBar: const BottomNavigationBarBuilder(),
+          // bottomNavigationBar: const BottomNavigationBarBuilder(),
         );
       },
     );

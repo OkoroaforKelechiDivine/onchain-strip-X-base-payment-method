@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
-import 'package:pay_me_mobile/presentation/homepage/widget/transaction_history.dart';
 import '../constants/colors.dart';
-import '../di/locator.dart';
 
 class BottomNavigationBarBuilder extends StatelessWidget {
   const BottomNavigationBarBuilder({Key? key}) : super(key: key);

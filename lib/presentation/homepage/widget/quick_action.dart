@@ -21,9 +21,7 @@ class QuickActions extends StatelessWidget {
         child: QuickActionParentContainer(
           text: text,
           child: Container(
-            padding: EdgeInsets.all(8),
-            // height: 30.h,
-            // width: 28.w,
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: backgroundColor,
               borderRadius: BorderRadius.circular(8),
@@ -54,18 +52,10 @@ class QuickActions extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildQuickActionContainer(
-                  'Inflow', AppAssets.inflow, AppColors.skyGreen),
-              //const Spacer(),
-              buildQuickActionContainer(
-                  'Transfer', AppAssets.transfer, AppColors.skyRed),
-              //const Spacer(),
-              buildQuickActionContainer(
-                  'Invoice', AppAssets.invoice, AppColors.skyBlue),
-
-              ///const Spacer(),
-              buildQuickActionContainer(
-                  'Report', AppAssets.report, AppColors.skyGrey),
+              buildQuickActionContainer('Inflow', AppAssets.inflow, AppColors.skyGreen),
+              buildQuickActionContainer('Transfer', AppAssets.transfer, AppColors.skyRed),
+              buildQuickActionContainer('Invoice', AppAssets.invoice, AppColors.skyBlue),
+              buildQuickActionContainer('Report', AppAssets.report, AppColors.skyGrey),
             ],
           ),
         ],
