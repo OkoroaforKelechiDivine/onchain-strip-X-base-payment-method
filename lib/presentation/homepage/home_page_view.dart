@@ -29,9 +29,7 @@ class HomepageView extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: model.currentCarouselIndex == index
-                  ? AppColors.deepGreen
-                  : AppColors.grey,
+              color: model.currentCarouselIndex == index ? AppColors.deepGreen : AppColors.grey,
             ),
           ),
         );

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 
-class PersonalInformationViewModel extends BaseViewModel{
+class PersonalInformationViewModel extends BaseViewModel {
   bool isStateOptionSelected = false;
   bool isGenderOptionSelected = false;
 
@@ -29,5 +29,4 @@ class PersonalInformationViewModel extends BaseViewModel{
     isGenderOptionSelected = index != null;
     notifyListeners();
   }
-
 }

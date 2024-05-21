@@ -6,6 +6,7 @@ import 'package:pay_me_mobile/presentation/auth/pin/create_pin.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../core/widgets/indicator.dart';
+import 'gender_selection.dart';
 
 class PersonalInformationView extends StatelessWidget {
   const PersonalInformationView({super.key});
@@ -108,31 +109,19 @@ class PersonalInformationView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: AppDropDown(
-                              hint: "Gender",
-                              list: model.genderOptions,
-                              selected: model.genderIndex,
-                              onChangeValue: (value) {
-                                model.onGenderChanged(value);
-                              },
-                              borderRadius: 8,
-                              borderWidth: 1,
-                              height: 45.h,
-                              borderColor: AppColors.darkWhite,
-                              background: AppColors.white,
-                              textColor: AppColors.grey,
-                              dropDownTextColor: AppColors.grey,
-                              dropDownTextSize: 15.sp,
-                            ),
-                          ),
-                        ],
+                      GenderSelectionWidget(
+                        selectedIndex: model.genderIndex,
+                        onChanged: (value) {
+                          model.onGenderChanged(value);
+                        },
                       ),
                       AppCustomTextField(
                         focusBorderColor: AppColors.white,
                         hintText: "Phone number",
+                        prefixIcon: const Padding(
+                          padding: EdgeInsets.only(top: 15, left: 10),
+                          child: AppText("+234", color: AppColors.transparentDeep,),
+                        ),
                         backgroundColor: AppColors.white,
                         borderColor: AppColors.darkWhite,
                         textEditingController: model.phoneNumber,

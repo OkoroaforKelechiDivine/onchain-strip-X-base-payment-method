@@ -28,45 +28,50 @@ class CircleIndicator extends StatelessWidget {
     Color borderColor = circleColor ?? AppColors.grey;
     Color numberColor = showImage ? Colors.transparent : (textColor ?? AppColors.black);
 
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          width: 20.h,
-          height: 20.w,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: circleColor ?? Colors.transparent,
-            border: Border.all(
-              color: borderColor,
-            ),
-          ),
-          alignment: Alignment.center,
-          child: showImage ? Image.asset(
-            AppAssets.check ?? '',
-            width: 10.h,
-            height: 10.w,
-            fit: BoxFit.cover,
-          ) : AppText(
-            number,
-            color: numberColor,
-            fontSize: 10.sp,
-            fontWeight: boldText ? FontWeight.bold : FontWeight.normal,
-          ),
-        ),
-        SizedBox(height: 2.h),
         Column(
           children: [
-            AppText(
-              firstPart,
-              color: textColor ?? AppColors.indicatorTextColor,
-              fontSize: 10.sp,
-              fontWeight: boldText ? FontWeight.bold : FontWeight.normal,
+            Container(
+              width: 20.h,
+              height: 20.w,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: circleColor ?? Colors.transparent,
+                border: Border.all(
+                  color: borderColor,
+                ),
+              ),
+              alignment: Alignment.center,
+              child: showImage ? Image.asset(
+                AppAssets.check ?? '',
+                width: 10.h,
+                height: 10.w,
+                fit: BoxFit.cover,
+              ) : AppText(
+                number,
+                color: numberColor,
+                fontSize: 10.sp,
+                fontWeight: boldText ? FontWeight.bold : FontWeight.normal,
+              ),
             ),
-            AppText(
-              secondPart,
-              color: textColor ?? AppColors.indicatorTextColor,
-              fontSize: 10.sp,
-              fontWeight: boldText ? FontWeight.bold : FontWeight.normal,
+            SizedBox(height: 2.h),
+            Column(
+              children: [
+                AppText(
+                  firstPart,
+                  color: textColor ?? AppColors.indicatorTextColor,
+                  fontSize: 10.sp,
+                  fontWeight: boldText ? FontWeight.bold : FontWeight.normal,
+                ),
+                AppText(
+                  secondPart,
+                  color: textColor ?? AppColors.indicatorTextColor,
+                  fontSize: 10.sp,
+                  fontWeight: boldText ? FontWeight.bold : FontWeight.normal,
+                ),
+              ],
             ),
           ],
         ),
@@ -87,7 +92,7 @@ class Underline extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 25),
         child: SizedBox(
           height: 2.h,
-          width: 50.w,
+          width: 40.w,
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.transparent,
