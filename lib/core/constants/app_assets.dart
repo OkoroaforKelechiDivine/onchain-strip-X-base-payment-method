@@ -42,6 +42,7 @@ class AppAssets {
   static const String lightOval = 'assets/svgs/light_oval.svg';
   static const String back = 'assets/svgs/back.svg';
   static const String userProfile = 'assets/png/userProfile.png';
+  static const String check = 'assets/png/check.png';
   static const String notification = 'assets/jpg/notifications.jpg';
   static const String eye = 'assets/png/eye.png';
   static const String add = 'assets/png/add.png';

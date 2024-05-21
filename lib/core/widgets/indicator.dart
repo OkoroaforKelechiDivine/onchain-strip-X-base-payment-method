@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 
 class CircleIndicator extends StatelessWidget {
   final String number;
   final String text;
+  final Color? circleColor;
+  final Color? textColor;
+  final bool boldText;
 
   const CircleIndicator({
     Key? key,
     required this.number,
     required this.text,
+    this.circleColor,
+    this.textColor,
+    this.boldText = false,
   }) : super(key: key);
 
   @override
@@ -17,6 +24,9 @@ class CircleIndicator extends StatelessWidget {
     List<String> splitText = text.split(' ');
     String firstPart = splitText[0];
     String secondPart = splitText.sublist(1).join(' ');
+    bool showImage = circleColor != null && circleColor != AppColors.grey;
+    Color borderColor = circleColor ?? AppColors.grey;
+    Color numberColor = showImage ? Colors.transparent : (textColor ?? AppColors.black);
 
     return Column(
       children: [
@@ -25,15 +35,22 @@ class CircleIndicator extends StatelessWidget {
           height: 20.w,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
+            color: circleColor ?? Colors.transparent,
             border: Border.all(
-              color: AppColors.grey,
+              color: borderColor,
             ),
           ),
           alignment: Alignment.center,
-          child: AppText(
+          child: showImage ? Image.asset(
+            AppAssets.check ?? '',
+            width: 10.h,
+            height: 10.w,
+            fit: BoxFit.cover,
+          ) : AppText(
             number,
-            color: AppColors.black,
+            color: numberColor,
             fontSize: 10.sp,
+            fontWeight: boldText ? FontWeight.bold : FontWeight.normal,
           ),
         ),
         SizedBox(height: 2.h),
@@ -41,13 +58,15 @@ class CircleIndicator extends StatelessWidget {
           children: [
             AppText(
               firstPart,
-              color: AppColors.indicatorTextColor,
+              color: textColor ?? AppColors.indicatorTextColor,
               fontSize: 10.sp,
+              fontWeight: boldText ? FontWeight.bold : FontWeight.normal,
             ),
             AppText(
               secondPart,
-              color: AppColors.indicatorTextColor,
+              color: textColor ?? AppColors.indicatorTextColor,
               fontSize: 10.sp,
+              fontWeight: boldText ? FontWeight.bold : FontWeight.normal,
             ),
           ],
         ),
@@ -57,7 +76,9 @@ class CircleIndicator extends StatelessWidget {
 }
 
 class Underline extends StatelessWidget {
-  const Underline({Key? key}) : super(key: key);
+  final Color? color;
+
+  const Underline({Key? key, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,12 +88,12 @@ class Underline extends StatelessWidget {
         child: SizedBox(
           height: 2.h,
           width: 50.w,
-          child: const DecoratedBox(
+          child: DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.transparent,
               border: Border(
                 bottom: BorderSide(
-                  color: AppColors.grey,
+                  color: color ?? AppColors.grey,
                   style: BorderStyle.solid,
                 ),
               ),
