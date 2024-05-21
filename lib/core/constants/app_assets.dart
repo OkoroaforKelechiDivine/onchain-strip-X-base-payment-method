@@ -8,6 +8,27 @@ class AppAssets {
   static const String arrowBack = 'assets/svgs/arrow_back.svg';
   static const String customer = 'assets/svgs/customer.svg';
   static const String magicStar = 'assets/svgs/magic-star.svg';
+  static const String resetPass = 'assets/svgs/resetpass.svg';
+  static const String feedBack = 'assets/svgs/feedback.svg';
+  static const String receiptLong = 'assets/svgs/receipt_long.svg';
+
+  static const String aboutPayme = 'assets/svgs/aboutPayme.svg';
+
+  static const String otherApp = 'assets/svgs/otherApp.svg';
+
+  static const String recommendIcon = 'assets/svgs/reco.svg';
+
+  static const String requePos = 'assets/svgs/requePos.svg';
+  static const String transactLimit = 'assets/svgs/transactLimit.svg';
+
+  static const String privacy = 'assets/svgs/privacy.svg';
+
+  static const String loginPin = 'assets/svgs/loginPin.svg';
+
+  static const String logOut = 'assets/svgs/exit.svg';
+
+  static const String transacPin = 'assets/svgs/transacPin.svg';
+
   static const String percent = 'assets/svgs/percent.svg';
   static const String receipt = 'assets/svgs/receipt.svg';
   // static const String invoice = 'assets/png/invoice.png';

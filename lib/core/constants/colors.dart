@@ -25,9 +25,12 @@ class AppColors {
   static const Color black = Colors.black;
   static const Color white = Colors.white;
   static const Color invoiceStatus = Color(0xFF00CFAF);
-  static const Color invoiceIconBg = Color(0xFFBCF9F3);
+  static const Color profileLightGreen = Color(0xFF00BA96);
+
+  static const Color invoiceIconBg = Color.fromRGBO(9, 185, 223, 0.2);
   static const Color invoiceBg = Color(0xFFF9FAFC);
   static Color invoiceGreyText = const Color(0xFFBFBFBF);
+  static Color lightBlueButton = const Color(0xFF09B9DF);
   static Color welcomeGrey = const Color(0xFF6C727F);
   static Color scaffoldBg = const Color(0xFFF2F8F7);
   static Color serviceTextColor = const Color.fromRGBO(108, 114, 127, 1);

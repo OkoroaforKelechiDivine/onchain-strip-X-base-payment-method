@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/presentation/homepage/home_page_view.dart';
+import 'package:pay_me_mobile/presentation/settings/settings_view.dart';
 import 'package:stacked/stacked.dart';
 
 class BottomNavViewModel extends BaseViewModel {
@@ -15,9 +16,7 @@ class BottomNavViewModel extends BaseViewModel {
     const Center(
       child: AppText("Manage User"),
     ),
-    const Center(
-      child: AppText("Setting"),
-    ),
+    SettingsView(),
     const Center(
       child: AppText("Switch Accout"),
     ),

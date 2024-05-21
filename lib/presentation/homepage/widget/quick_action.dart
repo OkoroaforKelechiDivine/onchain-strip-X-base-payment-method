@@ -4,20 +4,17 @@ import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/constants/font_weights.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/presentation/homepage/widget/quick_action_parent_container.dart';
+import 'package:pay_me_mobile/presentation/invoice/invoice_home.dart';
 
 class QuickActions extends StatelessWidget {
   const QuickActions({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    void onQuickActionTap(String action) {
-      print('$action tapped');
-    }
-
-    Widget buildQuickActionContainer(
-        String text, String asset, Color backgroundColor) {
+    Widget buildQuickActionContainer(String text, String asset,
+        Color backgroundColor, Function()? onQuickActionTap) {
       return InkWell(
-        onTap: () => onQuickActionTap(text),
+        onTap: onQuickActionTap,
         child: QuickActionParentContainer(
           text: text,
           child: Container(
@@ -52,10 +49,20 @@ class QuickActions extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildQuickActionContainer('Inflow', AppAssets.inflow, AppColors.skyGreen),
-              buildQuickActionContainer('Transfer', AppAssets.transfer, AppColors.skyRed),
-              buildQuickActionContainer('Invoice', AppAssets.invoice, AppColors.skyBlue),
-              buildQuickActionContainer('Report', AppAssets.report, AppColors.skyGrey),
+              buildQuickActionContainer(
+                  'Inflow', AppAssets.inflow, AppColors.skyGreen, () {}),
+              //const Spacer(),
+              buildQuickActionContainer(
+                  'Transfer', AppAssets.transfer, AppColors.skyRed, () {}),
+              //const Spacer(),
+              buildQuickActionContainer(
+                  'Invoice', AppAssets.invoice, AppColors.skyBlue, () {
+                navigationService.push(InvoiceHomeScreen());
+              }),
+
+              ///const Spacer(),
+              buildQuickActionContainer(
+                  'Report', AppAssets.report, AppColors.skyGrey, () {}),
             ],
           ),
         ],
