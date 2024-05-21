@@ -5,6 +5,8 @@ import 'package:pay_me_mobile/presentation/auth/personal_information/personal_in
 import 'package:pay_me_mobile/presentation/auth/pin/create_pin.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../core/widgets/indicator.dart';
+
 class PersonalInformationView extends StatelessWidget {
   const PersonalInformationView({super.key});
 
@@ -23,6 +25,19 @@ class PersonalInformationView extends StatelessWidget {
                 const PaymeAppBar(
                   isBack: true,
                   title: "Sign Up",
+                ),
+                SizedBox(height: 15.h),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleIndicator(number: "01", text: "Business Information"),
+                    Underline(),
+                    CircleIndicator(number: "02", text: "Personal Information"),
+                    Underline(),
+                    CircleIndicator(number: "03", text: "Create Login Pin"),
+                    Underline(),
+                    CircleIndicator(number: "04", text: "Set Biometric"),
+                  ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 20.w, top: 20.h),

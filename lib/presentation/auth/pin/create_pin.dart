@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../core/widgets/indicator.dart';
 import '../finger_print/finger_print_view.dart';
 import 'create_pin_viewmodel.dart';
 
@@ -24,6 +25,19 @@ class CreatePinView extends StatelessWidget {
                 const PaymeAppBar(
                   isBack: true,
                   title: "Create Login Pin",
+                ),
+                SizedBox(height: 15.h),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleIndicator(number: "01", text: "Business Information"),
+                    Underline(),
+                    CircleIndicator(number: "02", text: "Personal Information"),
+                    Underline(),
+                    CircleIndicator(number: "03", text: "Create Login Pin"),
+                    Underline(),
+                    CircleIndicator(number: "04", text: "Set Biometric"),
+                  ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 20.w, top: 20.h),
