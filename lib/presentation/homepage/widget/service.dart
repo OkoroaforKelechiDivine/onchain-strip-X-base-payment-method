@@ -9,14 +9,10 @@ class ServiceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void onServiceTap(String action) {
-      print('$action tapped');
-    }
-
     Widget buildServiceContainer(
-        Color backgroundColor, String asset, String text) {
+        Color backgroundColor, String asset, String text, Function() onTap) {
       return InkWell(
-        onTap: () => onServiceTap('Service tapped'),
+        onTap: onTap,
         child: Column(
           children: [
             Container(
@@ -54,18 +50,39 @@ class ServiceSection extends StatelessWidget {
           Row(
             children: [
               buildServiceContainer(
-                  AppColors.skyBlue, AppAssets.accounting, 'Accounting'),
+                AppColors.skyBlue,
+                AppAssets.accounting,
+                'Accounting',
+                () {},
+              ),
               const Spacer(),
               buildServiceContainer(
-                  AppColors.transparentDeep, AppAssets.inventory, 'Inventory'),
+                AppColors.transparentDeep,
+                AppAssets.inventory,
+                'Inventory',
+                () {},
+              ),
               const Spacer(),
               buildServiceContainer(
-                  AppColors.brightGreen, AppAssets.loan, 'Loan'),
+                AppColors.brightGreen,
+                AppAssets.loan,
+                'Loan',
+                () {},
+              ),
               const Spacer(),
               buildServiceContainer(
-                  AppColors.skyOrange, AppAssets.utility, 'Utility'),
+                AppColors.skyOrange,
+                AppAssets.utility,
+                'Utility',
+                () {},
+              ),
               const Spacer(),
-              buildServiceContainer(AppColors.skyGreen, AppAssets.more, 'More'),
+              buildServiceContainer(
+                AppColors.skyGreen,
+                AppAssets.more,
+                'More',
+                () {},
+              ),
             ],
           ),
         ],

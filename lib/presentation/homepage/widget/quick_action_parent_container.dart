@@ -5,16 +5,23 @@ import 'package:pay_me_mobile/core/cores.dart';
 import '../../../core/constants/font_weights.dart';
 
 class QuickActionParentContainer extends StatelessWidget {
-  final Widget child;
   final String text;
+  final String asset;
+  final Color backgroundColor;
+  final Function()? onQuickActionTap;
 
   const QuickActionParentContainer(
-      {Key? key, required this.child, required this.text})
+      {Key? key,
+      required this.text,
+      required this.asset,
+      required this.backgroundColor,
+      this.onQuickActionTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onQuickActionTap,
       child: Container(
         height: 68.h,
         width: 68.w,
@@ -27,7 +34,18 @@ class QuickActionParentContainer extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              child,
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: backgroundColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Image.asset(
+                  asset,
+                  height: 13.h,
+                  width: 13.w,
+                ),
+              ),
               SizedBox(height: 8.h),
               AppText(
                 text,

@@ -98,7 +98,9 @@ class HomepageView extends StatelessWidget {
                   SizedBox(height: 30.h),
                   const ServiceSection(),
                   SizedBox(height: 30.h),
-                  const TransactionHistory(),
+                  TransactionHistory(
+                    model: model,
+                  ),
                 ],
               ),
             ),

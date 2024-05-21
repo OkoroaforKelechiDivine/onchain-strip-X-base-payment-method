@@ -5,34 +5,13 @@ import 'package:pay_me_mobile/core/constants/font_weights.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/presentation/homepage/widget/quick_action_parent_container.dart';
 import 'package:pay_me_mobile/presentation/invoice/invoice_home.dart';
+import 'package:pay_me_mobile/presentation/transfer/transfer.dart';
 
 class QuickActions extends StatelessWidget {
   const QuickActions({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Widget buildQuickActionContainer(String text, String asset,
-        Color backgroundColor, Function()? onQuickActionTap) {
-      return InkWell(
-        onTap: onQuickActionTap,
-        child: QuickActionParentContainer(
-          text: text,
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Image.asset(
-              asset,
-              height: 13.h,
-              width: 13.w,
-            ),
-          ),
-        ),
-      );
-    }
-
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: Column(
@@ -49,20 +28,34 @@ class QuickActions extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildQuickActionContainer(
-                  'Inflow', AppAssets.inflow, AppColors.skyGreen, () {}),
-              //const Spacer(),
-              buildQuickActionContainer(
-                  'Transfer', AppAssets.transfer, AppColors.skyRed, () {}),
-              //const Spacer(),
-              buildQuickActionContainer(
-                  'Invoice', AppAssets.invoice, AppColors.skyBlue, () {
-                navigationService.push(InvoiceHomeScreen());
-              }),
-
-              ///const Spacer(),
-              buildQuickActionContainer(
-                  'Report', AppAssets.report, AppColors.skyGrey, () {}),
+              QuickActionParentContainer(
+                text: 'Inflow',
+                asset: AppAssets.inflow,
+                backgroundColor: AppColors.skyGreen,
+                onQuickActionTap: () {},
+              ),
+              QuickActionParentContainer(
+                text: 'Transfer',
+                asset: AppAssets.transfer,
+                backgroundColor: AppColors.skyRed,
+                onQuickActionTap: () {
+                  navigationService.push(const TransferView());
+                },
+              ),
+              QuickActionParentContainer(
+                text: 'Invoice',
+                asset: AppAssets.invoice,
+                backgroundColor: AppColors.skyBlue,
+                onQuickActionTap: () {
+                  navigationService.push(const InvoiceHomeScreen());
+                },
+              ),
+              QuickActionParentContainer(
+                text: 'Report',
+                asset: AppAssets.report,
+                backgroundColor: AppColors.skyGrey,
+                onQuickActionTap: () {},
+              ),
             ],
           ),
         ],

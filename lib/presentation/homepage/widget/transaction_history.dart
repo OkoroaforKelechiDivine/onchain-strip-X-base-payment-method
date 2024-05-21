@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/presentation/homepage/home_page_view_model.dart';
 
 import '../../../core/constants/font_weights.dart';
 
 class TransactionHistory extends StatelessWidget {
-  const TransactionHistory({super.key});
+  final HomePageViewModel model;
+  const TransactionHistory({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
