@@ -30,10 +30,10 @@ class CreatePinView extends StatelessWidget {
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleIndicator(number: "01", text: "Business Information"),
-                    Underline(),
-                    CircleIndicator(number: "02", text: "Personal Information"),
-                    Underline(),
+                    CircleIndicator(number: "01", text: "Business Information", circleColor: AppColors.demonicGreen, textColor: AppColors.demonicGreen, boldText: true),
+                    Underline(color: AppColors.demonicGreen),
+                    CircleIndicator(number: "02", text: "Personal Information", circleColor: AppColors.demonicGreen, textColor: AppColors.demonicGreen, boldText: true),
+                    Underline(color: AppColors.demonicGreen),
                     CircleIndicator(number: "03", text: "Create Login Pin"),
                     Underline(),
                     CircleIndicator(number: "04", text: "Set Biometric"),
