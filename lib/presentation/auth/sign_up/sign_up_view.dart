@@ -6,6 +6,8 @@ import 'package:pay_me_mobile/presentation/auth/personal_information/personal_in
 import 'package:pay_me_mobile/presentation/auth/sign_up/sign_up_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../core/widgets/indicator.dart';
+
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
 
@@ -25,8 +27,21 @@ class SignUpView extends StatelessWidget {
                   isBack: true,
                   title: "Sign Up",
                 ),
+                SizedBox(height: 15.h),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleIndicator(number: "01", text: "Business Information"),
+                    Underline(),
+                    CircleIndicator(number: "02", text: "Personal Information"),
+                    Underline(),
+                    CircleIndicator(number: "03", text: "Create Login Pin"),
+                    Underline(),
+                    CircleIndicator(number: "04", text: "Set Biometric"),
+                  ],
+                ),
                 Padding(
-                  padding: EdgeInsets.only(left: 20.w, top: 30.h),
+                  padding: EdgeInsets.only(left: 20.w, top: 20.h),
                   child: AppText(
                     "Business Information",
                     color: AppColors.deepGreen,
@@ -120,7 +135,7 @@ class SignUpView extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 150.h),
+                SizedBox(height: 100.h),
                 Center(
                   child: AppButton(
                     onPressed: () {
