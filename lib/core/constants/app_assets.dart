@@ -10,6 +10,7 @@ class AppAssets {
   static const String magicStar = 'assets/svgs/magic-star.svg';
   static const String resetPass = 'assets/svgs/resetpass.svg';
   static const String feedBack = 'assets/svgs/feedback.svg';
+  static const String receiptLong = 'assets/svgs/receipt_long.svg';
 
   static const String aboutPayme = 'assets/svgs/aboutPayme.svg';
 

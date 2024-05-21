@@ -16,10 +16,28 @@ class InvoiceHomeViewModel extends BaseViewModel {
       GlobalKey<RefreshIndicatorState>();
   double startVerticalDragDetailsY = 0.0;
   double updateVerticalDragDetailsY = 0.0;
+  ScrollController scrollController = ScrollController();
+  bool showFullButton = true;
 
   Future<void> init() async {
-    await getInvoice();
-    await getCustomers();
+    scrollController.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    if (scrollController.offset >= 50) {
+      showFullButton = false;
+      notifyListeners();
+    } else {
+      showFullButton = true;
+      notifyListeners();
+    }
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(_scrollListener);
+    scrollController.dispose();
+    super.dispose();
   }
 
   void setIndex(int index) {
