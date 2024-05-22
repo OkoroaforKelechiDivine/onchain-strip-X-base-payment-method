@@ -95,7 +95,7 @@ class TransferViewModel extends BaseViewModel {
     selectedBankLogo = logo;
     bankIndex = bankOptions.indexWhere((b) => b['name'] == bank);
     isBankOptionSelected = true;
-    _onAccountNumberChanged(); // Update account name when bank is selected
+    _onAccountNumberChanged(); // This will update account name when a bank is selected
     notifyListeners();
   }
 }
