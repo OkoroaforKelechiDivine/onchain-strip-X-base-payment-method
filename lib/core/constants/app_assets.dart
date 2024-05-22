@@ -43,9 +43,11 @@ class AppAssets {
   static const String back = 'assets/svgs/back.svg';
   static const String userProfile = 'assets/png/userProfile.png';
   static const String check = 'assets/png/check.png';
+  static const String copy = 'assets/png/copy.png';
   static const String notification = 'assets/jpg/notifications.jpg';
   static const String eye = 'assets/png/eye.png';
   static const String add = 'assets/png/add.png';
+  static const String bankLogo = 'assets/png/bank_logo.png';
   static const String inflow = 'assets/png/inflow.png';
   static const String transfer = 'assets/png/sendmoney.png';
   static const String report = 'assets/png/report.png';

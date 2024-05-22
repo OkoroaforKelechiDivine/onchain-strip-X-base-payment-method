@@ -5,7 +5,7 @@ import 'package:pay_me_mobile/core/constants/font_weights.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/presentation/homepage/widget/quick_action_parent_container.dart';
 import 'package:pay_me_mobile/presentation/invoice/invoice_home.dart';
-import 'package:pay_me_mobile/presentation/transfer/transfer.dart';
+import 'package:pay_me_mobile/presentation/transfer/transfer_view.dart';
 
 class QuickActions extends StatelessWidget {
   const QuickActions({Key? key}) : super(key: key);
