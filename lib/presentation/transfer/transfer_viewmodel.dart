@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
+import 'package:pay_me_mobile/presentation/transfer/widget/enter_amount.dart';
 import 'package:stacked/stacked.dart';
+
+import '../../core/di/locator.dart';
 
 enum TransferOption {
   NEW,
@@ -50,6 +53,14 @@ class TransferViewModel extends BaseViewModel {
       accountName = null;
     }
     notifyListeners();
+  }
+
+  void navigateToNextScreen(BuildContext context) {
+    if (accountName != null) {
+      navigationService.push(
+        EnterAmount(accountName: accountName!),
+      );
+    }
   }
 
   void onBankChanged(int? index) {

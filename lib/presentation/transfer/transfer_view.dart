@@ -13,7 +13,7 @@ class TransferView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<TransferViewModel>.reactive(
+    return ViewModelBuilder.reactive(
       viewModelBuilder: () => TransferViewModel(),
       builder: (context, model, child) {
         return Scaffold(
@@ -58,12 +58,7 @@ class TransferView extends StatelessWidget {
                 SizedBox(height: 10.h),
                 GestureDetector(
                   onTap: () async {
-                    final selectedBank = await Navigator.push<Map<String, String>>(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SelectBankView(),
-                      ),
-                    );
+                    final selectedBank = await navigationService.push(const SelectBankView());
                     if (selectedBank != null) {
                       model.updateSelectedBank(selectedBank['name']!, selectedBank['logo']!);
                     }
@@ -158,7 +153,9 @@ class TransferView extends StatelessWidget {
                     child: AppButton(
                       title: "Next",
                       radius: 100.r,
-                      onPressed: () {},
+                      onPressed: () {
+                        model.navigateToNextScreen(context);
+                      },
                     ),
                   ),
                 ),

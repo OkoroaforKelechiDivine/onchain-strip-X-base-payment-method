@@ -9,8 +9,9 @@ class NavigationService<T, U> {
         arguments: args,
       );
 
-  Future<T?> push(Widget page) async => navigatorKey.currentState
-      ?.push<T>(MaterialPageRoute(builder: (c) => page));
+
+  Future<T?> push(Widget page, {Object? args}) async => navigatorKey.currentState
+      ?.push<T>(MaterialPageRoute(builder: (c) => page, settings: RouteSettings(arguments: args)));
 
   Future pushReplacement(Widget page) async => navigatorKey.currentState
       ?.pushReplacement(MaterialPageRoute(builder: (c) => page));
