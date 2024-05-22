@@ -55,7 +55,7 @@ class TransferView extends StatelessWidget {
                     secondText: 'Beneficiaries',
                   ),
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 10.h),
                 GestureDetector(
                   onTap: () async {
                     final selectedBank = await Navigator.push<Map<String, String>>(
@@ -110,7 +110,6 @@ class TransferView extends StatelessWidget {
                       ),
                     ],
                   ),
-
                 ),
                 AppCustomTextField(
                   focusBorderColor: AppColors.white,
@@ -151,7 +150,18 @@ class TransferView extends StatelessWidget {
                       fontSize: 16.sp,
                     ),
                   ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 100.h),
+                Opacity(
+                  opacity: model.accountName != null ? 1 : 0,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: AppButton(
+                      title: "Next",
+                      radius: 100.r,
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

@@ -27,7 +27,7 @@ class AppToggleButtons extends StatelessWidget {
           onTap: () => onOptionSelected(TransferOption.NEW),
           child: Container(
             decoration: BoxDecoration(
-              color: selectedOption == TransferOption.NEW ? AppColors.deepGreen : AppColors.transparent,
+              color: selectedOption == TransferOption.NEW ? AppColors.deepGreen : AppColors.white,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 color: selectedOption == TransferOption.NEW ? AppColors.deepGreen : AppColors.transparentDeep,
@@ -41,12 +41,12 @@ class AppToggleButtons extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 30.w),
+        SizedBox(width: 10.w),
         GestureDetector(
           onTap: () => onOptionSelected(TransferOption.BENEFICIARY),
           child: Container(
             decoration: BoxDecoration(
-              color: selectedOption == TransferOption.BENEFICIARY ? AppColors.deepGreen : Colors.transparent,
+              color: selectedOption == TransferOption.BENEFICIARY ? AppColors.deepGreen : AppColors.white,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 color: selectedOption == TransferOption.BENEFICIARY ? AppColors.deepGreen : AppColors.transparentDeep,
