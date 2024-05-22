@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
-import 'package:pay_me_mobile/presentation/transfer/widget/enter_amount.dart';
+import 'package:pay_me_mobile/presentation/transfer/enter_amount.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../core/di/locator.dart';
