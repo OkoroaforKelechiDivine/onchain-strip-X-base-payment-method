@@ -20,6 +20,7 @@ class AppColors {
   static const Color demonicGreen = Color.fromRGBO(0, 186, 150, 1);
   static const Color transparentDeep = Color.fromRGBO(5, 60, 66, 0.2);
   static const Color indicatorTextColor = Color.fromRGBO(70, 86, 104, 1);
+  static const Color lightYellow = Color.fromRGBO(255, 183, 3, 1);
   static const Color deepGreen = Color(0xFF053C42);
   static const Color dullOrange = Color.fromRGBO(232, 211, 19, 1);
   static const Color grey = Colors.grey;

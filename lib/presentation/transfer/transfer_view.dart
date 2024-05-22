@@ -83,7 +83,7 @@ class TransferView extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                if (model.selectedBankLogo != null)
+                                if (model.selectedBankLogo != null) ...[
                                   Row(
                                     children: [
                                       Image.asset(
@@ -91,11 +91,17 @@ class TransferView extends StatelessWidget {
                                       ),
                                       SizedBox(width: 10.w),
                                       AppText(
-                                        model.selectedBank ?? 'Select Bank',
+                                        model.selectedBank != null && model.selectedBank!.isNotEmpty ? model.selectedBank! : 'Select Bank',
                                         color: AppColors.grey,
                                       ),
                                     ],
                                   ),
+                                ] else ...[
+                                  const AppText(
+                                    'Select Bank',
+                                    color: AppColors.grey,
+                                  ),
+                                ],
                                 const Icon(Icons.arrow_drop_down, color: AppColors.grey),
                               ],
                             ),
@@ -104,6 +110,7 @@ class TransferView extends StatelessWidget {
                       ),
                     ],
                   ),
+
                 ),
                 AppCustomTextField(
                   focusBorderColor: AppColors.white,
@@ -133,6 +140,17 @@ class TransferView extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: 10.h),
+                if (model.accountName != null)
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: AppText(
+                      "${model.accountName}",
+                      color: AppColors.lightYellow,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16.sp,
+                    ),
+                  ),
                 SizedBox(height: 20.h),
               ],
             ),
