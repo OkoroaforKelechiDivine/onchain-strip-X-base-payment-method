@@ -15,6 +15,9 @@ class TransferViewModel extends BaseViewModel {
   final int _currentIndex = 0;
   int get currentIndex => _currentIndex;
 
+
+  TextEditingController amount = TextEditingController();
+  TextEditingController description = TextEditingController();
   TextEditingController accountNumber = TextEditingController();
   TextEditingController searchController = TextEditingController();
 

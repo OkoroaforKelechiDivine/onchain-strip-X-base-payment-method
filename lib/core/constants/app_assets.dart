@@ -48,6 +48,7 @@ class AppAssets {
   static const String eye = 'assets/png/eye.png';
   static const String add = 'assets/png/add.png';
   static const String bankLogo = 'assets/png/bank_logo.png';
+  static const String close = 'assets/png/close.png';
   static const String inflow = 'assets/png/inflow.png';
   static const String transfer = 'assets/png/sendmoney.png';
   static const String report = 'assets/png/report.png';
