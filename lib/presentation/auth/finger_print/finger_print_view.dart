@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/presentation/auth/complete/complete_sign_up.dart';
 import 'package:pay_me_mobile/presentation/auth/finger_print/finger_print_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -65,9 +66,8 @@ class FingerPrintView extends StatelessWidget {
                 SizedBox(height:150.h),
                 Center(
                   child: AppButton(
-                    //  Still waiting for the designer to get me the success image. But for now I will navigate to the home page
                     onPressed: () {
-                      navigationService.push(const HomepageView());
+                      navigationService.push(const CompleteSignUp());
                       },
                     color: AppColors.deepGreen,
                     title: "Continue",
