@@ -7,7 +7,6 @@ import 'package:pay_me_mobile/presentation/auth/finger_print/finger_print_viewmo
 import 'package:stacked/stacked.dart';
 
 import '../../../core/widgets/indicator.dart';
-import '../../homepage/home_page_view.dart';
 
 class FingerPrintView extends StatelessWidget {
   const FingerPrintView({super.key});
