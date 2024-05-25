@@ -12,28 +12,33 @@ class SelectBankView extends StatelessWidget {
       viewModelBuilder: () => TransferViewModel(),
       builder: (context, model, child) {
         return Scaffold(
+          backgroundColor: AppColors.scaffoldBg,
           appBar: const PaymeAppBar(
             isBack: true,
             title: "Choose Bank",
           ),
           body: Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
-                AppCustomTextField(
-                  focusBorderColor: AppColors.grey,
-                  hintText: "Search Bank",
-                  backgroundColor: AppColors.white,
-                  borderColor: AppColors.transparentDeep,
-                  textEditingController: model.searchController,
-                  textInputType: TextInputType.text,
-                  prefixIcon: IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      model.clearSearch();
-                    },
+                SizedBox(
+                  height: 50,
+                  child: AppCustomTextField(
+                    focusBorderColor: AppColors.grey,
+                    hintText: "Search Bank",
+                    backgroundColor: AppColors.white,
+                    textColor: AppColors.black,
+                    borderColor: AppColors.transparentDeep,
+                    textEditingController: model.searchController,
+                    textInputType: TextInputType.text,
+                    prefixIcon: IconButton(
+                      icon: const Icon(Icons.search),
+                      onPressed: () {
+                        model.clearSearch();
+                      },
+                    ),
+                    onChanged: model.filterBanks,
                   ),
-                  onChanged: model.filterBanks,
                 ),
                 Expanded(
                   child: ListView.builder(

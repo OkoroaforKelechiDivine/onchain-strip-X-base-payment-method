@@ -4,6 +4,7 @@ import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/presentation/transfer/transfer_viewmodel.dart';
 import 'package:stacked/stacked.dart';
+import 'network_errorScreen.dart';
 
 class DraggableDialog extends StatefulWidget {
   const DraggableDialog({super.key});

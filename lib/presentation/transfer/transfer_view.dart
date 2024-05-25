@@ -67,7 +67,7 @@ class TransferView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.all(15),
+                          padding: const EdgeInsets.only(top: 15, right: 15, left: 15),
                           child: Container(
                             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                             decoration: BoxDecoration(
