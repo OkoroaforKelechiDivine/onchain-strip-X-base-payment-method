@@ -7,7 +7,6 @@ import '../../../core/constants/colors.dart';
 import '../../../core/di/locator.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/info.dart';
-import '../../homepage/home_page_view.dart';
 
 class NetworkErrorScreen extends StatelessWidget {
   const NetworkErrorScreen({Key? key}) : super(key: key);
