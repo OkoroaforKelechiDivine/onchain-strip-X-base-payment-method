@@ -22,7 +22,7 @@ class AppCustomTextField extends StatelessWidget {
   final int? maxLines, minLines, maxLength, hintMaxLines;
   final EdgeInsets? margin;
   final Iterable<String>? autofillHints;
-  final EdgeInsets? padding;
+  final EdgeInsets? padding, containerPadding;
   final Function(String)? onChanged, onSubmitted;
   final FormFieldValidator<String>? validator;
   final Function()? onEditingComplete;
@@ -57,67 +57,68 @@ class AppCustomTextField extends StatelessWidget {
 
   const AppCustomTextField(
       {Key? key,
-        this.title,
-        this.hintText,
-        this.textInputType,
-        this.icon,
-        this.disableTyping,
-        this.suffixIcon,
-        this.obscureText,
-        this.obscureChar,
-        this.onTap,
-        this.fontSize,
-        this.maxLines,
-        this.minLines,
-        this.margin,
-        this.padding,
-        this.onChanged,
-        this.onEditingComplete,
-        this.counter,
-        this.suffixText,
-        this.validator,
-        this.initialText,
-        this.textEditingController,
-        this.enabled,
-        this.suffixBoxConstraints,
-        this.prefixBoxConstraints,
-        this.errorText,
-        this.errorStyle,
-        this.maxLength,
-        this.inputFormatters,
-        this.autofocus,
-        this.textAlign,
-        this.focusNode,
-        this.showCursor,
-        this.borderWidth,
-        this.autofillHints,
-        this.prefixIcon,
-        this.borderColor,
-        this.borderRadius,
-        this.backgroundColor,
-        this.focusBorderColor,
-        this.focusBorderWidth,
-        this.textHeight,
-        this.errorBorderColor,
-        this.textInputAction,
-        this.onSubmitted,
-        this.disabledBorder,
-        this.enabledBorder,
-        this.focusedBorder,
-        this.errorBorder,
-        this.labelText,
-        this.labelTextStyle,
-        this.textAlignVertical,
-        this.constraints,
-        this.textColor,
-        this.fontWeight,
-        this.buildCounter,
-        this.textCapitalization,
-        this.isDense,
-        this.hintTextColor,
-        this.hintMaxLines,
-        this.suffixStyle,
-        this.readOnly})
+      this.title,
+      this.hintText,
+      this.textInputType,
+      this.icon,
+      this.disableTyping,
+      this.suffixIcon,
+      this.obscureText,
+      this.obscureChar,
+      this.onTap,
+      this.fontSize,
+      this.maxLines,
+      this.minLines,
+      this.margin,
+      this.padding,
+      this.onChanged,
+      this.onEditingComplete,
+      this.counter,
+      this.suffixText,
+      this.validator,
+      this.initialText,
+      this.textEditingController,
+      this.enabled,
+      this.suffixBoxConstraints,
+      this.prefixBoxConstraints,
+      this.errorText,
+      this.errorStyle,
+      this.maxLength,
+      this.inputFormatters,
+      this.autofocus,
+      this.textAlign,
+      this.focusNode,
+      this.showCursor,
+      this.borderWidth,
+      this.autofillHints,
+      this.prefixIcon,
+      this.borderColor,
+      this.borderRadius,
+      this.backgroundColor,
+      this.focusBorderColor,
+      this.focusBorderWidth,
+      this.textHeight,
+      this.errorBorderColor,
+      this.textInputAction,
+      this.onSubmitted,
+      this.disabledBorder,
+      this.enabledBorder,
+      this.focusedBorder,
+      this.errorBorder,
+      this.labelText,
+      this.labelTextStyle,
+      this.textAlignVertical,
+      this.constraints,
+      this.textColor,
+      this.fontWeight,
+      this.buildCounter,
+      this.textCapitalization,
+      this.isDense,
+      this.hintTextColor,
+      this.hintMaxLines,
+      this.suffixStyle,
+      this.readOnly,
+      this.containerPadding})
       : super(key: key);
 
   @override
@@ -126,7 +127,8 @@ class AppCustomTextField extends StatelessWidget {
       margin: margin,
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: Padding(
-        padding: EdgeInsets.only(top: 20.w, right: 15.w, left: 15.w),
+        padding: containerPadding ??
+            EdgeInsets.only(top: 20.w, right: 15.w, left: 15.w),
         child: IgnorePointer(
           ignoring: disableTyping ?? false,
           child: TextFormField(
@@ -135,7 +137,8 @@ class AppCustomTextField extends StatelessWidget {
             focusNode: focusNode,
             autofocus: autofocus ?? false,
             maxLength: maxLength,
-            textCapitalization: textCapitalization ?? TextCapitalization.sentences,
+            textCapitalization:
+                textCapitalization ?? TextCapitalization.sentences,
             validator: validator,
             textAlign: textAlign ?? TextAlign.start,
             style: TextStyle(
@@ -175,17 +178,19 @@ class AppCustomTextField extends StatelessWidget {
               errorStyle: errorStyle,
               errorText: errorText,
               isDense: isDense ?? true,
-              contentPadding: padding,
+              contentPadding:
+                  padding ?? EdgeInsets.symmetric(horizontal: 16, vertical: 22),
               suffixText: suffixText,
               suffixIconConstraints: suffixBoxConstraints,
               suffixIcon: suffixIcon == null ? null : suffixIcon!,
               icon: icon == null
                   ? null
-                  : Container(margin: const EdgeInsets.only(left: 16), child: icon),
+                  : Container(
+                      margin: const EdgeInsets.only(left: 16), child: icon),
               constraints: constraints,
               focusedBorder: focusedBorder ??
                   OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                    borderRadius: BorderRadius.circular(borderRadius ?? 12),
                     borderSide: BorderSide(
                         color: focusBorderColor ?? AppColors.lightGreen,
                         width: focusBorderWidth ?? 1),
@@ -193,20 +198,20 @@ class AppCustomTextField extends StatelessWidget {
               disabledBorder: disabledBorder,
               enabledBorder: enabledBorder ??
                   OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                    borderRadius: BorderRadius.circular(borderRadius ?? 12),
                     borderSide: BorderSide(
                         color: borderColor ?? AppColors.lightGreen,
                         width: borderWidth ?? 1),
                   ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                borderRadius: BorderRadius.circular(borderRadius ?? 12),
                 borderSide: BorderSide(
                     color: borderColor ?? AppColors.lightGreen,
                     width: borderWidth ?? 1),
               ),
               errorBorder: errorBorder ??
                   OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                    borderRadius: BorderRadius.circular(borderRadius ?? 12),
                     borderSide: BorderSide(
                         color: errorBorderColor ?? Colors.red,
                         width: borderWidth ?? 1),

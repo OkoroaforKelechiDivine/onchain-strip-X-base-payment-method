@@ -4,6 +4,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pay_me_mobile/core/states/app_state.dart';
 import 'package:pay_me_mobile/data/datasources/remote/authentication_data_provider.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_response.dart';
+import 'package:pay_me_mobile/data/model/params/login_param.dart';
 import 'package:pay_me_mobile/data/model/params/save_beneficiary_param.dart';
 import 'package:pay_me_mobile/data/model/params/signup_param.dart';
 import 'package:pay_me_mobile/data/model/response/auth/beneficiary.dart';
@@ -16,9 +17,8 @@ import '../model/response/auth/passcode_response.dart';
 class AuthRepo {
   final _authApi = AuthenticationDataProvider();
 
-  Future<ApiResponse<LoginResponse?>> login(
-      {required String username, required String password}) async {
-    final res = await _authApi.loginAPI(username: username, password: password);
+  Future<ApiResponse<LoginResponse?>> login({required LoginParam param}) async {
+    final res = await _authApi.loginAPI(param: param);
     if (res.success) {
       authLocalStorage.saveToken(res.data?.token);
       appLocalStorage.saveAppState(AppState.authenticated);

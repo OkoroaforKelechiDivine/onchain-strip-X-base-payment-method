@@ -68,7 +68,7 @@ class AppButton extends StatelessWidget {
                 children: [
                   AppText(
                     title ?? '',
-                    fontSize: 18,
+                    fontSize: 14,
                     color: AppColors.white,
                   ),
                   if (loading ?? false)

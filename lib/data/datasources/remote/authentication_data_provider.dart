@@ -5,6 +5,7 @@ import 'package:pay_me_mobile/core/di/locator.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_failure.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_response.dart';
 import 'package:pay_me_mobile/data/datasources/remote/base/api_service.dart';
+import 'package:pay_me_mobile/data/model/params/login_param.dart';
 import 'package:pay_me_mobile/data/model/params/save_beneficiary_param.dart';
 import 'package:pay_me_mobile/data/model/params/signup_param.dart';
 import 'package:pay_me_mobile/data/model/response/auth/beneficiary.dart';
@@ -13,13 +14,12 @@ import 'package:pay_me_mobile/data/model/response/auth/passcode_response.dart';
 import '../../model/response/auth/login_response.dart';
 
 class AuthenticationDataProvider {
-  final _apiService = ApiService(path: '/auth');
+  final _apiService = ApiService(path: '/user/v2');
 
   Future<ApiResponse<LoginResponse?>> loginAPI(
-      {required String username, required String password}) async {
+      {required LoginParam param}) async {
     try {
-      final res = await _apiService
-          .post('/login', data: {'username': username, 'password': password});
+      final res = await _apiService.post('/login', data: param.toJson());
       return ApiResponse.fromJson(res)
         ..success = true
         ..message = "Success"
