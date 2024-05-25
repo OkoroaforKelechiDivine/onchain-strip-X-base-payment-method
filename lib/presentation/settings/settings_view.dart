@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/widgets/app_bar.dart';
+import 'package:pay_me_mobile/data/datasources/local/base/local_storage_service.dart';
+import 'package:pay_me_mobile/presentation/auth/sign_in/sign_in_view.dart';
 import 'package:pay_me_mobile/presentation/settings/components/settings_item.dart';
 import 'package:pay_me_mobile/presentation/settings/settings_viewmodel.dart';
 import 'package:stacked/stacked.dart';
@@ -189,7 +191,10 @@ class SettingsView extends StatelessWidget {
                     iconPath: AppAssets.logOut,
                     title: "Log Out",
                     textColor: Colors.red,
-                    onTap: () {},
+                    onTap: () async {
+                      await LocalStorageService.clear();
+                      navigationService.pushAndRemoveUntil(const SignInView());
+                    },
                     logout: true,
                   ),
                   const SizedBox(
