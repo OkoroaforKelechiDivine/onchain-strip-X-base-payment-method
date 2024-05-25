@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/presentation/auth/sign_up/sign_up_viewmodel.dart';
-import '../../../homepage/home_page_view.dart';
 
 class FingerPrintView extends StatelessWidget {
   final SignUpViewModel model;
