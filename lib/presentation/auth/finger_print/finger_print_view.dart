@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/cores.dart';
-import 'package:pay_me_mobile/presentation/auth/complete/complete_sign_up.dart';
+import 'package:pay_me_mobile/core/widgets/info.dart';
+import 'package:pay_me_mobile/presentation/auth/complete/complete_screen.dart';
 import 'package:pay_me_mobile/presentation/auth/finger_print/finger_print_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -66,7 +67,7 @@ class FingerPrintView extends StatelessWidget {
                 Center(
                   child: AppButton(
                     onPressed: () {
-                      navigationService.push(const CompleteSignUp());
+                      navigationService.push(const CompleteScreen());
                       },
                     color: AppColors.deepGreen,
                     title: "Continue",

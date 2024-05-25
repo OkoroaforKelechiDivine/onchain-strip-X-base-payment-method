@@ -5,6 +5,7 @@ import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/presentation/transfer/transfer_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 import '../../auth/pin/create_pin.dart';
+import 'network_errorScreen.dart';
 
 class DraggableDialog extends StatefulWidget {
   const DraggableDialog({super.key});
@@ -136,7 +137,7 @@ class _DraggableDialogState extends State<DraggableDialog> {
                                   children: [
                                     AppButton(
                                       onPressed: () {
-                                        navigationService.push(const CreatePinView());
+                                        navigationService.push(const NetworkErrorScreen());
                                       },
                                       width: 250.w,
                                       color: AppColors.deepGreen,

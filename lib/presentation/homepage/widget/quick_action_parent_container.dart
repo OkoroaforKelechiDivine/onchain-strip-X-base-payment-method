@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 
-import '../../../core/constants/font_weights.dart';
-
 class QuickActionParentContainer extends StatelessWidget {
   final String text;
   final String asset;

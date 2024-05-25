@@ -5,6 +5,8 @@ class AppAssets {
   // static const String add = 'assets/svgs/add.svg';
   static const String fingerPrint = 'assets/png/fingerprint.png';
   static const String success = 'assets/png/complete.png';
+  static const String addPeople = 'assets/png/people-add.png';
+  static const String shareReceipt = 'assets/png/share_receipt.png';
   static const String naira = 'assets/svgs/naira.svg';
   static const String arrowBack = 'assets/svgs/arrow_back.svg';
   static const String customer = 'assets/svgs/customer.svg';
