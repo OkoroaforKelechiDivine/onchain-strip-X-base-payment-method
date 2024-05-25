@@ -31,7 +31,7 @@ class AuthenticationDataProvider {
 
   Future<ApiResponse> register({required SignUpParam param}) async {
     try {
-      final res = await _apiService.post('/signup', data: param.toJson());
+      final res = await _apiService.post('/register', data: param.toJson());
       return ApiResponse.fromJson(res);
     } on ApiFailure catch (e) {
       return ApiResponse(success: false, message: e.message);

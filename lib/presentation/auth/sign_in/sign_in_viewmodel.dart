@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
+import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/params/login_param.dart';
 import 'package:pay_me_mobile/presentation/bottom_nav.dart';
 import 'package:stacked/stacked.dart';
@@ -30,12 +31,12 @@ class SignInViewModel extends BaseViewModel {
     notifyListeners();
     final param = (_currentIndex == 1)
         ? LoginParam(
-            username: usernameController.text,
-            password: passwordController.text,
+            username: usernameController.text.trim(),
+            password: passwordController.text.trim(),
           )
         : LoginParam(
-            phoneNumber: phoneController.text,
-            password: passwordController.text,
+            phoneNumber: formatPhoneNumber(phoneController.text.trim()),
+            password: passwordController.text.trim(),
           );
 
     final res = await authRepo.login(param: param);

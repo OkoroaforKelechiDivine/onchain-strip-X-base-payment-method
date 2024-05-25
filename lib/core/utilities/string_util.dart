@@ -32,3 +32,21 @@ String formartDate(String dateStr) {
 
   return formattedDate; // Output: 2006-01-02
 }
+
+String formatPhoneNumber(String phoneNumber) {
+  // Remove any non-digit characters from the input
+  phoneNumber = phoneNumber.replaceAll(RegExp(r'\D'), '');
+
+  // Check if the phone number starts with '0'
+  if (phoneNumber.startsWith('0')) {
+    phoneNumber = '+234' + phoneNumber.substring(1);
+  } else if (phoneNumber.length == 10) {
+    // Check if the phone number has 10 digits
+    phoneNumber = '+234' + phoneNumber;
+  } else {
+    // If the input does not match expected formats, return the original input
+    return phoneNumber;
+  }
+
+  return phoneNumber;
+}

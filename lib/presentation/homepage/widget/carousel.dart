@@ -67,10 +67,10 @@ class CarouselWidget extends StatelessWidget {
                     color: AppColors.transparent,
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.all(4),
                     child: AppText(
-                      "A/C no: 0625806532",
+                      "A/C no: ${appGlobals.user?.accountNumber}",
                       color: AppColors.white,
                     ),
                   ),
@@ -86,7 +86,7 @@ class CarouselWidget extends StatelessWidget {
                       color: AppColors.demonicGreen,
                     ),
                     AppText(
-                      'Okoroafor Oladipupo Alex',
+                      appGlobals.user!.accountName,
                       fontSize: 12.sp,
                       color: AppColors.white,
                     ),

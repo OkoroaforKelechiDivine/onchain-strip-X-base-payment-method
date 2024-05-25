@@ -28,6 +28,7 @@ class AppAssets {
   static const String logOut = 'assets/svgs/exit.svg';
 
   static const String transacPin = 'assets/svgs/transacPin.svg';
+  static const String successSvg = 'assets/svgs/success.svg';
 
   static const String percent = 'assets/svgs/percent.svg';
   static const String receipt = 'assets/svgs/receipt.svg';

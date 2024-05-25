@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:pay_me_mobile/core/cores.dart';
-import 'package:pay_me_mobile/presentation/auth/personal_information/personal_information_view.dart';
+import 'package:pay_me_mobile/presentation/auth/sign_up/pages/business_info.dart';
+import 'package:pay_me_mobile/presentation/auth/sign_up/pages/create_pin_page.dart';
+import 'package:pay_me_mobile/presentation/auth/sign_up/pages/personal_info.dart';
 import 'package:pay_me_mobile/presentation/auth/sign_up/sign_up_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -18,138 +19,106 @@ class SignUpView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: AppColors.scaffoldBg,
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 25.h),
-                const PaymeAppBar(
-                  isBack: true,
-                  title: "Sign Up",
-                ),
-                SizedBox(height: 15.h),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleIndicator(number: "01", text: "Business Information"),
-                    Underline(),
-                    CircleIndicator(number: "02", text: "Personal Information"),
-                    Underline(),
-                    CircleIndicator(number: "03", text: "Create Login Pin"),
-                    Underline(),
-                    CircleIndicator(number: "04", text: "Set Biometric"),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 20.w, top: 20.h),
-                  child: AppText(
-                    "Business Information",
-                    color: AppColors.deepGreen,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 24.sp,
-                  ),
-                ),
-                AppCustomTextField(
-                  hintText: "Business name",
-                  focusBorderColor: AppColors.white,
-                  backgroundColor: AppColors.white,
-                  borderColor: AppColors.darkWhite,
-                  textEditingController: model.businessName,
-                ),
-                AppCustomTextField(
-                  focusBorderColor: AppColors.white,
-                  hintText: "Business address",
-                  backgroundColor: AppColors.white,
-                  borderColor: AppColors.darkWhite,
-                  textEditingController: model.businessAddress,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: AppDropDown(
-                        hint: "Business registration status",
-                        list: model.registrationOptions,
-                        selected: model.registrationStatusIndex,
-                        onChangeValue: (value) {
-                          model.onRegistrationStatusChanged(value);
-                        },
-                        borderRadius: 8,
-                        borderWidth: 1,
-                        height: 45.h,
-                        borderColor: AppColors.darkWhite,
-                        background: AppColors.white,
-                        textColor: AppColors.grey,
-                        dropDownTextColor: AppColors.grey,
-                        dropDownTextSize: 15.sp,
-                      ),
-                    ),
-                  ],
-                ),
-                Visibility(
-                  visible: model.isOptionSelected,
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
-                          AppCustomTextField(
-                            hintText: "Incorporate date",
-                            disableTyping: true,
-                            focusBorderColor: AppColors.white,
-                            backgroundColor: AppColors.white,
-                            borderColor: AppColors.darkWhite,
-                            textEditingController: model.incorporateDateController,
-                          ),
-                          Positioned(
-                            right: 20,
-                            top: 20,
-                            bottom: 0,
-                            child: GestureDetector(
-                              onTap: () async {
-                                final DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(2000),
-                                  lastDate: DateTime(2101),
-                                );
-                                if (pickedDate != null) {
-                                  final formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
-                                  model.setIncorporateDate(formattedDate);
-                                }
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
-                                child: Icon(Icons.calendar_month, color: AppColors.demonicGreen, size: 16.sp),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      AppCustomTextField(
-                        focusBorderColor: AppColors.white,
-                        hintText: "RC number",
-                        backgroundColor: AppColors.white,
-                        borderColor: AppColors.darkWhite,
-                        textEditingController: model.rcNumber,
-                        textInputType: TextInputType.number,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 100.h),
-                Center(
-                  child: AppButton(
-                    onPressed: () {
-                      navigationService.push(const PersonalInformationView());
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 25.h),
+              const PaymeAppBar(
+                isBack: true,
+                title: "Sign Up",
+              ),
+              SizedBox(height: 15.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      model.navigateTopage(0);
                     },
-                    color: AppColors.deepGreen,
-                    title: "Continue",
-                    radius: 100.r,
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: CircleIndicator(
+                        number: "01",
+                        text: "Business Information",
+                        circleColor:
+                            model.currentPage == 1 || model.currentPage == 2
+                                ? AppColors.demonicGreen
+                                : null,
+                        textColor:
+                            model.currentPage == 1 || model.currentPage == 2
+                                ? AppColors.demonicGreen
+                                : null,
+                        boldText:
+                            model.currentPage == 1 || model.currentPage == 2
+                                ? true
+                                : false),
                   ),
+                  Underline(
+                      color: model.currentPage == 1 || model.currentPage == 2
+                          ? AppColors.demonicGreen
+                          : null),
+                  GestureDetector(
+                    onTap: () {
+                      model.navigateTopage(1);
+                    },
+                    child: CircleIndicator(
+                        number: "02",
+                        text: "Personal Information",
+                        circleColor: model.currentPage == 2
+                            ? AppColors.demonicGreen
+                            : null,
+                        textColor: model.currentPage == 2
+                            ? AppColors.demonicGreen
+                            : null,
+                        boldText: model.currentPage == 2 ? true : false),
+                  ),
+                  Underline(
+                      color: model.currentPage == 2
+                          ? AppColors.demonicGreen
+                          : null),
+                  GestureDetector(
+                    onTap: () {
+                      model.navigateTopage(2);
+                    },
+                    child: CircleIndicator(
+                      number: "03",
+                      text: "Create Login Pin",
+                      circleColor: model.currentPage == 2
+                          ? AppColors.demonicGreen
+                          : null,
+                      textColor: model.currentPage == 2
+                          ? AppColors.demonicGreen
+                          : null,
+                    ),
+                  )
+                ],
+              ),
+              Expanded(
+                child: PageView(
+                  controller: model.pageController,
+                  physics:
+                      const NeverScrollableScrollPhysics(), // Disable scrolling
+                  children: [
+                    BusinessInfo(model: model),
+                    PersonalInfo(model: model),
+                    CreatePinPage(model: model),
+                    // FingerPrintView(
+                    //   model: model,
+                    // )
+                  ],
                 ),
-                SizedBox(height: 20.h),
-              ],
-            ),
+              ),
+              // SizedBox(height: 100.h),
+              Center(
+                child: AppButton(
+                  loading: model.isLoading,
+                  onPressed: model.validateForm,
+                  color: AppColors.deepGreen,
+                  title: "Continue",
+                  radius: 100.r,
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                ),
+              ),
+              SizedBox(height: 20.h),
+            ],
           ),
         );
       },

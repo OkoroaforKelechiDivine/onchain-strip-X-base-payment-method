@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pay_me_mobile/core/constants/font_weights.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 
-import '../../../core/constants/colors.dart';
+import '../../../../core/constants/colors.dart';
 
 class GenderSelectionWidget extends StatefulWidget {
   final int? selectedIndex;
@@ -74,7 +74,9 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: widget.selectedIndex == index ? AppColors.demonicGreen : AppColors.black,
+                color: widget.selectedIndex == index
+                    ? AppColors.demonicGreen
+                    : AppColors.black,
               ),
               color: AppColors.white,
             ),
@@ -87,7 +89,9 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
                   border: Border.all(
                     color: AppColors.white,
                   ),
-                  color: widget.selectedIndex == index ? AppColors.demonicGreen : AppColors.white,
+                  color: widget.selectedIndex == index
+                      ? AppColors.demonicGreen
+                      : AppColors.white,
                 ),
               ),
             ),
@@ -97,7 +101,9 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
             gender,
             style: TextStyle(
               fontSize: 15.sp,
-              color: widget.selectedIndex == index ? AppColors.grey : AppColors.grey,
+              color: widget.selectedIndex == index
+                  ? AppColors.grey
+                  : AppColors.grey,
               fontFamily: GoogleFonts.spectral().fontFamily,
             ),
           ),

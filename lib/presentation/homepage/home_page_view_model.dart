@@ -1,10 +1,10 @@
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
+import 'package:pay_me_mobile/core/cores.dart';
 import 'package:stacked/stacked.dart';
 
 class HomePageViewModel extends BaseViewModel {
-
   String getUserName() {
-    return 'John';
+    return appGlobals.user?.username ?? "User";
   }
 
   String getUserProfilePicture() {

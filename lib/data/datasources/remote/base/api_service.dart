@@ -103,12 +103,12 @@ class ApiService {
         break;
       case DioErrorType.badResponse:
         errorDescription = "Bad response";
-        if (dioError.response?.data["meta"]['message'] != null) {
-          errorDescription = dioError.response?.data["meta"]['message'];
+        if (dioError.response?.data["error"] != null) {
+          errorDescription = dioError.response?.data['error'];
         }
 
-        if (dioError.response?.data["meta"]['message'] != null) {
-          errorDescription = dioError.response?.data["meta"]['message'];
+        if (dioError.response?.data['error'] != null) {
+          errorDescription = dioError.response?.data['error'];
         }
         break;
     }
