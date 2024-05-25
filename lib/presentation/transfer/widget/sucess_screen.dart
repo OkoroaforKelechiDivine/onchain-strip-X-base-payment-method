@@ -70,6 +70,7 @@ class SuccessScreen extends StatelessWidget {
                                     child: AppText("Share as Image",
                                       fontSize: 14.sp,
                                       color: AppColors.grey,
+                                      fontWeight: AppFontWeight.extraBold,
                                     )
                                 ),
                                 onTap: () {
@@ -81,6 +82,7 @@ class SuccessScreen extends StatelessWidget {
                                     child: AppText("Share as PDF",
                                       fontSize: 14.sp,
                                       color: AppColors.grey,
+                                      fontWeight: AppFontWeight.extraBold,
                                     )
                                 ),
                                 onTap: () {
