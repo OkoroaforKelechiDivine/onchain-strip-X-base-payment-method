@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/core/utilities/string_util.dart';
 import 'package:pay_me_mobile/data/model/params/login_param.dart';
+import 'package:pay_me_mobile/presentation/auth/login_pin/login_pin_view.dart';
 import 'package:pay_me_mobile/presentation/bottom_nav.dart';
 import 'package:stacked/stacked.dart';
 
@@ -41,7 +42,7 @@ class SignInViewModel extends BaseViewModel {
 
     final res = await authRepo.login(param: param);
     if (res.success) {
-      navigationService.pushAndRemoveUntil(const BottomNav());
+      navigationService.pushAndRemoveUntil(const LoginPinView());
     } else {
       snackbarService.error(message: res.message!);
     }

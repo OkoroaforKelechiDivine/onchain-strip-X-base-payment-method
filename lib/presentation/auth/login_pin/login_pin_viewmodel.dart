@@ -1,5 +1,5 @@
-import 'dart:developer';
-
+import 'package:pay_me_mobile/core/di/locator.dart';
+import 'package:pay_me_mobile/presentation/bottom_nav.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginPinViewModel extends BaseViewModel {
@@ -33,8 +33,7 @@ class LoginPinViewModel extends BaseViewModel {
 
   void submitPin() {
     if (isPinComplete) {
-      // Implement your pin submission logic here
-      print('PIN submitted: $_pin');
+      navigationService.pushAndRemoveUntil(const BottomNav());
     }
   }
 }

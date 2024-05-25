@@ -6,6 +6,11 @@ import 'package:stacked/stacked.dart';
 class SplashScreenViewModel extends BaseViewModel {
   Future<void> initializeSplashScreen() async {
     await Future.delayed(const Duration(seconds: 5));
-    navigationService.pushAndRemoveUntil(const LoginPinView());
+    final isAuthenticated = appGlobals.token != null;
+    if (isAuthenticated) {
+      navigationService.pushReplacement(const LoginPinView());
+    } else {
+      navigationService.pushReplacement(const IntroScreen());
+    }
   }
 }
