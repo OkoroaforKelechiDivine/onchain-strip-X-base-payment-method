@@ -51,7 +51,7 @@ class AppButton extends StatelessWidget {
                     style: borderStyle ?? BorderStyle.solid),
             borderRadius: BorderRadius.circular(radius ?? 8),
           ),
-          color: color ?? AppColors.lightGreen,
+          color: color ?? AppColors.deepGreen,
           elevation: elevation ?? 0,
           minWidth: 0,
           height: height ?? 56,

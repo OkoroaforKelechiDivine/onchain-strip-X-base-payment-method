@@ -30,6 +30,9 @@ class AppColors {
   static const Color invoiceStatus = Color(0xFF00CFAF);
   static const Color profileLightGreen = Color(0xFF00BA96);
   static const Color pinBg = Color(0xFFF5F5F5);
+  static const Color dropDownBg = Color(0xFFFAFAFA);
+
+  static const Color transferSelectBank = Color(0xFF8F94A3);
 
   static const Color invoiceIconBg = Color.fromRGBO(9, 185, 223, 0.2);
   static const Color invoiceBg = Color(0xFFF9FAFC);

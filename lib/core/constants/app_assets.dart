@@ -22,6 +22,8 @@ class AppAssets {
   static const String recommendIcon = 'assets/svgs/reco.svg';
 
   static const String requePos = 'assets/svgs/requePos.svg';
+  static const String bankIcon = 'assets/svgs/bankIcon.svg';
+
   static const String transactLimit = 'assets/svgs/transactLimit.svg';
 
   static const String privacy = 'assets/svgs/privacy.svg';

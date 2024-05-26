@@ -17,15 +17,15 @@ import 'package:pay_me_mobile/data/model/response/tv_cable/tv_cable_package_resp
 import 'package:pay_me_mobile/data/model/response/tv_cable/verify_smart_card_response.dart';
 
 class BankApi {
-  final _apiService = ApiService(path: '/api');
+  final _apiService = ApiService(path: '/wallet/v2');
 
   Future<ApiResponse<List<BankResponse>?>> getBankList() async {
     try {
       final res = await _apiService.get(
-        "/get_all_banks",
+        "/bank",
       );
       return ApiResponse.fromJson(res)
-        ..data = (res['data']["bank"] as List)
+        ..data = (res['data']["data"]["bank"] as List)
             .map((e) => BankResponse.fromJson(e))
             .toList();
     } on ApiFailure catch (e) {
@@ -37,15 +37,15 @@ class BankApi {
       {required BankResponse bank, required String accountNumber}) async {
     try {
       final res = await _apiService.get(
-        "/get_beneficiary_account",
+        "/recipient",
         queryParams: {
-          "bank": bank.code,
           "accountNo": accountNumber,
+          "bank": bank.code,
           "transfer_type": bank.code == "999999" ? "intra" : "inter"
         },
       );
       return ApiResponse.fromJson(res)
-        ..data = BeneficiaryDetailResponse.fromJson(res['data']);
+        ..data = BeneficiaryDetailResponse.fromJson(res['data']["data"]);
     } on ApiFailure catch (e) {
       return ApiResponse(success: false, message: e.message);
     }
@@ -62,7 +62,7 @@ class BankApi {
       return ApiResponse.fromJson(res)
         ..success = true
         ..message = "Success"
-        ..data = BankTransferResponse.fromJson(res['data']);
+        ..data = BankTransferResponse.fromJson(res['data']["data"]);
     } on ApiFailure catch (e) {
       return ApiResponse(success: false, message: e.message);
     }
