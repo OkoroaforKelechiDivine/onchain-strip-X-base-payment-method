@@ -10,19 +10,33 @@ class NumericTextFormatter extends TextInputFormatter {
       return TextEditingValue.empty;
     }
 
-    // Remove any existing commas to avoid errors during parsing and reformatting
-    String newUnformattedText = newValue.text.replaceAll(',', '');
+    // Remove any existing commas and other non-numeric characters except decimal point
+    String newUnformattedText =
+        newValue.text.replaceAll(RegExp(r'[^0-9.]'), '');
 
-    // Attempt to parse the new value to ensure it's numeric
-    int? newIntValue = int.tryParse(newUnformattedText);
-    if (newIntValue == null) {
-      // If parsing fails (e.g., due to non-numeric input), return the oldValue to avoid changes
+    // Attempt to parse the new value to ensure it's a valid number
+    double? newDoubleValue = double.tryParse(newUnformattedText);
+    if (newDoubleValue == null) {
+      // If parsing fails (e.g., due to invalid input like multiple decimal points), return the oldValue to avoid changes
       return oldValue;
     }
 
-    // Use NumberFormat to format the text with commas
-    final newFormattedText =
-        NumberFormat('#,###,###,###,###,###,###').format(newIntValue);
+    // Determine if the last character is a decimal or zero following a decimal
+    bool endsWithDecimal = newUnformattedText.endsWith('.');
+    bool endsWithZeroAfterDecimal =
+        newUnformattedText.contains('.') && newUnformattedText.endsWith('0');
+
+    // Format the number with commas (without affecting the decimal part if it exists)
+    String newFormattedText = NumberFormat('#,##0.###').format(newDoubleValue);
+
+    // Preserving decimal point and following zeros
+    if (endsWithDecimal) {
+      newFormattedText += '.';
+    } else if (endsWithZeroAfterDecimal) {
+      int decimalPos = newUnformattedText.indexOf('.');
+      int decimalCount = newUnformattedText.length - decimalPos - 1;
+      newFormattedText += '.' + '0' * decimalCount;
+    }
 
     // Ensure the cursor does not exceed the length of the new text
     int cursorPosition = newValue.selection.end;

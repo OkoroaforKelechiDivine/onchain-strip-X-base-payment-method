@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/bank_response.dart';
 import 'package:pay_me_mobile/data/model/response/transaction_response/beneficiary_detail_response.dart';
-import 'package:pay_me_mobile/presentation/transfer/enter_amount.dart';
+import 'package:pay_me_mobile/presentation/transfer/proceed_with_transfer/proceed_with_transfer.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../core/di/locator.dart';
@@ -49,6 +49,12 @@ class TransferViewModel extends BaseViewModel {
 
   void setIndex(int val) {
     _currentIndex = val;
+    notifyListeners();
+  }
+
+  void resetBeneficiary() {
+    beneficiaryDetailResponse = null;
+    isLoadingbeneficiaryDetail = false;
     notifyListeners();
   }
 
@@ -97,9 +103,12 @@ class TransferViewModel extends BaseViewModel {
         bank: selectedBank!, accountNumber: accountNumber.text.trim());
     if (res.success) {
       beneficiaryDetailResponse = res.data;
+      isLoadingbeneficiaryDetail = false;
       notifyListeners();
     } else {
       isLoadingbeneficiaryDetail = false;
+      notifyListeners();
+      beneficiaryDetailResponse = null;
       snackbarService.error(message: res.message ?? "Something went wrong");
     }
     notifyListeners();

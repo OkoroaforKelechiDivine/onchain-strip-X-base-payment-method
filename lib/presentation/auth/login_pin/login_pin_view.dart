@@ -47,7 +47,7 @@ class LoginPinView extends StatelessWidget {
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
-                      AppText(
+                      const AppText(
                         '  Log out',
                         color: AppColors.lightGreen,
                         fontSize: 14,

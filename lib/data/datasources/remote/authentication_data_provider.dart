@@ -52,21 +52,18 @@ class AuthenticationDataProvider {
     }
   }
 
-  Future<ApiResponse<PasscodeResponse>> validatePascode({
+  Future<ApiResponse<bool>> validatePascode({
     required String code,
   }) async {
     try {
       final firstLogin = appGlobals.user?.isFirstLogin ?? false;
       log(firstLogin.toString());
-      final res = await _apiService.post(
-
-          ///firstLogin ? "/set_passcode" : '/validate_passcode',
-          "/validate_passcode",
-          data: {"passcode": code});
+      final res = await _apiService
+          .post("/validate_login_pin", data: {"login_pin": code});
       return ApiResponse.fromJson(res)
         ..success = true
         ..message = "Success"
-        ..data = PasscodeResponse.fromJson(res);
+        ..data = res["meta"]["message"] == "true" ? true : false;
     } on ApiFailure catch (e) {
       return ApiResponse(success: false, message: e.message);
     }
@@ -171,11 +168,12 @@ class AuthenticationDataProvider {
     required String code,
   }) async {
     try {
-      final res = await _apiService.post("/validate_pin", data: {"pin": code});
+      final res = await _apiService
+          .post("/validate_transaction_pin", data: {"pin": code});
       return ApiResponse.fromJson(res)
         ..success = true
         ..message = "Success"
-        ..data = res["message"];
+        ..data = res["meta"]["message"] == "true" ? true : false;
     } on ApiFailure catch (e) {
       return ApiResponse(success: false, message: e.message);
     }

@@ -62,7 +62,7 @@ class AuthRepo {
     return _authApi.setPascode(code: code);
   }
 
-  Future<ApiResponse<PasscodeResponse>> validatePascode({
+  Future<ApiResponse<bool>> validatePascode({
     required String code,
   }) {
     return _authApi.validatePascode(

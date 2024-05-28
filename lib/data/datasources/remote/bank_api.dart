@@ -39,7 +39,7 @@ class BankApi {
       final res = await _apiService.get(
         "/recipient",
         queryParams: {
-          "accountNo": accountNumber,
+          "account_no": accountNumber,
           "bank": bank.code,
           "transfer_type": bank.code == "999999" ? "intra" : "inter"
         },

@@ -144,7 +144,7 @@ class AppCustomTextField extends StatelessWidget {
             style: TextStyle(
                 fontSize: fontSize ?? 15.sp,
                 height: textHeight,
-                color: AppColors.grey,
+                color: AppColors.black,
                 fontWeight: fontWeight ?? AppFontWeight.medium),
             initialValue: initialText == null ? null : initialText!,
             onEditingComplete: onEditingComplete,
