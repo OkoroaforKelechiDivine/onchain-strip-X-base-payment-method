@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/presentation/auth/sign_in/sign_in_view.dart';
+import 'package:pay_me_mobile/presentation/homepage/home_page_view.dart';
 
 class SignUpSuccess extends StatelessWidget {
   const SignUpSuccess({super.key});
@@ -38,10 +39,10 @@ class SignUpSuccess extends StatelessWidget {
             Center(
               child: AppButton(
                 onPressed: () {
-                  navigationService.pushAndRemoveUntil(const SignInView());
+                  navigationService.pushAndRemoveUntil(const HomepageView());
                 },
                 color: AppColors.deepGreen,
-                title: "Back to Login",
+                title: "Go to Home Page",
                 radius: 100.r,
                 margin: const EdgeInsets.symmetric(horizontal: 20),
               ),

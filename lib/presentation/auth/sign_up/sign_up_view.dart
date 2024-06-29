@@ -10,7 +10,7 @@ import 'package:stacked/stacked.dart';
 import '../../../core/widgets/indicator.dart';
 
 class SignUpView extends StatelessWidget {
-  const SignUpView({super.key});
+  const SignUpView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,50 +33,49 @@ class SignUpView extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      model.navigateTopage(0);
+                      model.navigateToPage(0);
                     },
                     child: CircleIndicator(
-                        number: "01",
-                        text: "Business Information",
-                        circleColor:
-                            model.currentPage == 1 || model.currentPage == 2
-                                ? AppColors.demonicGreen
-                                : null,
-                        textColor:
-                            model.currentPage == 1 || model.currentPage == 2
-                                ? AppColors.demonicGreen
-                                : null,
-                        boldText:
-                            model.currentPage == 1 || model.currentPage == 2
-                                ? true
-                                : false),
+                      number: "01",
+                      text: "Business Information",
+                      circleColor: model.currentPage == 0
+                          ? AppColors.demonicGreen
+                          : null,
+                      textColor: model.currentPage == 0
+                          ? AppColors.demonicGreen
+                          : null,
+                      boldText: model.currentPage == 0,
+                    ),
                   ),
                   Underline(
-                      color: model.currentPage == 1 || model.currentPage == 2
-                          ? AppColors.demonicGreen
-                          : null),
+                    color: model.currentPage == 0
+                        ? AppColors.demonicGreen
+                        : null,
+                  ),
                   GestureDetector(
                     onTap: () {
-                      model.navigateTopage(1);
+                      model.navigateToPage(1);
                     },
                     child: CircleIndicator(
-                        number: "02",
-                        text: "Personal Information",
-                        circleColor: model.currentPage == 2
-                            ? AppColors.demonicGreen
-                            : null,
-                        textColor: model.currentPage == 2
-                            ? AppColors.demonicGreen
-                            : null,
-                        boldText: model.currentPage == 2 ? true : false),
+                      number: "02",
+                      text: "Personal Information",
+                      circleColor: model.currentPage == 1
+                          ? AppColors.demonicGreen
+                          : null,
+                      textColor: model.currentPage == 1
+                          ? AppColors.demonicGreen
+                          : null,
+                      boldText: model.currentPage == 1,
+                    ),
                   ),
                   Underline(
-                      color: model.currentPage == 2
-                          ? AppColors.demonicGreen
-                          : null),
+                    color: model.currentPage == 1
+                        ? AppColors.demonicGreen
+                        : null,
+                  ),
                   GestureDetector(
                     onTap: () {
-                      model.navigateTopage(2);
+                      model.navigateToPage(2);
                     },
                     child: CircleIndicator(
                       number: "03",
@@ -87,30 +86,29 @@ class SignUpView extends StatelessWidget {
                       textColor: model.currentPage == 2
                           ? AppColors.demonicGreen
                           : null,
+                      boldText: model.currentPage == 2,
                     ),
-                  )
+                  ),
                 ],
               ),
               Expanded(
                 child: PageView(
                   controller: model.pageController,
                   physics:
-                      const NeverScrollableScrollPhysics(), // Disable scrolling
+                  const NeverScrollableScrollPhysics(), // Disable scrolling
                   children: [
                     BusinessInfo(model: model),
                     PersonalInfo(model: model),
                     CreatePinPage(model: model),
-                    // FingerPrintView(
-                    //   model: model,
-                    // )
                   ],
                 ),
               ),
-              // SizedBox(height: 100.h),
               Center(
                 child: AppButton(
                   loading: model.isLoading,
-                  onPressed: model.validateForm,
+                  onPressed: () {
+                    model.validateForm();
+                  },
                   color: AppColors.deepGreen,
                   title: "Continue",
                   radius: 100.r,

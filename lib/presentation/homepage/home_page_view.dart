@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pay_me_mobile/core/constants/app_assets.dart';
-import 'package:pay_me_mobile/core/constants/font_weights.dart';
 import 'package:pay_me_mobile/core/cores.dart';
 import 'package:pay_me_mobile/presentation/homepage/widget/carousel.dart';
 import 'package:pay_me_mobile/presentation/homepage/widget/quick_action.dart';
@@ -12,18 +11,19 @@ import 'package:stacked/stacked.dart';
 import 'home_page_view_model.dart';
 
 class HomepageView extends StatelessWidget {
-  const HomepageView({super.key});
+  const HomepageView({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => HomePageViewModel(),
       builder: (context, model, child) {
-        String userName = model.getUserName();
-        String userProfilePicture = model.getUserProfilePicture();
+        String userName = "John Doe"; // Replace with actual user data
+        String userProfilePicture = AppAssets.addPeople; // Replace with actual image path
+
         List<Widget> indicators = List.generate(
           2,
-          (index) => Container(
+              (index) => Container(
             width: 5,
             height: 5,
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
@@ -33,6 +33,7 @@ class HomepageView extends StatelessWidget {
             ),
           ),
         );
+
         return Scaffold(
           backgroundColor: AppColors.scaffoldBg,
           body: SafeArea(
@@ -63,10 +64,12 @@ class HomepageView extends StatelessWidget {
                                   fontSize: 16.sp,
                                   color: AppColors.black,
                                 ),
-                                AppText(userName,
-                                    fontSize: 16.sp,
-                                    color: AppColors.black,
-                                    fontWeight: AppFontWeight.bold),
+                                AppText(
+                                  userName,
+                                  fontSize: 16.sp,
+                                  color: AppColors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ],
                             ),
                             AppText(
@@ -77,16 +80,17 @@ class HomepageView extends StatelessWidget {
                           ],
                         ),
                         const Spacer(),
-                        Image.asset(AppAssets.notification)
+                        Image.asset(AppAssets.notification),
                       ],
                     ),
                   ),
-                  CarouselWidget(
-                    currentIndex: model.currentCarouselIndex,
-                    onPageChanged: (index, reason) {
-                      model.setCarouselIndex(index);
-                    },
-                  ),
+                  // Ensure the CarouselWidget is only built if model is not null
+                  // CarouselWidget(
+                  //   currentIndex: model.currentCarouselIndex,
+                  //   onPageChanged: (index, reason) {
+                  //     model.setCarouselIndex(index);
+                  //   },
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: indicators,
@@ -96,9 +100,7 @@ class HomepageView extends StatelessWidget {
                   SizedBox(height: 30.h),
                   const ServiceSection(),
                   SizedBox(height: 30.h),
-                  TransactionHistory(
-                    model: model,
-                  ),
+                  TransactionHistory(model: model),
                 ],
               ),
             ),

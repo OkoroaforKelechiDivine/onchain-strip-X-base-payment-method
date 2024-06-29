@@ -31,30 +31,29 @@ class AppTheme {
     primary: AppColors.deepGreen,
     secondary: AppColors.black,
     secondaryContainer: AppColors.black,
-    onBackground: AppColors.black,
     onSurface: AppColors.black,
   );
 
   static TextTheme _textTheme(ColorScheme colorScheme) => TextTheme(
-        headline4: TextStyle(
+        headlineMedium: TextStyle(
           fontSize: 26,
           fontWeight: FontWeight.bold,
-          color: colorScheme.onBackground,
-        ),
-        headline6: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          color: colorScheme.onBackground,
-        ),
-        bodyText1: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.normal,
-          color: colorScheme.onBackground,
-        ),
-        bodyText2: TextStyle(
           color: colorScheme.onSurface,
         ),
-        button: TextStyle(
+        headlineLarge: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: colorScheme.onSurface,
+        ),
+        bodySmall: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.normal,
+          color: colorScheme.onSurface,
+        ),
+        bodyMedium: TextStyle(
+          color: colorScheme.onSurface,
+        ),
+        labelLarge: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
           color: colorScheme.onPrimary,

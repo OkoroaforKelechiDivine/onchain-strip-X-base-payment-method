@@ -33,12 +33,12 @@ class PersonalInfo extends StatelessWidget {
               backgroundColor: AppColors.white,
               borderColor: AppColors.darkWhite,
               textEditingController: model.lastName,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Last name is required";
-                }
-                return null;
-              },
+              // validator: (value) {
+              //   if (value!.isEmpty) {
+              //     return "Last name is required";
+              //   }
+              //   return null;
+              // },
             ),
             AppCustomTextField(
               focusBorderColor: AppColors.white,
@@ -46,12 +46,12 @@ class PersonalInfo extends StatelessWidget {
               backgroundColor: AppColors.white,
               borderColor: AppColors.darkWhite,
               textEditingController: model.firstName,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "First name is required";
-                }
-                return null;
-              },
+              // validator: (value) {
+              //   if (value!.isEmpty) {
+              //     return "First name is required";
+              //   }
+              //   return null;
+              // },
             ),
             AppCustomTextField(
               focusBorderColor: AppColors.white,
@@ -59,12 +59,12 @@ class PersonalInfo extends StatelessWidget {
               backgroundColor: AppColors.white,
               borderColor: AppColors.darkWhite,
               textEditingController: model.username,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Username is required";
-                }
-                return null;
-              },
+              // validator: (value) {
+              //   if (value!.isEmpty) {
+              //     return "Username is required";
+              //   }
+              //   return null;
+              // },
             ),
             AppCustomTextField(
               focusBorderColor: AppColors.white,
@@ -72,12 +72,12 @@ class PersonalInfo extends StatelessWidget {
               backgroundColor: AppColors.white,
               borderColor: AppColors.darkWhite,
               textEditingController: model.emailAddress,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Email address is required";
-                }
-                return null;
-              },
+              // validator: (value) {
+              //   if (value!.isEmpty) {
+              //     return "Email address is required";
+              //   }
+              //   return null;
+              // },
             ),
             AppCustomTextField(
               focusBorderColor: AppColors.white,
@@ -86,12 +86,12 @@ class PersonalInfo extends StatelessWidget {
               borderColor: AppColors.darkWhite,
               textEditingController: model.bvn,
               textInputType: TextInputType.number,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "BVN is required";
-                }
-                return null;
-              },
+              // validator: (value) {
+              //   if (value!.isEmpty) {
+              //     return "BVN is required";
+              //   }
+              //   return null;
+              // },
             ),
             Row(
               children: [
@@ -135,12 +135,12 @@ class PersonalInfo extends StatelessWidget {
               borderColor: AppColors.darkWhite,
               textEditingController: model.phoneNumber,
               textInputType: TextInputType.number,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Phone number is required";
-                }
-                return null;
-              },
+              // validator: (value) {
+              //   if (value!.isEmpty) {
+              //     return "Phone number is required";
+              //   }
+              //   return null;
+              // },
             ),
             Stack(
               children: [
@@ -151,12 +151,12 @@ class PersonalInfo extends StatelessWidget {
                   backgroundColor: AppColors.white,
                   borderColor: AppColors.darkWhite,
                   textEditingController: model.dob,
-                  validator: (value) {
-                    if (model.registrationStatusIndex == 0 && value!.isEmpty) {
-                      return "DOB is required";
-                    }
-                    return null;
-                  },
+                  // validator: (value) {
+                  //   if (model.registrationStatusIndex == 0 && value!.isEmpty) {
+                  //     return "DOB is required";
+                  //   }
+                  //   return null;
+                  // },
                 ),
                 Positioned(
                   right: 20,
@@ -172,7 +172,7 @@ class PersonalInfo extends StatelessWidget {
                       );
                       if (pickedDate != null) {
                         final formattedDate =
-                            DateFormat('dd-MM-yyyy').format(pickedDate);
+                        DateFormat('dd-MM-yyyy').format(pickedDate);
                         model.setDOBDate(formattedDate);
                       }
                     },
@@ -191,12 +191,12 @@ class PersonalInfo extends StatelessWidget {
               backgroundColor: AppColors.white,
               borderColor: AppColors.darkWhite,
               textEditingController: model.password,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Password is required";
-                }
-                return null;
-              },
+              // validator: (value) {
+              //   if (value!.isEmpty) {
+              //     return "Password is required";
+              //   }
+              //   return null;
+              // },
             ),
             SizedBox(height: 50.h),
           ],
